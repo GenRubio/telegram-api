@@ -1,0 +1,32 @@
+{
+    "products": [
+        {
+            "reference": "2022100000",
+            "name": "HBAR",
+            "tastes": [
+                {
+                    "name": "COOL MINT",
+                    "stock": 12
+                },
+                {
+                    "name": "COOL MINT 1",
+                    "stock": 9
+                },
+                {
+                    "name": "COOL MINT 2",
+                    "stock": 10
+                }
+            ],
+            "price": "10",
+            "description": {
+                "size": "19*42*82mm",
+                "resistance": "1.2Ω",
+                "power": "7W",
+                "e_liquid": "16ml",
+                "battery": "550mAh",
+                "charging": "Type-C",
+                "puffs": "6000"
+            }
+        }
+    ]
+}
