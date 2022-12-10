@@ -81,6 +81,51 @@ class ProductModel extends Model
         return count($this->productModelsFlavors);
     }
 
+    public function getPriceGetterAttribute()
+    {
+        return $this->price . ' €';
+    }
+
+    public function getSizeGetterAttribute()
+    {
+        return $this->size . ' mm';
+    }
+
+    public function getPowerRangeGetterAttribute()
+    {
+        return $this->power_range . ' W';
+    }
+
+    public function getInputVoltageGetterAttribute()
+    {
+        return $this->input_voltage . ' V';
+    }
+
+    public function getBatteryCapacityGetterAttribute()
+    {
+        return $this->battery_capacity . ' mAh';
+    }
+
+    public function getELiquidCapacityGetterAttribute()
+    {
+        return $this->e_liquid_capacity . ' ml';
+    }
+
+    public function getConcentrationGetterAttribute()
+    {
+        return $this->concentration . ' mg/ml';
+    }
+ 
+    public function getResistanceGetterAttribute()
+    {
+        return $this->resistance . ' Ω';
+    }
+
+    public function getAbsorbableQuantityGetterAttribute()
+    {
+        return $this->absorbable_quantity . ' Puffs';
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

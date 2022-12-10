@@ -2,7 +2,7 @@
 
 namespace App\Bot;
 
-use Illuminate\Support\Facades\Storage;
+use App\Models\ProductModel;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 
@@ -10,9 +10,8 @@ trait ActionViewProducts
 {
     public function actionViewProducts()
     {
-        $disk = Storage::disk('database_json');
-        $data = json_decode($disk->get('products.json'));
-        foreach ($data->products as $product) {
+        $products = ProductModel::active()->get();
+        foreach ($products as $product) {
             $this->chat->html(view('components.bot.product-item', ['product' => $product])->render())
                 ->keyboard(function (Keyboard $keyboard) use ($product) {
                     return $keyboard->row([
