@@ -67,20 +67,27 @@ class ProductModelsFlavorCrudController extends CrudController
             'model'     => "App\Models\ProductModel",
         ]);
         $this->crud->addColumn([
+            'name' => 'stock',
+            'label' => 'Stock',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'stock_bloqued',
+            'label' => 'Stock bloqueado',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'active',
             'type' => 'btnToggle',
             'label' => 'Activo',
         ]);
     }
 
-    protected function setupCreateOperation()
+    protected function setFields()
     {
-        CRUD::setValidation(ProductModelsFlavorRequest::class);
-
         $this->crud->addFields([
             [
                 'name' => 'product_model_id',
-                'label' => '',
                 'value' => $this->productModelId,
                 'type' => 'hidden',
             ],
@@ -96,6 +103,18 @@ class ProductModelsFlavorCrudController extends CrudController
                 'type' => 'text',
             ],
             [
+                'name' => 'stock',
+                'label' => 'Stock',
+                'type' => 'number',
+                'default' => 0
+            ],
+            [
+                'name' => 'stock_bloqued',
+                'label' => 'Stock bloqueado',
+                'type' => 'text',
+                'default' => 0
+            ],
+            [
                 'name' => 'active',
                 'type' => 'checkbox',
                 'label' => 'Activo',
@@ -104,8 +123,14 @@ class ProductModelsFlavorCrudController extends CrudController
         ]);
     }
 
+    protected function setupCreateOperation()
+    {
+        CRUD::setValidation(ProductModelsFlavorRequest::class);
+        $this->setFields();
+    }
+
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
+        $this->setFields();
     }
 }

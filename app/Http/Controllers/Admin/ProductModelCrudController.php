@@ -50,6 +50,11 @@ class ProductModelCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
+            'name' => 'product_models_flavors_count',
+            'label' => 'Sabores',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'active',
             'type' => 'btnToggle',
             'label' => 'Activo',

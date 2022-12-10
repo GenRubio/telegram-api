@@ -76,6 +76,11 @@ class ProductModel extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getProductModelsFlavorsCountAttribute()
+    {
+        return count($this->productModelsFlavors);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

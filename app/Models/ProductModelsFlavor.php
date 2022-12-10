@@ -25,6 +25,8 @@ class ProductModelsFlavor extends Model
         'product_model_id',
         'name',
         'image',
+        'stock',
+        'stock_bloqued',
         'active',
     ];
     // protected $hidden = [];

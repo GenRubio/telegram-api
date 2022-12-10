@@ -26,7 +26,9 @@ class ProductModelsFlavorRequest extends FormRequest
     {
         return [
             'name' => 'required|min:1|max:255',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
+            'image' => 'required|mimes:jpg,png,jpeg,gif,svg',
+            'stock' => 'required',
+            'stock_bloqued' => 'required'
         ];
     }
 
