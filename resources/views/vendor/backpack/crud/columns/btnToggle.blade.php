@@ -5,7 +5,7 @@
 @endphp
 <td>
     <a onclick="togglePublish(this)" style="min-width: 49px; color:#ffffff;"
-       class="btn btn-xs {{$btn_class}} ladda-button" data-model="{{get_class($entry)}}" data-target="{{$entry->id}}"
+       class="btn btn-sm {{$btn_class}} ladda-button" data-model="{{get_class($entry)}}" data-target="{{$entry->id}}"
        data-field="{{$column['name']}}" data-style="zoom-in"><span class="ladda-label"><i class="la {{$fa}}"></i> {{$text}} </span></a>
 </td>
 

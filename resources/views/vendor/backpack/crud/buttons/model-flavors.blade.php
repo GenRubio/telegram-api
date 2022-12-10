@@ -1,0 +1,1 @@
+<a href="{{ url($crud->route.'/'.$entry->getKey()) }}/product-models-flavor" class="btn btn-sm btn-default"></i>Añadir Sabores</a>

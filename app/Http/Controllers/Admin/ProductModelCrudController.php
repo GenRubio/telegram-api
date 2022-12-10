@@ -23,6 +23,8 @@ class ProductModelCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->crud->addButtonFromView('line', 'model-flavors', 'model-flavors', 'beginning');
+
         $this->crud->addColumn([
             'name' => 'image',
             'label' => 'Imagen',
