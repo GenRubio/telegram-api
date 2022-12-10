@@ -66,6 +66,10 @@ return [
             'root' => storage_path('database_json'),
         ],
 
+        'users_trolley'  => [
+            'driver' => 'local',
+            'root' => storage_path('users_trolley'),
+        ],
     ],
 
     /*
