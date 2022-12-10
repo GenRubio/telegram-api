@@ -33,6 +33,11 @@ class ProductModelCrudController extends CrudController
             'label' => 'Modelo',
             'type'  => 'text',
         ]);
+        $this->crud->addColumn([
+            'name' => 'active',
+            'type' => 'btnToggle',
+            'label' => 'Activo',
+        ]);
     }
 
     protected function setFields()

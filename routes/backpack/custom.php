@@ -16,6 +16,14 @@ Route::group([
     ),
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
+     /*
+    * AJAX
+    */
+    /* Toggle Active */
+    Route::post('toggleField', function (Illuminate\Http\Request $request) {
+        return toggleField($request);
+    })->name('toggleField');
+    
     Route::crud('product', 'ProductCrudController');
     Route::crud('product-model', 'ProductModelCrudController');
 }); // this should be the absolute last line of this file
