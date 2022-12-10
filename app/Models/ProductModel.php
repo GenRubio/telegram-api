@@ -6,6 +6,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Carbon\Carbon;
 
 class ProductModel extends Model
 {
@@ -22,8 +23,11 @@ class ProductModel extends Model
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = [
+        'reference',
         'name',
         'image',
+        'price',
+        'discount',
         'size',
         'power_range',
         'input_voltage',
@@ -77,6 +81,22 @@ class ProductModel extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setReferenceAttribute($value)
+    {
+        if (is_null($value)) {
+            $product = ProductModel::orderBy('reference', 'desc')->first();
+            if (is_null($product)) {
+                $this->attributes['reference'] = Carbon::now()->format('Y') . '10000';
+            } else {
+                if (empty($product->reference)) {
+                    $this->attributes['reference'] = Carbon::now()->format('Y') . '10000';
+                } else {
+                    $this->attributes['reference'] = (int)$product->reference + 1;
+                }
+            }
+        }
+    }
 
     public function setImageAttribute($value)
     {

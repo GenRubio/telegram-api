@@ -27,6 +27,8 @@ class ProductModelRequest extends FormRequest
         return [
             'name' => 'required|min:1|max:255|unique:product_models,name',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
+            'price' => 'required',
+            'discount' => 'required',
         ];
     }
 

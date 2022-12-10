@@ -24,7 +24,6 @@ Route::group([
         return toggleField($request);
     })->name('toggleField');
 
-    Route::crud('product', 'ProductCrudController');
     Route::crud('product-model', 'ProductModelCrudController');
     Route::group(['prefix' => 'product-model/{product_model_id}'], function () {
         Route::crud('product-models-flavor', 'ProductModelsFlavorCrudController');
