@@ -24,7 +24,16 @@ class ProductModel extends Model
     protected $fillable = [
         'name',
         'image',
-        'active'
+        'size',
+        'power_range',
+        'input_voltage',
+        'battery_capacity',
+        'e_liquid_capacity',
+        'concentration',
+        'resistance',
+        'absorbable_quantity',
+        'charging_port',
+        'active',
     ];
     // protected $hidden = [];
     // protected $dates = [];

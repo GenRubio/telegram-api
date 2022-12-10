@@ -33,13 +33,10 @@ class ProductModelCrudController extends CrudController
             'label' => 'Modelo',
             'type'  => 'text',
         ]);
-
     }
 
-    protected function setupCreateOperation()
+    protected function setFields()
     {
-        CRUD::setValidation(ProductModelRequest::class);
-
         $this->crud->addFields([
             [
                 'name' => 'image',
@@ -53,6 +50,59 @@ class ProductModelCrudController extends CrudController
                 'type' => 'text',
             ],
             [
+                'name' => 'size',
+                'label' => 'Medida',
+                'type' => 'text',
+                'suffix' => 'mm',
+            ],
+            [
+                'name' => 'power_range',
+                'label' => 'Rango de poder',
+                'type' => 'text',
+                'suffix' => 'W',
+            ],
+            [
+                'name' => 'input_voltage',
+                'label' => 'Voltaje de entrada',
+                'type' => 'text',
+                'suffix' => 'V',
+            ],
+            [
+                'name' => 'battery_capacity',
+                'label' => 'Capacidad de la batería',
+                'type' => 'text',
+                'suffix' => 'mAh',
+            ],
+            [
+                'name' => 'e_liquid_capacity',
+                'label' => 'Capacidad E Liquid',
+                'type' => 'text',
+                'suffix' => 'ml',
+            ],
+            [
+                'name' => 'concentration',
+                'label' => 'Concentración nicotina',
+                'type' => 'text',
+                'suffix' => 'mg/ml',
+            ],
+            [
+                'name' => 'resistance',
+                'label' => 'Resistencia',
+                'type' => 'text',
+                'suffix' => 'Ω',
+            ],
+            [
+                'name' => 'absorbable_quantity',
+                'label' => 'Cantidad de caladas',
+                'type' => 'text',
+                'suffix' => 'Puffs',
+            ],
+            [
+                'name' => 'charging_port',
+                'label' => 'Tipo de puerto de carga',
+                'type' => 'text',
+            ],
+            [
                 'name' => 'active',
                 'type' => 'checkbox',
                 'label' => 'Activo',
@@ -61,8 +111,23 @@ class ProductModelCrudController extends CrudController
         ]);
     }
 
+    protected function setupCreateOperation()
+    {
+        CRUD::setValidation(ProductModelRequest::class);
+        $this->setFields();
+    }
+
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
+        $this->crud->setRequest($this->handleNameInput(request()));
+        $this->setFields();
+    }
+
+    protected function handleNameInput($request)
+    {
+        if ($this->crud->getCurrentEntry()->name == $request->input('name')) {
+            $request->request->remove('name');
+        }
+        return $request;
     }
 }
