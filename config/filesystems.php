@@ -56,6 +56,11 @@ return [
             'throw' => false,
         ],
 
+        'images-product-models'=> [
+            'driver' => 'local',
+            'root' => public_path(),
+        ],
+
         'database_json'  => [
             'driver' => 'local',
             'root' => storage_path('database_json'),
