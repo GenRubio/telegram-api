@@ -29,4 +29,15 @@ class UserTrolleyUtil
         }
         return false;
     }
+
+    public static function getProducts($chatId)
+    {
+        $disk = Storage::disk('users_trolley');
+        $fileName = "{$chatId}.json";
+        if ($disk->exists($fileName)) {
+            $data = json_decode($disk->get($fileName));
+            return $data->products;
+        }
+        return [];
+    }
 }

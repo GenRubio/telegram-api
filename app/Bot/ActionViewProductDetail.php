@@ -4,7 +4,6 @@ namespace App\Bot;
 
 use App\Models\ProductModel;
 use App\Utils\UserTrolleyUtil;
-use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 
 trait ActionViewProductDetail

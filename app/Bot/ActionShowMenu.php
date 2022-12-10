@@ -16,7 +16,7 @@ trait ActionShowMenu
                 return $keyboard->row([
                     Button::make('Catalago')->action('actionViewProducts'),
                     Button::make('Productos')->action('actionViewProducts'),
-                    Button::make("Mi Carrito ({$productsInTrolley})")->action('actionViewProducts'),
+                    Button::make("Mi Carrito ({$productsInTrolley})")->action('actionShowMyTrolley'),
                 ]);
             })
             ->send();
