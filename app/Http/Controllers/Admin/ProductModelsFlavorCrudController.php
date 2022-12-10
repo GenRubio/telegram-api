@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\ProductModel;
+use Illuminate\Support\Facades\Route;
 use App\Http\Requests\ProductModelsFlavorRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use Illuminate\Support\Facades\Route;
 
 class ProductModelsFlavorCrudController extends CrudController
 {
@@ -24,17 +25,24 @@ class ProductModelsFlavorCrudController extends CrudController
         CRUD::setEntityNameStrings('sabor', 'sabores');
 
         $this->productModelId = Route::current()->parameter('product_model_id');
-        $this->crud->setRoute("admin/product-model/". $this->productModelId . '/product-models-flavor');
+        $this->crud->setRoute("admin/product-model/" . $this->productModelId . '/product-models-flavor');
         $this->breadCrumbs();
+        $this->listFilter();
     }
 
-    protected function breadCrumbs(){
+    protected function breadCrumbs()
+    {
         $this->data['breadcrumbs'] = [
             trans('backpack::crud.admin') => backpack_url('dashboard'),
             'Modelos' => backpack_url('product-model'),
             'Sabores' => backpack_url("product-model/" . $this->productModelId . "/product-models-flavor"),
             trans('backpack::crud.list') => false,
         ];
+    }
+
+    protected function listFilter()
+    {
+        $this->crud->addClause('where', 'product_model_id', $this->productModelId);
     }
 
     protected function setupListOperation()
@@ -46,8 +54,17 @@ class ProductModelsFlavorCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'name' => 'name',
-            'label' => 'Nombre',
+            'label' => 'Sabor',
             'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'productModel',
+            'label' => 'Modelo',
+            'type'      => 'select',
+            'name'      => 'product_model_id',
+            'entity'    => 'productModel',
+            'attribute' => 'name',
+            'model'     => "App\Models\ProductModel",
         ]);
         $this->crud->addColumn([
             'name' => 'active',
@@ -62,6 +79,12 @@ class ProductModelsFlavorCrudController extends CrudController
 
         $this->crud->addFields([
             [
+                'name' => 'product_model_id',
+                'label' => '',
+                'value' => $this->productModelId,
+                'type' => 'hidden',
+            ],
+            [
                 'name' => 'image',
                 'label' => 'Imagen',
                 'type' => 'upload',
@@ -69,7 +92,7 @@ class ProductModelsFlavorCrudController extends CrudController
             ],
             [
                 'name' => 'name',
-                'label' => 'Nombre',
+                'label' => 'Sabor',
                 'type' => 'text',
             ],
             [
@@ -79,7 +102,6 @@ class ProductModelsFlavorCrudController extends CrudController
                 'default' => true,
             ],
         ]);
-
     }
 
     protected function setupUpdateOperation()

@@ -42,6 +42,11 @@ class ProductModelsFlavor extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function productModel()
+    {
+        return $this->hasOne(ProductModel::class, 'id', 'product_model_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

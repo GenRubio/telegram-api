@@ -50,6 +50,11 @@ class ProductModel extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function productModelsFlavors()
+    {
+        return $this->hasMany(ProductModelsFlavor::class, 'product_model_id', 'id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
