@@ -83,47 +83,47 @@ class ProductModel extends Model
 
     public function getPriceGetterAttribute()
     {
-        return $this->price . ' €';
+        return $this->price ? $this->price . ' €' : null;
     }
 
     public function getSizeGetterAttribute()
     {
-        return $this->size . ' mm';
+        return $this->size ? $this->size . ' mm' : null;
     }
 
     public function getPowerRangeGetterAttribute()
     {
-        return $this->power_range . ' W';
+        return $this->power_range ? $this->power_range . ' W' : null;
     }
 
     public function getInputVoltageGetterAttribute()
     {
-        return $this->input_voltage . ' V';
+        return $this->input_voltage ? $this->input_voltage . ' V' : null;
     }
 
     public function getBatteryCapacityGetterAttribute()
     {
-        return $this->battery_capacity . ' mAh';
+        return $this->battery_capacity ? $this->battery_capacity . ' mAh' : null;
     }
 
     public function getELiquidCapacityGetterAttribute()
     {
-        return $this->e_liquid_capacity . ' ml';
+        return $this->e_liquid_capacity ? $this->e_liquid_capacity . ' ml' : null;
     }
 
     public function getConcentrationGetterAttribute()
     {
-        return $this->concentration . ' mg/ml';
+        return $this->concentration ? $this->concentration . ' mg/ml' : null;
     }
- 
+
     public function getResistanceGetterAttribute()
     {
-        return $this->resistance . ' Ω';
+        return $this->resistance ? $this->resistance . ' Ω' : null;
     }
 
     public function getAbsorbableQuantityGetterAttribute()
     {
-        return $this->absorbable_quantity . ' Puffs';
+        return $this->absorbable_quantity ? $this->absorbable_quantity . ' Puffs' : null;
     }
 
     /*

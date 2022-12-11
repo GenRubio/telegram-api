@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\GetProductsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,8 @@ Route::get('/', function () {
 Route::get('webapp/{chat}', function () {
     return view('webapp.index');
 })->name('webapp');
+
+
+Route::prefix('api')->group(function () {
+    Route::get('products', [GetProductsController::class, 'index']);
+});
