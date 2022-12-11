@@ -17,3 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/telegram', function () {
+    return view('telegram.index');
+})->name('telegram.web');
