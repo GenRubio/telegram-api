@@ -14,7 +14,7 @@ class MyWebhookHandler extends WebhookHandler
         $this->chat->html("Tienda")
             ->keyboard(function (Keyboard $keyboard) {
                 return $keyboard->row([
-                    Button::make('Productos')->webApp(route('telegram.web'))
+                    Button::make('Productos')->webApp(route('webapp', ['chat' => $this->chat->chat_id]))
                 ]);
             })
             ->protected()
