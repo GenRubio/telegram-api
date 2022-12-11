@@ -28,4 +28,6 @@ Route::group([
     Route::group(['prefix' => 'product-model/{product_model_id}'], function () {
         Route::crud('product-models-flavor', 'ProductModelsFlavorCrudController');
     });
+    Route::crud('order', 'OrderCrudController');
+    Route::crud('order-product', 'OrderProductCrudController');
 }); // this should be the absolute last line of this file
