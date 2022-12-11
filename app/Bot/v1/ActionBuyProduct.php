@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Bot;
+namespace App\v1\Bot;
 
 trait ActionBuyProduct
 {

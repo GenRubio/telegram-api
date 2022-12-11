@@ -2,34 +2,22 @@
 
 namespace App\Http\Webhooks;
 
-use App\Bot\ActionShowMenu;
-use App\Bot\ActionBuyProduct;
-use App\Bot\ActionViewProducts;
-use App\Bot\ActionShowMyTrolley;
-use App\Bot\ActionMyTrolleyManager;
-use App\Bot\ActionViewProductDetail;
-use App\Bot\ActionAddProductToTrolley;
-use App\Bot\ActionDeleteMyTrolleyProduct;
+use App\Utils\UserTrolleyUtil;
+use DefStudio\Telegraph\Keyboard\Button;
+use DefStudio\Telegraph\Keyboard\Keyboard;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 
 class MyWebhookHandler extends WebhookHandler
 {
-    use ActionAddProductToTrolley;
-    use ActionBuyProduct;
-    use ActionShowMenu;
-    use ActionViewProductDetail;
-    use ActionViewProducts;
-    use ActionShowMyTrolley;
-    use ActionMyTrolleyManager;
-    use ActionDeleteMyTrolleyProduct;
-
     public function start()
     {
-        $this->actionShowMenu();
-    }
-
-    public function menu()
-    {
-        $this->actionShowMenu();
+        $this->chat->html("Tienda")
+            ->keyboard(function (Keyboard $keyboard) {
+                return $keyboard->row([
+                    Button::make('Productos')->webApp(route('telegram.web'))
+                ]);
+            })
+            ->protected()
+            ->send();
     }
 }
