@@ -12,7 +12,9 @@ class ProductModelsFlavorCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -131,6 +133,27 @@ class ProductModelsFlavorCrudController extends CrudController
 
     protected function setupUpdateOperation()
     {
+        CRUD::setValidation(ProductModelsFlavorRequest::class);
         $this->setFields();
+    }
+
+    public function update()
+    {
+        $this->crud->setRequest($this->handleNameInput($this->crud->getRequest()));
+        $this->crud->unsetValidation();
+        return $this->traitUpdate();
+    }
+
+    public function store()
+    {
+        return $this->traitStore();
+    }
+
+    protected function handleNameInput($request)
+    {
+        if ($this->crud->getCurrentEntry()->name == $request->input('name')) {
+            $request->request->remove('name');
+        }
+        return $request;
     }
 }

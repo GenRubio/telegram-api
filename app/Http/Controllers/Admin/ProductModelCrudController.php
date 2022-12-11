@@ -9,8 +9,12 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class ProductModelCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        store as traitStore;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -172,14 +176,26 @@ class ProductModelCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(ProductModelRequest::class);
         $this->setFields();
+        CRUD::setValidation(ProductModelRequest::class);
     }
 
     protected function setupUpdateOperation()
     {
-        $this->crud->setRequest($this->handleNameInput(request()));
         $this->setFields();
+        CRUD::setValidation(ProductModelRequest::class);
+    }
+
+    public function update()
+    {
+        $this->crud->setRequest($this->handleNameInput($this->crud->getRequest()));
+        $this->crud->unsetValidation();
+        return $this->traitUpdate();
+    }
+
+    public function store()
+    {
+        return $this->traitStore();
     }
 
     protected function handleNameInput($request)
