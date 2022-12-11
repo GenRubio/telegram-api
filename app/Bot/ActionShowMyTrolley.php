@@ -18,13 +18,16 @@ trait ActionShowMyTrolley
                     ->keyboard(function (Keyboard $keyboard) use ($product) {
                         return $keyboard
                             ->button('❌ Eliminar')
-                            ->action('actionBuyProduct')
+                            ->action('actionDeleteMyTrolleyProduct')
                             ->param('parameter', $product->reference);
                     })
+                    ->protected()
                     ->send();
             }
         } else {
-            $this->chat->html('Tu carrito esta vacio 😔')->send();
+            $this->chat->html('Tu carrito esta vacio 😔')
+                ->protected()
+                ->send();
         }
     }
 }

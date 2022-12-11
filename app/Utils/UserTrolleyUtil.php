@@ -40,4 +40,15 @@ class UserTrolleyUtil
         }
         return [];
     }
+
+    public static function updateProducts($chatId, $products)
+    {
+        $disk = Storage::disk('users_trolley');
+        $fileName = "{$chatId}.json";
+        if ($disk->exists($fileName)) {
+            $data = json_decode($disk->get($fileName));
+            $data->products = $products;
+            $disk->put($fileName, json_encode($data));
+        }
+    }
 }

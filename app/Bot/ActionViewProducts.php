@@ -41,6 +41,7 @@ trait ActionViewProducts
                                 ->width(0.5);
                         });
                 })
+                ->protected()
                 ->send();
         }
     }
