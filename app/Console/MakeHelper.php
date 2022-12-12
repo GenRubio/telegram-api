@@ -2,83 +2,69 @@
 
 namespace App\Console\Commands;
 
-class MakeHelper extends MakeFileStructure
+use Illuminate\Console\Command;
+use Illuminate\Support\Str;
+
+class MakeHelper extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'make:name {path}';
+    protected $signature = 'make:helper {helperName}';
+    protected $description = 'Create a new Helper class';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command description';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         parent::__construct();
-
-        /**
-        * Simple structure
-        *
-        * $this->setNameSpace('App/Tasks');
-        * $this->setSuffix('Task');
-        * $this->setStubPath('stubs/task.stub');
-        * $this->setExtension('.php');
-        * $this->setFolderPermissions(0755);
-        */
-
-        /**
-        * Multiple File structure
-        *
-        * $this->setMultiFiles([
-        *     [
-        *         'name_space' => 'App/Tasks',
-        *         'suffix' => 'Task',
-        *         'stub_path' => 'stubs/task.stub',
-        *         'extension' => '.php',
-        *         'folder_permissions' => 0755
-        *     ],
-        *     [
-        *         'name_space' => 'App/Tasks',
-        *         'suffix' => 'TaskInterface',
-        *         'stub_path' => 'stubs/task.stub',
-        *         'extension' => '.php',
-        *         'folder_permissions' => 0755
-        *     ]
-        * ]);
-        */
     }
 
-    /**
-     * Method that change the keywords in the stub files, for the ones given
-     *
-     * For $this->setMultiFiles() use
-     * replaceWords_0
-     * replaceWords_1
-     * replaceWords_2
-     * 
-     * @param string $file
-     * @return string
-     */
-    public function replaceWords_0(string $file): string
+    private $folder;
+    private $singularVariableName;
+    private $singularHelperName;
+    private $helperName;
+
+    public function handle()
+    {
+        $this->folder = app_path('Helpers');
+        $this->singularVariableName = Str::lower($this->argument('helperName'));
+        $this->singularHelperName = Str::studly($this->argument('helperName'));
+        $this->helperName = Str::studly($this->argument('helperName') . 'Helper');
+
+        $this->makeHelper();
+    }
+
+    private function addUseToHelpersFile()
+    {
+        $filename = $this->folder . '/Helpers.php';
+        $search = '<?php';
+        $insert = PHP_EOL . 'use App\Helpers\\' . $this->helperName . ';';
+        $replace = $search . "\n" . $insert;
+        file_put_contents($filename, str_replace($search, $replace, file_get_contents($filename)));
+    }
+
+    private function makeHelper()
+    {
+        $helper = $this->replaceWords(file_get_contents('stubs/helper.stub'));
+        $this->saveHelper($helper);
+    }
+
+    private function saveHelper(string $file)
+    {
+        if (!is_file($this->folder . '/' . $this->helperName . '.php')) {
+            file_put_contents($this->folder . '/' . $this->helperName . '.php', $file);
+            $this->addUseToHelpersFile();
+            $this->info($this->helperName . ' created successfully!');
+        } else {
+            $this->info('Helper already exists');
+        }
+    }
+
+    private function replaceWords(string $file): string
     {
         $search = [
-            'App\Console\Commands',
-            'MakeHelper'
+            'SingularHelperName',
+            'SingularVariableName'
         ];
         $replace = [
-            $this->getNamespace(),
-            $this->getClassName()
+            $this->singularHelperName,
+            $this->singularVariableName
         ];
         return str_replace($search, $replace, $file);
     }

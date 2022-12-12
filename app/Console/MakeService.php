@@ -12,7 +12,7 @@ class MakeService extends Command
      *
      * @var string
      */
-    protected $signature = 'make:service {modelName}';
+    protected $signature = 'make:service {serviceName?} {--m|model=} {--r|repository=false}';
 
     /**
      * The console command description.
@@ -37,6 +37,13 @@ class MakeService extends Command
      * @var string
      */
     private $modelNamespaceBase = 'App\Models\\';
+
+    /**
+     * Repository base Namespace
+     *
+     * @var string
+     */
+    private $repositoryNamespaceBase = 'App\Repositories\\';
 
     /**
      * Folder where the Service will be stored
@@ -74,27 +81,45 @@ class MakeService extends Command
     private $serviceName;
 
     /**
+     * Name that will have the repository
+     *
+     * @var
+     */
+    private $repositoryName;
+
+    /**
      * Method called when the command is executed
      */
     public function handle()
     {
-        $this->singularVariableName = Str::lower($this->argument('modelName'));
-        $this->singularModelName = Str::studly($this->argument('modelName'));
-        $this->serviceName = Str::studly($this->argument('modelName') . 'Service');
+        $serviceNameParam = $this->argument('serviceName');
+        $modelParam = $this->option('model');
+        $repositoryParam = $this->option('repository');
 
-        $this->checkIfModelExists($this->singularModelName);
+        $this->singularVariableName = Str::lower($serviceNameParam);
+        $this->singularModelName = Str::studly($modelParam ?? $serviceNameParam);
+        $this->serviceName = Str::studly($serviceNameParam . 'Service');
+        $this->repositoryName = Str::studly($this->singularModelName . 'Repository');
 
-        $this->checkIfServiceFolderExists();
+        $repositoryExists = $this->checkIfRepositoryExists($repositoryParam, $this->repositoryName);
 
-        $this->makeService();
+        $modelExists = $this->checkIfModelExists($this->singularModelName);
+
+        $this->makeService($modelExists, $repositoryExists);
     }
 
     /**
      * Method that make the Service file
      */
-    private function makeService()
+    private function makeService(bool $modelExists, bool $repositoryExists): void
     {
-        $service = $this->replaceWords(file_get_contents(app_path('Helpers/Templates/Service/service.stub')));
+        $stubFile = 'stubs/service.stub';
+        if ($repositoryExists) {
+            $stubFile = 'stubs/service.repository.stub';
+        } else if ($modelExists) {
+            $stubFile = 'stubs/service.model.stub';
+        }
+        $service = $this->replaceWords(file_get_contents($stubFile));
         $this->saveService($service);
     }
 
@@ -103,8 +128,9 @@ class MakeService extends Command
      *
      * @param string $file
      */
-    private function saveService(string $file)
+    private function saveService(string $file): void
     {
+        $this->checkIfServiceFolderExists();
         if (!is_file($this->folder . '/' . $this->serviceName . '.php')) {
             file_put_contents($this->folder . '/' . $this->serviceName . '.php', $file);
             $this->info($this->serviceName . ' created successfully!');
@@ -112,29 +138,49 @@ class MakeService extends Command
             $this->info('Service already exists');
         }
     }
-    
+
     /**
      * Method that checks if the Model exists in the project, if it does not exists, throws an error
      *
      * @param string $model
      */
-    private function checkIfModelExists(string $model)
+    private function checkIfModelExists(string $model): bool
     {
         if (!class_exists($this->modelNamespaceBase . $model)) {
-            $this->error('The model ' . $model . ' was not found in this project.');
-            die(1);
+            $this->info('The model ' . $model . ' was not found in this project.');
+            return false;
         }
+        return true;
+    }
+
+    /**
+     * Method that checks if the Model exists in the project, if it does not exists, throws an error
+     *
+     * @param bool $repositoryParam
+     * @param string $repository
+     */
+    private function checkIfRepositoryExists(bool $repositoryParam, string $repository): bool
+    {
+        if (!$repositoryParam) {
+            return false;
+        }
+
+        if (!class_exists($this->repositoryNamespaceBase . $this->singularModelName . '\\' . $repository)) {
+            $this->error('The repository ' . $repository . ' was not found in this project.');
+            die();
+        }
+        return true;
     }
 
     /**
      * Method that checks if the Service folder exists, and creates it if it does not
      */
-    private function checkIfServiceFolderExists()
+    private function checkIfServiceFolderExists(): void
     {
         $this->folder = app_path('Services');
         if (!file_exists($this->folder)) {
             mkdir($this->folder, $this->folderPermissions, true);
-            $this->info($this->singularModelName . ' folder created successfully into Services folder!');
+            $this->info('Services folder created successfully!');
         }
     }
 
@@ -154,7 +200,6 @@ class MakeService extends Command
             $this->singularModelName,
             $this->singularVariableName
         ];
-        $result = str_replace($search, $replace, $file);
-        return $result;
+        return str_replace($search, $replace, $file);
     }
 }

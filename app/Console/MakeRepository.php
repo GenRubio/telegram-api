@@ -97,7 +97,7 @@ class MakeRepository extends Command
      */
     private function makeRepository()
     {
-        $repository = $this->replaceWords(file_get_contents(app_path('Helpers/Templates/Repository/repository.stub')));
+        $repository = $this->replaceWords(file_get_contents('stubs/repository.stub'));
         $this->saveRepository($repository);
     }
 
@@ -121,7 +121,7 @@ class MakeRepository extends Command
      */
     private function makeRepositoryInterface()
     {
-        $interfaceRepository = $this->replaceWords(file_get_contents(app_path('Helpers/Templates/Repository/repository.interface.stub')));
+        $interfaceRepository = $this->replaceWords(file_get_contents('stubs/repository.interface.stub'));
         $this->saveRepositoryInterface($interfaceRepository);
     }
 
@@ -181,7 +181,6 @@ class MakeRepository extends Command
             $this->singularModelName,
             $this->singularVariableName
         ];
-        $result = str_replace($search, $replace, $file);
-        return $result;
+        return str_replace($search, $replace, $file);
     }
 }
