@@ -11,7 +11,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <link rel="stylesheet" type="text/css" href="{{ url('webapp/css/app.css') }}">
     <script>
-        var apiUrl = "https://7031-94-125-96-102.eu.ngrok.io";
+        var apiUrl = "https://af05-94-125-96-102.eu.ngrok.io";
     </script>
     <script src="{{ url('webapp/js/app.js') }}"></script>
     <script>
@@ -21,27 +21,35 @@
         Telegram.WebApp.onEvent('themeChanged', setThemeClass);
         setThemeClass();
     </script>
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: var(--tg-theme-bg-color, #ffffff);
-            color: var(--tg-theme-text-color, #222222);
-            font-size: 16px;
-            margin: 0;
-            padding: 0;
-            color-scheme: var(--tg-color-scheme);
-        }
-    </style>
 </head>
 
 <body>
     <div class="container">
-        <div id="apiUrl"></div>
+        <div class="products-container">
+            <div class="products-container_grid_container">
+                <div class="products-container_grid_container_item">
+                    <div class="products-container_grid_container_item_image">
+                        <div class="products-container_grid_container_item_image_content"
+                            style="background: url({{ url('images/product/models/0b0c2f1d62dc5a406b484b596209b225-image.jpg') }});background-repeat: no-repeat;background-size: contain; background-position: center;">
+                            <div class="products-container_grid_container_item_image_content_price_container">
+                                <div class="products-container_grid_container_item_image_content_price_container_price">
+                                    10€
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-container_price_item_container">
+                        <div class="products-container_price_item_container_title">
+                            CUVIE BOX
+                        </div>
+                    </div>
+                    <div class="products-container_button_item_container">
+                        <div class="products-container_button_item_container_button">
+                            VER
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('apiUrl').innerHTML = apiUrl;
-        }, false);
-    </script>
 </body>
