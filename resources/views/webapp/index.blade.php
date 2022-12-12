@@ -10,6 +10,8 @@
     <title></title>
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <link rel="stylesheet" type="text/css" href="{{ url('webapp/css/app.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script>
         var apiUrl = "https://af05-94-125-96-102.eu.ngrok.io";
     </script>
@@ -26,30 +28,7 @@
 <body>
     <div class="container">
         <div class="products-container">
-            <div class="products-container_grid_container">
-                <div class="products-container_grid_container_item">
-                    <div class="products-container_grid_container_item_image">
-                        <div class="products-container_grid_container_item_image_content"
-                            style="background: url({{ url('images/product/models/0b0c2f1d62dc5a406b484b596209b225-image.jpg') }});background-repeat: no-repeat;background-size: contain; background-position: center;">
-                            <div class="products-container_grid_container_item_image_content_price_container">
-                                <div class="products-container_grid_container_item_image_content_price_container_price">
-                                    10€
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="products-container_price_item_container">
-                        <div class="products-container_price_item_container_title">
-                            CUVIE BOX
-                        </div>
-                    </div>
-                    <div class="products-container_button_item_container">
-                        <div class="products-container_button_item_container_button">
-                            VER
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="products-container_grid_container"></div>
         </div>
     </div>
 </body>
