@@ -2,7 +2,15 @@
 
 use App\Helpers\AuthHelper;
 use App\Helpers\CrudHelper;
+use App\Helpers\CacheHelper;
 use App\Helpers\UtilsHelper;
+
+if (!function_exists('clearCache')) {
+    function clearCache()
+    {
+        return CacheHelper::clearCache();
+    }
+}
 
 /**
  * AuthHelper
