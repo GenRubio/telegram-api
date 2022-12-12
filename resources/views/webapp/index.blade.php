@@ -28,7 +28,7 @@
 <body>
     <div class="container">
         <div class="products-container">
-            <div class="products-container_grid_container"></div>
+            <div class="products-container_grid_container products-container_grid_container-js"></div>
         </div>
     </div>
 </body>

@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    var productsContainer = ".products-container_grid_container";
-    
+    var productsContainer = ".products-container_grid_container-js";
+
     loadProducts();
 
     function loadProducts() {
