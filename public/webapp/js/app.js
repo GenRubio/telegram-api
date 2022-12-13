@@ -1,6 +1,11 @@
 $(document).ready(function () {
+    var apiUrl = "https://b1a0-94-125-96-102.eu.ngrok.io";
     var productsContainer = ".products-container_grid_container-js";
-
+    var mainButton = Telegram.WebApp.MainButton;
+    mainButton.text = "MI CARRITO (0)";
+    mainButton.color = "#f9a917";
+    mainButton.disable();
+    mainButton.show();
     loadProducts();
 
     function loadProducts() {
@@ -26,7 +31,7 @@ $(document).ready(function () {
                         </div>
                     </div>
                     <div class="products-container_button_item_container">
-                        <div class="products-container_button_item_container_button">
+                        <div class="products-container_button_item_container_button products-container_button_item_container_button-js" data-product="` + JSON.stringify(product) +`">
                             VER
                         </div>
                     </div>
@@ -36,4 +41,13 @@ $(document).ready(function () {
             }
         })
     }
+
+    $(document).on('click', '.products-container_button_item_container_button-js', function() {
+        document.getElementById("product-description-container-js").style.width = "100%";
+    })
+
+    $(document).on('click', '.close-product-description-js', function(event) {
+        event.preventDefault();
+        document.getElementById("product-description-container-js").style.width = "0";
+    })
 })

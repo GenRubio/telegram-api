@@ -26,7 +26,7 @@ body {
 .products-container_grid_container_item_image {
     position: relative;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid rgb(189, 189, 189);
     border-radius: 7px;
     background-color: white;
 }
@@ -43,7 +43,7 @@ body {
     height: 100%;
 }
 
-.products-container_price_item_container{
+.products-container_price_item_container {
     margin-top: 8px;
     display: flex;
     flex-wrap: wrap;
@@ -51,14 +51,14 @@ body {
     font-size: 14px;
 }
 
-.products-container_button_item_container{
+.products-container_button_item_container {
     margin-top: 8px;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
 }
 
-.products-container_button_item_container_button{
+.products-container_button_item_container_button {
     width: 100%;
     padding: 5px;
     text-align: center;
@@ -69,16 +69,73 @@ body {
     cursor: pointer;
 }
 
-.products-container_grid_container_item_image_content_price_container{
+.products-container_grid_container_item_image_content_price_container {
     display: flex;
     justify-content: end;
     padding: 3px;
 }
 
-.products-container_grid_container_item_image_content_price_container_price{
+.products-container_grid_container_item_image_content_price_container_price {
     padding: 1px 5px;
     background-color: rgba(0, 0, 0, 0.073);
     border-radius: 8px;
     font-size: 12px;
     color: black;
+}
+
+.product-description-container {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    background-color: var(--tg-theme-bg-color, #ffffff);
+    color: var(--tg-theme-text-color, #222222);
+    color-scheme: var(--tg-color-scheme);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.product-description-container a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+}
+
+.product-description-container .close-product-description {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    font-size: 36px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+
+.product-description-container_title_container {
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #f9a917;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.product-description-container_content_container_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 10px;
+}
+
+.product-description-container_especifications {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
 }
