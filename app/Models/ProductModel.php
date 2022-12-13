@@ -162,8 +162,8 @@ class ProductModel extends Model
             if ($this->{$attribute_name}) {
                 Storage::disk($disk)->delete('public/' . $this->{$attribute_name});
             }
-            $image = Image::make($value)->encode('jpg', 90);
-            $filename = md5($value . time()) . '-' . $attribute_name . '.jpg';
+            $image = Image::make($value)->encode('png', 90);
+            $filename = md5($value . time()) . '-' . $attribute_name . '.png';
             Storage::disk($disk)->put($destination_path . $filename, $image->stream());
             $this->attributes[$attribute_name] = $destination_path_db . $filename;
         } else {
