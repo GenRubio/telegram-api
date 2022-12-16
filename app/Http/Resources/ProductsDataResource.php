@@ -18,7 +18,10 @@ class ProductsDataResource extends JsonResource
         $response = [];
         foreach ($this->products as $product) {
             $productData = $this->getProductData($product);
-            $productData['flavors'] = $this->getFlavorsData($product);
+            $productData['flavors'] = [
+                'title' => 'FLAVORS',
+                'data' => $this->getFlavorsData($product)
+            ];
             $response[] = $productData;
         }
         return $response;
@@ -27,13 +30,29 @@ class ProductsDataResource extends JsonResource
     private function getProductData($product)
     {
         return [
+            'reference' => $product->reference,
             'name' => $product->name,
             'image' => url($product->image),
             'price' => $product->price,
             'discount' => $product->discount,
+            'button_view_text' => 'VER',
             'description' => [
                 'title' => 'SPECIFICATIONS',
                 'data' => [
+                    [
+                        'name' => 'Nicotine Salt',
+                        'value' => $product->concentration,
+                        'simbol' => 'mg/ml',
+                        'image' => url('images/icons/bg3-1.png'),
+                        'has_images' => true
+                    ],
+                    [
+                        'name' => 'Absorbable quantity',
+                        'value' => $product->absorbable_quantity,
+                        'simbol' => 'Puffs',
+                        'image' => url('images/icons/bg3-2.png'),
+                        'has_images' => true
+                    ],
                     [
                         'name' => 'Size',
                         'value' => $product->size,
@@ -61,24 +80,10 @@ class ProductsDataResource extends JsonResource
                         'has_images' => true
                     ],
                     [
-                        'name' => 'Nicotine Salt',
-                        'value' => $product->concentration,
-                        'simbol' => 'mg/ml',
-                        'image' => url('images/icons/bg3-1.png'),
-                        'has_images' => true
-                    ],
-                    [
                         'name' => 'Resistance',
                         'value' => $product->resistance,
                         'simbol' => 'Ω',
                         'image' => url('images/icons/bg3-6.png'),
-                        'has_images' => true
-                    ],
-                    [
-                        'name' => 'Absorbable quantity',
-                        'value' => $product->absorbable_quantity,
-                        'simbol' => 'Puffs',
-                        'image' => url('images/icons/bg3-2.png'),
                         'has_images' => true
                     ],
                     [
@@ -98,9 +103,11 @@ class ProductsDataResource extends JsonResource
         $flavors = [];
         foreach ($product->productModelsFlavors as $flavor) {
             $flavors[] = [
+                'reference' => $flavor->reference,
                 'name' => $flavor->name,
                 'image' => url($flavor->image),
                 'stock' => $flavor->stock,
+                'button_add_text' => 'AÑADIR'
             ];
         }
         return $flavors;

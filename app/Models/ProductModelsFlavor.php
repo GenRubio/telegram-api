@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +24,7 @@ class ProductModelsFlavor extends Model
     protected $guarded = ['id'];
     protected $fillable = [
         'product_model_id',
+        'reference',
         'name',
         'image',
         'stock',
@@ -71,6 +73,22 @@ class ProductModelsFlavor extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setReferenceAttribute($value)
+    {
+        if (is_null($value)) {
+            $product = ProductModelsFlavor::orderBy('reference', 'desc')->first();
+            if (is_null($product)) {
+                $this->attributes['reference'] = Carbon::now()->format('Y') . '10000';
+            } else {
+                if (empty($product->reference)) {
+                    $this->attributes['reference'] = Carbon::now()->format('Y') . '10000';
+                } else {
+                    $this->attributes['reference'] = (int)$product->reference + 1;
+                }
+            }
+        }
+    }
 
     public function setImageAttribute($value)
     {

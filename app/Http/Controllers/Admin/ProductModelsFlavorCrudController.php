@@ -50,6 +50,11 @@ class ProductModelsFlavorCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->crud->addColumn([
+            'name' => 'reference',
+            'label' => 'Referencia',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'image',
             'label' => 'Imagen',
             'type'  => 'image',
@@ -88,6 +93,10 @@ class ProductModelsFlavorCrudController extends CrudController
     protected function setFields()
     {
         $this->crud->addFields([
+            [
+                'name' => 'reference',
+                'type' => 'hidden',
+            ],
             [
                 'name' => 'product_model_id',
                 'value' => $this->productModelId,
@@ -142,11 +151,6 @@ class ProductModelsFlavorCrudController extends CrudController
         $this->crud->setRequest($this->handleNameInput($this->crud->getRequest()));
         $this->crud->unsetValidation();
         return $this->traitUpdate();
-    }
-
-    public function store()
-    {
-        return $this->traitStore();
     }
 
     protected function handleNameInput($request)
