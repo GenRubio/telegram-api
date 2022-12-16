@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::create('product_models_flavors', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_model_id');
+            $table->string('reference');
             $table->text('name')->unique();
             $table->text('image');
+            $table->integer('stock')->default(0);
+            $table->integer('stock_bloqued')->default(0);
             $table->boolean('active');
             $table->timestamps();
 

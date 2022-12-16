@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('product_models_flavors', function (Blueprint $table) {
-            $table->integer('stock')->default(0);
-            $table->integer('stock_bloqued')->default(0);
+        Schema::create('brands', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->boolean('active')->default(true);
+            $table->timestamps();
         });
     }
 
@@ -26,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('product_models_flavors', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('brands');
     }
 };

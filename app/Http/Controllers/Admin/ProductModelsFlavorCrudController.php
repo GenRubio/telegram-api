@@ -36,7 +36,7 @@ class ProductModelsFlavorCrudController extends CrudController
     {
         $this->data['breadcrumbs'] = [
             trans('backpack::crud.admin') => backpack_url('dashboard'),
-            'Modelos' => backpack_url('product-model'),
+            'Productos' => backpack_url('product-model'),
             'Sabores' => backpack_url("product-model/" . $this->productModelId . "/product-models-flavor"),
             trans('backpack::crud.list') => false,
         ];

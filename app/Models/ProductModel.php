@@ -23,6 +23,7 @@ class ProductModel extends Model
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = [
+        'brand_id',
         'reference',
         'name',
         'image',
@@ -53,6 +54,11 @@ class ProductModel extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function brand()
+    {
+        return $this->hasOne(Brand::class, 'id', 'brand_id');
+    }
 
     public function productModelsFlavors()
     {
