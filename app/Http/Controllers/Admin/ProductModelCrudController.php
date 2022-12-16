@@ -47,13 +47,9 @@ class ProductModelCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'brand',
             'label' => 'Marca',
-            'type'      => 'select',
-            'name'      => 'brand_id',
-            'entity'    => 'brand',
-            'attribute' => 'name',
-            'model'     => "App\Models\Brand",
+            'type'  => 'text',
+            'name'  => 'product_brand_name',
         ]);
         $this->crud->addColumn([
             'name' => 'product_models_flavors_count',
@@ -89,14 +85,14 @@ class ProductModelCrudController extends CrudController
             ],
             [
                 'label'     => "Marca",
-                'type'      => 'text',
+                'type'      => 'select',
                 'name'      => 'brand_id',
-                //'entity'    => 'brandModel',
-                //'model'     => "App\Models\Brand",
-                //'attribute' => 'name',
-                //'options'   => (function ($query) {
-                //    return $query->active()->get();
-                //}),
+                'entity'    => 'productBrand',
+                'model'     => "App\Models\Brand",
+                'attribute' => 'name',
+                'options'   => (function ($query) {
+                    return $query->active()->get();
+                }),
                 'tab' => 'Producto'
             ],
             [

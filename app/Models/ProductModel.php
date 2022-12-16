@@ -23,7 +23,6 @@ class ProductModel extends Model
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = [
-        'brand_id',
         'reference',
         'name',
         'image',
@@ -38,6 +37,7 @@ class ProductModel extends Model
         'resistance',
         'absorbable_quantity',
         'charging_port',
+        'brand_id',
         'active',
     ];
     // protected $hidden = [];
@@ -55,9 +55,9 @@ class ProductModel extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function brand()
+    public function productBrand()
     {
-        return $this->hasOne(Brand::class, 'id', 'brand_id');
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function productModelsFlavors()
@@ -81,6 +81,11 @@ class ProductModel extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+
+    public function getProductBrandNameAttribute()
+    {
+        return $this->productBrand->name;
+    }
 
     public function getProductModelsFlavorsCountAttribute()
     {
