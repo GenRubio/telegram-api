@@ -9,9 +9,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class ProductModelCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
-        store as traitStore;
-    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
         update as traitUpdate;
     }
@@ -91,14 +89,14 @@ class ProductModelCrudController extends CrudController
             ],
             [
                 'label'     => "Marca",
-                'type'      => 'select',
+                'type'      => 'text',
                 'name'      => 'brand_id',
-                'entity'    => 'brand',
-                'model'     => "App\Models\Brand",
-                'attribute' => 'name',
-                'options'   => (function ($query) {
-                    return $query->active()->get();
-                }),
+                //'entity'    => 'brandModel',
+                //'model'     => "App\Models\Brand",
+                //'attribute' => 'name',
+                //'options'   => (function ($query) {
+                //    return $query->active()->get();
+                //}),
                 'tab' => 'Producto'
             ],
             [
@@ -207,11 +205,6 @@ class ProductModelCrudController extends CrudController
         $this->crud->setRequest($this->handleNameInput($this->crud->getRequest()));
         $this->crud->unsetValidation();
         return $this->traitUpdate();
-    }
-
-    public function store()
-    {
-        return $this->traitStore();
     }
 
     protected function handleNameInput($request)

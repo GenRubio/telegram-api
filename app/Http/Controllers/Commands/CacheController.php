@@ -14,7 +14,6 @@ class CacheController extends Controller
         Artisan::call('route:clear');
         Artisan::call('cache:clear');
         Artisan::call('view:clear');
-        Artisan::call('flush:sessions');
         clearCache();
     }
 }
