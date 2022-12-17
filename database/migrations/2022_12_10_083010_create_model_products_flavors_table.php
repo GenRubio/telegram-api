@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_model_id');
             $table->string('reference');
-            $table->text('name')->unique();
+            $table->text('name');
             $table->text('image');
             $table->integer('stock')->default(0);
             $table->integer('stock_bloqued')->default(0);
