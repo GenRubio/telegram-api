@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Language;
 use App\Http\Requests\LanguageRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -9,8 +10,12 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class LanguageCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        store as traitStore;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -75,5 +80,35 @@ class LanguageCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function store()
+    {
+        $abbr = request()->input('abbr');
+        $this->makeLangFolder($abbr);
+        $this->updateDefaultLanguage(request()->input('default'));
+        return $this->traitStore();
+    }
+
+    public function update()
+    {
+        $this->updateDefaultLanguage(request()->input('default'));
+        return $this->traitUpdate();
+    }
+
+    private function makeLangFolder($abbr)
+    {
+        $langPath = base_path('lang');
+        if (!file_exists("{$langPath}/{$abbr}")) {
+            mkdir("{$langPath}/{$abbr}", 0777, true);
+        }
+    }
+
+    private function updateDefaultLanguage($default){
+        if ($default == true){
+            Language::query()->update([
+                'default' => false
+            ]);
+        }
     }
 }
