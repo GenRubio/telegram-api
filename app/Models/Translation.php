@@ -32,6 +32,12 @@ class Translation extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getTextValueForInput($abbr)
+    {
+        $text = json_decode($this->attributes['text']);
+        return $text->{$abbr} ?? '';
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -50,9 +56,21 @@ class Translation extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getDefaultLangTextAttribute()
+    {
+        $language = Language::active()->where('default', true)->first();
+        $text = json_decode($this->attributes['text']);
+        return $text->{$language->abbr} ?? '';
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setUuidAttribute($value)
+    {
+        $this->attributes['uuid'] = uniqid(microtime(true));
+    }
 }
