@@ -33,6 +33,11 @@ class TranslationCrudController extends CrudController
             'label' => 'Texto',
             'type'  => 'text',
         ]);
+        $this->crud->addColumn([
+            'name' => 'uuid',
+            'label' => 'Token',
+            'type'  => 'text',
+        ]);
     }
 
     protected function setupCreateOperation()
