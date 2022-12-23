@@ -36,4 +36,9 @@ class OrderRepository extends Repository implements OrderRepositoryInterface
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;
     }
+
+    public function getByReference($reference)
+    {
+        return $this->model->where('reference', $reference)->first();
+    }
 }

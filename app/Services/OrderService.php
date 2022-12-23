@@ -25,12 +25,8 @@ class OrderService extends Controller
         $this->orderRepository = new OrderRepository();
     }
 
-    /**
-     * Entry
-     */
-    public function handle()
+    public function getByReference($reference)
     {
-        //
+        return $this->orderRepository->getByReference($reference);
     }
-
 }
