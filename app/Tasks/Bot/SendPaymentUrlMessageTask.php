@@ -2,7 +2,7 @@
 
 namespace App\Tasks\Bot;
 
-class SendPaymentUrlTask
+class SendPaymentUrlMessageTask
 {
     public function __construct()
     {
