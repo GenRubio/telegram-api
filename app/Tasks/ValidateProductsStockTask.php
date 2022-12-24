@@ -9,11 +9,15 @@ class ValidateProductsStockTask
 {
     private $products;
     private $productModelService;
+    public $flavors;
 
     public function __construct($products)
     {
         $this->products = $products;
         $this->productModelService = new ProductModelService();
+        $this->flavors = [];
+
+        $this->run();
     }
 
     public function run()
@@ -41,6 +45,10 @@ class ValidateProductsStockTask
             if ($item->amount > $flavor->available_stock) {
                 throw new GenericException("No tenemos suficiente stock de {$flavor->name} del producto {$productModel->name}. Stock disponible {$flavor->available_stock}");
             }
+            $this->flavors[] = [
+                'amount' => $item->amount,
+                'flavor' => $flavor
+            ];
         }
     }
 }

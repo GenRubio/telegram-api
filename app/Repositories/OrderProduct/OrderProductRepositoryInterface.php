@@ -8,5 +8,5 @@ namespace App\Repositories\OrderProduct;
  */
 interface OrderProductRepositoryInterface
 {
-    //
+    public function createOrderProducts($data);
 }

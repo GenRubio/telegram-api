@@ -25,12 +25,8 @@ class OrderProductService extends Controller
         $this->orderproductRepository = new OrderProductRepository();
     }
 
-    /**
-     * Entry
-     */
-    public function handle()
+    public function createOrderProducts($data)
     {
-        //
+        $this->orderproductRepository->createOrderProducts($data);
     }
-
 }

@@ -19,9 +19,9 @@ class OrderController extends Controller
             if (is_null($customer)) {
                 throw new GenericException("User not found");
             }
-            (new ValidateProductsStockTask($request->products))->run();
+            $validateProductStock = new ValidateProductsStockTask($request->products);
 
-            (new CreateOrderTask($request, $customer))->run();
+            (new CreateOrderTask($request, $customer, $validateProductStock))->run();
             return response()->json([
                 'success' => "Ok"
             ]);

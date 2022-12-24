@@ -36,4 +36,9 @@ class OrderProductRepository extends Repository implements OrderProductRepositor
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;
     }
+
+    public function createOrderProducts($data)
+    {
+        $this->model->create($data);
+    }
 }
