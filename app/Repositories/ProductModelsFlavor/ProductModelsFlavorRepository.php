@@ -36,4 +36,9 @@ class ProductModelsFlavorRepository extends Repository implements ProductModelsF
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;
     }
+
+    public function updateBlockedStock($flavorId, $amount)
+    {
+        $this->model->where('id', $flavorId)->increment('stock_bloqued', $amount);
+    }
 }

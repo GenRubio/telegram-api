@@ -25,12 +25,8 @@ class ProductModelsFlavorService extends Controller
         $this->productmodelsflavorRepository = new ProductModelsFlavorRepository();
     }
 
-    /**
-     * Entry
-     */
-    public function handle()
+    public function updateBlockedStock($flavorId, $amount)
     {
-        //
+        $this->productmodelsflavorRepository->updateBlockedStock($flavorId, $amount);
     }
-
 }

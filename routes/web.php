@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\GetProductsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\GetProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,5 @@ Route::get('webapp/{chat}', function () {
 
 Route::prefix('api')->group(function () {
     Route::get('products', [GetProductsController::class, 'index']);
+    Route::post('new-order', [OrderController::class, 'createOrder']);
 });

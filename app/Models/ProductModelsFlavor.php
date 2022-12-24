@@ -68,6 +68,11 @@ class ProductModelsFlavor extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getAvailableStockAttribute()
+    {
+        return $this->stock - $this->stock_bloqued;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

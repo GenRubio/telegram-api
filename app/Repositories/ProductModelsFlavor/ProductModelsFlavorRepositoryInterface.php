@@ -8,5 +8,5 @@ namespace App\Repositories\ProductModelsFlavor;
  */
 interface ProductModelsFlavorRepositoryInterface
 {
-    //
+    public function updateBlockedStock($flavorId, $amount);
 }

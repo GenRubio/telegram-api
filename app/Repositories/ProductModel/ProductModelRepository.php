@@ -37,8 +37,24 @@ class ProductModelRepository extends Repository implements ProductModelRepositor
         $this->limit = 10;
     }
 
-    public function enabled($id)
+    public function enabled($reference)
     {
-        return $this->model->where('id', $id)->active()->first();
+        return $this->model->where('reference', $reference)
+            ->active()
+            ->first();
+    }
+
+    public function getByReferences($references)
+    {
+        return $this->model->whereIn('reference', $references)
+            ->active()
+            ->get();
+    }
+
+    public function getByReference($reference)
+    {
+        return $this->model->where('reference', $reference)
+            ->active()
+            ->first();
     }
 }

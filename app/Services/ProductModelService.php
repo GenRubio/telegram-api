@@ -25,8 +25,18 @@ class ProductModelService extends Controller
         $this->productmodelRepository = new ProductModelRepository();
     }
 
-    public function enabled($id)
+    public function enabled($reference)
     {
-        return $this->productmodelRepository->enabled($id) ? true : false;
+        return $this->productmodelRepository->enabled($reference) ? true : false;
+    }
+
+    public function getByReferences($references)
+    {
+        return $this->productmodelRepository->getByReferences($references);
+    }
+
+    public function getByReference($reference)
+    {
+        return $this->productmodelRepository->getByReference($reference);
     }
 }
