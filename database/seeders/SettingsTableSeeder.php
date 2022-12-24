@@ -37,6 +37,15 @@ class SettingsTableSeeder extends Seeder
                 'created_at' => '2022-12-24 14:22:59',
                 'updated_at' => '2022-12-24 14:22:59',
             ),
+            2 => 
+            array (
+                'id' => 4,
+                'key' => '1671894524.6744',
+                'description' => 'Url Bot Telegram',
+                'value' => 'https://t.me/HQTStoreBot',
+                'created_at' => '2022-12-24 15:08:44',
+                'updated_at' => '2022-12-24 15:08:44',
+            ),
         ));
         
         
