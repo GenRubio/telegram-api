@@ -36,6 +36,12 @@ class PaymentController extends Controller
 
     public function paymentSuccess(Request $request)
     {
+        try{
+
+        }
+        catch (GenericException | Exception $e){
+           
+        }
     }
 
     public function paymentError(Request $request)

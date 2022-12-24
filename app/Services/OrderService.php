@@ -29,4 +29,9 @@ class OrderService extends Controller
     {
         return $this->orderRepository->getByReference($reference);
     }
+
+    public function createOrder($data)
+    {
+        return $this->orderRepository->createOrder($data);
+    }
 }

@@ -36,4 +36,9 @@ class CustomerRepository extends Repository implements CustomerRepositoryInterfa
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;
     }
+
+    public function getByChat($chatId)
+    {
+        return $this->model->where('chat_id', $chatId)->first();
+    }
 }

@@ -25,12 +25,8 @@ class ProductModelService extends Controller
         $this->productmodelRepository = new ProductModelRepository();
     }
 
-    /**
-     * Entry
-     */
-    public function handle()
+    public function enabled($id)
     {
-        //
+        return $this->productmodelRepository->enabled($id) ? true : false;
     }
-
 }

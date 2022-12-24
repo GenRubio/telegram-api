@@ -36,4 +36,9 @@ class ProductModelRepository extends Repository implements ProductModelRepositor
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;
     }
+
+    public function enabled($id)
+    {
+        return $this->model->where('id', $id)->active()->first();
+    }
 }

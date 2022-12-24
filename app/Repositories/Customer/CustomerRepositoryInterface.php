@@ -8,5 +8,5 @@ namespace App\Repositories\Customer;
  */
 interface CustomerRepositoryInterface
 {
-    //
+    public function getByChat($chatId);
 }

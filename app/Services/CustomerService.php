@@ -25,12 +25,8 @@ class CustomerService extends Controller
         $this->customerRepository = new CustomerRepository();
     }
 
-    /**
-     * Entry
-     */
-    public function handle()
+    public function getByChat($chatId)
     {
-        //
+        return $this->customerRepository->getByChat($chatId);
     }
-
 }

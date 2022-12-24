@@ -41,4 +41,9 @@ class OrderRepository extends Repository implements OrderRepositoryInterface
     {
         return $this->model->where('reference', $reference)->first();
     }
+
+    public function createOrder($data)
+    {
+        $this->model->create($data);
+    }
 }

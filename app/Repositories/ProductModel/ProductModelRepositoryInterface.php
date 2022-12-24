@@ -8,5 +8,5 @@ namespace App\Repositories\ProductModel;
  */
 interface ProductModelRepositoryInterface
 {
-    //
+    public function enabled($id);
 }

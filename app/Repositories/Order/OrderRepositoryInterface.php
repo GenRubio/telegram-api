@@ -9,4 +9,5 @@ namespace App\Repositories\Order;
 interface OrderRepositoryInterface
 {
     public function getByReference($reference);
+    public function createOrder($data);
 }
