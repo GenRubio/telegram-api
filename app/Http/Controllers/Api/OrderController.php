@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Exception;
 use Illuminate\Http\Request;
+use App\Tasks\CreateOrderTask;
 use App\Services\CustomerService;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,7 @@ class OrderController extends Controller
             }
             (new ValidateProductsStockTask($request->products))->run();
 
+            (new CreateOrderTask($request, $customer))->run();
             return response()->json([
                 'success' => "Ok"
             ]);

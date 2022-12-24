@@ -35,4 +35,5 @@ Route::group([
     Route::crud('language', 'LanguageCrudController');
     Route::crud('translation', 'TranslationCrudController');
     Route::crud('customer', 'CustomerCrudController');
+    Route::crud('setting', 'SettingCrudController');
 }); // this should be the absolute last line of this file

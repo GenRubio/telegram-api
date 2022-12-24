@@ -11,3 +11,4 @@
 <li class="nav-title">CONFIGURACION</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('api-client') }}"><i class="nav-icon la la-question"></i> API Clientes</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('customer') }}"><i class="nav-icon la la-question"></i> Customers</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('setting') }}"><i class="nav-icon la la-question"></i> Configuración</a></li>
