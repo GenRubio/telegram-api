@@ -29,7 +29,7 @@ class CreateProductsStripeTask
                 'product_data' => [
                     'name' => $this->getNameProduct($product),
                 ],
-                'unit_amount' => $product->unit_price,
+                'unit_amount' => $product->unit_price * 100,
             ],
             'quantity' => $product->amount
         ];

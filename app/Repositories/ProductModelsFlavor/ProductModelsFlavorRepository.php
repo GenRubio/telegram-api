@@ -41,4 +41,9 @@ class ProductModelsFlavorRepository extends Repository implements ProductModelsF
     {
         $this->model->where('id', $flavorId)->increment('stock_bloqued', $amount);
     }
+
+    public function updateRemoveBlockedStock($flavorId, $amount)
+    {
+        $this->model->where('id', $flavorId)->decrement('stock_bloqued', $amount);
+    }
 }

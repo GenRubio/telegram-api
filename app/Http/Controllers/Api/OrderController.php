@@ -9,6 +9,7 @@ use App\Services\CustomerService;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use App\Tasks\ValidateProductsStockTask;
+use App\Tasks\Bot\SendPaymentUrlMessageTask;
 
 class OrderController extends Controller
 {
@@ -21,7 +22,8 @@ class OrderController extends Controller
             }
             $validateProductStock = new ValidateProductsStockTask($request->products);
 
-            (new CreateOrderTask($request, $customer, $validateProductStock))->run();
+            $createOrder = new CreateOrderTask($request, $customer, $validateProductStock);
+            (new SendPaymentUrlMessageTask($createOrder->order, $customer))->run();
             return response()->json([
                 'success' => "Ok"
             ]);

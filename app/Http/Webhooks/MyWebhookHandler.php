@@ -2,7 +2,6 @@
 
 namespace App\Http\Webhooks;
 
-use App\Utils\UserTrolleyUtil;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use DefStudio\Telegraph\Handlers\WebhookHandler;

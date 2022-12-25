@@ -49,6 +49,11 @@ class Order extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'chat_id', 'chat_id');
+    }
+
     public function orderProducts()
     {
         return $this->hasMany(OrderProduct::class, 'order_id', 'id');

@@ -39,11 +39,27 @@ class OrderRepository extends Repository implements OrderRepositoryInterface
 
     public function getByReference($reference)
     {
-        return $this->model->where('reference', $reference)->first();
+        return $this->model->where('reference', $reference)
+            ->first();
+    }
+
+    public function getByReferenceAndStatus($reference, $status)
+    {
+        return $this->model->where('reference', $reference)
+            ->where('status', $status)
+            ->first();
     }
 
     public function createOrder($data)
     {
         return $this->model->create($data);
+    }
+
+    public function updateStatus($id, $status)
+    {
+        $this->model->where('id', $id)
+            ->update([
+                'status' => $status
+            ]);
     }
 }

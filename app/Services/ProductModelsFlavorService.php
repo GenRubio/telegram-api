@@ -29,4 +29,9 @@ class ProductModelsFlavorService extends Controller
     {
         $this->productmodelsflavorRepository->updateBlockedStock($flavorId, $amount);
     }
+
+    public function updateRemoveBlockedStock($flavorId, $amount)
+    {
+        $this->productmodelsflavorRepository->updateRemoveBlockedStock($flavorId, $amount);
+    }
 }

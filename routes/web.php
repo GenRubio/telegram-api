@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\GetProductsController;
 
 /*
@@ -27,4 +28,14 @@ Route::get('webapp/{chat}', function () {
 Route::prefix('api')->group(function () {
     Route::get('products', [GetProductsController::class, 'index']);
     Route::post('new-order', [OrderController::class, 'createOrder']);
+    Route::prefix('payment')->group(function () {
+        Route::prefix('stripe')->group(function () {
+            Route::get('/{reference}', [PaymentController::class, 'payment'])
+                ->name('stripe.payment');
+            Route::get('success/{reference}', [PaymentController::class, 'paymentSuccess'])
+                ->name('stripe.payment.success');
+            Route::get('cancel/{reference}', [PaymentController::class, 'paymentError'])
+                ->name('stripe.payment.cancel');
+        });
+    });
 });

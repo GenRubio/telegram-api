@@ -30,8 +30,18 @@ class OrderService extends Controller
         return $this->orderRepository->getByReference($reference);
     }
 
+    public function getByReferenceAndStatus($reference, $status)
+    {
+        return $this->orderRepository->getByReferenceAndStatus($reference, $status);
+    }
+
     public function createOrder($data)
     {
         return $this->orderRepository->createOrder($data);
+    }
+
+    public function updateStatus($id, $status)
+    {
+        $this->orderRepository->updateStatus($id, $status);
     }
 }

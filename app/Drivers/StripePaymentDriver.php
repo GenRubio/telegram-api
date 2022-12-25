@@ -24,8 +24,8 @@ class StripePaymentDriver
             'payment_method_types' => ['card'],
             'line_items' => [$this->orderProducts],
             'mode' => 'payment',
-            'success_url' => route('payment-success', encrypt($this->order->reference)),
-            'cancel_url' => route('payment-cancel', encrypt($this->order->reference)),
+            'success_url' => route('stripe.payment.success', encrypt($this->order->reference)),
+            'cancel_url' => route('stripe.payment.cancel', encrypt($this->order->reference)),
         ]);
     }
 }

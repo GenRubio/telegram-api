@@ -19,6 +19,7 @@ class CreateOrderTask
     private $orderProductService;
     private $validateProductStock;
     private $productModelsFlavorService;
+    public $order;
 
     public function __construct($request, $customer, $validateProductStock)
     {
@@ -28,6 +29,8 @@ class CreateOrderTask
         $this->orderProductService = new OrderProductService();
         $this->validateProductStock = $validateProductStock;
         $this->productModelsFlavorService = new ProductModelsFlavorService();
+
+        $this->run();
     }
 
     public function run()
@@ -36,8 +39,8 @@ class CreateOrderTask
         try {
             DB::beginTransaction();
             $orderPrepare = (new OrderPrepare($this->request, $this->customer))->run();
-            $order = $this->orderService->createOrder($orderPrepare);
-            $prderProductPrepare = (new OrderProductPrepare($order, $this->validateProductStock))->run();
+            $this->order = $this->orderService->createOrder($orderPrepare);
+            $prderProductPrepare = (new OrderProductPrepare($this->order, $this->validateProductStock))->run();
             $this->orderProductService->createOrderProducts($prderProductPrepare);
             DB::commit();
         } catch (GenericException | Exception $e) {
