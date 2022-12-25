@@ -17,7 +17,7 @@ use App\Tasks\Bot\SendErrorPaymentMessageTask;
 
 class PaymentController extends Controller
 {
-    public function payment(Request $request)
+    public function stripePayment(Request $request)
     {
         try {
             $order = (new OrderService())
@@ -37,7 +37,7 @@ class PaymentController extends Controller
         }
     }
 
-    public function paymentSuccess(Request $request)
+    public function stripePaymentSuccess(Request $request)
     {
         try {
             $order = (new OrderService())->getByReference(decrypt($request->reference));
@@ -50,7 +50,7 @@ class PaymentController extends Controller
         return Redirect::to($settingService->getByKey('1671894524.6744')->value);
     }
 
-    public function paymentError(Request $request)
+    public function stripePaymentError(Request $request)
     {
         try {
             $order = (new OrderService())->getByReference(decrypt($request->reference));

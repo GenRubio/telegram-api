@@ -30,11 +30,11 @@ Route::prefix('api')->group(function () {
     Route::post('new-order', [OrderController::class, 'createOrder']);
     Route::prefix('payment')->group(function () {
         Route::prefix('stripe')->group(function () {
-            Route::get('/{reference}', [PaymentController::class, 'payment'])
+            Route::get('/{reference}', [PaymentController::class, 'stripePayment'])
                 ->name('stripe.payment');
-            Route::get('success/{reference}', [PaymentController::class, 'paymentSuccess'])
+            Route::get('success/{reference}', [PaymentController::class, 'stripePaymentSuccess'])
                 ->name('stripe.payment.success');
-            Route::get('cancel/{reference}', [PaymentController::class, 'paymentError'])
+            Route::get('cancel/{reference}', [PaymentController::class, 'stripePaymentError'])
                 ->name('stripe.payment.cancel');
         });
     });
