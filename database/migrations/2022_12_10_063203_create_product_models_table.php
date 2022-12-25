@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('image');
             $table->string('reference');
             $table->float('price')->default(0);
-            $table->float('discount')->default(0);
+            $table->integer('discount')->default(0);
             $table->string('size')->nullable();
             $table->string('power_range')->nullable();
             $table->string('input_voltage')->nullable();

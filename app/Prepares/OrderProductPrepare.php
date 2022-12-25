@@ -2,6 +2,8 @@
 
 namespace App\Prepares;
 
+use App\Exceptions\GenericException;
+
 class OrderProductPrepare
 {
     private $order;
@@ -31,8 +33,17 @@ class OrderProductPrepare
             'product_model_id' => $flavor->productModel->id,
             'product_models_flavor_id' => $flavor->id,
             'amount' => $amount,
-            'unit_price' => $flavor->productModel->price,
-            'total_price' => $flavor->productModel->price * $amount,
+            'unit_price' => $unitPrice = $this->getUnitPrice($flavor->productModel),
+            'total_price' => $unitPrice * $amount,
         ];
+    }
+
+    private function getUnitPrice($productModel)
+    {
+        $productDiscount = 0;
+        if (!is_null($productModel->discount > 0) && $productModel->discount > 0) {
+            $productDiscount = ($productModel->price * $productModel->discount / 100);
+        }
+        return $productModel->price - $productDiscount;
     }
 }

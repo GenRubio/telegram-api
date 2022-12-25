@@ -39,6 +39,6 @@ class OrderProductRepository extends Repository implements OrderProductRepositor
 
     public function createOrderProducts($data)
     {
-        $this->model->create($data);
+        $this->model->insert($data);
     }
 }

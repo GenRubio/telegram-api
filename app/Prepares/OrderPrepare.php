@@ -4,6 +4,7 @@ namespace App\Prepares;
 
 use App\Enums\OrderStatusEnum;
 use App\Services\SettingService;
+use App\Services\ProductModelService;
 
 class OrderPrepare
 {
@@ -11,6 +12,7 @@ class OrderPrepare
     private $paymentData;
     private $products;
     private $settingService;
+    private $productModelService;
 
     public function __construct($request, $customer)
     {
@@ -18,6 +20,7 @@ class OrderPrepare
         $this->paymentData = (object)$request->payment;
         $this->products = $request->products;
         $this->settingService = new SettingService();
+        $this->productModelService = new ProductModelService();
     }
 
     public function run()
@@ -43,8 +46,13 @@ class OrderPrepare
     {
         $price = 0;
         foreach ($this->products as $item) {
-            $product = (object)$item['product'];
-            $price += $product->price * $item['amount'];
+            $productData = (object)$item['product'];
+            $productModel = $this->productModelService->getByReference($productData->reference);
+            $productDiscount = 0;
+            if (!is_null($productModel->discount > 0) && $productModel->discount > 0){
+                $productDiscount = ($productModel->price * $productModel->discount / 100);
+            }
+            $price += ($productModel->price - $productDiscount) * $item['amount'];
         }
         return $price;
     }

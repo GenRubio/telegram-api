@@ -37,8 +37,8 @@ class CreateOrderTask
             DB::beginTransaction();
             $orderPrepare = (new OrderPrepare($this->request, $this->customer))->run();
             $order = $this->orderService->createOrder($orderPrepare);
-            $orderProducts = (new OrderProductPrepare($order, $this->validateProductStock))->run();
-            $this->orderProductService->createOrderProducts($orderProducts);
+            $prderProductPrepare = (new OrderProductPrepare($order, $this->validateProductStock))->run();
+            $this->orderProductService->createOrderProducts($prderProductPrepare);
             DB::commit();
         } catch (GenericException | Exception $e) {
             DB::rollBack();
