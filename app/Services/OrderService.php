@@ -2,8 +2,9 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Enums\OrderStatusEnum;
+use App\Http\Controllers\Controller;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\Order\OrderRepositoryInterface;
 
@@ -33,6 +34,14 @@ class OrderService extends Controller
     public function getByReferenceAndStatus($reference, $status)
     {
         return $this->orderRepository->getByReferenceAndStatus($reference, $status);
+    }
+
+    public function getPaymentOrder($reference)
+    {
+        $settingService = new SettingService();
+        $subminutes = $settingService->getByKey('1671967273.4378')->value;
+        $status = OrderStatusEnum::STATUS_IDS['pd_payment'];
+        return $this->orderRepository->getPaymentOrder($reference, $status, $subminutes);
     }
 
     public function createOrder($data)

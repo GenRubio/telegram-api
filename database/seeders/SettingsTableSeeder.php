@@ -46,6 +46,15 @@ class SettingsTableSeeder extends Seeder
                 'created_at' => '2022-12-24 15:08:44',
                 'updated_at' => '2022-12-24 15:08:44',
             ),
+            3 => 
+            array (
+                'id' => 5,
+                'key' => '1671967273.4378',
+                'description' => 'Tiempo valido para la Url de pago en minutos',
+                'value' => '60',
+                'created_at' => '2022-12-25 11:21:13',
+                'updated_at' => '2022-12-25 11:21:13',
+            ),
         ));
         
         

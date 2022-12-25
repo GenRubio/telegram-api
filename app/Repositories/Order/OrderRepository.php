@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Order;
 
+use Carbon\Carbon;
 use App\Models\Order;
 use App\Repositories\Repository;
 
@@ -47,6 +48,14 @@ class OrderRepository extends Repository implements OrderRepositoryInterface
     {
         return $this->model->where('reference', $reference)
             ->where('status', $status)
+            ->first();
+    }
+
+    public function getPaymentOrder($reference, $status, $time)
+    {
+        return $this->model->where('reference', $reference)
+            ->where('status', $status)
+            ->where('created_at', '<', Carbon::now()->subMinutes($time))
             ->first();
     }
 

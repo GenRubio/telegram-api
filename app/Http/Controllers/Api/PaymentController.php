@@ -20,14 +20,13 @@ class PaymentController extends Controller
     public function payment(Request $request)
     {
         try {
-            $order = (new OrderService())
-                ->getByReferenceAndStatus(decrypt($request->reference), OrderStatusEnum::STATUS_IDS['pd_payment']);
+            $order = (new OrderService())->getPaymentOrder(decrypt($request->reference));
             if (is_null($order)) {
                 throw new GenericException("Order not found");
             }
             if ($order->payment_method == "stripe") {
-                $response = (new StripePaymentDriver($order))->run();
-                return Redirect::to($response->url);
+                $stripe = (new StripePaymentDriver($order))->run();
+                return Redirect::to($stripe->url);
             } else if ($order->payment_method == "paypal") {
                 throw new GenericException("PayPal not working");
             }

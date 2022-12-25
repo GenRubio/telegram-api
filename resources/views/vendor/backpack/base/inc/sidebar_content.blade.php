@@ -1,6 +1,6 @@
 {{-- This file is used to store sidebar items, inside the Backpack admin panel --}}
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a></li>
-<li class="nav-title">LANG</li>
+<li class="nav-title">WEB APP</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('language') }}"><i class="nav-icon la la-question"></i> Idiomas</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('translation') }}"><i class="nav-icon la la-question"></i> Traducciones</a></li>
 <li class="nav-title">TIENDA</li>
