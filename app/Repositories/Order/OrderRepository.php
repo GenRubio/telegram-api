@@ -55,7 +55,7 @@ class OrderRepository extends Repository implements OrderRepositoryInterface
     {
         return $this->model->where('reference', $reference)
             ->where('status', $status)
-            ->where('created_at', '<', Carbon::now()->subMinutes($time))
+            ->where('created_at', '>', Carbon::now()->subMinutes($time)->format('Y-m-d H:i:s'))
             ->first();
     }
 

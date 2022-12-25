@@ -49,7 +49,7 @@ class OrderPrepare
             $productData = (object)$item['product'];
             $productModel = $this->productModelService->getByReference($productData->reference);
             $productDiscount = 0;
-            if (!is_null($productModel->discount > 0) && $productModel->discount > 0){
+            if (!is_null($productModel->discount) && $productModel->discount > 0){
                 $productDiscount = ($productModel->price * $productModel->discount / 100);
             }
             $price += ($productModel->price - $productDiscount) * $item['amount'];
@@ -63,6 +63,6 @@ class OrderPrepare
             ->value;
         $shippmentPrice = $this->settingService->getByKey('1671891779.1284')
             ->value;
-        return $price > $minPriceFreeShippment ? 0 : $price + $shippmentPrice;
+        return $price > $minPriceFreeShippment ? 0 : $shippmentPrice;
     }
 }

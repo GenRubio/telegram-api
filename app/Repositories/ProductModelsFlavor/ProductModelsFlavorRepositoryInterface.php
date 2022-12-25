@@ -10,4 +10,5 @@ interface ProductModelsFlavorRepositoryInterface
 {
     public function updateBlockedStock($flavorId, $amount);
     public function updateRemoveBlockedStock($flavorId, $amount);
+    public function updateRemoveStock($flavorId, $amount);
 }

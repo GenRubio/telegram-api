@@ -106,7 +106,7 @@ class ProductsDataResource extends JsonResource
                 'reference' => $flavor->reference,
                 'name' => $flavor->name,
                 'image' => url($flavor->image),
-                'stock' => $flavor->stock,
+                'stock' => $flavor->stock,//$flavor->stock - $flavor->stock_bloqued
                 'button_add_text' => 'AÑADIR'
             ];
         }
