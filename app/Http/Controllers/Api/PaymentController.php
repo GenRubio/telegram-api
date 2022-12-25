@@ -17,7 +17,7 @@ use App\Tasks\Bot\SendErrorPaymentMessageTask;
 
 class PaymentController extends Controller
 {
-    public function stripePayment(Request $request)
+    public function payment(Request $request)
     {
         try {
             $order = (new OrderService())
