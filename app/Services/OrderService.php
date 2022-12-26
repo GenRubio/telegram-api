@@ -44,6 +44,14 @@ class OrderService extends Controller
         return $this->orderRepository->getPaymentOrder($reference, $status, $subminutes);
     }
 
+    public function getForAutomaticCancel()
+    {
+        $settingService = new SettingService();
+        $subminutes = $settingService->getByKey('1671967273.4378')->value;
+        $status = OrderStatusEnum::STATUS_IDS['pd_payment'];
+        return $this->orderRepository->getForAutomaticCancel($status, $subminutes);
+    }
+
     public function createOrder($data)
     {
         return $this->orderRepository->createOrder($data);

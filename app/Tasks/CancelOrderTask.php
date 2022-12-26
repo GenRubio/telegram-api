@@ -11,12 +11,14 @@ class CancelOrderTask
     private $order;
     private $orderService;
     private $productModelsFlavorService;
+    private $refund;
 
-    public function __construct($order)
+    public function __construct($order, $refund = false)
     {
         $this->order = $order;
         $this->orderService = new OrderService();
         $this->productModelsFlavorService = new ProductModelsFlavorService();
+        $this->refund = $refund;
     }
 
     public function run()

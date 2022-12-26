@@ -71,4 +71,11 @@ class OrderRepository extends Repository implements OrderRepositoryInterface
                 'status' => $status
             ]);
     }
+
+    public function getForAutomaticCancel($status, $time)
+    {
+        return $this->model->where('status', $status)
+            ->where('created_at', '<', Carbon::now()->subMinutes($time)->format('Y-m-d H:i:s'))
+            ->get();
+    }
 }
