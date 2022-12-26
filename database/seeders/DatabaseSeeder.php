@@ -29,5 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguagesTableSeeder::class);
         $this->call(TranslationsTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
+        $this->call(TelegramBotMessagesTableSeeder::class);
     }
 }
