@@ -8,5 +8,5 @@ namespace App\Repositories\TelegramBotMessage;
  */
 interface TelegramBotMessageRepositoryInterface
 {
-    //
+    public function getByKey($key);
 }

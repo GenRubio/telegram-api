@@ -36,4 +36,9 @@ class TelegramBotMessageRepository extends Repository implements TelegramBotMess
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;
     }
+
+    public function getByKey($key)
+    {
+        return $this->model->where('key', $key)->first();
+    }
 }

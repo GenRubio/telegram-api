@@ -25,12 +25,8 @@ class TelegramBotMessageService extends Controller
         $this->telegrambotmessageRepository = new TelegramBotMessageRepository();
     }
 
-    /**
-     * Entry
-     */
-    public function handle()
+    public function getByKey($key)
     {
-        //
+        return $this->telegrambotmessageRepository->getByKey($key);
     }
-
 }
