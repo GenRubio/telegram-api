@@ -29,6 +29,11 @@ class TelegramBotMessageCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
+            'name' => 'description',
+            'label' => 'Descripcion',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'image',
             'label' => 'Imagen',
             'type'  => 'image',
@@ -48,6 +53,11 @@ class TelegramBotMessageCrudController extends CrudController
             [
                 'name' => 'key',
                 'type' => 'hidden',
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Descripcion',
+                'type' => 'textarea',
             ],
             [
                 'name' => 'image',

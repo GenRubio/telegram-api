@@ -23,6 +23,7 @@ class TelegramBotMessage extends Model
     protected $guarded = ['id'];
     protected $fillable = [
         'key',
+        'description',
         'image',
         'message'
     ];

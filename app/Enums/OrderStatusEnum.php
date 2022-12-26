@@ -10,7 +10,6 @@ abstract class OrderStatusEnum
         'pd_payment' => 'pd_payment',
         'pd_sent' => 'pd_sent',
         'payment_accepted' => 'payment_accepted',
-        'payment_error' => 'payment_error',
         'sent' => 'sent',
         'delivered' => 'delivered'
     ];
@@ -20,8 +19,16 @@ abstract class OrderStatusEnum
         'pd_payment' => 'Pendiente de pago',
         'pd_sent' => 'Pendiente de envio',
         'payment_accepted' => 'Pago aceptado',
-        'payment_error' => 'Pago rechazado',
         'sent' => 'Enviado',
         'delivered' => 'Entregado'
+    ];
+    const STATUS_COLORS = [
+        'cancel' => '#df3e3e',
+        'error' => '#df3e3e',
+        'pd_payment' => '#ffb800',
+        'pd_sent' => '#0089ff',
+        'payment_accepted' => '#14d2cb',
+        'sent' => '#dd13dd',
+        'delivered' => '#4add13'
     ];
 }
