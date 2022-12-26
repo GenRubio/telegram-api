@@ -29,7 +29,9 @@ Route::group([
         Route::crud('product-models-flavor', 'ProductModelsFlavorCrudController');
     });
     Route::crud('order', 'OrderCrudController');
-    Route::crud('order-product', 'OrderProductCrudController');
+    Route::group(['prefix' => 'order/{order_id}'], function () {
+        Route::crud('order-product', 'OrderProductCrudController');
+    });
     Route::crud('brand', 'BrandCrudController');
     Route::crud('api-client', 'ApiClientCrudController');
     Route::crud('language', 'LanguageCrudController');

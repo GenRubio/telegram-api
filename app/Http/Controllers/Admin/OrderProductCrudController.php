@@ -5,12 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\OrderProductRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Route;
 
-/**
- * Class OrderProductCrudController
- * @package App\Http\Controllers\Admin
- * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
- */
 class OrderProductCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
@@ -19,48 +15,80 @@ class OrderProductCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
-    /**
-     * Configure the CrudPanel object. Apply settings to all operations.
-     * 
-     * @return void
-     */
+    protected $orderId;
+
     public function setup()
     {
         CRUD::setModel(\App\Models\OrderProduct::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/order-product');
         CRUD::setEntityNameStrings('order product', 'order products');
+
+        $this->orderId = Route::current()->parameter('order_id');
+        $this->crud->setRoute("admin/order/" . $this->orderId . '/order-product');
+        $this->breadCrumbs();
+        $this->listFilter();
     }
 
-    /**
-     * Define what happens when the List operation is loaded.
-     * 
-     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
-     * @return void
-     */
+    protected function breadCrumbs()
+    {
+        $this->data['breadcrumbs'] = [
+            trans('backpack::crud.admin') => backpack_url('dashboard'),
+            'Pedidos' => backpack_url('order'),
+            'Productos' => backpack_url("order/" . $this->orderId . "/order-product"),
+            trans('backpack::crud.list') => false,
+        ];
+    }
+
+    protected function listFilter()
+    {
+        $this->crud->addClause('where', 'order_id', $this->orderId);
+    }
+
     protected function setupListOperation()
     {
-        CRUD::column('order_id');
-        CRUD::column('product_model_id');
-        CRUD::column('product_models_flavor_id');
-        CRUD::column('amount');
-        CRUD::column('unit_price');
-        CRUD::column('total_price');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
+        $this->crud->removeButton('create');
+        $this->crud->removeButton('delete');
+        $this->crud->removeButton('update');
+        $this->crud->addColumn([
+            'name' => 'order_reference',
+            'label' => 'Referencia pedido',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'productModel',
+            'label' => 'Modelo',
+            'type'      => 'select',
+            'name'      => 'product_model_id',
+            'entity'    => 'productModel',
+            'attribute' => 'name',
+            'model'     => "App\Models\ProductModel",
+        ]);
+        $this->crud->addColumn([
+            'name' => 'productModelsFlavor',
+            'label' => 'Sabor',
+            'type'      => 'select',
+            'name'      => 'product_models_flavor_id',
+            'entity'    => 'productModelsFlavor',
+            'attribute' => 'name',
+            'model'     => "App\Models\ProductModelsFlavor",
+        ]);
+        $this->crud->addColumn([
+            'name' => 'total_price',
+            'label' => 'Precio total',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'unit_price',
+            'label' => 'Precio unidad',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'amount',
+            'label' => 'Cantidad',
+            'type'  => 'text',
+        ]);
     }
 
-    /**
-     * Define what happens when the Create operation is loaded.
-     * 
-     * @see https://backpackforlaravel.com/docs/crud-operation-create
-     * @return void
-     */
     protected function setupCreateOperation()
     {
         CRUD::setValidation(OrderProductRequest::class);
@@ -72,19 +100,8 @@ class OrderProductCrudController extends CrudController
         CRUD::field('unit_price');
         CRUD::field('total_price');
 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
-    /**
-     * Define what happens when the Update operation is loaded.
-     * 
-     * @see https://backpackforlaravel.com/docs/crud-operation-update
-     * @return void
-     */
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();

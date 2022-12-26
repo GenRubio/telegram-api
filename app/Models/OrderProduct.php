@@ -69,6 +69,11 @@ class OrderProduct extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getOrderReferenceAttribute()
+    {
+        return $this->order->reference;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS
