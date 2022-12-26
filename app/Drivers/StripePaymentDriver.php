@@ -40,6 +40,19 @@ class StripePaymentDriver
     {
         $session = Session::create([
             'payment_method_types' => ['card'],
+            'shipping_options' => [
+                [
+                    'shipping_rate_data' => [
+                        'type' => 'fixed_amount',
+                        'fixed_amount' => ['amount' => $this->order->shipping_price * 100, 'currency' => 'eur'],
+                        'display_name' => 'Free shipping',
+                        'delivery_estimate' => [
+                            'minimum' => ['unit' => 'business_day', 'value' => 5],
+                            'maximum' => ['unit' => 'business_day', 'value' => 7],
+                        ],
+                    ],
+                ],
+            ],
             'line_items' => [$this->orderProducts],
             'mode' => 'payment',
             'success_url' => route('stripe.payment.success', encrypt($this->order->reference)),

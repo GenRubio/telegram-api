@@ -43,7 +43,7 @@ class CancelOrderTask
 
     private function cancelPaymentStripe()
     {
-        if ($this->order->payment_method == 'stripe') {
+        if ($this->order->payment_method == 'stripe' && !empty($this->order->stripe_id)) {
             (new CancelPaymentStripeTask($this->order->stripe_id))->run();
         }
     }
