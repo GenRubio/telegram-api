@@ -71,6 +71,11 @@ class Order extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getCountProductsAttribute()
+    {
+        return count($this->orderProducts);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

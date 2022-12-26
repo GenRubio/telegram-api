@@ -57,8 +57,8 @@ class OrderCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'name',
-            'label' => 'Nombre',
+            'name' => 'count_products',
+            'label' => 'Productos',
             'type'  => 'text',
         ]);
     }
