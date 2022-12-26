@@ -5,6 +5,7 @@ namespace App\Tasks;
 use App\Enums\OrderStatusEnum;
 use App\Services\OrderService;
 use App\Services\ProductModelsFlavorService;
+use App\Tasks\Stripe\CancelPaymentStripeTask;
 
 class CancelOrderTask
 {
@@ -25,6 +26,7 @@ class CancelOrderTask
     {
         $this->updateStatus();
         $this->removeBlockedStock();
+        $this->cancelPaymentStripe();
     }
 
     private function updateStatus()
@@ -36,6 +38,13 @@ class CancelOrderTask
     {
         foreach ($this->order->orderProducts as $item) {
             $this->productModelsFlavorService->updateRemoveBlockedStock($item->productModelsFlavor->id, $item->amount);
+        }
+    }
+
+    private function cancelPaymentStripe()
+    {
+        if ($this->order->payment_method == 'stripe') {
+            (new CancelPaymentStripeTask($this->order->stripe_id))->run();
         }
     }
 }

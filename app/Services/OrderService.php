@@ -61,4 +61,9 @@ class OrderService extends Controller
     {
         $this->orderRepository->updateStatus($id, $status);
     }
+
+    public function updateStripeId($id, $stripeId)
+    {
+        $this->orderRepository->updateStripeId($id, $stripeId);
+    }
 }

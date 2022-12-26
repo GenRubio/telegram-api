@@ -78,4 +78,11 @@ class OrderRepository extends Repository implements OrderRepositoryInterface
             ->where('created_at', '<', Carbon::now()->subMinutes($time)->format('Y-m-d H:i:s'))
             ->get();
     }
+
+    public function updateStripeId($id, $stripeId)
+    {
+        $this->model->where('id', $id)->update([
+            'stripe_id' => $stripeId
+        ]);
+    }
 }

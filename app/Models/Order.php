@@ -32,7 +32,8 @@ class Order extends Model
         'status',
         'price',
         'total_price',
-        'shipping_price'
+        'shipping_price',
+        'stripe_id'
     ];
     // protected $hidden = [];
     // protected $dates = [];
