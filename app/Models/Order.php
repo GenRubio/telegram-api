@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -58,6 +59,11 @@ class Order extends Model
     public function orderProducts()
     {
         return $this->hasMany(OrderProduct::class, 'order_id', 'id');
+    }
+
+    public function telegraphChat()
+    {
+        return $this->hasOne(TelegraphChat::class, 'chat_id', 'chat_id');
     }
 
     /*

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Services\OrderService;
 use App\Tasks\CancelOrderTask;
 use Illuminate\Console\Command;
+use App\Tasks\Bot\SendAutoCancelMessageTask;
 
 class CancelOrders extends Command
 {
@@ -32,6 +33,7 @@ class CancelOrders extends Command
         $orderService = new OrderService();
         foreach ($orderService->getForAutomaticCancel() as $order) {
             (new CancelOrderTask($order))->run();
+            (new SendAutoCancelMessageTask($order))->run();
         }
     }
 }
