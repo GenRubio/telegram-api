@@ -12,6 +12,7 @@ use App\Drivers\StripePaymentDriver;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use App\Tasks\Stripe\ValidatePaymentTask;
 use App\Tasks\Bot\SendSuccessPaymentMessageTask;
 
 class PaymentController extends Controller
@@ -38,12 +39,14 @@ class PaymentController extends Controller
     public function stripePaymentSuccess(Request $request)
     {
         try {
-            $order = (new OrderService())->getByReference(decrypt($request->reference));
+            $order = (new OrderService())->getPaymentOrder(decrypt($request->reference));
             if (is_null($order)) {
                 throw new GenericException("Order not found");
             }
-            (new AcceptOrderTask($order))->run();
-            (new SendSuccessPaymentMessageTask($order))->run();
+            if ((new ValidatePaymentTask($order->stripe_id))->run()){
+                (new AcceptOrderTask($order))->run();
+                (new SendSuccessPaymentMessageTask($order))->run();
+            }
         } catch (GenericException | Exception $e) {
         }
         $settingService = new SettingService();

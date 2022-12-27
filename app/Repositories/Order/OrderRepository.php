@@ -38,6 +38,12 @@ class OrderRepository extends Repository implements OrderRepositoryInterface
         $this->limit = 10;
     }
 
+    public function getById($id)
+    {
+        return $this->model->where('id', $id)
+            ->first();
+    }
+
     public function getByReference($reference)
     {
         return $this->model->where('reference', $reference)

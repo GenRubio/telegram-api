@@ -8,6 +8,7 @@ namespace App\Repositories\Order;
  */
 interface OrderRepositoryInterface
 {
+    public function getById($id);
     public function getByReference($reference);
     public function createOrder($data);
     public function updateStatus($id, $status);
