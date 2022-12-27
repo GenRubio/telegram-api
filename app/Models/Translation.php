@@ -38,6 +38,12 @@ class Translation extends Model
         return $text->{$abbr} ?? '';
     }
 
+    public function langText($abbr)
+    {
+        $text = json_decode($this->attributes['text']);
+        return $text->{$abbr};
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

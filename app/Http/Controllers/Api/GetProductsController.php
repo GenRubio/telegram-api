@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductsDataResource;
+use App\Http\Resources\WebAppDataResource;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
 class GetProductsController extends Controller
@@ -15,7 +15,7 @@ class GetProductsController extends Controller
         $chat = TelegraphChat::where('chat_id', $request->token)->first();
         if ($chat) {
             $products = ProductModel::active()->get();
-            return response()->json(new ProductsDataResource($products));
+            return response()->json(new WebAppDataResource($products, $chat->bot->id));
         }
         return response()->json([
             'error' => 'Undefined'
