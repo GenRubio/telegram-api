@@ -26,7 +26,7 @@ class SendStartMessageTask
         if (!empty($this->telegramBotMessage->image)) {
             $this->chat
                 ->photo(public_path($this->telegramBotMessage->image))
-                ->html($this->telegramBotMessage->message)
+                ->html($this->telegramBotMessage->getLangMessage($this->chat->bot->id))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
                         Button::make('Productos')->webApp(route('webapp', ['chat' => $this->chat->chat_id]))
@@ -36,7 +36,7 @@ class SendStartMessageTask
                 ->send();
         } else {
             $this->chat
-                ->html($this->telegramBotMessage->message)
+                ->html($this->telegramBotMessage->getLangMessage($this->chat->bot->id))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
                         Button::make('Productos')->webApp(route('webapp', ['chat' => $this->chat->chat_id]))

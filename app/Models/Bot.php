@@ -54,6 +54,11 @@ class Bot extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getLanguageNameAttribute()
+    {
+        return $this->language->name;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

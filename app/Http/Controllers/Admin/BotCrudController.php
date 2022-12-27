@@ -29,6 +29,11 @@ class BotCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
+            'name' => 'language_name',
+            'label' => 'Idioma',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'token',
             'label' => 'Token',
             'type'  => 'text',

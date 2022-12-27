@@ -25,7 +25,6 @@ class TelegramBotMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'message' => 'required',
             'description' => 'required'
         ];
     }

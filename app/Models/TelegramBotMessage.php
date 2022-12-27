@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Services\BotService;
 use Intervention\Image\Facades\Image;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Database\Eloquent\Model;
 
 class TelegramBotMessage extends Model
 {
@@ -35,6 +36,19 @@ class TelegramBotMessage extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function getLangMessage($botId)
+    {
+        $botService = new BotService();
+        $bot = $botService->getById($botId);
+        return json_decode($this->attributes['message'])->{$bot->language->abbr};
+    }
+
+    public function getTextValueForInput($abbr)
+    {
+        $text = json_decode($this->attributes['message']);
+        return $text->{$abbr} ?? '';
+    }
 
     /*
     |--------------------------------------------------------------------------
