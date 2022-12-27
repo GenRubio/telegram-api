@@ -2,31 +2,51 @@
 
 namespace App\Tasks\Bot;
 
-use DefStudio\Telegraph\Models\TelegraphChat;
-use DefStudio\Telegraph\Keyboard\Keyboard;
+use App\Services\TelegramBotMessageService;
 
 class SendSuccessPaymentMessageTask
 {
     private $order;
-    private $customer;
-    private $chat;
+    private $telegramBotMessageService;
+    private $key;
+    private $telegramBotMessage;
+    private $botId;
+    private $message;
 
     public function __construct($order)
     {
         $this->order = $order;
-        $this->customer = $this->order->customer;
-        $this->chat = $this->setChat();
+        $this->telegramBotMessageService = new TelegramBotMessageService();
+        $this->key = '1672078516.7314';
+        $this->telegramBotMessage = $this->setTelegramBotMessage();
+        $this->botId = $this->order->telegraphChat->bot->id;
+        $this->message = $this->telegramBotMessage->getLangMessage($this->botId);
+        $this->preparedMessage();
     }
 
     public function run()
     {
-        $this->chat->html("Pago realizado correctamente.\nGracias por confiar en nosotros.\nEl numero de referencia de tu pedido es el siguente {$this->order->reference}")
-            ->protected()
-            ->send();
+        if (!empty($this->telegramBotMessage->image)) {
+            $this->order->telegraphChat
+                ->photo(public_path($this->telegramBotMessage->image))
+                ->html($this->message)
+                ->protected()
+                ->send();
+        } else {
+            $this->order->telegraphChat
+                ->html($this->message)
+                ->protected()
+                ->send();
+        }
     }
 
-    private function setChat()
+    private function setTelegramBotMessage()
     {
-        return TelegraphChat::where('chat_id', $this->customer->chat_id)->first();
+        return $this->telegramBotMessageService->getByKey($this->key);
+    }
+
+    private function preparedMessage()
+    {
+        $this->message = str_replace("<reference>", $this->order->reference, $this->message);
     }
 }
