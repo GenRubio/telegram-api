@@ -26,7 +26,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('telegram_bot_messages', function (Blueprint $table) {
-            //
+            $table->dropColumn([
+                'description'
+            ]);
         });
     }
 };

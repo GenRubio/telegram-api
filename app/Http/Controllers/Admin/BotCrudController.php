@@ -24,6 +24,11 @@ class BotCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->crud->addColumn([
+            'name' => 'image',
+            'label' => 'Imagen',
+            'type'  => 'image',
+        ]);
+        $this->crud->addColumn([
             'name' => 'name',
             'label' => 'Nombre',
             'type'  => 'text',
@@ -38,7 +43,47 @@ class BotCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(BotRequest::class);
-
+        $this->crud->addFields([
+            [
+                'name' => 'name',
+                'label' => 'Nombre',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'token',
+                'label' => 'Token',
+                'type' => 'text',
+            ],
+            [
+                'label'     => "Idioma",
+                'type'      => 'select',
+                'name'      => 'language_id',
+                'entity'    => 'language',
+                'model'     => "App\Models\Language",
+                'attribute' => 'name',
+            ],
+            [
+                'name' => 'image',
+                'label' => 'Imagen',
+                'type' => 'upload',
+                'upload' => true,
+            ],
+            [
+                'name' => 'bot_url',
+                'label' => 'Bot Url',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'title',
+                'label' => 'Titulo',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Descripcion',
+                'type' => 'textarea',
+            ],
+        ]);
     }
 
     protected function setupUpdateOperation()

@@ -25,7 +25,11 @@ class BotRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required',
+            'token' => 'required',
+            'language_id' => 'required',
+            'title' => 'required',
+            'bot_url' => 'required',
         ];
     }
 

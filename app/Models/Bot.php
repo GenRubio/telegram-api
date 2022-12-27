@@ -3,10 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use DefStudio\Telegraph\Models\TelegraphBot;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
-class Bot extends TelegraphBot
+class Bot extends Model
 {
     use CrudTrait;
 
@@ -16,6 +15,18 @@ class Bot extends TelegraphBot
     |--------------------------------------------------------------------------
     */
     protected $table = 'telegraph_bots';
+    // protected $primaryKey = 'id';
+    // public $timestamps = false;
+    protected $guarded = ['id'];
+    protected $fillable = [
+        'name',
+        'token',
+        'bot_url',
+        'title',
+        'description',
+        'image',
+        'language_id'
+    ];
 
     /*
     |--------------------------------------------------------------------------
@@ -28,6 +39,11 @@ class Bot extends TelegraphBot
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class, 'language_id');
+    }
 
     /*
     |--------------------------------------------------------------------------
