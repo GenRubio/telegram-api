@@ -23,7 +23,7 @@ class OrderController extends Controller
             $validateProductStock = new ValidateProductsStockTask($request->products);
 
             $createOrder = new CreateOrderTask($request, $customer, $validateProductStock);
-            (new SendPaymentUrlMessageTask($createOrder->order, $customer))->run();
+            (new SendPaymentUrlMessageTask($createOrder->order))->run();
             return response()->json([
                 'success' => "Ok"
             ]);
