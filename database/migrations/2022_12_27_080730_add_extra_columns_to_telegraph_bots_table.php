@@ -15,15 +15,7 @@ return new class extends Migration
     {
         Schema::table('telegraph_bots', function (Blueprint $table) {
             $table->text('bot_url')->nullable();
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
-            $table->text('image')->nullable();
             $table->unsignedInteger('language_id')->nullable();
-
-            $table->foreign('language_id')
-                ->references('id')
-                ->on('languages')
-                ->cascadeOnDelete();
         });
     }
 
@@ -37,9 +29,6 @@ return new class extends Migration
         Schema::table('telegraph_bots', function (Blueprint $table) {
             $table->dropColumn([
                 'bot_url',
-                'title',
-                'description',
-                'image',
                 'language_id'
             ]);
         });

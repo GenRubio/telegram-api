@@ -22,9 +22,6 @@ class Bot extends Model
         'name',
         'token',
         'bot_url',
-        'title',
-        'description',
-        'image',
         'language_id'
     ];
 

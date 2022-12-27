@@ -28,7 +28,6 @@ class BotRequest extends FormRequest
             'name' => 'required',
             'token' => 'required',
             'language_id' => 'required',
-            'title' => 'required',
             'bot_url' => 'required',
         ];
     }
