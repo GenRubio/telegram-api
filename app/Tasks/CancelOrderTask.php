@@ -24,9 +24,9 @@ class CancelOrderTask
 
     public function run()
     {
+        $this->cancelPaymentStripe();
         $this->updateStatus();
         $this->removeBlockedStock();
-        $this->cancelPaymentStripe();
     }
 
     private function updateStatus()

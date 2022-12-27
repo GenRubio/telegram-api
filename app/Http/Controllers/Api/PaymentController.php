@@ -43,19 +43,28 @@ class PaymentController extends Controller
             if (is_null($order)) {
                 throw new GenericException("Order not found");
             }
-            if ((new ValidatePaymentTask($order->stripe_id))->run()){
+            if ((new ValidatePaymentTask($order->stripe_id))->run()) {
                 (new AcceptOrderTask($order))->run();
                 (new SendSuccessPaymentMessageTask($order))->run();
             }
         } catch (GenericException | Exception $e) {
+            $settingService = new SettingService();
+            return Redirect::to($settingService->getByKey('1671894524.6744')->value);
         }
-        $settingService = new SettingService();
-        return Redirect::to($settingService->getByKey('1671894524.6744')->value);
+        return Redirect::to($order->bot()->bot_url);
     }
 
     public function stripePaymentError(Request $request)
     {
-        $settingService = new SettingService();
-        return Redirect::to($settingService->getByKey('1671894524.6744')->value);
+        try {
+            $order = (new OrderService())->getPaymentOrder(decrypt($request->reference));
+            if (is_null($order)) {
+                throw new GenericException("Order not found");
+            }
+        } catch (GenericException | Exception $e) {
+            $settingService = new SettingService();
+            return Redirect::to($settingService->getByKey('1671894524.6744')->value);
+        }
+        return Redirect::to($order->bot()->bot_url);
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use DefStudio\Telegraph\Models\TelegraphChat;
+use App\Services\BotService;
 use Illuminate\Database\Eloquent\Model;
+use DefStudio\Telegraph\Models\TelegraphChat;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class Order extends Model
 {
@@ -44,6 +45,12 @@ class Order extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function bot()
+    {
+        $botService = new BotService();
+        return $botService->getById($this->telegraphChat->bot->id);
+    }
 
     /*
     |--------------------------------------------------------------------------
