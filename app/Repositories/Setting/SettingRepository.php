@@ -37,6 +37,11 @@ class SettingRepository extends Repository implements SettingRepositoryInterface
         $this->limit = 10;
     }
 
+    public function getAll()
+    {
+        return $this->model->get();
+    }
+
     public function getByKey($key)
     {
         return $this->model->where('key', $key)->first();

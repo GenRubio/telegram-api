@@ -275,6 +275,30 @@ class TranslationsTableSeeder extends Seeder
                 'created_at' => '2022-12-23 06:53:01',
                 'updated_at' => '2022-12-23 07:06:11',
             ),
+            32 => 
+            array (
+                'id' => 34,
+                'uuid' => '1672217710.933163ac046ee3cec',
+                'text' => '{"es":"No hay sabores disponibles","en":null,"ru":null}',
+                'created_at' => '2022-12-28 08:55:10',
+                'updated_at' => '2022-12-28 08:55:10',
+            ),
+            33 => 
+            array (
+                'id' => 35,
+                'uuid' => '1672219456.10363ac0b401925a',
+                'text' => '{"es":"Stripe","en":"Stripe","ru":"Stripe"}',
+                'created_at' => '2022-12-28 09:24:16',
+                'updated_at' => '2022-12-28 09:24:16',
+            ),
+            34 => 
+            array (
+                'id' => 36,
+                'uuid' => '1672219464.864263ac0b48d2fd0',
+                'text' => '{"es":"Paypal","en":"Paypal","ru":"Paypal"}',
+                'created_at' => '2022-12-28 09:24:24',
+                'updated_at' => '2022-12-28 09:24:24',
+            ),
         ));
         
         

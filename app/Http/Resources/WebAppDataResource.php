@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Services\BotService;
+use App\Services\SettingService;
 use App\Services\TranslationService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +15,8 @@ class WebAppDataResource extends JsonResource
     private $translationService;
     private $translations;
     private $language;
+    private $settingService;
+    private $settings;
 
     public function __construct($products, $botId)
     {
@@ -23,6 +26,8 @@ class WebAppDataResource extends JsonResource
         $this->translationService = new TranslationService();
         $this->translations = $this->translationService->getAll();
         $this->language = $this->bot->language;
+        $this->settingService = new SettingService();
+        $this->settings = $this->settingService->getAll();
     }
 
     public function toArray($request)
@@ -30,6 +35,7 @@ class WebAppDataResource extends JsonResource
         $response = [];
         $response['products'] = $this->getPreparedProducts();
         $response['translations'] = $this->getPreparedTranslations();
+        $response['settings'] = $this->getPreparedSettings();
         return $response;
     }
 
@@ -50,9 +56,18 @@ class WebAppDataResource extends JsonResource
     {
         $translations = [];
         foreach ($this->translations as $translation) {
-            $translations[$translation->uuid] = $translation->langText($this->language->abbr);
+            $translations[$translation->uuid] = $this->formatLangText($translation->uuid, $translation->langText($this->language->abbr));
         }
         return $translations;
+    }
+
+    private function getPreparedSettings()
+    {
+        $settings = [];
+        foreach ($this->settings as $setting) {
+            $settings["{$setting->key}a"] = $setting->value;
+        }
+        return $settings;
     }
 
     private function getProductData($product)
@@ -142,5 +157,17 @@ class WebAppDataResource extends JsonResource
     {
         $translation = $this->translations->where('uuid', $uuid)->first();
         return $translation->langText($this->language->abbr);
+    }
+
+    private function formatLangText($uuid, $text)
+    {
+        $formattedText = $text;
+        switch ($uuid) {
+            case '1671778172.297963a54f7c48b8b':
+                $price = $this->settings->where('key', '1671891736.2341')->first()->value;
+                $formattedText = str_replace("<price>", $price, $formattedText);
+                break;
+        }
+        return $formattedText;
     }
 }

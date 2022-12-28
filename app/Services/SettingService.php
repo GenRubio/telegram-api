@@ -25,6 +25,11 @@ class SettingService extends Controller
         $this->settingRepository = new SettingRepository();
     }
 
+    public function getAll()
+    {
+        return $this->settingRepository->getAll();
+    }
+
     public function getByKey($key)
     {
         return $this->settingRepository->getByKey($key);
