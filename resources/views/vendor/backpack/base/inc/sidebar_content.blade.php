@@ -9,6 +9,7 @@
 <li class="nav-title">TELEGRAM BOT</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('bot') }}"><i class="nav-icon la la-question"></i> Bots</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('telegram-bot-message') }}"><i class="nav-icon la la-question"></i> Mensajes</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('bot-translation') }}"><i class="nav-icon la la-question"></i> Traducciones</a></li>
 <li class="nav-title">CONFIGURACION</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('language') }}"><i class="nav-icon la la-question"></i> Idiomas</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('api-client') }}"><i class="nav-icon la la-question"></i> API Clientes</a></li>
