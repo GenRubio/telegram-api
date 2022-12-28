@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BotRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Exception;
 use Illuminate\Support\Facades\Artisan;
 
 class BotCrudController extends CrudController
@@ -80,9 +81,14 @@ class BotCrudController extends CrudController
 
     public function setWebhook(Request $request)
     {
-        Artisan::call("telegraph:set-webhook {$request->botId}");
+        $message = 'WebHook actualizado correctamente';
+        try {
+            Artisan::call("telegraph:set-webhook {$request->botId}");
+        } catch (Exception $e) {
+            $message = $e->getMessage();
+        }
         return [
-            'message' => 'WebHook actualizado correctamente'
+            'message' => $message
         ];
     }
 }
