@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\BotRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Artisan;
 
 class BotCrudController extends CrudController
 {
@@ -23,6 +25,7 @@ class BotCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->crud->addButtonFromView('line', 'set-webhook', 'set-webhook', 'beginning');
         $this->crud->addColumn([
             'name' => 'name',
             'label' => 'Nombre',
@@ -73,5 +76,13 @@ class BotCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function setWebhook(Request $request)
+    {
+        Artisan::call("telegraph:set-webhook {$request->botId}");
+        return [
+            'message' => 'WebHook actualizado correctamente'
+        ];
     }
 }
