@@ -180,11 +180,6 @@ class OrderCrudController extends CrudController
 
     private function getListStatuses(){
         $actualStatus = $this->crud->getCurrentEntry()->status;
-        return [
-            $actualStatus => OrderStatusEnum::STATUS[$actualStatus],
-            'cancel' => 'Cancelado',
-            'sent' => 'Enviado',
-            'delivered' => 'Entregado'
-        ];
+        return OrderStatusEnum::STATUS_TO_STATUS[$actualStatus];
     }
 }
