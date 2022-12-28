@@ -86,6 +86,12 @@ class OrderCrudController extends CrudController
                 'tab' => 'General'
             ],
             [
+                'name' => 'provider_url',
+                'label' => 'Url Proveedor',
+                'type' => 'text',
+                'tab' => 'General'
+            ],
+            [
                 'name' => 'price',
                 'label' => 'Precio',
                 'type' => 'text',

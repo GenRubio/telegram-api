@@ -35,7 +35,8 @@ class Order extends Model
         'price',
         'total_price',
         'shipping_price',
-        'stripe_id'
+        'stripe_id',
+        'provider_url'
     ];
     // protected $hidden = [];
     // protected $dates = [];
