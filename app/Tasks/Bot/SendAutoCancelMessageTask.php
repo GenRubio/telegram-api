@@ -50,6 +50,6 @@ class SendAutoCancelMessageTask
     {
         $settingService = new SettingService();
         $time = $settingService->getByKey('1671967273.4378')->value;
-        $this->message = str_replace("<time>", $time, $this->message);
+        $this->message = str_replace("[time]", $time, $this->message);
     }
 }

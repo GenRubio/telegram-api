@@ -47,7 +47,7 @@ class SendOrderCancelMessageTask
 
     private function preparedMessage()
     {
-        $this->message = str_replace("<reference>", $this->order->reference, $this->message);
-        $this->message = str_replace("<detail>", $this->order->order_cancel_detail, $this->message);
+        $this->message = str_replace("[reference]", $this->order->reference, $this->message);
+        $this->message = str_replace("[detail]", $this->order->order_cancel_detail, $this->message);
     }
 }

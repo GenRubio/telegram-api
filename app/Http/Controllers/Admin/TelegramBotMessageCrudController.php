@@ -10,10 +10,10 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class TelegramBotMessageCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
         store as traitStore;
     }
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
         update as traitUpdate;
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
@@ -78,10 +78,14 @@ class TelegramBotMessageCrudController extends CrudController
             $data[] = [
                 'name' => "lang_{$lang->abbr}",
                 'label' => "Mensaje ({$lang->abbr})",
-                'type' => 'textarea',
-                'attributes' => [
-                    'rows' => 7,
-                ]
+                'type'  => 'summernote',
+                'options' => [
+                    'toolbar' => [
+                        ['font', ['bold', 'underline', 'italic']]
+                    ],
+                    'minheight' => 200,
+                    'height' => 200
+                ],
             ];
         }
         return $data;
@@ -110,9 +114,13 @@ class TelegramBotMessageCrudController extends CrudController
             $data[] = [
                 'name' => "lang_{$lang->abbr}",
                 'label' => "Mensaje ({$lang->abbr})",
-                'type' => 'textarea',
-                'attributes' => [
-                    'rows' => 7,
+                'type'  => 'summernote',
+                'options' => [
+                    'toolbar' => [
+                        ['font', ['bold', 'underline', 'italic']]
+                    ],
+                    'minheight' => 200,
+                    'height' => 200
                 ],
                 'value' => $this->crud->getCurrentEntry()->getTextValueForInput($lang->abbr)
             ];
@@ -130,7 +138,7 @@ class TelegramBotMessageCrudController extends CrudController
     {
         $textData = [];
         $laguages = Language::active()->orderBy('default', 'desc')->get();
-        foreach ($laguages as $lang){
+        foreach ($laguages as $lang) {
             $textValue = request()->input("lang_{$lang->abbr}");
             $textData[$lang->abbr] = $textValue;
         }
@@ -142,7 +150,7 @@ class TelegramBotMessageCrudController extends CrudController
     {
         $textData = [];
         $laguages = Language::active()->orderBy('default', 'desc')->get();
-        foreach ($laguages as $lang){
+        foreach ($laguages as $lang) {
             $textValue = request()->input("lang_{$lang->abbr}");
             $textData[$lang->abbr] = $textValue;
         }

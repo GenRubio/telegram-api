@@ -59,6 +59,6 @@ class SendTrackingNumberMessageTask
 
     private function preparedMessage()
     {
-        $this->message = str_replace("<reference>", $this->order->reference, $this->message);
+        $this->message = str_replace("[reference]", $this->order->reference, $this->message);
     }
 }

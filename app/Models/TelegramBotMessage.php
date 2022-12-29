@@ -41,7 +41,14 @@ class TelegramBotMessage extends Model
     {
         $botService = new BotService();
         $bot = $botService->getById($botId);
-        return json_decode($this->attributes['message'])->{$bot->language->abbr};
+        $message = json_decode($this->attributes['message'])->{$bot->language->abbr};
+        $newcontent = preg_replace("/<p[^>]*?>/", "", $message);
+        $newcontent = str_replace("</p>", "\n", $newcontent);
+        $newcontent = preg_replace("/<span[^>]*?>/", "", $newcontent);
+        $newcontent = str_replace("</span>", "", $newcontent);
+        $newcontent = preg_replace("/<br[^>]*?>/", "", $newcontent);
+        $newcontent = str_replace("</br>", "", $newcontent);
+        return $newcontent;
     }
 
     public function getTextValueForInput($abbr)
