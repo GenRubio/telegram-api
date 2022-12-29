@@ -2,9 +2,10 @@
 
 namespace App\Tasks\Bot;
 
-use App\Services\TelegramBotMessageService;
+use App\Tasks\GetApiClientTask;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
+use App\Services\TelegramBotMessageService;
 
 class SendStartMessageTask
 {
@@ -12,6 +13,7 @@ class SendStartMessageTask
     private $telegramBotMessageService;
     private $key;
     private $telegramBotMessage;
+    private $clientApiUrl;
 
     public function __construct($chat)
     {
@@ -19,6 +21,7 @@ class SendStartMessageTask
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672042240.2779';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
+        $this->clientApiUrl = (new GetApiClientTask($this->chat->chat_id))->run();
     }
 
     public function run()
@@ -29,7 +32,7 @@ class SendStartMessageTask
                 ->html($this->telegramBotMessage->getLangMessage($this->chat->bot->id))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make('Productos')->webApp(route('webapp', ['chat' => $this->chat->chat_id]))
+                        Button::make('Productos')->webApp($this->clientApiUrl)
                     ]);
                 })
                 ->protected()
@@ -39,7 +42,7 @@ class SendStartMessageTask
                 ->html($this->telegramBotMessage->getLangMessage($this->chat->bot->id))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make('Productos')->webApp(route('webapp', ['chat' => $this->chat->chat_id]))
+                        Button::make('Productos')->webApp($this->clientApiUrl)
                     ]);
                 })
                 ->protected()
