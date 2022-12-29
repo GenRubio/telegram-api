@@ -74,6 +74,11 @@ class TelegramBotMessageCrudController extends CrudController
             'type' => 'upload',
             'upload' => true,
         ];
+        $data[] = [
+            'name' => 'emojis_url',
+            'type' => 'custom_html',
+            'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
+        ];
         foreach ($laguages as $lang) {
             $data[] = [
                 'name' => "lang_{$lang->abbr}",
@@ -109,6 +114,11 @@ class TelegramBotMessageCrudController extends CrudController
             'label' => 'Imagen',
             'type' => 'upload',
             'upload' => true,
+        ];
+        $data[] = [
+            'name' => 'emojis_url',
+            'type' => 'custom_html',
+            'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
         ];
         foreach ($laguages as $lang) {
             $data[] = [
