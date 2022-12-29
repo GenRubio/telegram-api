@@ -36,7 +36,8 @@ class Order extends Model
         'total_price',
         'shipping_price',
         'stripe_id',
-        'provider_url'
+        'provider_url',
+        'order_cancel_detail'
     ];
     // protected $hidden = [];
     // protected $dates = [];

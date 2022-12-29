@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\OrderStatusEnum;
+use App\Tasks\CancelOrderTask;
 use App\Http\Requests\OrderRequest;
 use App\Tasks\Bot\SendOrderSentMessageTask;
+use App\Tasks\Bot\SendOrderCancelMessageTask;
 use App\Tasks\Bot\SendOrderDeliveredMessageTask;
 use App\Tasks\Bot\SendTrackingNumberMessageTask;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -71,6 +73,7 @@ class OrderCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(OrderRequest::class);
+        $clientLanguage = $this->crud->getCurrentEntry()->bot()->language->name;
         $this->crud->addFields([
             [
                 'name' => 'reference',
@@ -88,6 +91,12 @@ class OrderCrudController extends CrudController
                 'type'        => 'select_from_array',
                 'options'     => $this->getListStatuses(),
                 'allows_null' => false,
+                'tab' => 'General'
+            ],
+            [
+                'name' => 'order_cancel_detail',
+                'label' => 'Razon de cancelacion de pedido <small>(En caso de que el estado sea Cancelado)</small><br><div style="font-size: 15px;font-weight: normal;">Idioma del cliente: ' . $clientLanguage .'</div>',
+                'type' => 'textarea',
                 'tab' => 'General'
             ],
             [
@@ -193,9 +202,22 @@ class OrderCrudController extends CrudController
     {
         $order = $this->crud->getCurrentEntry();
         $request = $this->crud->getRequest();
+        $this->sendOrderCancelMessage($order, $request);
         $this->sendOrderSentMessage($order, $request);
         $this->sendOrderDeliveredMessage($order, $request);
+        $this->sendTrackingNumberMessage($order, $request);
         return $this->traitUpdate();
+    }
+
+    private function sendOrderCancelMessage($order, $request)
+    {
+        if (
+            $request->input('status') == OrderStatusEnum::STATUS_IDS['cancel']
+            && $order->status != $request->input('status')
+        ) {
+            (new CancelOrderTask($order))->run();
+            (new SendOrderCancelMessageTask($order, $request->input('order_cancel_detail')))->run();
+        }
     }
 
     private function sendOrderSentMessage($order, $request)
@@ -221,8 +243,9 @@ class OrderCrudController extends CrudController
     private function sendTrackingNumberMessage($order, $request)
     {
         if (
-            empty($order->provider_url) && !empty($request->input('provider_url'))
-            || !empty($request->input('provider_url')) && $order->provider_url != $request->input('provider_url')
+            $order->status == OrderStatusEnum::STATUS_IDS['sent']
+            && (empty($order->provider_url) && !empty($request->input('provider_url'))
+                || !empty($request->input('provider_url')) && $order->provider_url != $request->input('provider_url'))
         ) {
             $order->provider_url = $request->input('provider_url');
             (new SendTrackingNumberMessageTask($order))->run();

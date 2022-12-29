@@ -29,6 +29,7 @@ return new class extends Migration
             $table->float('shipping_price')->default(0);
             $table->float('total_price')->default(0);
             $table->text('provider_url')->nullable();
+            $table->text('order_cancel_detail')->nullable();
             $table->timestamps();
 
             $table->foreign('chat_id')
