@@ -25,7 +25,9 @@ class TelegraphBotsTableSeeder extends Seeder
                 'token' => '5706325891:AAHUKwPPNcOk4WQ1Kji1TfvYcdAJ24EgP3A',
                 'name' => 'HQTStoreBot',
                 'created_at' => '2022-12-17 09:28:32',
-                'updated_at' => '2022-12-17 09:28:32',
+                'updated_at' => '2022-12-27 12:04:26',
+                'bot_url' => 'https://t.me/HQTStoreBot',
+                'language_id' => 1,
             ),
         ));
         

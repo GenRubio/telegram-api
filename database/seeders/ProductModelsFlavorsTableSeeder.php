@@ -30,7 +30,7 @@ class ProductModelsFlavorsTableSeeder extends Seeder
                 'stock_bloqued' => 0,
                 'active' => 1,
                 'created_at' => '2022-12-17 09:14:10',
-                'updated_at' => '2022-12-17 09:14:10',
+                'updated_at' => '2022-12-29 09:32:27',
             ),
             1 => 
             array (
@@ -43,7 +43,7 @@ class ProductModelsFlavorsTableSeeder extends Seeder
                 'stock_bloqued' => 0,
                 'active' => 1,
                 'created_at' => '2022-12-17 09:14:40',
-                'updated_at' => '2022-12-17 09:15:23',
+                'updated_at' => '2022-12-29 09:32:27',
             ),
             2 => 
             array (
@@ -56,7 +56,7 @@ class ProductModelsFlavorsTableSeeder extends Seeder
                 'stock_bloqued' => 0,
                 'active' => 1,
                 'created_at' => '2022-12-17 09:15:06',
-                'updated_at' => '2022-12-17 09:15:13',
+                'updated_at' => '2022-12-25 13:23:34',
             ),
             3 => 
             array (
@@ -65,11 +65,11 @@ class ProductModelsFlavorsTableSeeder extends Seeder
                 'reference' => '202210003',
                 'name' => 'PINEAPPLE',
                 'image' => 'images/product/models/flavors/d0c58645f8d340c770e0777e253c3865-image.png',
-                'stock' => 10,
+                'stock' => 9,
                 'stock_bloqued' => 0,
                 'active' => 1,
                 'created_at' => '2022-12-17 09:19:19',
-                'updated_at' => '2022-12-17 09:19:19',
+                'updated_at' => '2022-12-26 13:29:41',
             ),
             4 => 
             array (
@@ -78,11 +78,11 @@ class ProductModelsFlavorsTableSeeder extends Seeder
                 'reference' => '202210004',
                 'name' => 'PEACH ICE',
                 'image' => 'images/product/models/flavors/3c98683906f1b90b291927c91c5b15a5-image.png',
-                'stock' => 10,
+                'stock' => 9,
                 'stock_bloqued' => 0,
                 'active' => 1,
                 'created_at' => '2022-12-17 09:23:09',
-                'updated_at' => '2022-12-17 09:23:15',
+                'updated_at' => '2022-12-26 13:29:42',
             ),
         ));
         

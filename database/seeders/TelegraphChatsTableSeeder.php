@@ -21,12 +21,12 @@ class TelegraphChatsTableSeeder extends Seeder
         \DB::table('telegraph_chats')->insert(array (
             0 => 
             array (
-                'id' => 1,
+                'id' => 2,
                 'chat_id' => '5488974094',
                 'name' => '[private] ',
                 'telegraph_bot_id' => 1,
-                'created_at' => '2022-12-17 09:30:21',
-                'updated_at' => '2022-12-17 09:30:21',
+                'created_at' => '2022-12-24 14:45:33',
+                'updated_at' => '2022-12-24 14:45:33',
             ),
         ));
         

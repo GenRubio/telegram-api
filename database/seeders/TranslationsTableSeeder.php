@@ -159,9 +159,9 @@ class TranslationsTableSeeder extends Seeder
             array (
                 'id' => 19,
                 'uuid' => '1671778172.297963a54f7c48b8b',
-                'text' => '{"es":"Env\\u00edos gratis a todos los pedidos superiores a 40 euros.","en":null,"ru":null}',
+                'text' => '{"es":"Env\\u00edos gratis a todos los pedidos superiores a <price> euros.","en":null,"ru":null}',
                 'created_at' => '2022-12-23 06:49:32',
-                'updated_at' => '2022-12-23 06:49:32',
+                'updated_at' => '2022-12-28 11:02:19',
             ),
             18 => 
             array (

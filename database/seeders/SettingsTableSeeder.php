@@ -24,9 +24,9 @@ class SettingsTableSeeder extends Seeder
                 'id' => 2,
                 'key' => '1671891736.2341',
                 'description' => 'Cantidad de euros mínimo para envió gratuito',
-                'value' => '40',
+                'value' => '60',
                 'created_at' => '2022-12-24 14:22:16',
-                'updated_at' => '2022-12-24 14:22:16',
+                'updated_at' => '2022-12-28 11:02:35',
             ),
             1 => 
             array (
@@ -51,9 +51,9 @@ class SettingsTableSeeder extends Seeder
                 'id' => 5,
                 'key' => '1671967273.4378',
                 'description' => 'Tiempo valido para la Url de pago en minutos',
-                'value' => '60',
+                'value' => '20',
                 'created_at' => '2022-12-25 11:21:13',
-                'updated_at' => '2022-12-25 11:21:13',
+                'updated_at' => '2022-12-27 16:35:45',
             ),
         ));
         
