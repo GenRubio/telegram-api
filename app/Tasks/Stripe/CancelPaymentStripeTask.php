@@ -18,9 +18,12 @@ class CancelPaymentStripeTask
     {
         Stripe::setApiKey(config('app.stripe_private'));
         $stripe = new StripeClient(config('app.stripe_private'));
-        $stripe->checkout->sessions->expire(
-            $this->stripeId,
-            []
-        );
+        $session = $stripe->checkout->sessions->retrieve($this->stripeId);
+        if ($session->status == 'open') {
+            $stripe->checkout->sessions->expire(
+                $this->stripeId,
+                []
+            );
+        }
     }
 }
