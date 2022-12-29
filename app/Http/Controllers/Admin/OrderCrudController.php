@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\OrderStatusEnum;
 use App\Http\Requests\OrderRequest;
+use App\Tasks\Bot\SendOrderSentMessageTask;
+use App\Tasks\Bot\SendOrderDeliveredMessageTask;
+use App\Tasks\Bot\SendTrackingNumberMessageTask;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -11,7 +14,9 @@ class OrderCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -74,7 +79,7 @@ class OrderCrudController extends CrudController
                 'attributes' => [
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
-                  ],
+                ],
                 'tab' => 'General'
             ],
             [
@@ -99,7 +104,7 @@ class OrderCrudController extends CrudController
                 'attributes' => [
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
-                  ],
+                ],
                 'tab' => 'General'
             ],
             [
@@ -110,7 +115,7 @@ class OrderCrudController extends CrudController
                 'attributes' => [
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
-                  ],
+                ],
                 'tab' => 'General'
             ],
             [
@@ -121,7 +126,7 @@ class OrderCrudController extends CrudController
                 'attributes' => [
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
-                  ],
+                ],
                 'tab' => 'General'
             ],
             [
@@ -131,7 +136,7 @@ class OrderCrudController extends CrudController
                 'attributes' => [
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
-                  ],
+                ],
                 'tab' => 'General'
             ],
             [
@@ -178,8 +183,49 @@ class OrderCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-    private function getListStatuses(){
+    private function getListStatuses()
+    {
         $actualStatus = $this->crud->getCurrentEntry()->status;
         return OrderStatusEnum::STATUS_TO_STATUS[$actualStatus];
+    }
+
+    public function update()
+    {
+        $order = $this->crud->getCurrentEntry();
+        $request = $this->crud->getRequest();
+        $this->sendOrderSentMessage($order, $request);
+        $this->sendOrderDeliveredMessage($order, $request);
+        return $this->traitUpdate();
+    }
+
+    private function sendOrderSentMessage($order, $request)
+    {
+        if (
+            $order->status == OrderStatusEnum::STATUS_IDS['payment_accepted']
+            && $request->input('status') == OrderStatusEnum::STATUS_IDS['sent']
+        ) {
+            (new SendOrderSentMessageTask($order))->run();
+        }
+    }
+
+    private function sendOrderDeliveredMessage($order, $request)
+    {
+        if (
+            $order->status == OrderStatusEnum::STATUS_IDS['sent']
+            && $request->input('status') == OrderStatusEnum::STATUS_IDS['delivered']
+        ) {
+            (new SendOrderDeliveredMessageTask($order))->run();
+        }
+    }
+
+    private function sendTrackingNumberMessage($order, $request)
+    {
+        if (
+            empty($order->provider_url) && !empty($request->input('provider_url'))
+            || !empty($request->input('provider_url')) && $order->provider_url != $request->input('provider_url')
+        ) {
+            $order->provider_url = $request->input('provider_url');
+            (new SendTrackingNumberMessageTask($order))->run();
+        }
     }
 }

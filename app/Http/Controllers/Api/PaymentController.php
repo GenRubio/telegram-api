@@ -13,6 +13,7 @@ use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use App\Tasks\Stripe\ValidatePaymentTask;
+use App\Tasks\Stripe\CancelPaymentStripeTask;
 use App\Tasks\Bot\SendSuccessPaymentMessageTask;
 
 class PaymentController extends Controller
@@ -45,6 +46,7 @@ class PaymentController extends Controller
             }
             if ((new ValidatePaymentTask($order->stripe_id))->run()) {
                 (new AcceptOrderTask($order))->run();
+                (new CancelPaymentStripeTask($order->stripe_id))->run();
                 (new SendSuccessPaymentMessageTask($order))->run();
             }
         } catch (GenericException | Exception $e) {
