@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('product_models', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('brand_id')->nullable();
-            $table->text('name', 60000)->unique();
+            $table->string('name')->unique();
             $table->text('image');
             $table->string('reference');
             $table->float('price')->default(0);
