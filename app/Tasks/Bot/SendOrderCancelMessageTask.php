@@ -7,17 +7,15 @@ use App\Services\TelegramBotMessageService;
 class SendOrderCancelMessageTask
 {
     private $order;
-    private $detail;
     private $telegramBotMessageService;
     private $key;
     private $telegramBotMessage;
     private $botId;
     private $message;
 
-    public function __construct($order, $detail)
+    public function __construct($order)
     {
         $this->order = $order;
-        $this->detail = $detail;
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672062409.0611';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
@@ -50,6 +48,6 @@ class SendOrderCancelMessageTask
     private function preparedMessage()
     {
         $this->message = str_replace("<reference>", $this->order->reference, $this->message);
-        $this->message = str_replace("<detail>", $this->detail, $this->message);
+        $this->message = str_replace("<detail>", $this->order->order_cancel_detail, $this->message);
     }
 }
