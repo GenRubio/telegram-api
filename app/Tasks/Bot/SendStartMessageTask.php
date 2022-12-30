@@ -21,7 +21,7 @@ class SendStartMessageTask
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672042240.2779';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
-        $this->clientApiUrl = "https://grand-kangaroo-3ccdb5.netlify.app/webapp/{$this->chat->bot->id}"; //(new GetApiClientTask($this->chat->chat_id))->run();
+        $this->clientApiUrl = "https://grand-kangaroo-3ccdb5.netlify.app/webapp/{$this->chat->chat_id}"; //(new GetApiClientTask($this->chat->chat_id))->run();
     }
 
     public function run()
@@ -48,10 +48,6 @@ class SendStartMessageTask
                 ->protected()
                 ->send();
         }
-        $this->chat
-                ->html($this->clientApiUrl)
-                ->protected()
-                ->send();
     }
 
     private function setTelegramBotMessage()
