@@ -19,6 +19,6 @@ class GetApiClientTask
 
     public function run()
     {
-        return $this->activeClients->first()->url . '/webapp/' . $this->chatId;
+        return $this->activeClients->first()->url . 'webapp/' . $this->chatId;
     }
 }
