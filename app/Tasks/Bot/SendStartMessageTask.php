@@ -39,7 +39,7 @@ class SendStartMessageTask
                 ->send();
         } else {
             $this->chat
-                ->html($this->clientApiUrl)
+                ->html($this->telegramBotMessage->getLangMessage($this->chat->bot->id))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
                         Button::make('Productos')->webApp($this->clientApiUrl)
@@ -49,7 +49,7 @@ class SendStartMessageTask
                 ->send();
         }
         $this->chat
-                ->html($this->telegramBotMessage->getLangMessage($this->chat->bot->id))
+                ->html($this->clientApiUrl)
                 ->protected()
                 ->send();
     }
