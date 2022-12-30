@@ -43,4 +43,6 @@ Route::group([
     Route::post('bot-set-webhook', 'BotCrudController@setWebhook')
         ->name('setWebhookBot');
     Route::crud('bot-translation', 'BotTranslationCrudController');
+    Route::crud('user', 'UserCrudController');
+    Route::crud('office-permission', 'OfficePermissionCrudController');
 }); // this should be the absolute last line of this file

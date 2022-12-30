@@ -56,6 +56,11 @@ return [
             'throw' => false,
         ],
 
+        'laravel'=> [
+            'driver' => 'local',
+            'root' => base_path(),
+        ],
+
         'images-product-models'=> [
             'driver' => 'local',
             'root' => public_path(),
