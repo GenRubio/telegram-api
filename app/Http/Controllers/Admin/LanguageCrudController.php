@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Language;
 use App\Http\Requests\LanguageRequest;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class LanguageCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
         store as traitStore;
@@ -21,6 +23,9 @@ class LanguageCrudController extends CrudController
 
     public function setup()
     {
+        if (!backpack_user()->officePermission(get_class($this), 'show')) {
+            abort(403);
+        }
         CRUD::setModel(\App\Models\Language::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/language');
         CRUD::setEntityNameStrings('idioma', 'idiomas');
@@ -28,6 +33,7 @@ class LanguageCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->removeActionsCrud();
         $this->crud->setColumns([
             [
                 'name' => 'name',

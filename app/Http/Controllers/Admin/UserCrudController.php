@@ -8,11 +8,13 @@ use Prologue\Alerts\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class UserCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
         store as traitStore;
@@ -25,6 +27,9 @@ class UserCrudController extends CrudController
 
     public function setup()
     {
+        if (!backpack_user()->officePermission(get_class($this), 'show')) {
+            abort(403);
+        }
         CRUD::setModel(\App\Models\User::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/user');
         CRUD::setEntityNameStrings('usuario', 'usuarios');
@@ -32,6 +37,7 @@ class UserCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->removeActionsCrud();
         CRUD::column('name');
         CRUD::column('email');
     }

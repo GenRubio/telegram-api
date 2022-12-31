@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Models\ProductModel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\ProductModelsFlavorRequest;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class ProductModelsFlavorCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
@@ -22,6 +24,9 @@ class ProductModelsFlavorCrudController extends CrudController
 
     public function setup()
     {
+        if (!backpack_user()->officePermission(get_class($this), 'show')) {
+            abort(403);
+        }
         CRUD::setModel(\App\Models\ProductModelsFlavor::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/product-models-flavor');
         CRUD::setEntityNameStrings('sabor', 'sabores');
@@ -49,6 +54,7 @@ class ProductModelsFlavorCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'reference',
             'label' => 'Referencia',

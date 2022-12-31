@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\BotTranslationRequest;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -13,6 +14,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class BotTranslationCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
@@ -26,6 +28,9 @@ class BotTranslationCrudController extends CrudController
      */
     public function setup()
     {
+        if (!backpack_user()->officePermission(get_class($this), 'show')) {
+            abort(403);
+        }
         CRUD::setModel(\App\Models\BotTranslation::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/bot-translation');
         CRUD::setEntityNameStrings('bot translation', 'bot translations');
@@ -39,7 +44,7 @@ class BotTranslationCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        
+        $this->removeActionsCrud();
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:

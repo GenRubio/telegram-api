@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\OfficePermissionRequest;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use Illuminate\Support\Facades\Storage;
 
 class OfficePermissionCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
@@ -17,6 +19,9 @@ class OfficePermissionCrudController extends CrudController
 
     public function setup()
     {
+        if (!backpack_user()->officePermission(get_class($this), 'show')) {
+            abort(403);
+        }
         CRUD::setModel(\App\Models\OfficePermission::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/office-permission');
         CRUD::setEntityNameStrings('permiso', 'permisos');
@@ -24,9 +29,7 @@ class OfficePermissionCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        $this->crud->removeButton('create');
-        $this->crud->removeButton('update');
-        $this->crud->removeButton('delete');
+        $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'crud_controller',
             'label' => 'CRUD',

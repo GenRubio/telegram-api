@@ -9,11 +9,13 @@ use App\Tasks\Bot\SendOrderSentMessageTask;
 use App\Tasks\Bot\SendOrderCancelMessageTask;
 use App\Tasks\Bot\SendOrderDeliveredMessageTask;
 use App\Tasks\Bot\SendTrackingNumberMessageTask;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class OrderCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
@@ -24,6 +26,9 @@ class OrderCrudController extends CrudController
 
     public function setup()
     {
+        if (!backpack_user()->officePermission(get_class($this), 'show')) {
+            abort(403);
+        }
         CRUD::setModel(\App\Models\Order::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/order');
         CRUD::setEntityNameStrings('pedido', 'pedidos');
@@ -31,7 +36,7 @@ class OrderCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        $this->crud->removeButton('create');
+        $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'order-products', 'order-products', 'beginning');
         $this->crud->addColumn([
             'name' => 'created_at',

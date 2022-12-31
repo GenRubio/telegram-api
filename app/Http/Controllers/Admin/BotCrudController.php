@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Requests\BotRequest;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use Exception;
-use Illuminate\Support\Facades\Artisan;
 
 class BotCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
@@ -19,6 +21,9 @@ class BotCrudController extends CrudController
 
     public function setup()
     {
+        if (!backpack_user()->officePermission(get_class($this), 'show')) {
+            abort(403);
+        }
         CRUD::setModel(\App\Models\Bot::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/bot');
         CRUD::setEntityNameStrings('bot', 'bots');
@@ -26,6 +31,7 @@ class BotCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'set-webhook', 'set-webhook', 'beginning');
         $this->crud->addColumn([
             'name' => 'name',
