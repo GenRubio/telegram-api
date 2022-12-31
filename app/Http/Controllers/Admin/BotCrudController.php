@@ -44,8 +44,8 @@ class BotCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'token',
-            'label' => 'Token',
+            'name' => 'bot_url',
+            'label' => 'Bot Url',
             'type'  => 'text',
         ]);
     }

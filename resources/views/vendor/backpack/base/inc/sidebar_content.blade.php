@@ -8,7 +8,13 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('order') }}"><i class="nav-icon la la-question"></i> Pedidos</a></li>
 <li class="nav-title">TELEGRAM BOT</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('bot') }}"><i class="nav-icon la la-question"></i> Bots</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('telegram-bot-message') }}"><i class="nav-icon la la-question"></i> Mensajes</a></li>
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-question"></i> Mensajes</a>
+    <ul class="nav-dropdown-items">
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('telegram-bot-message') }}"><i class="nav-icon la la-question"></i> Mensajes</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('telegram-bot-global-message') }}"><i class="nav-icon la la-question"></i> Globales</a></li>
+    </ul>
+</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('bot-translation') }}"><i class="nav-icon la la-question"></i> Traducciones</a></li>
 <li class="nav-title">CONFIGURACION</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('language') }}"><i class="nav-icon la la-question"></i> Idiomas</a></li>

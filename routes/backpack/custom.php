@@ -45,4 +45,5 @@ Route::group([
     Route::crud('bot-translation', 'BotTranslationCrudController');
     Route::crud('user', 'UserCrudController');
     Route::crud('office-permission', 'OfficePermissionCrudController');
+    Route::crud('telegram-bot-global-message', 'TelegramBotGlobalMessageCrudController');
 }); // this should be the absolute last line of this file

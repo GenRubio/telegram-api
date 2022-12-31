@@ -3,19 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Language;
-use App\Http\Requests\TelegramBotMessageRequest;
-use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
+use App\Http\Requests\TelegramBotGlobalMessageRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
-class TelegramBotMessageCrudController extends CrudController
+class TelegramBotGlobalMessageCrudController extends CrudController
 {
-    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
         store as traitStore;
     }
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
         update as traitUpdate;
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
@@ -23,22 +21,13 @@ class TelegramBotMessageCrudController extends CrudController
 
     public function setup()
     {
-        if (!backpack_user()->officePermission(get_class($this), 'show')) {
-            abort(403);
-        }
-        CRUD::setModel(\App\Models\TelegramBotMessage::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/telegram-bot-message');
-        CRUD::setEntityNameStrings('mensaje', 'mensajes');
+        CRUD::setModel(\App\Models\TelegramBotGlobalMessage::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/telegram-bot-global-message');
+        CRUD::setEntityNameStrings('mensaje', 'mensajes globales');
     }
 
     protected function setupListOperation()
     {
-        $this->removeActionsCrud();
-        $this->crud->addColumn([
-            'name' => 'key',
-            'label' => 'Key',
-            'type'  => 'text',
-        ]);
         $this->crud->addColumn([
             'name' => 'image',
             'label' => 'Imagen',
@@ -49,11 +38,16 @@ class TelegramBotMessageCrudController extends CrudController
             'label' => 'Descripcion',
             'type'  => 'text',
         ]);
+        $this->crud->addColumn([
+            'name' => 'execution_date',
+            'label' => 'Fecha ejecucion',
+            'type'  => 'text',
+        ]);
     }
 
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(TelegramBotMessageRequest::class);
+        CRUD::setValidation(TelegramBotGlobalMessageRequest::class);
         $this->crud->addFields($this->setCreateFields());
     }
 
@@ -62,10 +56,6 @@ class TelegramBotMessageCrudController extends CrudController
         $laguages = Language::active()->orderBy('default', 'desc')->get();
         $data = [];
         $data[] = [
-            'name' => 'key',
-            'type' => 'hidden',
-        ];
-        $data[] = [
             'name' => 'message',
             'type' => 'hidden',
         ];
@@ -73,6 +63,11 @@ class TelegramBotMessageCrudController extends CrudController
             'name' => 'description',
             'label' => 'Descripcion',
             'type' => 'text',
+        ];
+        $data[] = [
+            'name' => 'execution_date',
+            'label' => 'Fecha lanzamiento',
+            'type' => 'datetime',
         ];
         $data[] = [
             'name' => 'image',
@@ -104,7 +99,7 @@ class TelegramBotMessageCrudController extends CrudController
 
     protected function setupUpdateOperation()
     {
-        CRUD::setValidation(TelegramBotMessageRequest::class);
+        CRUD::setValidation(TelegramBotGlobalMessageRequest::class);
         $this->crud->addFields($this->setUpdateFields());
     }
 
@@ -120,6 +115,11 @@ class TelegramBotMessageCrudController extends CrudController
             'name' => 'description',
             'label' => 'Descripcion',
             'type' => 'text',
+        ];
+        $data[] = [
+            'name' => 'execution_date',
+            'label' => 'Fecha lanzamiento',
+            'type' => 'datetime',
         ];
         $data[] = [
             'name' => 'image',
