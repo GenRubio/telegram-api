@@ -7,7 +7,13 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('brand') }}"><i class="nav-icon la la-question"></i> Marcas</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('order') }}"><i class="nav-icon la la-question"></i> Pedidos</a></li>
 <li class="nav-title">TELEGRAM BOT</li>
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('bot') }}"><i class="nav-icon la la-question"></i> Bots</a></li>
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-question"></i> Bots</a>
+    <ul class="nav-dropdown-items">
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('bot') }}"><i class="nav-icon la la-question"></i> Bots</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('telegram-bot-group') }}"><i class="nav-icon la la-question"></i> Grupos</a></li>
+    </ul>
+</li>
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-question"></i> Mensajes</a>
     <ul class="nav-dropdown-items">

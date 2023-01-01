@@ -23,6 +23,7 @@ class TelegramBotGlobalMessage extends Model
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = [
+        'telegram_bot_group_id',
         'image',
         'description',
         'message',
@@ -63,6 +64,11 @@ class TelegramBotGlobalMessage extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function telegramBotGroup()
+    {
+        return $this->hasOne(TelegramBotGroup::class, 'id', 'telegram_bot_group_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

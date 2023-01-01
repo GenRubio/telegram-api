@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TelegramBotGlobalMessageRequest extends FormRequest
+class TelegramBotGroupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,8 @@ class TelegramBotGlobalMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => 'required',
-            'execution_date' => 'required',
-            'telegram_bot_group_id' => 'required'
+            'name' => 'required',
+            'bots' => 'required'
         ];
     }
 

@@ -10,10 +10,10 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class TelegramBotGlobalMessageCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
         store as traitStore;
     }
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
         update as traitUpdate;
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
@@ -37,6 +37,15 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             'name' => 'description',
             'label' => 'Descripcion',
             'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'telegramBotGroup',
+            'label' => 'Grupo Bots',
+            'type'      => 'select',
+            'name'      => 'telegram_bot_group_id',
+            'entity'    => 'telegramBotGroup',
+            'attribute' => 'name',
+            'model'     => "App\Models\TelegramBotGroup",
         ]);
         $this->crud->addColumn([
             'name' => 'execution_date',
@@ -68,6 +77,15 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             'name' => 'execution_date',
             'label' => 'Fecha lanzamiento',
             'type' => 'datetime',
+        ];
+        $data[] = [
+            'name' => 'telegramBotGroup',
+            'label' => 'Grupo Bots',
+            'type'      => 'select',
+            'name'      => 'telegram_bot_group_id',
+            'entity'    => 'telegramBotGroup',
+            'attribute' => 'name',
+            'model'     => "App\Models\TelegramBotGroup",
         ];
         $data[] = [
             'name' => 'image',
@@ -120,6 +138,15 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             'name' => 'execution_date',
             'label' => 'Fecha lanzamiento',
             'type' => 'datetime',
+        ];
+        $data[] = [
+            'name' => 'telegramBotGroup',
+            'label' => 'Grupo Bots',
+            'type'      => 'select',
+            'name'      => 'telegram_bot_group_id',
+            'entity'    => 'telegramBotGroup',
+            'attribute' => 'name',
+            'model'     => "App\Models\TelegramBotGroup",
         ];
         $data[] = [
             'name' => 'image',

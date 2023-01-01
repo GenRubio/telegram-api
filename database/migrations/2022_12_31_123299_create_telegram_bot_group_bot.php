@@ -13,19 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('telegram_bot_global_messages', function (Blueprint $table) {
+        Schema::create('telegram_bot_group_bot', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('telegram_bot_group_id');
-            $table->text('image')->nullable();
-            $table->string('description');
-            $table->text('message');
-            $table->dateTime('execution_date');
-            $table->string('status');
+            $table->unsignedBigInteger('telegraph_bot_id');
             $table->timestamps();
 
             $table->foreign('telegram_bot_group_id')
                 ->references('id')
                 ->on('telegram_bot_groups')
+                ->cascadeOnDelete();
+            $table->foreign('telegraph_bot_id')
+                ->references('id')
+                ->on('telegraph_bots')
                 ->cascadeOnDelete();
         });
     }
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('telegram_bot_global_messages');
+        Schema::dropIfExists('telegram_bot_group_bot');
     }
 };
