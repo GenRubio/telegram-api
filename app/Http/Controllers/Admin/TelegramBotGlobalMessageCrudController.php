@@ -69,6 +69,10 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             'type' => 'hidden',
         ];
         $data[] = [
+            'name' => 'status',
+            'type' => 'hidden',
+        ];
+        $data[] = [
             'name' => 'description',
             'label' => 'Descripcion',
             'type' => 'text',
@@ -79,13 +83,12 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             'type' => 'datetime',
         ];
         $data[] = [
-            'name' => 'telegramBotGroup',
-            'label' => 'Grupo Bots',
+            'label'     => "Grupo Bots",
             'type'      => 'select',
             'name'      => 'telegram_bot_group_id',
             'entity'    => 'telegramBotGroup',
-            'attribute' => 'name',
             'model'     => "App\Models\TelegramBotGroup",
+            'attribute' => 'name',
         ];
         $data[] = [
             'name' => 'image',
@@ -130,6 +133,10 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             'type' => 'hidden',
         ];
         $data[] = [
+            'name' => 'status',
+            'type' => 'hidden',
+        ];
+        $data[] = [
             'name' => 'description',
             'label' => 'Descripcion',
             'type' => 'text',
@@ -140,13 +147,12 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             'type' => 'datetime',
         ];
         $data[] = [
-            'name' => 'telegramBotGroup',
-            'label' => 'Grupo Bots',
+            'label'     => "Grupo Bots",
             'type'      => 'select',
             'name'      => 'telegram_bot_group_id',
             'entity'    => 'telegramBotGroup',
-            'attribute' => 'name',
             'model'     => "App\Models\TelegramBotGroup",
+            'attribute' => 'name',
         ];
         $data[] = [
             'name' => 'image',

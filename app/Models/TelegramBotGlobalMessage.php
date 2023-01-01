@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\BotService;
+use App\Enums\BotGlobalMessagesEnum;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -67,7 +68,7 @@ class TelegramBotGlobalMessage extends Model
 
     public function telegramBotGroup()
     {
-        return $this->hasOne(TelegramBotGroup::class, 'id', 'telegram_bot_group_id');
+        return $this->belongsTo(TelegramBotGroup::class, 'telegram_bot_group_id');
     }
 
     /*
@@ -91,7 +92,7 @@ class TelegramBotGlobalMessage extends Model
     public function setStatusAttribute($value)
     {
         if (is_null($value)) {
-            $this->attributes['status'] = '';
+            $this->attributes['status'] = BotGlobalMessagesEnum::STATUS_IDS['pd_sent'];
         }
     }
 
