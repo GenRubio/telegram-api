@@ -2,16 +2,43 @@
 
 namespace App\Tasks\Bot;
 
+use Exception;
+
 class SendGlobalMessageTask
 {
-    public function __construct()
+    private $message;
+
+    public function __construct($message)
     {
-        //
+        $this->message = $message;
     }
 
     public function run()
     {
-        //
+        foreach ($this->message->telegramBotGroup->bots as $bot) {
+            $langMessage = $this->message->getLangMessage($bot->id);
+            foreach ($bot->telegramChats as $chat) {
+                try {
+                    $this->sendMessageToChat($chat, $langMessage);
+                } catch (Exception $e) {
+                }
+            }
+        }
     }
 
+    private function sendMessageToChat($chat, $langMessage)
+    {
+        if (!empty($this->message->image)) {
+            $chat
+                ->photo(public_path($this->message->image))
+                ->html($langMessage)
+                ->protected()
+                ->send();
+        } else {
+            $chat
+                ->html($langMessage)
+                ->protected()
+                ->send();
+        }
+    }
 }

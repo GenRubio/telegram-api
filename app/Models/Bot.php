@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DefStudio\Telegraph\Models\TelegraphChat;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class Bot extends Model
@@ -40,6 +41,11 @@ class Bot extends Model
     public function language()
     {
         return $this->belongsTo(Language::class, 'language_id');
+    }
+
+    public function telegramChats()
+    {
+        return $this->hasMany(TelegraphChat::class, 'telegraph_bot_id', 'id');
     }
 
     /*
