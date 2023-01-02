@@ -66,7 +66,6 @@ class PaymentController extends Controller
                 throw new GenericException("Order not found");
             }
             (new CancelOrderTask($order))->run();
-            (new SendOrderCancelMessageTask($order))->run();
         } catch (GenericException | Exception $e) {
             $settingService = new SettingService();
             return Redirect::to($settingService->getByKey('1671894524.6744')->value);

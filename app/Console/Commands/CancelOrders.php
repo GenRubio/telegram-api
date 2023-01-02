@@ -33,7 +33,6 @@ class CancelOrders extends Command
         $orderService = new OrderService();
         foreach ($orderService->getForAutomaticCancel() as $order) {
             (new CancelOrderTask($order))->run();
-            (new SendAutoCancelMessageTask($order))->run();
         }
     }
 }
