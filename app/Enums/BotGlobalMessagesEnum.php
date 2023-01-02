@@ -16,4 +16,10 @@ abstract class BotGlobalMessagesEnum
         'pd_sent' => 'Pendiente de envio',
         'sent' => 'Enviado',
     ];
+    const STATUS_COLORS = [
+        'cancel' => '#df3e3e',
+        'error' => '#df3e3e',
+        'pd_sent' => '#0089ff',
+        'sent' => '#4add13',
+    ];
 }

@@ -1,8 +1,8 @@
 @php
-    use App\Enums\OrderStatusEnum;
+    use App\Enums\BotGlobalMessagesEnum;
     $status = $entry->{$column['name']};
-    $name = OrderStatusEnum::STATUS[$status];
-    $color = OrderStatusEnum::STATUS_COLORS[$status];
+    $name = BotGlobalMessagesEnum::STATUS[$status];
+    $color = BotGlobalMessagesEnum::STATUS_COLORS[$status];
 @endphp
 <style>
     .status-container {

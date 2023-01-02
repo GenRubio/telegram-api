@@ -29,6 +29,11 @@ class TelegramBotGlobalMessageCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->crud->addColumn([
+            'name' => 'status',
+            'label' => 'Estado',
+            'type'  => 'status-global-message',
+        ]);
+        $this->crud->addColumn([
             'name' => 'image',
             'label' => 'Imagen',
             'type'  => 'image',
