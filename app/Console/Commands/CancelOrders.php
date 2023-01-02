@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Services\OrderService;
-use App\Tasks\CancelOrderTask;
 use Illuminate\Console\Command;
+use App\Tasks\Order\CancelOrderTask;
 use App\Tasks\Bot\SendAutoCancelMessageTask;
 
 class CancelOrders extends Command

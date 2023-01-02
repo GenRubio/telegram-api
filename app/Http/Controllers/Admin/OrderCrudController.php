@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\OrderStatusEnum;
-use App\Tasks\CancelOrderTask;
 use App\Http\Requests\OrderRequest;
+use App\Tasks\Order\CancelOrderTask;
 use App\Tasks\Bot\SendOrderSentMessageTask;
 use App\Tasks\Bot\SendOrderCancelMessageTask;
 use App\Tasks\Bot\SendOrderDeliveredMessageTask;

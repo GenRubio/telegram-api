@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use Exception;
 use Illuminate\Http\Request;
-use App\Tasks\CreateOrderTask;
 use App\Services\CustomerService;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
+use App\Tasks\Order\CreateOrderTask;
 use App\Tasks\Order\GetPaymentUrlTask;
 use App\Tasks\ValidateProductsStockTask;
 use App\Tasks\Bot\SendPaymentUrlMessageTask;
