@@ -2,6 +2,7 @@
 
 namespace App\Tasks\Bot;
 
+use App\Tasks\Order\GetPaymentUrlTask;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
@@ -14,6 +15,7 @@ class SendPaymentUrlMessageTask
     private $telegramBotMessage;
     private $botId;
     private $message;
+    private $paymentUrl;
 
     public function __construct($order)
     {
@@ -23,6 +25,7 @@ class SendPaymentUrlMessageTask
         $this->telegramBotMessage = $this->setTelegramBotMessage();
         $this->botId = $this->order->telegraphChat->bot->id;
         $this->message = $this->telegramBotMessage->getLangMessage($this->botId);
+        $this->paymentUrl = (new GetPaymentUrlTask($this->order))->run();
     }
 
     public function run()
@@ -33,7 +36,7 @@ class SendPaymentUrlMessageTask
                 ->html($this->message)
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make('Pagar')->url($this->getPaymentUrl())
+                        Button::make('Pagar')->url($this->paymentUrl)
                     ]);
                 })
                 ->protected()
@@ -43,21 +46,12 @@ class SendPaymentUrlMessageTask
                 ->html($this->message)
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make('Pagar')->url($this->getPaymentUrl())
+                        Button::make('Pagar')->url($this->paymentUrl)
                     ]);
                 })
                 ->protected()
                 ->send();
         }
-    }
-
-    private function getPaymentUrl()
-    {
-        $paymentUrl = route('stripe.payment', ['reference' => encrypt($this->order->reference)]);
-        if ($this->order->payment_method == 'stripe') {
-            $paymentUrl = route('stripe.payment', ['reference' => encrypt($this->order->reference)]);
-        }
-        return $paymentUrl;
     }
 
     private function setTelegramBotMessage()
