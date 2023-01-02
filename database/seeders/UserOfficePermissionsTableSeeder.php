@@ -499,6 +499,70 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            60 => 
+            array (
+                'id' => 83,
+                'user_id' => 1,
+                'office_permission_id' => 61,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            61 => 
+            array (
+                'id' => 84,
+                'user_id' => 1,
+                'office_permission_id' => 62,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            62 => 
+            array (
+                'id' => 85,
+                'user_id' => 1,
+                'office_permission_id' => 63,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            63 => 
+            array (
+                'id' => 86,
+                'user_id' => 1,
+                'office_permission_id' => 64,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            64 => 
+            array (
+                'id' => 87,
+                'user_id' => 1,
+                'office_permission_id' => 65,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            65 => 
+            array (
+                'id' => 88,
+                'user_id' => 1,
+                'office_permission_id' => 66,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            66 => 
+            array (
+                'id' => 89,
+                'user_id' => 1,
+                'office_permission_id' => 67,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            67 => 
+            array (
+                'id' => 90,
+                'user_id' => 1,
+                'office_permission_id' => 68,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
         ));
         
         

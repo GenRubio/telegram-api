@@ -499,6 +499,102 @@ class OfficePermissionsTableSeeder extends Seeder
                 'created_at' => '2022-12-30 14:15:06',
                 'updated_at' => '2022-12-30 14:15:06',
             ),
+            60 => 
+            array (
+                'id' => 61,
+                'crud_controller' => 'TelegramBotGlobalMessageCrudController',
+                'name' => 'show',
+                'created_at' => '2023-01-02 14:26:01',
+                'updated_at' => '2023-01-02 14:26:01',
+            ),
+            61 => 
+            array (
+                'id' => 62,
+                'crud_controller' => 'TelegramBotGlobalMessageCrudController',
+                'name' => 'create',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
+            62 => 
+            array (
+                'id' => 63,
+                'crud_controller' => 'TelegramBotGlobalMessageCrudController',
+                'name' => 'update',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
+            63 => 
+            array (
+                'id' => 64,
+                'crud_controller' => 'TelegramBotGlobalMessageCrudController',
+                'name' => 'delete',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
+            64 => 
+            array (
+                'id' => 65,
+                'crud_controller' => 'TelegramBotGroupCrudController',
+                'name' => 'show',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
+            65 => 
+            array (
+                'id' => 66,
+                'crud_controller' => 'TelegramBotGroupCrudController',
+                'name' => 'create',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
+            66 => 
+            array (
+                'id' => 67,
+                'crud_controller' => 'TelegramBotGroupCrudController',
+                'name' => 'update',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
+            67 => 
+            array (
+                'id' => 68,
+                'crud_controller' => 'TelegramBotGroupCrudController',
+                'name' => 'delete',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
+            68 => 
+            array (
+                'id' => 69,
+                'crud_controller' => 'Traits/AdminCrudTrait',
+                'name' => 'show',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
+            69 => 
+            array (
+                'id' => 70,
+                'crud_controller' => 'Traits/AdminCrudTrait',
+                'name' => 'create',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
+            70 => 
+            array (
+                'id' => 71,
+                'crud_controller' => 'Traits/AdminCrudTrait',
+                'name' => 'update',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
+            71 => 
+            array (
+                'id' => 72,
+                'crud_controller' => 'Traits/AdminCrudTrait',
+                'name' => 'delete',
+                'created_at' => '2023-01-02 14:26:02',
+                'updated_at' => '2023-01-02 14:26:02',
+            ),
         ));
         
         

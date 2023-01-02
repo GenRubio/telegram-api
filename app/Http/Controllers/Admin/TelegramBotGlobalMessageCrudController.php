@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Language;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use App\Http\Requests\TelegramBotGlobalMessageRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class TelegramBotGlobalMessageCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
         store as traitStore;
@@ -21,6 +23,9 @@ class TelegramBotGlobalMessageCrudController extends CrudController
 
     public function setup()
     {
+        if (!backpack_user()->officePermission(get_class($this), 'show')) {
+            abort(403);
+        }
         CRUD::setModel(\App\Models\TelegramBotGlobalMessage::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/telegram-bot-global-message');
         CRUD::setEntityNameStrings('mensaje', 'mensajes globales');
@@ -28,6 +33,7 @@ class TelegramBotGlobalMessageCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'status',
             'label' => 'Estado',
