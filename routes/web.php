@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\StripeController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\GetProductsController;
 
@@ -32,9 +33,9 @@ Route::prefix('api')->group(function () {
         Route::prefix('stripe')->group(function () {
             Route::get('/{reference}', [PaymentController::class, 'payment'])
                 ->name('stripe.payment');
-            Route::get('success/{reference}', [PaymentController::class, 'stripePaymentSuccess'])
+            Route::get('success/{reference}', [StripeController::class, 'paymentSuccess'])
                 ->name('stripe.payment.success');
-            Route::get('cancel/{reference}', [PaymentController::class, 'stripePaymentError'])
+            Route::get('cancel/{reference}', [StripeController::class, 'paymentError'])
                 ->name('stripe.payment.cancel');
         });
     });
