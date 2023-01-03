@@ -36,6 +36,7 @@ class Order extends Model
         'total_price',
         'shipping_price',
         'stripe_id',
+        'paypal_id',
         'provider_url',
         'order_cancel_detail'
     ];

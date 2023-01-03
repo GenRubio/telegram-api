@@ -71,4 +71,9 @@ class OrderService extends Controller
     {
         $this->orderRepository->updateStripeId($id, $stripeId);
     }
+
+    public function updatePaypalId($id, $paypalId)
+    {
+        $this->orderRepository->updatePaypalId($id, $paypalId);
+    }
 }

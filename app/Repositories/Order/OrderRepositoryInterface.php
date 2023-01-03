@@ -16,4 +16,5 @@ interface OrderRepositoryInterface
     public function getPaymentOrder($reference, $status, $time);
     public function getForAutomaticCancel($status, $time);
     public function updateStripeId($id, $stripeId);
+    public function updatePaypalId($id, $paypalId);
 }

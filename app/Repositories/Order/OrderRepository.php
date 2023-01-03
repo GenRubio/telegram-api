@@ -91,4 +91,11 @@ class OrderRepository extends Repository implements OrderRepositoryInterface
             'stripe_id' => $stripeId
         ]);
     }
+
+    public function updatePaypalId($id, $paypalId)
+    {
+        $this->model->where('id', $id)->update([
+            'paypal_id' => $paypalId
+        ]);
+    }
 }
