@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Drivers\PaypalPaymentDriver;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -11,6 +12,7 @@ use App\Drivers\StripePaymentDriver;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+
 class PaymentController extends Controller
 {
     public function payment(Request $request)
@@ -24,7 +26,8 @@ class PaymentController extends Controller
                 $stripe = (new StripePaymentDriver($order))->run();
                 return Redirect::to($stripe->url);
             } else if ($order->payment_method == "paypal") {
-                throw new GenericException("PayPal not working");
+                $paypal = (new PaypalPaymentDriver($order))->run();
+                return Redirect::to($paypal);
             }
         } catch (GenericException | Exception $e) {
             $settingService = new SettingService();

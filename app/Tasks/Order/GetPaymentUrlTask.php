@@ -13,10 +13,6 @@ class GetPaymentUrlTask
 
     public function run()
     {
-        $paymentUrl = route('stripe.payment', ['reference' => encrypt($this->order->reference)]);
-        if ($this->order->payment_method == 'stripe') {
-            $paymentUrl = route('stripe.payment', ['reference' => encrypt($this->order->reference)]);
-        }
-        return $paymentUrl;
+        return route('payment', ['reference' => encrypt($this->order->reference)]);
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\StripeController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\GetProductsController;
@@ -30,13 +31,19 @@ Route::prefix('api')->group(function () {
     Route::get('products', [GetProductsController::class, 'index']);
     Route::post('new-order', [OrderController::class, 'createOrder']);
     Route::prefix('payment')->group(function () {
+        Route::get('/{reference}', [PaymentController::class, 'payment'])
+            ->name('payment');
         Route::prefix('stripe')->group(function () {
-            Route::get('/{reference}', [PaymentController::class, 'payment'])
-                ->name('stripe.payment');
             Route::get('success/{reference}', [StripeController::class, 'paymentSuccess'])
                 ->name('stripe.payment.success');
             Route::get('cancel/{reference}', [StripeController::class, 'paymentError'])
                 ->name('stripe.payment.cancel');
+        });
+        Route::prefix('paypal')->group(function () {
+            Route::get('success/{reference}', [PaypalController::class, 'paymentSuccess'])
+                ->name('paypal.payment.success');
+            Route::get('cancel/{reference}', [PaypalController::class, 'paymentError'])
+                ->name('paypal.payment.cancel');
         });
     });
 });
