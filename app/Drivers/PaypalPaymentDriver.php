@@ -4,6 +4,7 @@ namespace App\Drivers;
 
 use Exception;
 use App\Services\OrderService;
+use App\Tasks\PayPal\CreateProductsPaypalTask;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class PaypalPaymentDriver
@@ -12,6 +13,7 @@ class PaypalPaymentDriver
     private $provider;
     private $token;
     private $orderService;
+    //private $orderProducts;
     #https://srmklive.github.io/laravel-paypal/docs.html
     #https://github.com/srmklive/laravel-paypal/issues/407
     #Test User
@@ -25,6 +27,7 @@ class PaypalPaymentDriver
         $this->token = $this->provider->getAccessToken();
         $this->provider->setAccessToken($this->token);
         $this->orderService = new OrderService();
+        //$this->orderProducts = (new CreateProductsPaypalTask($order->orderProducts))->run();
     }
 
     public function run()
@@ -37,17 +40,8 @@ class PaypalPaymentDriver
                     //'description' => $plan->name,
                     'amount' => [
                         'currency_code' => 'EUR',
-                        'value' => '20.00'
+                        'value' => $this->order->total_price
                     ],
-                    //'items' => [
-                    //    [
-                    //        'name' => number_format($plan->credits) . ' Plan',
-                    //        'unit_amount' => 10,
-                    //        'quantity' => 1,
-                    //        'description' => $plan->name,
-                    //        'category' => 'DIGITAL_GOODS',
-                    //    ]
-                    //]
                 ]],
                 'application_context' => [
                     'cancel_url' => route('paypal.payment.cancel', ['reference' => encrypt($this->order->reference)]),

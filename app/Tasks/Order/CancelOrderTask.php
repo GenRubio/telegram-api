@@ -6,6 +6,7 @@ use App\Enums\OrderStatusEnum;
 use App\Services\OrderService;
 use App\Services\ProductModelsFlavorService;
 use App\Tasks\Stripe\CancelPaymentStripeTask;
+use App\Tasks\PayPal\CancelPaymentPaypalTaskTask;
 
 class CancelOrderTask
 {
@@ -45,6 +46,9 @@ class CancelOrderTask
     {
         if ($this->order->payment_method == 'stripe' && !empty($this->order->stripe_id)) {
             (new CancelPaymentStripeTask($this->order->stripe_id))->run();
+        }
+        if ($this->order->payment_method == 'paypal' && !empty($this->order->paypal_id)) {
+            (new CancelPaymentPaypalTaskTask($this->order->paypal_id))->run();
         }
     }
 }

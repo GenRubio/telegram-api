@@ -11,8 +11,8 @@ use App\Http\Controllers\Controller;
 use App\Tasks\Order\AcceptOrderTask;
 use App\Tasks\Order\CancelOrderTask;
 use Illuminate\Support\Facades\Redirect;
-use App\Tasks\Stripe\ValidatePaymentTask;
 use App\Tasks\Stripe\CancelPaymentStripeTask;
+use App\Tasks\Stripe\ValidatePaymentStripeTask;
 use App\Tasks\Bot\SendSuccessPaymentMessageTask;
 
 class StripeController extends Controller
@@ -24,7 +24,7 @@ class StripeController extends Controller
             if (is_null($order)) {
                 throw new GenericException("Order not found");
             }
-            if ((new ValidatePaymentTask($order->stripe_id))->run()) {
+            if ((new ValidatePaymentStripeTask($order->stripe_id))->run()) {
                 (new AcceptOrderTask($order))->run();
                 (new CancelPaymentStripeTask($order->stripe_id))->run();
                 (new SendSuccessPaymentMessageTask($order))->run();

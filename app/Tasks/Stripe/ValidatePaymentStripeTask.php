@@ -5,7 +5,7 @@ namespace App\Tasks\Stripe;
 use Stripe\Stripe;
 use Stripe\StripeClient;
 
-class ValidatePaymentTask
+class ValidatePaymentStripeTask
 {
     private $stripeId;
 
