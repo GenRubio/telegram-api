@@ -1,15 +1,16 @@
-<button class="btn btn-sm btn-success set-webhook-js" data-bot-id="{{ $entry->id }}">Actualizar</button>
+<button class="btn btn-sm btn-danger remove-webhook-{{ $entry->id }}-js" data-bot-id="{{ $entry->id }}">Eliminar WH</button>
 
 <script type="text/javascript">
-    $('.set-webhook-js').on('click', function(event) {
+    $('.remove-webhook-{{ $entry->id }}-js').on('click', function(event) {
         var botId = $(this).data('bot-id');
         $.ajax({
             type: 'POST',
-            url: "{{ route('setWebhookBot') }}",
+            url: "{{ route('removeWebhookBot') }}",
             data: {
                 botId: botId
             },
             success: function(result) {
+                console.log("hola")
                 new Noty({
                     type: "success",
                     text: result.message,

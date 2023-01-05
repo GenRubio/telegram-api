@@ -23,7 +23,8 @@ class Bot extends Model
         'name',
         'token',
         'bot_url',
-        'language_id'
+        'language_id',
+        'webhook'
     ];
 
     /*

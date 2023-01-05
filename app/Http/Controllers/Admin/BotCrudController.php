@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BotRequest;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
+use App\Models\Bot;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use DefStudio\Telegraph\Models\TelegraphBot;
 
 class BotCrudController extends CrudController
 {
@@ -32,7 +34,8 @@ class BotCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->removeActionsCrud();
-        $this->crud->addButtonFromView('line', 'set-webhook', 'set-webhook', 'beginning');
+        $this->crud->addButtonFromView('line', 'remove-webhook', 'remove-webhook', 'beginning');
+        $this->crud->addButtonFromView('line', 'update-webhook', 'update-webhook', 'beginning');
         $this->crud->addColumn([
             'name' => 'name',
             'label' => 'Nombre',
@@ -47,6 +50,11 @@ class BotCrudController extends CrudController
             'name' => 'bot_url',
             'label' => 'Bot Url',
             'type'  => 'link',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'webhook',
+            'label' => 'WebHook',
+            'type'  => 'check',
         ]);
     }
 
@@ -85,11 +93,36 @@ class BotCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-    public function setWebhook(Request $request)
+    public function updateWebhook(Request $request)
     {
+        $telegraphBot = TelegraphBot::where('id', $request->botId)->first();
+        $bot = Bot::where('id', $request->botId)->first();
         $message = 'WebHook actualizado correctamente';
         try {
-            Artisan::call("telegraph:set-webhook {$request->botId}");
+            //Artisan::call("telegraph:set-webhook {$request->botId}");
+            $telegraphBot->registerWebhook()->send();
+            $bot->update([
+                'webhook' => true
+            ]);
+        } catch (Exception $e) {
+            $message = $e->getMessage();
+        }
+        return [
+            'message' => $message
+        ];
+    }
+
+    public function removeWebhook(Request $request)
+    {
+        $telegraphBot = TelegraphBot::where('id', $request->botId)->first();
+        $bot = Bot::where('id', $request->botId)->first();
+        $message = 'WebHook eliminado correctamente';
+        try {
+            //Artisan::call("telegraph:set-webhook {$request->botId}");
+            $telegraphBot->unregisterWebhook()->send();
+            $bot->update([
+                'webhook' => false
+            ]);
         } catch (Exception $e) {
             $message = $e->getMessage();
         }

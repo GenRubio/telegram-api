@@ -40,8 +40,10 @@ Route::group([
     Route::crud('setting', 'SettingCrudController');
     Route::crud('telegram-bot-message', 'TelegramBotMessageCrudController');
     Route::crud('bot', 'BotCrudController');
-    Route::post('bot-set-webhook', 'BotCrudController@setWebhook')
-        ->name('setWebhookBot');
+    Route::post('bot-update-webhook', 'BotCrudController@updateWebhook')
+        ->name('updateWebhookBot');
+    Route::post('bot-remove-webhook', 'BotCrudController@removeWebhook')
+        ->name('removeWebhookBot');
     Route::crud('bot-translation', 'BotTranslationCrudController');
     Route::crud('user', 'UserCrudController');
     Route::crud('office-permission', 'OfficePermissionCrudController');
