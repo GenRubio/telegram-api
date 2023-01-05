@@ -32,9 +32,11 @@ class CreateOfficePermissions extends Command
         $disk = Storage::disk('laravel');
         $crudsArray = [];
         foreach ($disk->allFiles('app/Http/Controllers/Admin/') as $file) {
-            $controllerName = str_replace("app/Http/Controllers/Admin/", "", $file);
-            $controllerName = str_replace(".php", "", $controllerName);
-            $crudsArray[$controllerName] = $controllerName;
+            if (!str_contains($file, 'Traits')){
+                $controllerName = str_replace("app/Http/Controllers/Admin/", "", $file);
+                $controllerName = str_replace(".php", "", $controllerName);
+                $crudsArray[$controllerName] = $controllerName;
+            }
         }
         $nameActions = [];
         $nameActions['show'] = 'Mostrar';
