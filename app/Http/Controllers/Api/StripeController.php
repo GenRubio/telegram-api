@@ -22,8 +22,13 @@ class StripeController extends Controller
     public function paymentSuccess(Request $request)
     {
         try {
-            $order = (new OrderService())->getPaymentOrder(decrypt($request->reference));
+            $reference = decrypt($request->reference);
+            $order = (new OrderService())->getPaymentOrder($reference);
             if (is_null($order)) {
+                $order = (new OrderService())->getByReference($reference);
+                if (!is_null($order)) {
+                    (new SendPaymentUrlCancelMessageTask($order))->run();
+                }
                 throw new GenericException("Order not found");
             }
             if ((new ValidatePaymentStripeTask($order->stripe_id))->run()) {
@@ -43,8 +48,13 @@ class StripeController extends Controller
     public function paymentError(Request $request)
     {
         try {
-            $order = (new OrderService())->getPaymentOrder(decrypt($request->reference));
+            $reference = decrypt($request->reference);
+            $order = (new OrderService())->getPaymentOrder($reference);
             if (is_null($order)) {
+                $order = (new OrderService())->getByReference($reference);
+                if (!is_null($order)) {
+                    (new SendPaymentUrlCancelMessageTask($order))->run();
+                }
                 throw new GenericException("Order not found");
             }
             (new CancelOrderTask($order))->run();
