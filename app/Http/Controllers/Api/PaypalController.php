@@ -11,8 +11,10 @@ use App\Http\Controllers\Controller;
 use App\Tasks\Order\AcceptOrderTask;
 use App\Tasks\Order\CancelOrderTask;
 use Illuminate\Support\Facades\Redirect;
-use App\Tasks\PayPal\ValidatePaymentPaypalTask;
+use App\Tasks\Bot\SendPaymentCancelMessageTask;
 use App\Tasks\Bot\SendSuccessPaymentMessageTask;
+use App\Tasks\PayPal\AuthorizePaymentPaypalTask;
+use App\Tasks\Bot\SendPaymentUrlCancelMessageTask;
 
 class PaypalController extends Controller
 {
@@ -23,10 +25,11 @@ class PaypalController extends Controller
             if (is_null($order)) {
                 throw new GenericException("Order not found");
             }
-            if ((new ValidatePaymentPaypalTask($order->paypal_id))->run()) {
+            if ((new AuthorizePaymentPaypalTask($order))->run()) {
                 (new AcceptOrderTask($order))->run();
-                //(new CancelPaymentStripeTask($order->stripe_id))->run();
                 (new SendSuccessPaymentMessageTask($order))->run();
+            } else {
+                (new SendPaymentUrlCancelMessageTask($order))->run();
             }
         } catch (GenericException | Exception $e) {
             $settingService = new SettingService();
@@ -43,8 +46,8 @@ class PaypalController extends Controller
                 throw new GenericException("Order not found");
             }
             (new CancelOrderTask($order))->run();
+            (new SendPaymentCancelMessageTask($order))->run();
         } catch (GenericException | Exception $e) {
-            dd($e);
             $settingService = new SettingService();
             return Redirect::to($settingService->getByKey('1671894524.6744')->value);
         }

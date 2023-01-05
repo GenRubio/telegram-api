@@ -16,6 +16,7 @@ class PaypalPaymentDriver
     //private $orderProducts;
     #https://srmklive.github.io/laravel-paypal/docs.html
     #https://github.com/srmklive/laravel-paypal/issues/407
+    #https://progi.pro/kak-ya-mogu-otmenit-token-ispolzuya-api-paypal-8461577
     #Test User
     #sb-97c6v24773152@personal.example.com
     #lu4XH*)?

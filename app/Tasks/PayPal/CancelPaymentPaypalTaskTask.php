@@ -2,27 +2,27 @@
 
 namespace App\Tasks\PayPal;
 
+use App\Services\OrderService;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class CancelPaymentPaypalTaskTask
 {
-    private $paypalId;
-    private $provider;
-    private $token;
+    private $order;
+    private $orderService;
+    //private $provider;
+    //private $token;
 
-    public function __construct($paypalId)
+    public function __construct($order)
     {
-        $this->paypalId = $paypalId;
-        $this->provider = new PayPalClient;
-        $this->provider->setApiCredentials(config('paypal'));
-        $this->token = $this->provider->getAccessToken();
-        $this->provider->setAccessToken($this->token);
+        $this->order = $order;
+        $this->orderService = new OrderService();
     }
 
     public function run()
     {
-        $order = $this->provider->showOrderDetails($this->paypalId);
-        $this->provider->voidAuthorizedPayment($this->paypalId);
+        //$order = $this->provider->showOrderDetails($this->paypalId);
+        //$this->provider->voidAuthorizedPayment($this->paypalId);
+        //dd($this->provider->showOrderDetails($this->paypalId));
+        $this->orderService->updatePaypalId($this->order->id, null);
     }
-
 }

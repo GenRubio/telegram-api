@@ -4,15 +4,15 @@ namespace App\Tasks\PayPal;
 
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
-class ValidatePaymentPaypalTask
+class AuthorizePaymentPaypalTask
 {
-    private $paypalId;
+    private $order;
     private $provider;
     private $token;
 
-    public function __construct($paypalId)
+    public function __construct($order)
     {
-        $this->paypalId = $paypalId;
+        $this->order = $order;
         $this->provider = new PayPalClient;
         $this->provider->setApiCredentials(config('paypal'));
         $this->token = $this->provider->getAccessToken();
@@ -21,7 +21,11 @@ class ValidatePaymentPaypalTask
 
     public function run()
     {
-        //
+        $detail = $this->provider->showOrderDetails($this->order->paypal_id);
+        if ($detail['status'] == "CREATED") {
+            $this->provider->capturePaymentOrder($this->order->paypal_id);
+            return true;
+        }
+        return false;
     }
-
 }
