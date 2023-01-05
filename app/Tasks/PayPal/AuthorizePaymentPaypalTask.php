@@ -22,7 +22,7 @@ class AuthorizePaymentPaypalTask
     public function run()
     {
         $detail = $this->provider->showOrderDetails($this->order->paypal_id);
-        if ($detail['status'] == "CREATED") {
+        if ($detail['status'] == "APPROVED") {
             $this->provider->capturePaymentOrder($this->order->paypal_id);
             return true;
         }
