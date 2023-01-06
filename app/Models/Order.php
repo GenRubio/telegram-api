@@ -78,7 +78,8 @@ class Order extends Model
 
     public function orderHistoryStates()
     {
-        return $this->hasMany(OrderHistoryState::class, 'order_id', 'id');
+        return $this->hasMany(OrderHistoryState::class, 'order_id', 'id')
+            ->orderBy('id', 'desc');
     }
 
     /*

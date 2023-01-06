@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderHistoryState extends Model
@@ -18,6 +19,7 @@ class OrderHistoryState extends Model
     // protected $guarded = ['id'];
     protected $fillable = [
         'order_id',
+        'user_id',
         'state'
     ];
     // protected $hidden = [];
@@ -38,6 +40,11 @@ class OrderHistoryState extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -49,6 +56,11 @@ class OrderHistoryState extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
+
+    public function getDateAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('d-m-Y H:i:s');
+    }
 
     /*
     |--------------------------------------------------------------------------

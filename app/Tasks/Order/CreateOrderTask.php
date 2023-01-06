@@ -3,6 +3,7 @@
 namespace App\Tasks\Order;
 
 use Exception;
+use App\Enums\OrderStatusEnum;
 use App\Prepares\OrderPrepare;
 use App\Services\OrderService;
 use Illuminate\Support\Facades\DB;
@@ -40,6 +41,7 @@ class CreateOrderTask
             DB::beginTransaction();
             $orderPrepare = (new OrderPrepare($this->request, $this->customer))->run();
             $this->order = $this->orderService->createOrder($orderPrepare);
+            (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['pd_payment']))->run();
             $prderProductPrepare = (new OrderProductPrepare($this->order, $this->validateProductStock))->run();
             $this->orderProductService->createOrderProducts($prderProductPrepare);
             DB::commit();

@@ -16,12 +16,17 @@ return new class extends Migration
         Schema::create('order_history_states', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('state');
             $table->timestamps();
 
             $table->foreign('order_id')
                 ->references('id')
                 ->on('orders')
+                ->cascadeOnDelete();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
                 ->cascadeOnDelete();
         });
     }

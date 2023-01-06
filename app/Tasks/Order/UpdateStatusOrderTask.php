@@ -25,6 +25,7 @@ class UpdateStatusOrderTask
         $this->orderService->updateStatus($this->order->id, $this->newStatus);
         $this->orderHistoryStateService->create([
             'order_id' => $this->order->id,
+            'user_id' => backpack_user() ? backpack_user()->id : null,
             'state' => $this->newStatus
         ]);
     }
