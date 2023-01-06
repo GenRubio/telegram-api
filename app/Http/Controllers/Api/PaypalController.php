@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Exception;
 use Illuminate\Http\Request;
+use App\Enums\OrderStatusEnum;
 use App\Services\OrderService;
 use App\Services\SettingService;
 use App\Exceptions\GenericException;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Tasks\Order\AcceptOrderTask;
 use App\Tasks\Order\CancelOrderTask;
 use Illuminate\Support\Facades\Redirect;
+use App\Tasks\PayPal\LatePaymentPaypalTask;
 use App\Tasks\Bot\SendPaymentCancelMessageTask;
 use App\Tasks\PayPal\PaymentApprovedPaypalTask;
 use App\Tasks\Bot\SendSuccessPaymentMessageTask;
@@ -27,7 +29,10 @@ class PaypalController extends Controller
             if (is_null($order)) {
                 $order = (new OrderService())->getByReference($reference);
                 if (!is_null($order)) {
-                    if ((new PaymentApprovedPaypalTask($order))->run()) {
+                    if ((new PaymentApprovedPaypalTask($order))->run()
+                        && $order->status == OrderStatusEnum::STATUS_IDS['cancel']
+                    ) {
+                        (new LatePaymentPaypalTask($order))->run();
                     } else {
                         (new SendPaymentUrlCancelMessageTask($order))->run();
                     }

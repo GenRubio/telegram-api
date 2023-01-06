@@ -10,8 +10,11 @@ abstract class OrderStatusEnum
         'pd_payment' => 'pd_payment',
         'pd_sent' => 'pd_sent',
         'payment_accepted' => 'payment_accepted',
+        'payment_late' => 'payment_late',
+        'payment_denied' => 'payment_denied',
         'sent' => 'sent',
-        'delivered' => 'delivered'
+        'delivered' => 'delivered',
+        'refund' => 'refund'
     ];
     const STATUS = [
         'cancel' => 'Cancelado',
@@ -19,17 +22,23 @@ abstract class OrderStatusEnum
         'pd_payment' => 'Pendiente de pago',
         'pd_sent' => 'Pendiente de envio',
         'payment_accepted' => 'Pago aceptado',
+        'payment_late' => 'Pago atrasado',
+        'payment_denied' => 'Pago denegado',
         'sent' => 'Enviado',
-        'delivered' => 'Entregado'
+        'delivered' => 'Entregado',
+        'refund' => 'Pago reembolsado'
     ];
     const STATUS_COLORS = [
         'cancel' => '#df3e3e',
         'error' => '#df3e3e',
+        'payment_late' => '#df3e3e',
         'pd_payment' => '#ffb800',
+        'payment_denied' => '#df3e3e',
         'pd_sent' => '#0089ff',
         'payment_accepted' => '#14d2cb',
         'sent' => '#dd13dd',
-        'delivered' => '#4add13'
+        'delivered' => '#4add13',
+        'refund' => '#5a5a5a'
     ];
     const STATUS_TO_STATUS = [
         'cancel' => [
