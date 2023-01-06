@@ -4,7 +4,7 @@ namespace App\Tasks\PayPal;
 
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
-class AuthorizePaymentPaypalTask
+class PaymentApprovedPaypalTask
 {
     private $order;
     private $provider;
@@ -23,7 +23,8 @@ class AuthorizePaymentPaypalTask
     {
         $detail = $this->provider->showOrderDetails($this->order->paypal_id);
         if ($detail['status'] == "APPROVED") {
-            $this->provider->capturePaymentOrder($this->order->paypal_id);
+            return true;
         }
+        return false;
     }
 }

@@ -12,6 +12,7 @@ use App\Tasks\Order\AcceptOrderTask;
 use App\Tasks\Order\CancelOrderTask;
 use Illuminate\Support\Facades\Redirect;
 use App\Tasks\Bot\SendPaymentCancelMessageTask;
+use App\Tasks\PayPal\PaymentApprovedPaypalTask;
 use App\Tasks\Bot\SendSuccessPaymentMessageTask;
 use App\Tasks\PayPal\AuthorizePaymentPaypalTask;
 use App\Tasks\Bot\SendPaymentUrlCancelMessageTask;
@@ -26,11 +27,16 @@ class PaypalController extends Controller
             if (is_null($order)) {
                 $order = (new OrderService())->getByReference($reference);
                 if (!is_null($order)) {
-                    (new SendPaymentUrlCancelMessageTask($order))->run();
+                    if ((new PaymentApprovedPaypalTask($order))->run()) {
+                    } else {
+                        (new SendPaymentUrlCancelMessageTask($order))->run();
+                    }
+                } else {
+                    throw new GenericException("Order not found");
                 }
-                throw new GenericException("Order not found");
             }
-            if ((new AuthorizePaymentPaypalTask($order))->run()) {
+            if ((new PaymentApprovedPaypalTask($order))->run()) {
+                (new AuthorizePaymentPaypalTask($order))->run();
                 (new AcceptOrderTask($order))->run();
                 (new SendSuccessPaymentMessageTask($order))->run();
             } else {
@@ -52,8 +58,9 @@ class PaypalController extends Controller
                 $order = (new OrderService())->getByReference($reference);
                 if (!is_null($order)) {
                     (new SendPaymentUrlCancelMessageTask($order))->run();
+                } else {
+                    throw new GenericException("Order not found");
                 }
-                throw new GenericException("Order not found");
             }
             (new CancelOrderTask($order))->run();
             (new SendPaymentCancelMessageTask($order))->run();

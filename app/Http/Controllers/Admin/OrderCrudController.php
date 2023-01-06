@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\OrderStatusEnum;
 use App\Http\Requests\OrderRequest;
 use App\Tasks\Order\CancelOrderTask;
+use App\Tasks\Order\UpdateStatusOrderTask;
 use App\Tasks\Bot\SendOrderSentMessageTask;
 use App\Tasks\Bot\SendOrderCancelMessageTask;
 use App\Tasks\Bot\SendOrderDeliveredMessageTask;
@@ -100,7 +101,7 @@ class OrderCrudController extends CrudController
             ],
             [
                 'name' => 'order_cancel_detail',
-                'label' => 'Razon de cancelacion de pedido <small>(En caso de que el estado sea Cancelado)</small><br><div style="font-size: 15px;font-weight: normal;">Idioma del cliente: ' . $clientLanguage .'</div>',
+                'label' => 'Razon de cancelacion de pedido <small>(En caso de que el estado sea Cancelado)</small><br><div style="font-size: 15px;font-weight: normal;">Idioma del cliente: ' . $clientLanguage . '</div>',
                 'type' => 'textarea',
                 'tab' => 'General'
             ],
@@ -232,6 +233,7 @@ class OrderCrudController extends CrudController
             $order->status == OrderStatusEnum::STATUS_IDS['payment_accepted']
             && $request->input('status') == OrderStatusEnum::STATUS_IDS['sent']
         ) {
+            (new UpdateStatusOrderTask($order, OrderStatusEnum::STATUS_IDS['sent']))->run();
             (new SendOrderSentMessageTask($order))->run();
         }
     }
@@ -242,6 +244,7 @@ class OrderCrudController extends CrudController
             $order->status == OrderStatusEnum::STATUS_IDS['sent']
             && $request->input('status') == OrderStatusEnum::STATUS_IDS['delivered']
         ) {
+            (new UpdateStatusOrderTask($order, OrderStatusEnum::STATUS_IDS['delivered']))->run();
             (new SendOrderDeliveredMessageTask($order))->run();
         }
     }

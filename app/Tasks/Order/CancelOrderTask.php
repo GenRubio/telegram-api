@@ -11,14 +11,12 @@ use App\Tasks\PayPal\CancelPaymentPaypalTaskTask;
 class CancelOrderTask
 {
     private $order;
-    private $orderService;
     private $productModelsFlavorService;
     private $refund;
 
     public function __construct($order, $refund = false)
     {
         $this->order = $order;
-        $this->orderService = new OrderService();
         $this->productModelsFlavorService = new ProductModelsFlavorService();
         $this->refund = $refund;
     }
@@ -32,7 +30,7 @@ class CancelOrderTask
 
     private function updateStatus()
     {
-        $this->orderService->updateStatus($this->order->id, OrderStatusEnum::STATUS_IDS['cancel']);
+        (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['cancel']))->run();
     }
 
     private function removeBlockedStock()

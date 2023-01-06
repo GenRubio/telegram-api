@@ -28,8 +28,9 @@ class StripeController extends Controller
                 $order = (new OrderService())->getByReference($reference);
                 if (!is_null($order)) {
                     (new SendPaymentUrlCancelMessageTask($order))->run();
+                } else {
+                    throw new GenericException("Order not found");
                 }
-                throw new GenericException("Order not found");
             }
             if ((new ValidatePaymentStripeTask($order->stripe_id))->run()) {
                 (new AcceptOrderTask($order))->run();
@@ -54,8 +55,9 @@ class StripeController extends Controller
                 $order = (new OrderService())->getByReference($reference);
                 if (!is_null($order)) {
                     (new SendPaymentUrlCancelMessageTask($order))->run();
+                } else {
+                    throw new GenericException("Order not found");
                 }
-                throw new GenericException("Order not found");
             }
             (new CancelOrderTask($order))->run();
             (new SendPaymentCancelMessageTask($order))->run();

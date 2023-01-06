@@ -9,13 +9,11 @@ use App\Services\ProductModelsFlavorService;
 class AcceptOrderTask
 {
     private $order;
-    private $orderService;
     private $productModelsFlavorService;
 
     public function __construct($order)
     {
         $this->order = $order;
-        $this->orderService = new OrderService();
         $this->productModelsFlavorService = new ProductModelsFlavorService();
     }
 
@@ -28,7 +26,7 @@ class AcceptOrderTask
 
     private function updateStatus()
     {
-        $this->orderService->updateStatus($this->order->id, OrderStatusEnum::STATUS_IDS['payment_accepted']);
+        (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['payment_accepted']))->run();
     }
 
     private function removeStock()
