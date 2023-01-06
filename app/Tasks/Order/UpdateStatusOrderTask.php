@@ -25,7 +25,7 @@ class UpdateStatusOrderTask
         $this->orderService->updateStatus($this->order->id, $this->newStatus);
         $this->orderHistoryStateService->create([
             'order_id' => $this->order->id,
-            'status' => $this->newStatus
+            'state' => $this->newStatus
         ]);
     }
 }
