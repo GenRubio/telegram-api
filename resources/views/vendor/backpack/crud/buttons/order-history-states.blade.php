@@ -27,8 +27,11 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div class="mb-1">
+                    Pedido: <b>{{ $order->reference }}</b>
+                </div>
                 <div>
-                    Pedido: {{ $order->reference }}
+                    Metodo pago: <b>{{ $order->payment_method }}</b>
                 </div>
                 <hr>
                 <div class="row" style="align-items: center;">
