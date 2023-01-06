@@ -76,6 +76,11 @@ class Order extends Model
         return $this->hasOne(TelegraphChat::class, 'chat_id', 'chat_id');
     }
 
+    public function orderHistoryStates()
+    {
+        return $this->hasMany(OrderHistoryState::class, 'order_id', 'id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
