@@ -52,6 +52,7 @@ class PaypalPaymentDriver
         } catch (Exception $e) {
             dd($e);
         }
+
         $this->orderService->updatePaypalId($this->order->id, $order['id']);
         return $order['links'][1]['href'];
     }

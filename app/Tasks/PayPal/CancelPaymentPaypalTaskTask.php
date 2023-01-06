@@ -9,20 +9,23 @@ class CancelPaymentPaypalTaskTask
 {
     private $order;
     private $orderService;
-    //private $provider;
-    //private $token;
+    private $provider;
+    private $token;
 
     public function __construct($order)
     {
         $this->order = $order;
         $this->orderService = new OrderService();
+        $this->provider = new PayPalClient;
+        $this->provider->setApiCredentials(config('paypal'));
+        $this->token = $this->provider->getAccessToken();
+        $this->provider->setAccessToken($this->token);
     }
 
     public function run()
     {
-        //$order = $this->provider->showOrderDetails($this->paypalId);
-        //$this->provider->voidAuthorizedPayment($this->paypalId);
-        //dd($this->provider->showOrderDetails($this->paypalId));
+        //$detail = $this->provider->showOrderDetails($this->order->paypal_id);
+        //$this->provider->orderVoid($this->order->paypal_id);
         $this->orderService->updatePaypalId($this->order->id, null);
     }
 }
