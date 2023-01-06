@@ -97,6 +97,11 @@ class ProductModel extends Model
         return $this->price ? $this->price . ' €' : null;
     }
 
+    public function getPriceBackpackAttribute()
+    {
+        return !empty($this->price) ? $this->price . '€' : $this->price;
+    }
+
     public function getSizeGetterAttribute()
     {
         return $this->size ? $this->size . ' mm' : null;

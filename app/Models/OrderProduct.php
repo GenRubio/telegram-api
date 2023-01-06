@@ -74,6 +74,16 @@ class OrderProduct extends Model
         return $this->order->reference;
     }
 
+    public function getUnitPriceBackpackAttribute()
+    {
+        return !empty($this->unit_price) ? $this->unit_price . '€' : $this->unit_price;
+    }
+
+    public function getTotalPriceBackpackAttribute()
+    {
+        return !empty($this->total_price) ? $this->total_price . '€' : $this->total_price;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

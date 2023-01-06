@@ -54,17 +54,17 @@ class OrderCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'total_price',
+            'name' => 'total_price_backpack',
             'label' => 'Precio total',
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'price',
+            'name' => 'price_backpack',
             'label' => 'Precio',
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'shipping_price',
+            'name' => 'shipping_price_backpack',
             'label' => 'Precio envio',
             'type'  => 'text',
         ]);

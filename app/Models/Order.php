@@ -93,6 +93,21 @@ class Order extends Model
         return count($this->orderProducts);
     }
 
+    public function getPriceBackpackAttribute()
+    {
+        return !empty($this->price) ? $this->price . '€' : $this->price;
+    }
+
+    public function getTotalPriceBackpackAttribute()
+    {
+        return !empty($this->total_price) ? $this->total_price . '€' : $this->total_price;
+    }
+
+    public function getShippingPriceBackpackAttribute()
+    {
+        return !empty($this->shipping_price) ? $this->price . '€' : $this->shipping_price;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

@@ -76,12 +76,12 @@ class OrderProductCrudController extends CrudController
             'model'     => "App\Models\ProductModelsFlavor",
         ]);
         $this->crud->addColumn([
-            'name' => 'total_price',
+            'name' => 'total_price_backpack',
             'label' => 'Precio total',
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'unit_price',
+            'name' => 'unit_price_backpack',
             'label' => 'Precio unidad',
             'type'  => 'text',
         ]);
