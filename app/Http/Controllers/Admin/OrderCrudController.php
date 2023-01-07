@@ -223,6 +223,7 @@ class OrderCrudController extends CrudController
             && $order->status != $request->input('status')
         ) {
             (new CancelOrderTask($order))->run();
+            (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['cancel'], backpack_user()))->run();
             $order->order_cancel_detail = $request->input('order_cancel_detail');
             (new SendOrderCancelMessageTask($order))->run();
         }
@@ -234,7 +235,7 @@ class OrderCrudController extends CrudController
             $order->status == OrderStatusEnum::STATUS_IDS['payment_accepted']
             && $request->input('status') == OrderStatusEnum::STATUS_IDS['sent']
         ) {
-            (new UpdateStatusOrderTask($order, OrderStatusEnum::STATUS_IDS['sent']))->run();
+            (new UpdateStatusOrderTask($order, OrderStatusEnum::STATUS_IDS['sent'], backpack_user()))->run();
             (new SendOrderSentMessageTask($order))->run();
         }
     }
@@ -245,7 +246,7 @@ class OrderCrudController extends CrudController
             $order->status == OrderStatusEnum::STATUS_IDS['sent']
             && $request->input('status') == OrderStatusEnum::STATUS_IDS['delivered']
         ) {
-            (new UpdateStatusOrderTask($order, OrderStatusEnum::STATUS_IDS['delivered']))->run();
+            (new UpdateStatusOrderTask($order, OrderStatusEnum::STATUS_IDS['delivered'], backpack_user()))->run();
             (new SendOrderDeliveredMessageTask($order))->run();
         }
     }

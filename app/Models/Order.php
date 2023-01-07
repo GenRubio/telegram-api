@@ -38,7 +38,8 @@ class Order extends Model
         'stripe_id',
         'paypal_id',
         'provider_url',
-        'order_cancel_detail'
+        'order_cancel_detail',
+        'payment_id'
     ];
     // protected $hidden = [];
     // protected $dates = [];

@@ -98,4 +98,17 @@ class OrderRepository extends Repository implements OrderRepositoryInterface
             'paypal_id' => $paypalId
         ]);
     }
+
+    public function getByStatus($status)
+    {
+        return $this->model->where('status', $status)
+            ->get();
+    }
+
+    public function updatePaymentId($id, $paymentId)
+    {
+        $this->model->where('id', $id)->update([
+            'payment_id' => $paymentId
+        ]);
+    }
 }

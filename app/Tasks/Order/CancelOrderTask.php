@@ -27,7 +27,7 @@ class CancelOrderTask
 
     private function updateStatus()
     {
-        (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['cancel']))->run();
+        (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['cancel'], null))->run();
     }
 
     private function removeBlockedStock()

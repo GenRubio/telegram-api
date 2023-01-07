@@ -57,6 +57,12 @@ class OrderService extends Controller
         return $this->orderRepository->getForAutomaticCancel($status, $subminutes);
     }
 
+    public function getAcceptedPaymentOrders()
+    {
+        $status = OrderStatusEnum::STATUS_IDS['payment_accepted'];
+        return $this->orderRepository->getByStatus($status);
+    }
+
     public function createOrder($data)
     {
         return $this->orderRepository->createOrder($data);
@@ -75,5 +81,10 @@ class OrderService extends Controller
     public function updatePaypalId($id, $paypalId)
     {
         $this->orderRepository->updatePaypalId($id, $paypalId);
+    }
+
+    public function updatePaymentId($id, $paymentId)
+    {
+        $this->orderRepository->updatePaymentId($id, $paymentId);
     }
 }

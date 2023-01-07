@@ -41,7 +41,7 @@ class CreateOrderTask
             DB::beginTransaction();
             $orderPrepare = (new OrderPrepare($this->request, $this->customer))->run();
             $this->order = $this->orderService->createOrder($orderPrepare);
-            (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['pd_payment']))->run();
+            (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['pd_payment'], null))->run();
             $prderProductPrepare = (new OrderProductPrepare($this->order, $this->validateProductStock))->run();
             $this->orderProductService->createOrderProducts($prderProductPrepare);
             DB::commit();
