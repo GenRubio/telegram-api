@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tasks\PayPal;
+namespace App\Tasks\PayPal\API;
 
-class CheckPaymentCompletedPaypalTask
+class CheckPaymentCreatedPaypalTask
 {
     private $order;
     private $clientId;
@@ -22,18 +22,15 @@ class CheckPaymentCompletedPaypalTask
     public function run()
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "{$this->apiUrl}/v2/payments/captures/{$this->order->payment_id}");
+        curl_setopt($ch, CURLOPT_URL, "{$this->apiUrl}/v2/payments/authorizations/{$this->order->payment_id}");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Authorization: Bearer ' . $this->accessToken,
             'Content-Type: application/json',
         ));
-        //curl_setopt($ch, CURLOPT_POSTFIELDS, 'grant_type=client_credentials');
-        //curl_setopt($ch, CURLOPT_USERPWD, $clientId . ':' . $secret);
-        //curl_setopt($ch, CURLOPT_POSTFIELDS, 'grant_type=client_credentials');
         $response = curl_exec($ch);
         $json = json_decode($response);
-        if ($json->status == 'COMPLETED') {
+        if ($json->status == 'CREATED') {
             return true;
         }
         return false;

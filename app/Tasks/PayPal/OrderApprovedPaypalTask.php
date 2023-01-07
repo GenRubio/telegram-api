@@ -4,7 +4,7 @@ namespace App\Tasks\PayPal;
 
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
-class PaymentApprovedPaypalTask
+class OrderApprovedPaypalTask
 {
     private $order;
     private $provider;

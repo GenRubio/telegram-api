@@ -23,7 +23,7 @@ class AcceptOrderTask
 
     private function updateStatus()
     {
-        (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['payment_accepted'], null))->run();
+        (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['payment_completed'], null))->run();
     }
 
     private function removeStock()

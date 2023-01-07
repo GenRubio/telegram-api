@@ -35,7 +35,7 @@ class PaypalPaymentDriver
     {
         try {
             $order = $this->provider->createOrder([
-                'intent' => 'CAPTURE',
+                'intent' => 'AUTHORIZE',
                 'purchase_units' => [[
                     'reference_id' => $this->order->reference,
                     //'description' => $plan->name,
