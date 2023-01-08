@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserOfficePermissionsTableSeeder::class);
         $this->call(TelegramBotGroupsTableSeeder::class);
         $this->call(TelegramBotGroupBotTableSeeder::class);
-        $this->call(TelegramBotGlobalMessagesTableSeeder::class);
+        $this->call(ApiClientsTableSeeder::class);
+        $this->call(BotTranslationsTableSeeder::class);
     }
 }

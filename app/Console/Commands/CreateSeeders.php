@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
 
 class CreateSeeders extends Command
 {
@@ -27,7 +29,19 @@ class CreateSeeders extends Command
      */
     public function handle()
     {
-        return Command::SUCCESS;
+        $disk = Storage::disk('laravel');
+        $route = 'database/seeders';
+        $files = $disk->allFiles($route);
+        $deleteFiles = [];
+        foreach($files as $file){
+            if (!str_contains($file, 'DatabaseSeeder')){
+                $deleteFiles[] = $file;
+            }
+        }
+        $disk->delete($deleteFiles);
+        foreach($this->getTables() as $table){
+            Artisan::call("iseed {$table}");
+        }
     }
 
     private function getTables()

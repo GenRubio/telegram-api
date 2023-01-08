@@ -32,6 +32,5 @@ class DataBaseDeploy extends Command
         $dataBaseName = config('database.connections.mysql.database');
         DB::statement("DROP DATABASE {$dataBaseName}");
         DB::statement("CREATE DATABASE {$dataBaseName}");
-        Artisan::call('migrate --seed');
     }
 }

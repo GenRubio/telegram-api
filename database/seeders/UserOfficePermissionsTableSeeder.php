@@ -253,21 +253,13 @@ class UserOfficePermissionsTableSeeder extends Seeder
             ),
             29 => 
             array (
-                'id' => 52,
-                'user_id' => 1,
-                'office_permission_id' => 30,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            30 => 
-            array (
                 'id' => 53,
                 'user_id' => 1,
                 'office_permission_id' => 31,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            31 => 
+            30 => 
             array (
                 'id' => 54,
                 'user_id' => 1,
@@ -275,7 +267,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            32 => 
+            31 => 
             array (
                 'id' => 55,
                 'user_id' => 1,
@@ -283,31 +275,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            33 => 
-            array (
-                'id' => 56,
-                'user_id' => 1,
-                'office_permission_id' => 34,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            34 => 
-            array (
-                'id' => 57,
-                'user_id' => 1,
-                'office_permission_id' => 35,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            35 => 
-            array (
-                'id' => 58,
-                'user_id' => 1,
-                'office_permission_id' => 36,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            36 => 
+            32 => 
             array (
                 'id' => 59,
                 'user_id' => 1,
@@ -315,7 +283,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            37 => 
+            33 => 
             array (
                 'id' => 60,
                 'user_id' => 1,
@@ -323,7 +291,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            38 => 
+            34 => 
             array (
                 'id' => 61,
                 'user_id' => 1,
@@ -331,7 +299,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            39 => 
+            35 => 
             array (
                 'id' => 62,
                 'user_id' => 1,
@@ -339,7 +307,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            40 => 
+            36 => 
             array (
                 'id' => 63,
                 'user_id' => 1,
@@ -347,7 +315,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            41 => 
+            37 => 
             array (
                 'id' => 64,
                 'user_id' => 1,
@@ -355,7 +323,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            42 => 
+            38 => 
             array (
                 'id' => 65,
                 'user_id' => 1,
@@ -363,7 +331,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            43 => 
+            39 => 
             array (
                 'id' => 66,
                 'user_id' => 1,
@@ -371,7 +339,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            44 => 
+            40 => 
             array (
                 'id' => 67,
                 'user_id' => 1,
@@ -379,7 +347,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            45 => 
+            41 => 
             array (
                 'id' => 68,
                 'user_id' => 1,
@@ -387,7 +355,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            46 => 
+            42 => 
             array (
                 'id' => 69,
                 'user_id' => 1,
@@ -395,7 +363,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            47 => 
+            43 => 
             array (
                 'id' => 70,
                 'user_id' => 1,
@@ -403,7 +371,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            48 => 
+            44 => 
             array (
                 'id' => 71,
                 'user_id' => 1,
@@ -411,7 +379,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            49 => 
+            45 => 
             array (
                 'id' => 72,
                 'user_id' => 1,
@@ -419,7 +387,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            50 => 
+            46 => 
             array (
                 'id' => 73,
                 'user_id' => 1,
@@ -427,7 +395,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            51 => 
+            47 => 
             array (
                 'id' => 74,
                 'user_id' => 1,
@@ -435,7 +403,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            52 => 
+            48 => 
             array (
                 'id' => 75,
                 'user_id' => 1,
@@ -443,7 +411,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            53 => 
+            49 => 
             array (
                 'id' => 76,
                 'user_id' => 1,
@@ -451,7 +419,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            54 => 
+            50 => 
             array (
                 'id' => 77,
                 'user_id' => 1,
@@ -459,7 +427,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            55 => 
+            51 => 
             array (
                 'id' => 78,
                 'user_id' => 1,
@@ -467,7 +435,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            56 => 
+            52 => 
             array (
                 'id' => 79,
                 'user_id' => 1,
@@ -475,7 +443,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            57 => 
+            53 => 
             array (
                 'id' => 80,
                 'user_id' => 1,
@@ -483,7 +451,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            58 => 
+            54 => 
             array (
                 'id' => 81,
                 'user_id' => 1,
@@ -491,7 +459,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            59 => 
+            55 => 
             array (
                 'id' => 82,
                 'user_id' => 1,
@@ -499,7 +467,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            60 => 
+            56 => 
             array (
                 'id' => 83,
                 'user_id' => 1,
@@ -507,7 +475,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            61 => 
+            57 => 
             array (
                 'id' => 84,
                 'user_id' => 1,
@@ -515,7 +483,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            62 => 
+            58 => 
             array (
                 'id' => 85,
                 'user_id' => 1,
@@ -523,7 +491,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            63 => 
+            59 => 
             array (
                 'id' => 86,
                 'user_id' => 1,
@@ -531,7 +499,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            64 => 
+            60 => 
             array (
                 'id' => 87,
                 'user_id' => 1,
@@ -539,7 +507,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            65 => 
+            61 => 
             array (
                 'id' => 88,
                 'user_id' => 1,
@@ -547,7 +515,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            66 => 
+            62 => 
             array (
                 'id' => 89,
                 'user_id' => 1,
@@ -555,7 +523,7 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            67 => 
+            63 => 
             array (
                 'id' => 90,
                 'user_id' => 1,

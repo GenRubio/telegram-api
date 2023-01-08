@@ -287,9 +287,9 @@ class TranslationsTableSeeder extends Seeder
             array (
                 'id' => 35,
                 'uuid' => '1672219456.10363ac0b401925a',
-                'text' => '{"es":"Stripe","en":"Stripe","ru":"Stripe"}',
+            'text' => '{"es":"Stripe (Recomendado)","en":"Stripe","ru":"Stripe"}',
                 'created_at' => '2022-12-28 09:24:16',
-                'updated_at' => '2022-12-28 09:24:16',
+                'updated_at' => '2023-01-06 08:24:31',
             ),
             34 => 
             array (
@@ -298,6 +298,22 @@ class TranslationsTableSeeder extends Seeder
                 'text' => '{"es":"Paypal","en":"Paypal","ru":"Paypal"}',
                 'created_at' => '2022-12-28 09:24:24',
                 'updated_at' => '2022-12-28 09:24:24',
+            ),
+            35 => 
+            array (
+                'id' => 37,
+                'uuid' => '1672641467.288563b27bbb46713',
+                'text' => '{"es":"Tu carrito esta vac\\u00edo","en":null,"ru":null}',
+                'created_at' => '2023-01-02 06:37:47',
+                'updated_at' => '2023-01-02 06:37:47',
+            ),
+            36 => 
+            array (
+                'id' => 38,
+                'uuid' => '1672641473.545963b27bc18545c',
+                'text' => '{"es":"Gratis","en":null,"ru":null}',
+                'created_at' => '2023-01-02 06:37:53',
+                'updated_at' => '2023-01-02 06:37:53',
             ),
         ));
         

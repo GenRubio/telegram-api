@@ -563,38 +563,6 @@ class OfficePermissionsTableSeeder extends Seeder
                 'created_at' => '2023-01-02 14:26:02',
                 'updated_at' => '2023-01-02 14:26:02',
             ),
-            68 => 
-            array (
-                'id' => 69,
-                'crud_controller' => 'Traits/AdminCrudTrait',
-                'name' => 'show',
-                'created_at' => '2023-01-02 14:26:02',
-                'updated_at' => '2023-01-02 14:26:02',
-            ),
-            69 => 
-            array (
-                'id' => 70,
-                'crud_controller' => 'Traits/AdminCrudTrait',
-                'name' => 'create',
-                'created_at' => '2023-01-02 14:26:02',
-                'updated_at' => '2023-01-02 14:26:02',
-            ),
-            70 => 
-            array (
-                'id' => 71,
-                'crud_controller' => 'Traits/AdminCrudTrait',
-                'name' => 'update',
-                'created_at' => '2023-01-02 14:26:02',
-                'updated_at' => '2023-01-02 14:26:02',
-            ),
-            71 => 
-            array (
-                'id' => 72,
-                'crud_controller' => 'Traits/AdminCrudTrait',
-                'name' => 'delete',
-                'created_at' => '2023-01-02 14:26:02',
-                'updated_at' => '2023-01-02 14:26:02',
-            ),
         ));
         
         

@@ -99,6 +99,46 @@ class TelegramBotMessagesTableSeeder extends Seeder
             'updated_at' => '2022-12-29 15:10:22',
             'description' => 'Pago aceptado',
         ),
+        8 => 
+        array (
+            'id' => 9,
+            'key' => '1672899563.642',
+            'image' => NULL,
+            'message' => '{"es":"<p>El pago fue cancelado \\ud83e\\udd7a.<\\/p><p><b>\\u00a1No reutilices las url de pago! <\\/b><\\/p><p>Vuelva a realizar el pedido desde nuestra tienda para obtener nuevo url de pago&nbsp;<\\/p>","en":null,"ru":null}',
+            'created_at' => '2023-01-05 06:19:23',
+            'updated_at' => '2023-01-05 06:19:23',
+            'description' => 'Pago cancelado',
+        ),
+        9 => 
+        array (
+            'id' => 10,
+            'key' => '1672899914.5809',
+            'image' => NULL,
+            'message' => '{"es":"El pedido ha sido cancelado.","en":null,"ru":null}',
+            'created_at' => '2023-01-05 06:25:14',
+            'updated_at' => '2023-01-08 09:12:11',
+            'description' => 'Url pago cancelada',
+        ),
+        10 => 
+        array (
+            'id' => 11,
+            'key' => '1673016874.7175',
+            'image' => NULL,
+            'message' => '{"es":"<p>Tu pago ha sido cancelado.<\\/p><p>Pedido: <b>[reference]<\\/b>&nbsp;<\\/p><p>No disponemos de suficiente stock de productos, su pago se ha cancelado.<\\/p><p>En caso de alguna duda p\\u00f3ngase en contacto con un administrador de nuestra tienda.<\\/p><p><br><\\/p><p>Le recordamos no reutilizar las url de pago.<\\/p>","en":null,"ru":null}',
+            'created_at' => '2023-01-06 14:54:34',
+            'updated_at' => '2023-01-08 08:52:07',
+            'description' => 'Pago denegado',
+        ),
+        11 => 
+        array (
+            'id' => 12,
+            'key' => '1673103329.4375',
+            'image' => NULL,
+            'message' => '{"es":"<p>Ha ocurrido un error al realizar el pago.<\\/p><p>Pedido: <b>[reference]<\\/b><\\/p><p>P\\u00f3ngase en contacto con un administrador de nuestra tienda<\\/p>","en":null,"ru":null}',
+            'created_at' => '2023-01-07 14:55:29',
+            'updated_at' => '2023-01-07 14:55:29',
+            'description' => 'Error pago',
+        ),
     ));
         
         
