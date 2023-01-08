@@ -134,9 +134,9 @@ class TelegramBotMessagesTableSeeder extends Seeder
             'id' => 12,
             'key' => '1673103329.4375',
             'image' => NULL,
-            'message' => '{"es":"<p>Ha ocurrido un error al realizar el pago.<\\/p><p>Pedido: <b>[reference]<\\/b><\\/p><p>P\\u00f3ngase en contacto con un administrador de nuestra tienda<\\/p>","en":null,"ru":null}',
+            'message' => '{"es":"<p>Su pago ha sido rechazado.<\\/p><p>Pedido: <b>[reference]<\\/b><\\/p><p>Los pagos est\\u00e1n disponibles solo durante un determinado tiempo.<\\/p>","en":null,"ru":null}',
             'created_at' => '2023-01-07 14:55:29',
-            'updated_at' => '2023-01-07 14:55:29',
+            'updated_at' => '2023-01-08 17:02:56',
             'description' => 'Error pago',
         ),
     ));

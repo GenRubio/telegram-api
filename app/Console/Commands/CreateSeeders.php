@@ -41,6 +41,7 @@ class CreateSeeders extends Command
         $disk->delete($deleteFiles);
         foreach($this->getTables() as $table){
             Artisan::call("iseed {$table}");
+            dump("{$table} --> created");
         }
     }
 

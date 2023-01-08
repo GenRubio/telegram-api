@@ -65,11 +65,11 @@ class ProductModelsFlavorsTableSeeder extends Seeder
                 'reference' => '202210003',
                 'name' => 'PINEAPPLE',
                 'image' => 'images/product/models/flavors/d0c58645f8d340c770e0777e253c3865-image.png',
-                'stock' => 90,
+                'stock' => 88,
                 'stock_bloqued' => 38,
                 'active' => 1,
                 'created_at' => '2022-12-17 09:19:19',
-                'updated_at' => '2023-01-08 08:47:01',
+                'updated_at' => '2023-01-08 13:43:00',
             ),
             4 => 
             array (
@@ -79,10 +79,10 @@ class ProductModelsFlavorsTableSeeder extends Seeder
                 'name' => 'PEACH ICE',
                 'image' => 'images/product/models/flavors/3c98683906f1b90b291927c91c5b15a5-image.png',
                 'stock' => 100,
-                'stock_bloqued' => 0,
+                'stock_bloqued' => 3,
                 'active' => 1,
                 'created_at' => '2022-12-17 09:23:09',
-                'updated_at' => '2023-01-04 17:58:51',
+                'updated_at' => '2023-01-08 13:48:37',
             ),
         ));
         
