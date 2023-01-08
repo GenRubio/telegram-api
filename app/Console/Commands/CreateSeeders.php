@@ -49,7 +49,6 @@ class CreateSeeders extends Command
         return [
             'brands',
             'telegraph_bots',
-            'telegraph_chats',
             'product_models',
             'product_models_flavors',
             'users',
@@ -57,7 +56,6 @@ class CreateSeeders extends Command
             'translations',
             'settings',
             'telegram_bot_messages',
-            'customers',
             'office_permissions',
             'user_office_permissions',
             'telegram_bot_groups',

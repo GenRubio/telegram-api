@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(BrandsTableSeeder::class);
         $this->call(TelegraphBotsTableSeeder::class);
-        $this->call(TelegraphChatsTableSeeder::class);
         $this->call(ProductModelsTableSeeder::class);
         $this->call(ProductModelsFlavorsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
@@ -30,7 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TranslationsTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
         $this->call(TelegramBotMessagesTableSeeder::class);
-        $this->call(CustomersTableSeeder::class);
         $this->call(OfficePermissionsTableSeeder::class);
         $this->call(UserOfficePermissionsTableSeeder::class);
         $this->call(TelegramBotGroupsTableSeeder::class);
