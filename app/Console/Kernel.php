@@ -17,8 +17,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('command:cancel-orders')->everyMinute();
         $schedule->command('send:bot-global-messages')->everyMinute();
-        $schedule->command('backup:clean')->daily()->at('01:00');
-        $schedule->command('backup:run')->daily()->at('02:00');
+        //$schedule->command('backup:clean')->daily()->at('01:00');
+        //$schedule->command('backup:run')->daily()->at('02:00');
     }
 
     /**
