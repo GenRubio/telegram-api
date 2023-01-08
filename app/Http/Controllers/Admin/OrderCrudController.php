@@ -157,6 +157,42 @@ class OrderCrudController extends CrudController
                 'tab' => 'General'
             ],
             [
+                'name' => 'name',
+                'label' => 'Nombre',
+                'type' => 'text',
+                'tab' => 'Cliente'
+            ],
+            [
+                'name' => 'surnames',
+                'label' => 'Apellidos',
+                'type' => 'text',
+                'tab' => 'Cliente'
+            ],
+            [
+                'name' => 'address',
+                'label' => 'Direccion',
+                'type' => 'textarea',
+                'tab' => 'Cliente'
+            ],
+            [
+                'name' => 'postal_code',
+                'label' => 'Codigo postal',
+                'type' => 'text',
+                'tab' => 'Cliente'
+            ],
+            [
+                'name' => 'city',
+                'label' => 'Ciudad',
+                'type' => 'text',
+                'tab' => 'Cliente'
+            ],
+            [
+                'name' => 'country',
+                'label' => 'Pais',
+                'type' => 'text',
+                'tab' => 'Cliente'
+            ],
+            [
                 'name' => 'stripe_id',
                 'label' => 'ID Pedido (Stripe)',
                 'type' => 'text',
@@ -196,42 +232,6 @@ class OrderCrudController extends CrudController
                     'disabled'    => 'disabled',
                 ],
                 'tab' => 'Pago'
-            ],
-            [
-                'name' => 'name',
-                'label' => 'Nombre',
-                'type' => 'text',
-                'tab' => 'Cliente'
-            ],
-            [
-                'name' => 'surnames',
-                'label' => 'Apellidos',
-                'type' => 'text',
-                'tab' => 'Cliente'
-            ],
-            [
-                'name' => 'address',
-                'label' => 'Direccion',
-                'type' => 'textarea',
-                'tab' => 'Cliente'
-            ],
-            [
-                'name' => 'postal_code',
-                'label' => 'Codigo postal',
-                'type' => 'text',
-                'tab' => 'Cliente'
-            ],
-            [
-                'name' => 'city',
-                'label' => 'Ciudad',
-                'type' => 'text',
-                'tab' => 'Cliente'
-            ],
-            [
-                'name' => 'country',
-                'label' => 'Pais',
-                'type' => 'text',
-                'tab' => 'Cliente'
             ],
         ]);
     }
