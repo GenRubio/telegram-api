@@ -158,7 +158,7 @@ class OrderCrudController extends CrudController
             ],
             [
                 'name' => 'stripe_id',
-                'label' => 'ID pedido (Stripe)',
+                'label' => 'ID Pedido (Stripe)',
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
@@ -168,7 +168,7 @@ class OrderCrudController extends CrudController
             ],
             [
                 'name' => 'paypal_id',
-                'label' => 'ID pedido (Paypal)',
+                'label' => 'ID Pedido (Paypal)',
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
@@ -178,7 +178,7 @@ class OrderCrudController extends CrudController
             ],
             [
                 'name' => 'payment_id',
-                'label' => 'ID pago',
+                'label' => 'ID Pago',
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
