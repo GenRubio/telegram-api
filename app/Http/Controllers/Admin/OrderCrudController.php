@@ -274,7 +274,7 @@ class OrderCrudController extends CrudController
     private function sendOrderSentMessage($order, $request)
     {
         if (
-            $order->status == OrderStatusEnum::STATUS_IDS['payment_accepted']
+            $order->status == OrderStatusEnum::STATUS_IDS['payment_completed']
             && $request->input('status') == OrderStatusEnum::STATUS_IDS['sent']
         ) {
             (new UpdateStatusOrderTask($order, OrderStatusEnum::STATUS_IDS['sent'], backpack_user()))->run();
