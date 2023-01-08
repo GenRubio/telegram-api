@@ -190,7 +190,7 @@ class OrderCrudController extends CrudController
                 'name' => 'payment_url_test',
                 'label' => 'Url pago paypal (test)',
                 'type' => 'text',
-                'value' => 'https://www.sandbox.paypal.com/checkoutnow?token=' . 'paypal_id',
+                'value' => 'https://www.sandbox.paypal.com/checkoutnow?token=' . $this->crud->getCurrentEntry()->paypal_id,
                 'attributes' => [
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
