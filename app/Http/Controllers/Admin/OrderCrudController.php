@@ -39,7 +39,7 @@ class OrderCrudController extends CrudController
     {
         $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'order-history-states', 'order-history-states', 'beginning');
-        $this->crud->addButtonFromView('line', 'order-payment-info', 'order-payment-info', 'beginning');
+        //$this->crud->addButtonFromView('line', 'order-payment-info', 'order-payment-info', 'beginning');
         $this->crud->addButtonFromView('line', 'order-products', 'order-products', 'beginning');
         $this->crud->addColumn([
             'name' => 'created_at',
