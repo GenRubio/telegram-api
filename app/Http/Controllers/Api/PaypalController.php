@@ -35,7 +35,7 @@ class PaypalController extends Controller
                     ) {
                         (new LatePaymentPaypalTask($order))->run();
                     } else {
-                        (new SendPaymentErrorMessageTask($this->order))->run();
+                        (new SendPaymentErrorMessageTask($order))->run();
                     }
                 } else {
                     throw new GenericException("Order not found");
@@ -50,12 +50,11 @@ class PaypalController extends Controller
                     (new SendPaymentErrorMessageTask($order))->run();
                 }
             } else {
-                (new SendPaymentErrorMessageTask($this->order))->run();
+                (new SendPaymentErrorMessageTask($order))->run();
             }
         } catch (GenericException | Exception $e) {
-            dd($e);
-            //$settingService = new SettingService();
-            //return Redirect::to($settingService->getByKey('1671894524.6744')->value);
+            $settingService = new SettingService();
+            return Redirect::to($settingService->getByKey('1671894524.6744')->value);
         }
         return Redirect::to($order->bot()->bot_url);
     }
