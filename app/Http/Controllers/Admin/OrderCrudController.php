@@ -164,7 +164,7 @@ class OrderCrudController extends CrudController
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
                 ],
-                'tab' => 'General'
+                'tab' => 'Pago'
             ],
             [
                 'name' => 'paypal_id',
@@ -174,7 +174,7 @@ class OrderCrudController extends CrudController
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
                 ],
-                'tab' => 'General'
+                'tab' => 'Pago'
             ],
             [
                 'name' => 'payment_id',
@@ -184,7 +184,18 @@ class OrderCrudController extends CrudController
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
                 ],
-                'tab' => 'General'
+                'tab' => 'Pago'
+            ],
+            [
+                'name' => 'payment_url_test',
+                'label' => 'Url pago paypal (test)',
+                'type' => 'text',
+                'value' => 'https://www.sandbox.paypal.com/checkoutnow?token=' . 'paypal_id',
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                ],
+                'tab' => 'Pago'
             ],
             [
                 'name' => 'name',
