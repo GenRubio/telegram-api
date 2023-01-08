@@ -112,7 +112,7 @@ class Order extends Model
 
     public function getShippingPriceBackpackAttribute()
     {
-        return !empty($this->shipping_price) ? $this->price . '€' : $this->shipping_price;
+        return !empty($this->shipping_price) ? $this->shipping_price . '€' : $this->shipping_price;
     }
 
     /*
