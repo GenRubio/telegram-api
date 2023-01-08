@@ -157,6 +157,36 @@ class OrderCrudController extends CrudController
                 'tab' => 'General'
             ],
             [
+                'name' => 'stripe_id',
+                'label' => 'ID pedido (Stripe)',
+                'type' => 'text',
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                ],
+                'tab' => 'General'
+            ],
+            [
+                'name' => 'paypal_id',
+                'label' => 'ID pedido (Paypal)',
+                'type' => 'text',
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                ],
+                'tab' => 'General'
+            ],
+            [
+                'name' => 'payment_id',
+                'label' => 'ID pago',
+                'type' => 'text',
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                ],
+                'tab' => 'General'
+            ],
+            [
                 'name' => 'name',
                 'label' => 'Nombre',
                 'type' => 'text',
