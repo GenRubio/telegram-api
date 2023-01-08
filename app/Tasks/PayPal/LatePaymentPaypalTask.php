@@ -38,7 +38,7 @@ class LatePaymentPaypalTask
         $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_late']);
         $this->autorizePaymentOrder();
         if ((new CheckPaymentCreatedPaypalTask($this->order))->run()) {
-            if ((new ProductStockManagerTask($this->order))->enoughStock()) {
+            if ((new ProductStockManagerTask($this->order->orderProducts))->enoughStock()) {
                 $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_accepted']);
                 $this->removeStock();
                 (new CaptureAuthorizedPaymentPaypalTask($this->order))->run();
