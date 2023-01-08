@@ -53,6 +53,7 @@ class PaypalController extends Controller
                 (new SendPaymentErrorMessageTask($this->order))->run();
             }
         } catch (GenericException | Exception $e) {
+            dd($e);
             //$settingService = new SettingService();
             //return Redirect::to($settingService->getByKey('1671894524.6744')->value);
         }
