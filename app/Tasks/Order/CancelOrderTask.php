@@ -40,8 +40,5 @@ class CancelOrderTask
         if ($this->order->payment_method == 'stripe' && !empty($this->order->stripe_id)) {
             (new CancelPaymentStripeTask($this->order->stripe_id))->run();
         }
-        if ($this->order->payment_method == 'paypal' && !empty($this->order->paypal_id)) {
-            (new CancelPaymentPaypalTaskTask($this->order))->run();
-        }
     }
 }

@@ -35,7 +35,7 @@ class PaypalController extends Controller
                     ) {
                         (new LatePaymentPaypalTask($order))->run();
                     } else {
-                        (new SendPaymentUrlCancelMessageTask($order))->run();
+                        (new SendPaymentErrorMessageTask($this->order))->run();
                     }
                 } else {
                     throw new GenericException("Order not found");
@@ -50,7 +50,7 @@ class PaypalController extends Controller
                     (new SendPaymentErrorMessageTask($order))->run();
                 }
             } else {
-                (new SendPaymentUrlCancelMessageTask($order))->run();
+                (new SendPaymentErrorMessageTask($this->order))->run();
             }
         } catch (GenericException | Exception $e) {
             $settingService = new SettingService();

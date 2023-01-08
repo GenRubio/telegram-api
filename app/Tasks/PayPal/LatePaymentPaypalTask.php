@@ -36,7 +36,7 @@ class LatePaymentPaypalTask
     public function run()
     {
         $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_late']);
-        $this->capturePaymentOrder();
+        $this->autorizePaymentOrder();
         if ((new CheckPaymentCreatedPaypalTask($this->order))->run()) {
             if ((new ProductStockManagerTask($this->order))->enoughStock()) {
                 $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_accepted']);
@@ -55,10 +55,10 @@ class LatePaymentPaypalTask
         }
     }
 
-    private function capturePaymentOrder()
+    private function autorizePaymentOrder()
     {
-        $this->capture = $this->provider->capturePaymentOrder($this->order->paypal_id);
-        $paymentId = $this->capture['purchase_units'][0]['payments']['captures'][0]['id'];
+        $autorize = $this->provider->authorizePaymentOrder($this->order->paypal_id);
+        $paymentId = $autorize['purchase_units'][0]['payments']['authorizations'][0]['id'];
         $this->order->payment_id = $paymentId;
         $this->orderService->updatePaymentId($this->order->id, $paymentId);
     }
