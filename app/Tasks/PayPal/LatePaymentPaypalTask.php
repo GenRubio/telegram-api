@@ -7,6 +7,7 @@ use App\Services\OrderService;
 use App\Tasks\Order\UpdateStatusOrderTask;
 use App\Tasks\Bot\SendPaymentErrorMessageTask;
 use App\Tasks\Product\ProductStockManagerTask;
+use App\Tasks\Bot\SendPaymentCancelMessageTask;
 use App\Tasks\Bot\SendPaymentDeniedMessageTask;
 use App\Tasks\Bot\SendSuccessPaymentMessageTask;
 use App\Tasks\PayPal\API\VoidAuthorizedPaymentTask;
@@ -35,24 +36,28 @@ class LatePaymentPaypalTask
 
     public function run()
     {
-        $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_late']);
         $this->autorizePaymentOrder();
-        if ((new CheckPaymentCreatedPaypalTask($this->order))->run()) {
-            if ((new ProductStockManagerTask($this->order->orderProducts))->enoughStock()) {
-                $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_accepted']);
-                $this->removeStock();
-                (new CaptureAuthorizedPaymentPaypalTask($this->order))->run();
-                $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_completed']);
-                (new SendSuccessPaymentMessageTask($this->order))->run();
-            } else {
-                (new VoidAuthorizedPaymentTask($this->order))->run();
-                $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_denied']);
-                (new SendPaymentDeniedMessageTask($this->order))->run();
-            }
-        } else {
-            $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_denied']);
-            (new SendPaymentErrorMessageTask($this->order))->run();
-        }
+        (new VoidAuthorizedPaymentTask($this->order))->run();
+        (new SendPaymentErrorMessageTask($this->order))->run();
+        (new SendPaymentCancelMessageTask($this->order))->run();
+        //$this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_late']);
+        //$this->autorizePaymentOrder();
+        //if ((new CheckPaymentCreatedPaypalTask($this->order))->run()) {
+        //    if ((new ProductStockManagerTask($this->order->orderProducts))->enoughStock()) {
+        //        $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_accepted']);
+        //        $this->removeStock();
+        //        (new CaptureAuthorizedPaymentPaypalTask($this->order))->run();
+        //        $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_completed']);
+        //        (new SendSuccessPaymentMessageTask($this->order))->run();
+        //    } else {
+        //        (new VoidAuthorizedPaymentTask($this->order))->run();
+        //        $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_denied']);
+        //        (new SendPaymentDeniedMessageTask($this->order))->run();
+        //    }
+        //} else {
+        //    $this->updateStatus(OrderStatusEnum::STATUS_IDS['payment_denied']);
+        //    (new SendPaymentErrorMessageTask($this->order))->run();
+        //}
     }
 
     private function autorizePaymentOrder()
