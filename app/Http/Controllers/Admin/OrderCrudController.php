@@ -93,6 +93,7 @@ class OrderCrudController extends CrudController
             $retriveOrder = (new GetRetrieveStripeTask($this->crud->getCurrentEntry()->stripe_id))->run();
         } else {
             $retriveOrder = (new GetRetrieveOrderPaypalTask($this->crud->getCurrentEntry()))->run();
+            dd($retriveOrder);
             if ($this->crud->getCurrentEntry()->payment_id) {
                 $retrivePayment = (new GetRetrievePaymentPaypalTask($this->crud->getCurrentEntry()))->run();
             }
