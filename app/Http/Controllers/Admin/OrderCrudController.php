@@ -95,7 +95,6 @@ class OrderCrudController extends CrudController
             $payment_payment_status = $retriveOrder->payment_status;
         }
         else{
-            dd($this->crud->getCurrentEntry());
             $retriveOrder = (new GetRetrieveOrderPaypalTask($this->crud->getCurrentEntry()))->run();
             if ($this->crud->getCurrentEntry()->payment_id) {
                 $retrivePayment = (new GetRetrievePaymentPaypalTask($this->crud->getCurrentEntry()))->run();
