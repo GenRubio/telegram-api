@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use App\Tasks\PayPal\API\GetRetrievePaymentPaypalTask;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Exception;
 
 class OrderCrudController extends CrudController
 {
@@ -89,17 +90,20 @@ class OrderCrudController extends CrudController
         $retrivePayment = null;
         $payment_order_status = null;
         $payment_payment_status = null;
-        if ($this->crud->getCurrentEntry()->payment_method == 'stripe'){
+        if ($this->crud->getCurrentEntry()->payment_method == 'stripe') {
             $retriveOrder = (new GetRetrieveStripeTask($this->crud->getCurrentEntry()->stripe_id))->run();
             $payment_order_status = $retriveOrder->status;
             $payment_payment_status = $retriveOrder->payment_status;
-        }
-        else{
+        } else {
             $retriveOrder = (new GetRetrieveOrderPaypalTask($this->crud->getCurrentEntry()))->run();
             if ($this->crud->getCurrentEntry()->payment_id) {
                 $retrivePayment = (new GetRetrievePaymentPaypalTask($this->crud->getCurrentEntry()))->run();
             }
-            $payment_order_status = $retriveOrder['status'];
+            try {
+                $payment_order_status = $retriveOrder['status'];
+            } catch (Exception $e) {
+                $payment_order_status = 'EXPIRED';
+            }
             $payment_payment_status = $retrivePayment ? $retrivePayment->status : 'Pendiente de pago';
         }
         $this->crud->addFields([
