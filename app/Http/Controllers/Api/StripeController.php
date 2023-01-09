@@ -18,7 +18,6 @@ use App\Tasks\Bot\SendPaymentErrorMessageTask;
 use App\Tasks\Bot\SendPaymentCancelMessageTask;
 use App\Tasks\Stripe\ValidatePaymentStripeTask;
 use App\Tasks\Bot\SendSuccessPaymentMessageTask;
-use App\Tasks\Bot\SendPaymentUrlCancelMessageTask;
 
 class StripeController extends Controller
 {
@@ -59,7 +58,7 @@ class StripeController extends Controller
             if (is_null($order)) {
                 $order = (new OrderService())->getByReference($reference);
                 if (!is_null($order)) {
-                    (new SendPaymentUrlCancelMessageTask($order))->run();
+                    return Redirect::to($order->bot()->bot_url);
                 } else {
                     throw new GenericException("Order not found");
                 }

@@ -7,10 +7,13 @@ use App\Http\Requests\OrderRequest;
 use App\Tasks\Order\CancelOrderTask;
 use App\Tasks\Order\UpdateStatusOrderTask;
 use App\Tasks\Bot\SendOrderSentMessageTask;
+use App\Tasks\Stripe\GetRetrieveStripeTask;
 use App\Tasks\Bot\SendOrderCancelMessageTask;
 use App\Tasks\Bot\SendOrderDeliveredMessageTask;
 use App\Tasks\Bot\SendTrackingNumberMessageTask;
+use App\Tasks\PayPal\GetRetrieveOrderPaypalTask;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
+use App\Tasks\PayPal\API\GetRetrievePaymentPaypalTask;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -82,6 +85,16 @@ class OrderCrudController extends CrudController
     {
         CRUD::setValidation(OrderRequest::class);
         $clientLanguage = $this->crud->getCurrentEntry()->bot()->language->name;
+        $retriveOrder = null;
+        $retrivePayment = null;
+        if ($this->crud->getCurrentEntry()->payment_method == 'stripe') {
+            $retriveOrder = (new GetRetrieveStripeTask($this->crud->getCurrentEntry()->stripe_id))->run();
+        } else {
+            $retriveOrder = (new GetRetrieveOrderPaypalTask($this->crud->getCurrentEntry()))->run();
+            if ($this->crud->getCurrentEntry()->payment_id) {
+                $retrivePayment = (new GetRetrievePaymentPaypalTask($this->crud->getCurrentEntry()))->run();
+            }
+        }
         $this->crud->addFields([
             [
                 'name' => 'reference',
@@ -227,6 +240,28 @@ class OrderCrudController extends CrudController
                 'label' => 'Url pago paypal (test)',
                 'type' => 'text',
                 'value' => 'https://www.sandbox.paypal.com/checkoutnow?token=' . $this->crud->getCurrentEntry()->paypal_id,
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                ],
+                'tab' => 'Pago'
+            ],
+            [
+                'name' => 'payment_order_status',
+                'label' => 'Estado de pedido',
+                'type' => 'text',
+                'value' => $this->crud->getCurrentEntry()->payment_method == 'stripe' ? $retriveOrder->status : $retriveOrder['status'],
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                ],
+                'tab' => 'Pago'
+            ],
+            [
+                'name' => 'payment_payment_status',
+                'label' => 'Estado de pago',
+                'type' => 'text',
+                'value' => $this->crud->getCurrentEntry()->payment_method == 'stripe' ? $retriveOrder->payment_status : ($retrivePayment ? $retrivePayment->status : 'Pendiente de pago'),
                 'attributes' => [
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
