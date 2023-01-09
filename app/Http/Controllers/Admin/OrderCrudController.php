@@ -87,6 +87,8 @@ class OrderCrudController extends CrudController
         $clientLanguage = $this->crud->getCurrentEntry()->bot()->language->name;
         $retriveOrder = null;
         $retrivePayment = null;
+        $payment_order_status = null;
+        $payment_payment_status = null;
         if ($this->crud->getCurrentEntry()->payment_method == 'stripe') {
             $retriveOrder = (new GetRetrieveStripeTask($this->crud->getCurrentEntry()->stripe_id))->run();
         } else {
@@ -94,6 +96,14 @@ class OrderCrudController extends CrudController
             if ($this->crud->getCurrentEntry()->payment_id) {
                 $retrivePayment = (new GetRetrievePaymentPaypalTask($this->crud->getCurrentEntry()))->run();
             }
+        }
+        if ($this->crud->getCurrentEntry()->payment_method == 'stripe'){
+            $payment_order_status = $retriveOrder->status;
+            $payment_payment_status = $retriveOrder->payment_status;
+        }
+        else{
+            $payment_order_status = $retriveOrder['status'];
+            $payment_payment_status = $retrivePayment ? $retrivePayment->status : 'Pendiente de pago';
         }
         $this->crud->addFields([
             [
@@ -250,7 +260,7 @@ class OrderCrudController extends CrudController
                 'name' => 'payment_order_status',
                 'label' => 'Estado de pedido',
                 'type' => 'text',
-                'value' => $this->crud->getCurrentEntry()->payment_method == 'stripe' ? $retriveOrder->status : $retriveOrder['status'],
+                'value' => $payment_order_status,
                 'attributes' => [
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
@@ -261,7 +271,7 @@ class OrderCrudController extends CrudController
                 'name' => 'payment_payment_status',
                 'label' => 'Estado de pago',
                 'type' => 'text',
-                'value' => $this->crud->getCurrentEntry()->payment_method == 'stripe' ? $retriveOrder->payment_status : ($retrivePayment ? $retrivePayment->status : 'Pendiente de pago'),
+                'value' => $payment_payment_status,
                 'attributes' => [
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
