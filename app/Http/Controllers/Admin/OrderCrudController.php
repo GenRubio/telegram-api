@@ -89,20 +89,17 @@ class OrderCrudController extends CrudController
         $retrivePayment = null;
         $payment_order_status = null;
         $payment_payment_status = null;
-        if ($this->crud->getCurrentEntry()->payment_method == 'stripe') {
-            $retriveOrder = (new GetRetrieveStripeTask($this->crud->getCurrentEntry()->stripe_id))->run();
-        } else {
-            $retriveOrder = (new GetRetrieveOrderPaypalTask($this->crud->getCurrentEntry()))->run();
-            dd($retriveOrder);
-            if ($this->crud->getCurrentEntry()->payment_id) {
-                $retrivePayment = (new GetRetrievePaymentPaypalTask($this->crud->getCurrentEntry()))->run();
-            }
-        }
         if ($this->crud->getCurrentEntry()->payment_method == 'stripe'){
+            $retriveOrder = (new GetRetrieveStripeTask($this->crud->getCurrentEntry()->stripe_id))->run();
             $payment_order_status = $retriveOrder->status;
             $payment_payment_status = $retriveOrder->payment_status;
         }
         else{
+            dd($this->crud->getCurrentEntry());
+            $retriveOrder = (new GetRetrieveOrderPaypalTask($this->crud->getCurrentEntry()))->run();
+            if ($this->crud->getCurrentEntry()->payment_id) {
+                $retrivePayment = (new GetRetrievePaymentPaypalTask($this->crud->getCurrentEntry()))->run();
+            }
             $payment_order_status = $retriveOrder['status'];
             $payment_payment_status = $retrivePayment ? $retrivePayment->status : 'Pendiente de pago';
         }
