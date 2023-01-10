@@ -595,6 +595,38 @@ class OfficePermissionsTableSeeder extends Seeder
                 'created_at' => '2023-01-09 18:57:41',
                 'updated_at' => '2023-01-09 18:57:41',
             ),
+            72 => 
+            array (
+                'id' => 73,
+                'crud_controller' => 'TelegraphChatCrudController',
+                'name' => 'show',
+                'created_at' => '2023-01-10 06:40:56',
+                'updated_at' => '2023-01-10 06:40:56',
+            ),
+            73 => 
+            array (
+                'id' => 74,
+                'crud_controller' => 'TelegraphChatCrudController',
+                'name' => 'create',
+                'created_at' => '2023-01-10 06:40:56',
+                'updated_at' => '2023-01-10 06:40:56',
+            ),
+            74 => 
+            array (
+                'id' => 75,
+                'crud_controller' => 'TelegraphChatCrudController',
+                'name' => 'update',
+                'created_at' => '2023-01-10 06:40:56',
+                'updated_at' => '2023-01-10 06:40:56',
+            ),
+            75 => 
+            array (
+                'id' => 76,
+                'crud_controller' => 'TelegraphChatCrudController',
+                'name' => 'delete',
+                'created_at' => '2023-01-10 06:40:56',
+                'updated_at' => '2023-01-10 06:40:56',
+            ),
         ));
         
         

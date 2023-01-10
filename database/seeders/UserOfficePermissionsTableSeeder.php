@@ -755,6 +755,14 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            92 => 
+            array (
+                'id' => 119,
+                'user_id' => 1,
+                'office_permission_id' => 73,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
         ));
         
         
