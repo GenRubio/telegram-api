@@ -57,6 +57,11 @@ class BotCrudController extends CrudController
             'label' => 'WebHook',
             'type'  => 'check',
         ]);
+        $this->crud->addColumn([
+            'name' => 'count_telegram_chats',
+            'label' => 'Chats',
+            'type'  => 'text',
+        ]);
     }
 
     protected function setupCreateOperation()

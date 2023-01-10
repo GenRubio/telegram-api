@@ -61,6 +61,11 @@ class Bot extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getCountTelegramChatsAttribute()
+    {
+        return count($this->telegramChats);
+    }
+
     public function getLanguageNameAttribute()
     {
         return $this->language->name;
