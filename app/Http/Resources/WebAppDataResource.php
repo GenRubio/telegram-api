@@ -147,7 +147,7 @@ class WebAppDataResource extends JsonResource
                 'reference' => $flavor->reference,
                 'name' => $flavor->name,
                 'image' => url($flavor->image),
-                'stock' => $flavor->stock, //$flavor->stock - $flavor->stock_bloqued
+                'stock' => $flavor->stock - $flavor->stock_bloqued,
             ];
         }
         return $flavors;
