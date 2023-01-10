@@ -8,5 +8,5 @@ namespace App\Repositories\BotTranslation;
  */
 interface BotTranslationRepositoryInterface
 {
-    //
+    public function getByKey($key);
 }

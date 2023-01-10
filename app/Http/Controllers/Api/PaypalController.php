@@ -6,7 +6,6 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Enums\OrderStatusEnum;
 use App\Services\OrderService;
-use App\Services\SettingService;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use App\Tasks\Order\AcceptOrderTask;
@@ -51,8 +50,7 @@ class PaypalController extends Controller
                 (new SendPaymentErrorMessageTask($order))->run();
             }
         } catch (GenericException | Exception $e) {
-            $settingService = new SettingService();
-            return Redirect::to($settingService->getByKey('1671894524.6744')->value);
+            return Redirect::to(settings('1671894524.6744'));
         }
         return Redirect::to($order->bot()->bot_url);
     }
@@ -73,8 +71,7 @@ class PaypalController extends Controller
             (new CancelOrderTask($order))->run();
             (new SendPaymentCancelMessageTask($order))->run();
         } catch (GenericException | Exception $e) {
-            $settingService = new SettingService();
-            return Redirect::to($settingService->getByKey('1671894524.6744')->value);
+            return Redirect::to(settings('1671894524.6744'));
         }
         return Redirect::to($order->bot()->bot_url);
     }

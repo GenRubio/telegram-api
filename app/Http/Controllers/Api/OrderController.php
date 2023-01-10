@@ -19,7 +19,7 @@ class OrderController extends Controller
         try {
             $customer = (new CustomerService())->getByChat($request->token);
             if (is_null($customer)) {
-                throw new GenericException("User not found");
+                throw new GenericException("Ha ocurrido un error");
             }
             if (!(new ValidateAddressTask($request))->run()) {
                 throw new GenericException("No hemos podido localizar tu direccion. Requerda que solo hacemos envios a España");

@@ -4,6 +4,8 @@ use App\Helpers\AuthHelper;
 use App\Helpers\CrudHelper;
 use App\Helpers\CacheHelper;
 use App\Helpers\UtilsHelper;
+use App\Helpers\SettingsHelper;
+use App\Helpers\BotMessagesTranslationsHelper;
 
 if (!function_exists('clearCache')) {
     function clearCache()
@@ -72,5 +74,27 @@ if (!function_exists('toggleField')) {
     function toggleField($request)
     {
         return CrudHelper::toggleField($request);
+    }
+}
+
+/**
+ * SettingsHelper
+ */
+
+if (!function_exists('settings')) {
+    function settings($key)
+    {
+        return SettingsHelper::settings($key);
+    }
+}
+
+/**
+ * BotMessagesTranslationsHelper
+ */
+
+ if (!function_exists('botMessage')) {
+    function botMessage($bot, $key)
+    {
+        return BotMessagesTranslationsHelper::botMessage($bot, $key);
     }
 }

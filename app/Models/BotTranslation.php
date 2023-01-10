@@ -62,6 +62,13 @@ class BotTranslation extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getDefaultLangTextAttribute()
+    {
+        $language = Language::active()->where('default', true)->first();
+        $text = json_decode($this->attributes['text']);
+        return $text->{$language->abbr} ?? '';
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

@@ -25,12 +25,8 @@ class BotTranslationService extends Controller
         $this->bottranslationRepository = new BotTranslationRepository();
     }
 
-    /**
-     * Entry
-     */
-    public function handle()
+    public function getByKey($key)
     {
-        //
+        return $this->bottranslationRepository->getByKey($key);
     }
-
 }

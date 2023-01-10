@@ -2,30 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Language;
 use App\Http\Requests\BotTranslationRequest;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
-/**
- * Class BotTranslationCrudController
- * @package App\Http\Controllers\Admin
- * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
- */
 class BotTranslationCrudController extends CrudController
 {
     use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+        store as traitStore;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
+        update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
-    /**
-     * Configure the CrudPanel object. Apply settings to all operations.
-     * 
-     * @return void
-     */
     public function setup()
     {
         if (!backpack_user()->officePermission(get_class($this), 'show')) {
@@ -33,53 +28,98 @@ class BotTranslationCrudController extends CrudController
         }
         CRUD::setModel(\App\Models\BotTranslation::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/bot-translation');
-        CRUD::setEntityNameStrings('bot translation', 'bot translations');
+        CRUD::setEntityNameStrings('texto', 'traducciones');
     }
 
-    /**
-     * Define what happens when the List operation is loaded.
-     * 
-     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
-     * @return void
-     */
     protected function setupListOperation()
     {
         $this->removeActionsCrud();
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
+        $this->crud->addColumn([
+            'name' => 'default_lang_text',
+            'label' => 'Texto',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'key',
+            'label' => 'Key',
+            'type'  => 'text',
+        ]);
     }
 
-    /**
-     * Define what happens when the Create operation is loaded.
-     * 
-     * @see https://backpackforlaravel.com/docs/crud-operation-create
-     * @return void
-     */
     protected function setupCreateOperation()
     {
         CRUD::setValidation(BotTranslationRequest::class);
-
-        
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
+        $this->crud->addFields($this->setCreateFields());
     }
 
-    /**
-     * Define what happens when the Update operation is loaded.
-     * 
-     * @see https://backpackforlaravel.com/docs/crud-operation-update
-     * @return void
-     */
+    private function setCreateFields()
+    {
+        $laguages = Language::active()->orderBy('default', 'desc')->get();
+        $data = [];
+        $data[] = [
+            'name' => 'key',
+            'type' => 'hidden',
+        ];
+        $data[] = [
+            'name' => 'text',
+            'type' => 'hidden',
+        ];
+        foreach ($laguages as $lang) {
+            $data[] = [
+                'name' => "lang_{$lang->abbr}",
+                'label' => "Texto ({$lang->abbr})",
+                'type' => 'textarea',
+            ];
+        }
+        return $data;
+    }
+
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
+        CRUD::setValidation(BotTranslationRequest::class);
+        $this->crud->addFields($this->setUpdateFields());
+    }
+
+    private function setUpdateFields()
+    {
+        $laguages = Language::active()->orderBy('default', 'desc')->get();
+        $data = [];
+        $data[] = [
+            'name' => 'text',
+            'type' => 'hidden',
+        ];
+        foreach ($laguages as $lang) {
+            $data[] = [
+                'name' => "lang_{$lang->abbr}",
+                'label' => "Texto ({$lang->abbr})",
+                'type' => 'textarea',
+                'value' => $this->crud->getCurrentEntry()->getTextValueForInput($lang->abbr)
+            ];
+        }
+        return $data;
+    }
+
+    public function store()
+    {
+        $textData = [];
+        $laguages = Language::active()->orderBy('default', 'desc')->get();
+        foreach ($laguages as $lang){
+            $textValue = request()->input("lang_{$lang->abbr}");
+            $textData[$lang->abbr] = $textValue;
+        }
+        request()->request->set('text', json_encode($textData));
+        return $this->traitStore();
+    }
+
+    public function update()
+    {
+        $textData = [];
+        $laguages = Language::active()->orderBy('default', 'desc')->get();
+        foreach ($laguages as $lang){
+            $textValue = request()->input("lang_{$lang->abbr}");
+            $textData[$lang->abbr] = $textValue;
+        }
+        request()->request->set('text', json_encode($textData));
+        return $this->traitUpdate();
     }
 }
