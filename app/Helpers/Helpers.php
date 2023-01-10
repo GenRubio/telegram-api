@@ -87,14 +87,3 @@ if (!function_exists('settings')) {
         return SettingsHelper::settings($key);
     }
 }
-
-/**
- * BotMessagesTranslationsHelper
- */
-
- if (!function_exists('botMessage')) {
-    function botMessage($bot, $key)
-    {
-        return BotMessagesTranslationsHelper::botMessage($bot, $key);
-    }
-}
