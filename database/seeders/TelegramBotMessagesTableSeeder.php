@@ -111,26 +111,6 @@ class TelegramBotMessagesTableSeeder extends Seeder
         ),
         9 => 
         array (
-            'id' => 10,
-            'key' => '1672899914.5809',
-            'image' => NULL,
-            'message' => '{"es":"El pedido ha sido cancelado.","en":null,"ru":null}',
-            'created_at' => '2023-01-05 06:25:14',
-            'updated_at' => '2023-01-08 09:12:11',
-            'description' => 'Url pago cancelada',
-        ),
-        10 => 
-        array (
-            'id' => 11,
-            'key' => '1673016874.7175',
-            'image' => NULL,
-            'message' => '{"es":"<p>Tu pago ha sido cancelado.<\\/p><p>Pedido: <b>[reference]<\\/b>&nbsp;<\\/p><p>No disponemos de suficiente stock de productos, su pago se ha cancelado.<\\/p><p>En caso de alguna duda p\\u00f3ngase en contacto con un administrador de nuestra tienda.<\\/p><p><br><\\/p><p>Le recordamos no reutilizar las url de pago.<\\/p>","en":null,"ru":null}',
-            'created_at' => '2023-01-06 14:54:34',
-            'updated_at' => '2023-01-08 08:52:07',
-            'description' => 'Pago denegado',
-        ),
-        11 => 
-        array (
             'id' => 12,
             'key' => '1673103329.4375',
             'image' => NULL,

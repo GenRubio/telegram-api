@@ -62,7 +62,8 @@ class CreateSeeders extends Command
             'telegram_bot_groups',
             'telegram_bot_group_bot',
             'api_clients',
-            'bot_translations'
+            'bot_translations',
+            'geocoding_apis'
         ];
     }
 }

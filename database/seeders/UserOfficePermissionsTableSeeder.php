@@ -531,6 +531,230 @@ class UserOfficePermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            64 => 
+            array (
+                'id' => 91,
+                'user_id' => 1,
+                'office_permission_id' => 69,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            65 => 
+            array (
+                'id' => 92,
+                'user_id' => 1,
+                'office_permission_id' => 70,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            66 => 
+            array (
+                'id' => 93,
+                'user_id' => 1,
+                'office_permission_id' => 71,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            67 => 
+            array (
+                'id' => 94,
+                'user_id' => 1,
+                'office_permission_id' => 72,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            68 => 
+            array (
+                'id' => 95,
+                'user_id' => 2,
+                'office_permission_id' => 9,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            69 => 
+            array (
+                'id' => 96,
+                'user_id' => 2,
+                'office_permission_id' => 11,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            70 => 
+            array (
+                'id' => 97,
+                'user_id' => 2,
+                'office_permission_id' => 13,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            71 => 
+            array (
+                'id' => 98,
+                'user_id' => 2,
+                'office_permission_id' => 29,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            72 => 
+            array (
+                'id' => 99,
+                'user_id' => 2,
+                'office_permission_id' => 31,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            73 => 
+            array (
+                'id' => 100,
+                'user_id' => 2,
+                'office_permission_id' => 33,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            74 => 
+            array (
+                'id' => 101,
+                'user_id' => 2,
+                'office_permission_id' => 37,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            75 => 
+            array (
+                'id' => 102,
+                'user_id' => 2,
+                'office_permission_id' => 38,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            76 => 
+            array (
+                'id' => 103,
+                'user_id' => 2,
+                'office_permission_id' => 39,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            77 => 
+            array (
+                'id' => 104,
+                'user_id' => 2,
+                'office_permission_id' => 40,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            78 => 
+            array (
+                'id' => 105,
+                'user_id' => 2,
+                'office_permission_id' => 41,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            79 => 
+            array (
+                'id' => 106,
+                'user_id' => 2,
+                'office_permission_id' => 42,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            80 => 
+            array (
+                'id' => 107,
+                'user_id' => 2,
+                'office_permission_id' => 43,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            81 => 
+            array (
+                'id' => 108,
+                'user_id' => 2,
+                'office_permission_id' => 44,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            82 => 
+            array (
+                'id' => 109,
+                'user_id' => 2,
+                'office_permission_id' => 45,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            83 => 
+            array (
+                'id' => 110,
+                'user_id' => 2,
+                'office_permission_id' => 47,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            84 => 
+            array (
+                'id' => 111,
+                'user_id' => 2,
+                'office_permission_id' => 49,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            85 => 
+            array (
+                'id' => 112,
+                'user_id' => 2,
+                'office_permission_id' => 51,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            86 => 
+            array (
+                'id' => 113,
+                'user_id' => 2,
+                'office_permission_id' => 53,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            87 => 
+            array (
+                'id' => 114,
+                'user_id' => 2,
+                'office_permission_id' => 55,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            88 => 
+            array (
+                'id' => 115,
+                'user_id' => 2,
+                'office_permission_id' => 61,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            89 => 
+            array (
+                'id' => 116,
+                'user_id' => 2,
+                'office_permission_id' => 62,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            90 => 
+            array (
+                'id' => 117,
+                'user_id' => 2,
+                'office_permission_id' => 63,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            91 => 
+            array (
+                'id' => 118,
+                'user_id' => 2,
+                'office_permission_id' => 64,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
         ));
         
         

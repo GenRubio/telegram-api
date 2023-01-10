@@ -563,6 +563,38 @@ class OfficePermissionsTableSeeder extends Seeder
                 'created_at' => '2023-01-02 14:26:02',
                 'updated_at' => '2023-01-02 14:26:02',
             ),
+            68 => 
+            array (
+                'id' => 69,
+                'crud_controller' => 'GeocodingApiCrudController',
+                'name' => 'show',
+                'created_at' => '2023-01-09 18:57:41',
+                'updated_at' => '2023-01-09 18:57:41',
+            ),
+            69 => 
+            array (
+                'id' => 70,
+                'crud_controller' => 'GeocodingApiCrudController',
+                'name' => 'create',
+                'created_at' => '2023-01-09 18:57:41',
+                'updated_at' => '2023-01-09 18:57:41',
+            ),
+            70 => 
+            array (
+                'id' => 71,
+                'crud_controller' => 'GeocodingApiCrudController',
+                'name' => 'update',
+                'created_at' => '2023-01-09 18:57:41',
+                'updated_at' => '2023-01-09 18:57:41',
+            ),
+            71 => 
+            array (
+                'id' => 72,
+                'crud_controller' => 'GeocodingApiCrudController',
+                'name' => 'delete',
+                'created_at' => '2023-01-09 18:57:41',
+                'updated_at' => '2023-01-09 18:57:41',
+            ),
         ));
         
         

@@ -41,10 +41,10 @@ class SettingsTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'key' => '1671894524.6744',
-                'description' => 'Url Bot Telegram',
+                'description' => 'Url Grupo de tienda',
                 'value' => 'https://t.me/HQTStoreBot',
                 'created_at' => '2022-12-24 15:08:44',
-                'updated_at' => '2022-12-24 15:08:44',
+                'updated_at' => '2023-01-09 06:44:23',
             ),
             3 => 
             array (
