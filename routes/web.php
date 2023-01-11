@@ -29,6 +29,7 @@ Route::get('webapp/{chat}', function () {
 
 Route::prefix('api')->group(function () {
     Route::get('products', [GetProductsController::class, 'index']);
+    Route::get('order/{reference}', [OrderController::class, 'getOrder']);
     Route::post('new-order', [OrderController::class, 'createOrder']);
     Route::prefix('payment')->group(function () {
         Route::get('/{reference}', [PaymentController::class, 'payment'])

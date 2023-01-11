@@ -32,7 +32,7 @@ class SendStartMessageTask
                 ->html($this->telegramBotMessage->getLangMessage($this->chat->bot->id))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make('Productos')->webApp($this->clientApiUrl)
+                        Button::make('TIENDA')->webApp($this->clientApiUrl)
                     ]);
                 })
                 ->protected()
@@ -42,7 +42,7 @@ class SendStartMessageTask
                 ->html($this->telegramBotMessage->getLangMessage($this->chat->bot->id))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make('Productos')->webApp($this->clientApiUrl)
+                        Button::make('TIENDA')->webApp($this->clientApiUrl)
                     ]);
                 })
                 ->protected()
