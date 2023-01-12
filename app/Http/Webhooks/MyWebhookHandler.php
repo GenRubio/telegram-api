@@ -14,7 +14,7 @@ class MyWebhookHandler extends WebhookHandler
     public function start()
     {
         try{
-            $reference = $this->data->get('reference');
+            $reference = $this->request->reference;
             BotChat::where('chat_id', $this->chat->chat_id)
             ->update([
                 'reference' => $reference
