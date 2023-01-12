@@ -78,6 +78,7 @@ class WebAppDataResource extends JsonResource
             'image' => url($product->image),
             'price' => $product->price,
             'discount' => $product->discount,
+            'brand' => $product->productBrand->name,
             'description' => [
                 'data' => [
                     [

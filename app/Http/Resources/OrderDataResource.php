@@ -62,6 +62,7 @@ class OrderDataResource extends JsonResource
                 'image' => url($product->productModelsFlavor->image),
                 'model' => $product->productModel->name,
                 'flavor' => $product->productModelsFlavor->name,
+                'brand' => $product->productModel->productBrand->name,
                 'amount' => $product->amount,
             ];
         }
