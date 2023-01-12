@@ -14,10 +14,10 @@ class MyWebhookHandler extends WebhookHandler
     public function start()
     {
         try{
-            //$reference = $this->request->reference;
+            $reference = $this->data->reference;
             BotChat::where('chat_id', $this->chat->chat_id)
             ->update([
-                'reference' => "23"
+                'reference' => $reference
             ]);
         }
         catch(Exception $e){
