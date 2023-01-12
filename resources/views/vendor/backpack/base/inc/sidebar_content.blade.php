@@ -71,6 +71,7 @@
    @endif
    @if(backpack_user()->officePermission('SettingCrudController', 'show'))
    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('setting') }}"><i class="nav-icon la la-question"></i> Configuración</a></li>
+   <li class="nav-item"><a class="nav-link" href="{{ backpack_url('elfinder') }}"><i class="nav-icon la la-files-o"></i> Elfinder</a></li>
    @endif
 @endif
 @if(backpack_user()->officePermission('UserCrudController', 'show')
