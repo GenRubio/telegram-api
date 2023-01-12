@@ -63,6 +63,11 @@ class TelegraphChatCrudController extends CrudController
             'label' => 'Nombre',
             'type'  => 'text',
         ]);
+        $this->crud->addColumn([
+            'name' => 'reference',
+            'label' => 'Referencia',
+            'type'  => 'text',
+        ]);
     }
 
     protected function setupCreateOperation()
