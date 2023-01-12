@@ -11,10 +11,9 @@ use Exception;
 
 class MyWebhookHandler extends WebhookHandler
 {
-    public function start()
+    public function start($reference = null)
     {
         try{
-            $reference = $this->data->reference;
             BotChat::where('chat_id', $this->chat->chat_id)
             ->update([
                 'reference' => $reference
