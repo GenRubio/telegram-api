@@ -59,7 +59,7 @@ return [
             'strict' => true,
             'engine' => null,
             'dump' => [
-                'dump_binary_path' => 'D:/xampp2/mysql/bin/',
+                'dump_binary_path' => env('DB_DUMP_BINARY_PATH'),
                 'use_single_transaction',
                 'timeout' => 60 * 5,
             ],
