@@ -14,30 +14,17 @@ use App\Http\Webhooks\Bot\v2\Bot\ActionSetLanguage;
 
 class MyWebhookHandler extends WebhookHandler
 {
-    //use ActionSetLanguage;
+    use ActionSetLanguage;
 
     //$reference = null
     public function start()
     {
-        $this->chat
-        ->html("hola")
-        //->keyboard(function (Keyboard $keyboard) {
-        //    foreach ($this->languages as $language) {
-        //        $keyboard
-        //            ->button($language->native)
-        //            ->action('actionSetLaguage')
-        //            ->param('parameter', $language->id);
-        //    }
-        //    return $keyboard;
-        //})
-        ->protected()
-        ->send();
-        //$botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
-        //if ($botChat->language) {
-        //    (new SendStartMessageTask($this->chat))->run();
-        //} else {
-        //    (new SendLanguageMessageTask($this->chat))->run();
-        //}
+        $botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
+        if ($botChat->language) {
+            (new SendStartMessageTask($this->chat))->run();
+        } else {
+            (new SendLanguageMessageTask($this->chat))->run();
+        }
         //https://t.me/HQDTiendaProdEsBot?start=3245435
         //try {
         //    BotChat::where('chat_id', $this->chat->chat_id)
