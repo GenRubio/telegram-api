@@ -14,9 +14,10 @@ use App\Http\Webhooks\Bot\v2\Bot\ActionSetLanguage;
 
 class MyWebhookHandler extends WebhookHandler
 {
-    use ActionSetLanguage;
+    //use ActionSetLanguage;
 
-    public function start($reference = null)
+    //$reference = null
+    public function start()
     {
         $this->chat
         ->html("hola")
