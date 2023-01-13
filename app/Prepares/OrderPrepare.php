@@ -48,11 +48,11 @@ class OrderPrepare
         foreach ($this->products as $item) {
             $productData = (object)$item['product'];
             $productModel = $this->productModelService->getByReference($productData->reference);
-            $productDiscount = 0;
-            if (!is_null($productModel->discount) && $productModel->discount > 0){
-                $productDiscount = ($productModel->price * $productModel->discount / 100);
+            if ($productModel->price != $productModel->price_with_discount) {
+                $price += $productModel->price_with_discount * $item['amount'];
+            } else {
+                $price += $productModel->price * $item['amount'];
             }
-            $price += ($productModel->price - $productDiscount) * $item['amount'];
         }
         return $price;
     }

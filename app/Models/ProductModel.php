@@ -82,6 +82,15 @@ class ProductModel extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getPriceWithDiscountAttribute()
+    {
+        if ($this->discount && $this->discount > 0) {
+            $productDiscount = ($this->price * $this->discount / 100);
+            return $this->price - $productDiscount;
+        }
+        return $this->price;
+    }
+
     public function getProductBrandNameAttribute()
     {
         return $this->productBrand->name;
