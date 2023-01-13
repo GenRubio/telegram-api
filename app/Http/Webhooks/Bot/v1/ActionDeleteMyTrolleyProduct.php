@@ -1,6 +1,6 @@
 <?php
 
-namespace App\v1\Bot;
+namespace App\Http\Webhooks\Bot\v1\Bot;
 
 use App\Utils\UserTrolleyUtil;
 use Illuminate\Support\Facades\Storage;
