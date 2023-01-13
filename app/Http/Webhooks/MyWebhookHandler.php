@@ -21,17 +21,9 @@ class MyWebhookHandler extends WebhookHandler
     {
         $botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
         if ($botChat->language) {
-            $this->chat
-                ->html("test")
-                ->protected()
-                ->send();
-            //(new SendStartMessageTask($this->chat))->run();
+            (new SendStartMessageTask($this->chat))->run();
         } else {
-            $this->chat
-                ->html("hola")
-                ->protected()
-                ->send();
-            //(new SendLanguageMessageTask($this->chat))->run();
+            (new SendLanguageMessageTask($this->chat))->run();
         }
         //https://t.me/HQDTiendaProdEsBot?start=3245435
         //try {
