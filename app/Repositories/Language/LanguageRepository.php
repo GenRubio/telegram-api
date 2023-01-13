@@ -36,4 +36,19 @@ class LanguageRepository extends Repository implements LanguageRepositoryInterfa
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;
     }
+
+    public function getAllActive()
+    {
+        return $this->model->where('active', true)->get();
+    }
+
+    public function getById($id)
+    {
+        return $this->model->where('id', $id)->first();
+    }
+
+    public function getByAbbr($abbr)
+    {
+        return $this->model->where('abbr', $abbr)->first();
+    }
 }

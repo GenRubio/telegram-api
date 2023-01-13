@@ -25,12 +25,18 @@ class LanguageService extends Controller
         $this->languageRepository = new LanguageRepository();
     }
 
-    /**
-     * Entry
-     */
-    public function handle()
+    public function getAllActive()
     {
-        //
+        return $this->languageRepository->getAllActive();
     }
 
+    public function getById($id)
+    {
+        return $this->languageRepository->getById($id);
+    }
+
+    public function getByAbbr($abbr)
+    {
+        return $this->languageRepository->getByAbbr($abbr);
+    }
 }

@@ -22,7 +22,8 @@ class BotChat extends Model
         'chat_id',
         'name',
         'telegraph_bot_id',
-        'reference'
+        'reference',
+        'language_id'
     ];
     // protected $hidden = [];
     // protected $dates = [];
@@ -41,6 +42,11 @@ class BotChat extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function language()
+    {
+        return $this->hasOne(Language::class, 'id', 'language_id');
+    }
 
     /*
     |--------------------------------------------------------------------------
