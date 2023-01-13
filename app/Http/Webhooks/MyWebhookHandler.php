@@ -23,7 +23,11 @@ class MyWebhookHandler extends WebhookHandler
         if ($botChat->language) {
             (new SendStartMessageTask($this->chat))->run();
         } else {
-            (new SendLanguageMessageTask($this->chat))->run();
+            $this->chat
+                ->html("hola")
+                ->protected()
+                ->send();
+            //(new SendLanguageMessageTask($this->chat))->run();
         }
         //https://t.me/HQDTiendaProdEsBot?start=3245435
         //try {
