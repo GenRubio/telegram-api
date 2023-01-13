@@ -18,6 +18,19 @@ class MyWebhookHandler extends WebhookHandler
 
     public function start($reference = null)
     {
+        $this->chat
+        ->html("hola")
+        //->keyboard(function (Keyboard $keyboard) {
+        //    foreach ($this->languages as $language) {
+        //        $keyboard
+        //            ->button($language->native)
+        //            ->action('actionSetLaguage')
+        //            ->param('parameter', $language->id);
+        //    }
+        //    return $keyboard;
+        //})
+        ->protected()
+        ->send();
         $botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
         if ($botChat->language) {
             (new SendStartMessageTask($this->chat))->run();
@@ -25,12 +38,12 @@ class MyWebhookHandler extends WebhookHandler
             (new SendLanguageMessageTask($this->chat))->run();
         }
         //https://t.me/HQDTiendaProdEsBot?start=3245435
-        try {
-            BotChat::where('chat_id', $this->chat->chat_id)
-                ->update([
-                    'reference' => $reference
-                ]);
-        } catch (Exception $e) {
-        }
+        //try {
+        //    BotChat::where('chat_id', $this->chat->chat_id)
+        //        ->update([
+        //            'reference' => $reference
+        //        ]);
+        //} catch (Exception $e) {
+        //}
     }
 }
