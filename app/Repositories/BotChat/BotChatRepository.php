@@ -41,4 +41,10 @@ class BotChatRepository extends Repository implements BotChatRepositoryInterface
     {
         return $this->model->where('chat_id', $id)->first();
     }
+
+    public function update($chatId, $data)
+    {
+        $this->model->where('chat_id', $chatId)
+            ->update($data);
+    }
 }

@@ -29,4 +29,9 @@ class BotChatService extends Controller
     {
         return $this->botchatRepository->getByChatId($id);
     }
+
+    public function update($chatId, $data)
+    {
+        $this->botchatRepository->update($chatId, $data);
+    }
 }

@@ -36,9 +36,14 @@ class MyWebhookHandler extends WebhookHandler
     public function actionSetLaguage()
     {
         $parameter = $this->data->get('parameter');
+        $botChatService = new BotChatService();
         $language = (new LanguageService())->getById($parameter);
         if (!is_null($language)){
+            $botChatService->update($this->chat->chat_id, [
+                'language_id' => $language->id
+            ]);
             $this->chat->deleteMessage($this->messageId)->send();
+            (new SendStartMessageTask($this->chat))->run();
         }
     }
 }
