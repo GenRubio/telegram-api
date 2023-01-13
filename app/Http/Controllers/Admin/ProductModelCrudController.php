@@ -48,8 +48,18 @@ class ProductModelCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
+            'name' => 'total_price_backpack',
+            'label' => 'Precio total',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'price_backpack',
             'label' => 'Precio',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'discount_backpack',
+            'label' => 'Descuento',
             'type'  => 'text',
         ]);
         $this->crud->addColumn([

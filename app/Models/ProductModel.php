@@ -91,6 +91,16 @@ class ProductModel extends Model
         return $this->price;
     }
 
+    public function getDiscountBackpackAttribute()
+    {
+        return $this->discount . ' %';
+    }
+
+    public function getTotalPriceBackpackAttribute()
+    {
+        return $this->price_with_discount . ' €';
+    }
+
     public function getProductBrandNameAttribute()
     {
         return $this->productBrand->name;
