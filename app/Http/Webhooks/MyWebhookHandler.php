@@ -5,6 +5,7 @@ namespace App\Http\Webhooks;
 use Exception;
 use App\Models\BotChat;
 use App\Services\BotChatService;
+use App\Services\LanguageService;
 use App\Tasks\Bot\SendStartMessageTask;
 use DefStudio\Telegraph\Keyboard\Button;
 use App\Tasks\Bot\SendLanguageMessageTask;
@@ -35,5 +36,9 @@ class MyWebhookHandler extends WebhookHandler
     public function actionSetLaguage()
     {
         $parameter = $this->data->get('parameter');
+        $language = (new LanguageService())->getById($parameter);
+        if (!is_null($language)){
+            $this->chat->deleteMessage($this->message->id)->send();
+        }
     }
 }
