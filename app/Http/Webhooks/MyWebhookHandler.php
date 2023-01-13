@@ -14,7 +14,7 @@ use App\Http\Webhooks\Bot\v2\Bot\ActionSetLanguage;
 
 class MyWebhookHandler extends WebhookHandler
 {
-    use ActionSetLanguage;
+    //use ActionSetLanguage;
 
     //$reference = null
     public function start()
