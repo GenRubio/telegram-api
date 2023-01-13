@@ -35,6 +35,7 @@ class SendLanguageMessageTask
                         ->action('actionSetLaguage')
                         ->param('parameter', $language->id);
                 }
+                return $keyboard;
             })
             ->protected()
             ->send();
