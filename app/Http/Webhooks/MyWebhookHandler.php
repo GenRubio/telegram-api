@@ -10,12 +10,9 @@ use DefStudio\Telegraph\Keyboard\Button;
 use App\Tasks\Bot\SendLanguageMessageTask;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
-use App\Http\Webhooks\Bot\v2\Bot\ActionSetLanguage;
 
 class MyWebhookHandler extends WebhookHandler
 {
-    //use ActionSetLanguage;
-
     //$reference = null
     public function start()
     {
@@ -33,5 +30,10 @@ class MyWebhookHandler extends WebhookHandler
         //        ]);
         //} catch (Exception $e) {
         //}
+    }
+
+    public function actionSetLaguage()
+    {
+        $parameter = $this->data->get('parameter');
     }
 }
