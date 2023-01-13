@@ -10,22 +10,18 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class WebAppDataResource extends JsonResource
 {
     private $products;
-    private $botService;
-    private $bot;
     private $translationService;
     private $translations;
     private $language;
     private $settingService;
     private $settings;
 
-    public function __construct($products, $botId)
+    public function __construct($products, $chat)
     {
         $this->products = $products;
-        $this->botService = new BotService();
-        $this->bot = $this->botService->getById($botId);
         $this->translationService = new TranslationService();
         $this->translations = $this->translationService->getAll();
-        $this->language = $this->bot->language;
+        $this->language = $chat->language->abbr;
         $this->settingService = new SettingService();
         $this->settings = $this->settingService->getAll();
     }
@@ -158,7 +154,7 @@ class WebAppDataResource extends JsonResource
     private function getTranslationByUuid($uuid)
     {
         $translation = $this->translations->where('uuid', $uuid)->first();
-        return $translation->langText($this->language->abbr);
+        return $translation->langText($this->language);
     }
 
     private function formatLangText($uuid, $text)
