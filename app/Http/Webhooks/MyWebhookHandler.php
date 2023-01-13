@@ -40,7 +40,7 @@ class MyWebhookHandler extends WebhookHandler
         if (!is_null($language)){
             //$this->chat->deleteMessage($this->message->id)->send();
             $this->chat
-            ->html($this->message->id)
+            ->html($this->messageId)
             ->protected()
             ->send();
         }
