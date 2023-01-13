@@ -28,15 +28,15 @@ class SendLanguageMessageTask
     {
         $this->chat
             ->html($this->telegramBotMessage->getLangMessage("en"))
-            ->keyboard(function (Keyboard $keyboard) {
-                foreach ($this->languages as $language) {
-                    $keyboard
-                        ->button($language->native)
-                        ->action('actionSetLaguage')
-                        ->param('parameter', $language->id);
-                }
-                return $keyboard;
-            })
+            //->keyboard(function (Keyboard $keyboard) {
+            //    foreach ($this->languages as $language) {
+            //        $keyboard
+            //            ->button($language->native)
+            //            ->action('actionSetLaguage')
+            //            ->param('parameter', $language->id);
+            //    }
+            //    return $keyboard;
+            //})
             ->protected()
             ->send();
     }
