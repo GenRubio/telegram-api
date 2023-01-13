@@ -38,7 +38,11 @@ class MyWebhookHandler extends WebhookHandler
         $parameter = $this->data->get('parameter');
         $language = (new LanguageService())->getById($parameter);
         if (!is_null($language)){
-            $this->chat->deleteMessage($this->message->id)->send();
+            //$this->chat->deleteMessage($this->message->id)->send();
+            $this->chat
+            ->html("hola")
+            ->protected()
+            ->send();
         }
     }
 }
