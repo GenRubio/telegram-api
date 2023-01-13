@@ -12,7 +12,6 @@ class SendTrackingNumberMessageTask
     private $telegramBotMessageService;
     private $key;
     private $telegramBotMessage;
-    private $botId;
     private $message;
 
     public function __construct($order)
@@ -21,8 +20,8 @@ class SendTrackingNumberMessageTask
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672062471.687';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
-        $this->botId = $this->order->telegraphChat->bot->id;
-        $this->message = $this->telegramBotMessage->getLangMessage($this->botId);
+
+        $this->message = $this->telegramBotMessage->getLangMessage($this->order->telegraphChat->language->abbr);
         $this->preparedMessage();
     }
 

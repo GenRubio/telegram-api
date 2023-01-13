@@ -10,7 +10,6 @@ class SendOrderSentMessageTask
     private $telegramBotMessageService;
     private $key;
     private $telegramBotMessage;
-    private $botId;
     private $message;
 
     public function __construct($order)
@@ -19,8 +18,7 @@ class SendOrderSentMessageTask
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672062424.6009';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
-        $this->botId = $this->order->telegraphChat->bot->id;
-        $this->message = $this->telegramBotMessage->getLangMessage($this->botId);
+        $this->message = $this->telegramBotMessage->getLangMessage($this->order->telegraphChat->language->abbr);
         $this->preparedMessage();
     }
 

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Services\BotService;
 use Illuminate\Database\Eloquent\Model;
-use DefStudio\Telegraph\Models\TelegraphChat;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class Order extends Model
@@ -74,7 +73,7 @@ class Order extends Model
 
     public function telegraphChat()
     {
-        return $this->hasOne(TelegraphChat::class, 'chat_id', 'chat_id');
+        return $this->hasOne(BotChat::class, 'chat_id', 'chat_id');
     }
 
     public function orderHistoryStates()

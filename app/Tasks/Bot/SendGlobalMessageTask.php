@@ -19,9 +19,9 @@ class SendGlobalMessageTask
     public function run()
     {
         foreach ($this->message->telegramBotGroup->bots as $bot) {
-            $langMessage = $this->message->getLangMessage($bot->id);
             foreach ($bot->telegramChats as $chat) {
                 try {
+                    $langMessage = $this->message->getLangMessage($chat->language->abbr);
                     $clientApiUrl = (new GetApiClientTask($chat->chat_id))->run();
                     $this->sendMessageToChat($chat, $langMessage, $clientApiUrl);
                 } catch (Exception $e) {
