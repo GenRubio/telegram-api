@@ -10,6 +10,7 @@ use App\Tasks\Bot\SendStartMessageTask;
 use DefStudio\Telegraph\Keyboard\Button;
 use App\Tasks\Bot\SendLanguageMessageTask;
 use DefStudio\Telegraph\Keyboard\Keyboard;
+use App\Tasks\Bot\SendNewLanguageMessageTask;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 
 class MyWebhookHandler extends WebhookHandler
@@ -33,12 +34,17 @@ class MyWebhookHandler extends WebhookHandler
         //}
     }
 
+    public function language()
+    {
+        (new SendNewLanguageMessageTask($this->chat))->run();
+    }
+
     public function actionSetLaguage()
     {
         $parameter = $this->data->get('parameter');
         $botChatService = new BotChatService();
         $language = (new LanguageService())->getById($parameter);
-        if (!is_null($language)){
+        if (!is_null($language)) {
             $botChatService->update($this->chat->chat_id, [
                 'language_id' => $language->id
             ]);
