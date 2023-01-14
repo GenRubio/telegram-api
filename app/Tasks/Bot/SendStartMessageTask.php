@@ -30,7 +30,7 @@ class SendStartMessageTask
     public function run()
     {
         if (!empty($this->telegramBotMessage->image)) {
-            $chatMessage = $this->chat
+            $this->chat
                 ->photo(public_path($this->telegramBotMessage->image))
                 ->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
                 ->keyboard(function (Keyboard $keyboard) {
@@ -39,10 +39,11 @@ class SendStartMessageTask
                     ]);
                 })
                 ->protected()
-                ->send();
+                ->send()
+                ->dd();
             //$this->chat->pinMessage($chatMessage->messageId)->send();
         } else {
-            $chatMessage = $this->chat
+            $this->chat
                 ->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
