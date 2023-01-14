@@ -47,7 +47,7 @@ class SendStartMessageTask
             }
             catch(Exception $e){
                 //$response->result->message_id
-                $this->chat->html("Error")->send();
+                $this->chat->html($e->getMessage())->send();
             }
 
             //$this->chat->html($response->result->message_id)->send();
