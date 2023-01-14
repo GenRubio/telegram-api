@@ -23,7 +23,6 @@ class MyWebhookHandler extends WebhookHandler
         } else {
             (new SendLanguageMessageTask($this->chat))->run();
         }
-        $this->chat->pinMessage($this->messageId)->send();
         //https://t.me/HQDTiendaProdEsBot?start=3245435
         //try {
         //    BotChat::where('chat_id', $this->chat->chat_id)
