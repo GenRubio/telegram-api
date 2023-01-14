@@ -38,7 +38,6 @@ class SendStartMessageTask
                         Button::make('TIENDA')->webApp($this->clientApiUrl)
                     ]);
                 })
-                ->pinMessage()
                 ->protected()
                 ->send();
         } else {
@@ -49,7 +48,6 @@ class SendStartMessageTask
                         Button::make('TIENDA')->webApp($this->clientApiUrl)
                     ]);
                 })
-                ->pinMessage()
                 ->protected()
                 ->send();
         }
