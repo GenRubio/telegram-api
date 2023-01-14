@@ -40,7 +40,7 @@ class SendStartMessageTask
                 })
                 ->protected()
                 ->send();
-            $this->chat->pinMessage($chatMessage->messageId)->send();
+            //$this->chat->pinMessage($chatMessage->messageId)->send();
         } else {
             $chatMessage = $this->chat
                 ->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
@@ -51,7 +51,7 @@ class SendStartMessageTask
                 })
                 ->protected()
                 ->send();
-            $this->chat->pinMessage($chatMessage->messageId)->send();
+            //$this->chat->pinMessage($chatMessage->messageId)->send();
         }
     }
 
