@@ -30,7 +30,7 @@ class StripeController extends Controller
                 if (!is_null($order)) {
                     (new SendPaymentErrorMessageTask($order))->run();
                 } else {
-                    throw new GenericException("Order not found");
+                    throw new GenericException("Error");
                 }
             }
             if ((new ValidatePaymentStripeTask($order->stripe_id))->run()) {
@@ -58,7 +58,7 @@ class StripeController extends Controller
                 if (!is_null($order)) {
                     return Redirect::to($order->bot()->bot_url);
                 } else {
-                    throw new GenericException("Order not found");
+                    throw new GenericException("Error");
                 }
             }
             (new CancelOrderTask($order))->run();

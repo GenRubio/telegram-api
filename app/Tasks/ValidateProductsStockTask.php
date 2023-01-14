@@ -4,16 +4,21 @@ namespace App\Tasks;
 
 use App\Exceptions\GenericException;
 use App\Services\ProductModelService;
+use App\Tasks\Bot\Translations\StockNotAvailableTextTask;
+use App\Tasks\Bot\Translations\FlavorNotAvailableTextTask;
+use App\Tasks\Bot\Translations\ProductNotAvailableTextTask;
 
 class ValidateProductsStockTask
 {
     private $products;
+    private $chat;
     private $productModelService;
     public $flavors;
 
-    public function __construct($products)
+    public function __construct($products, $chat)
     {
         $this->products = $products;
+        $this->chat = $chat;
         $this->productModelService = new ProductModelService();
         $this->flavors = [];
 
@@ -32,18 +37,30 @@ class ValidateProductsStockTask
             $product = (object) $item->product;
             $productModel = $this->productModelService->getByReference($product->reference);
             if (is_null($productModel)) {
-                throw new GenericException("El producto {$product->name} ya no esta disponible");
+                $errorMessage = (new ProductNotAvailableTextTask($this->chat, [
+                    'product_name' => $product->name
+                ]))->run();
+                throw new GenericException($errorMessage);
             }
             $flavor = $productModel->productModelsFlavors->where('reference', $item->flavor)
                 ->first();
             if (is_null($flavor)) {
-                throw new GenericException("Ha ocurrido un error");
+                throw new GenericException("Error");
             }
             if (!$flavor->active) {
-                throw new GenericException("El sabor {$flavor->name} del producto {$productModel->name} no esta disponible");
+                $errorMessage = (new FlavorNotAvailableTextTask($this->chat, [
+                    'flavor_name' => $flavor->name,
+                    'product_name' => $productModel->name
+                ]))->run();
+                throw new GenericException($errorMessage);
             }
             if ($item->amount > $flavor->available_stock) {
-                throw new GenericException("No tenemos suficiente stock de {$flavor->name} del producto {$productModel->name}. Stock disponible {$flavor->available_stock}");
+                $errorMessage = (new StockNotAvailableTextTask($this->chat, [
+                    'flavor_name' => $flavor->name,
+                    'product_name' => $productModel->name,
+                    'flavor_available_stock' => $flavor->available_stock
+                ]))->run();
+                throw new GenericException($errorMessage);
             }
             $this->flavors[] = [
                 'amount' => $item->amount,

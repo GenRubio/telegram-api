@@ -35,7 +35,7 @@ class PaypalController extends Controller
                     }
                     (new SendPaymentErrorMessageTask($order))->run();
                 } else {
-                    throw new GenericException("Order not found");
+                    throw new GenericException("Error");
                 }
             }
             if ((new OrderApprovedPaypalTask($order))->run()) {
@@ -65,7 +65,7 @@ class PaypalController extends Controller
                 if (!is_null($order)) {
                     return Redirect::to($order->bot()->bot_url);
                 } else {
-                    throw new GenericException("Order not found");
+                    throw new GenericException("Error");
                 }
             }
             (new CancelOrderTask($order))->run();

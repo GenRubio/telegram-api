@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Laravel\Cashier\Billable;
 use Illuminate\Database\Eloquent\Model;
+use DefStudio\Telegraph\Models\TelegraphChat;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class Customer extends Model
@@ -42,6 +43,16 @@ class Customer extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function telegraphChat()
+    {
+        return $this->hasOne(TelegraphChat::class, 'chat_id', 'chat_id');
+    }
+
+    public function botChat()
+    {
+        return $this->hasOne(BotChat::class, 'chat_id', 'chat_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

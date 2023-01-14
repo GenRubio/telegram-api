@@ -13,6 +13,7 @@ use App\Tasks\Order\GetPaymentUrlTask;
 use App\Tasks\ValidateProductsStockTask;
 use App\Http\Resources\OrderDataResource;
 use App\Tasks\Geocoding\ValidateAddressTask;
+use App\Tasks\Bot\Translations\AddressNotFoundTextTask;
 
 class OrderController extends Controller
 {
@@ -21,7 +22,7 @@ class OrderController extends Controller
         try {
             $order = (new OrderService())->getByReference($request->reference);
             if (is_null($order)) {
-                throw new GenericException("Order not found");
+                throw new GenericException("Error");
             }
             return response()->json(new OrderDataResource($order));
         } catch (GenericException | Exception $e) {
@@ -36,12 +37,12 @@ class OrderController extends Controller
         try {
             $customer = (new CustomerService())->getByChat($request->token);
             if (is_null($customer)) {
-                throw new GenericException("Ha ocurrido un error");
+                throw new GenericException("Error");
             }
             if (!(new ValidateAddressTask($request))->run()) {
-                throw new GenericException("No hemos podido localizar tu direccion. Requerda que solo hacemos envios a España");
+                throw new GenericException((new AddressNotFoundTextTask($customer->botChat))->run());
             }
-            $validateProductStock = new ValidateProductsStockTask($request->products);
+            $validateProductStock = new ValidateProductsStockTask($request->products, $customer->botChat);
             $createOrder = new CreateOrderTask($request, $customer, $validateProductStock);
             $paymentUrl = (new GetPaymentUrlTask($createOrder->order))->run();
             return response()->json([

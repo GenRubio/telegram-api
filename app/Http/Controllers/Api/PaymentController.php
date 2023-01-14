@@ -18,7 +18,7 @@ class PaymentController extends Controller
         try {
             $order = (new OrderService())->getPaymentOrder(decrypt($request->reference));
             if (is_null($order)) {
-                throw new GenericException("Order not found");
+                throw new GenericException("Error");
             }
             if ($order->payment_method == "stripe") {
                 $stripe = (new StripePaymentDriver($order))->run();
