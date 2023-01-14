@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Services\BotService;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use DefStudio\Telegraph\Models\TelegraphChat;
 
 class Order extends Model
 {
@@ -72,6 +73,11 @@ class Order extends Model
     }
 
     public function telegraphChat()
+    {
+        return $this->hasOne(TelegraphChat::class, 'chat_id', 'chat_id');
+    }
+
+    public function botChat()
     {
         return $this->hasOne(BotChat::class, 'chat_id', 'chat_id');
     }

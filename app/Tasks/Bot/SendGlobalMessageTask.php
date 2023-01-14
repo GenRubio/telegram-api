@@ -19,7 +19,7 @@ class SendGlobalMessageTask
     public function run()
     {
         foreach ($this->message->telegramBotGroup->bots as $bot) {
-            foreach ($bot->telegramChats as $chat) {
+            foreach ($bot->botChat as $chat) {
                 try {
                     $langMessage = $this->message->getLangMessage($chat->language->abbr);
                     $clientApiUrl = (new GetApiClientTask($chat->chat_id))->run();
@@ -34,6 +34,7 @@ class SendGlobalMessageTask
     {
         if (!empty($this->message->image)) {
             $chat
+                ->telegramChats
                 ->photo(public_path($this->message->image))
                 ->html($langMessage)
                 ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl) {
@@ -45,6 +46,7 @@ class SendGlobalMessageTask
                 ->send();
         } else {
             $chat
+                ->telegramChats
                 ->html($langMessage)
                 ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl) {
                     return $keyboard->row([

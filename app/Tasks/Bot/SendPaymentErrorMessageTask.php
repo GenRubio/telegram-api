@@ -18,7 +18,7 @@ class SendPaymentErrorMessageTask
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1673103329.4375';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
-        $this->message = $this->telegramBotMessage->getLangMessage($this->order->telegraphChat->language->abbr);
+        $this->message = $this->telegramBotMessage->getLangMessage($this->order->botChat->language->abbr);
         $this->preparedMessage();
     }
 

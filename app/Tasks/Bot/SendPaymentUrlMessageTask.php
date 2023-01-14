@@ -22,7 +22,7 @@ class SendPaymentUrlMessageTask
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672062515.7575';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
-        $this->message = $this->telegramBotMessage->getLangMessage($this->order->telegraphChat->language->abbr);
+        $this->message = $this->telegramBotMessage->getLangMessage($this->order->botChat->language->abbr);
         $this->paymentUrl = (new GetPaymentUrlTask($this->order))->run();
     }
 
