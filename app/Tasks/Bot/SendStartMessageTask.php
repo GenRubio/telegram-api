@@ -2,12 +2,13 @@
 
 namespace App\Tasks\Bot;
 
-use App\Services\BotChatService;
+use Exception;
 use App\Tasks\GetApiClientTask;
+use App\Services\BotChatService;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
-use Exception;
+use App\Tasks\Bot\Settings\SetPinStartMessageTask;
 
 class SendStartMessageTask
 {
@@ -41,20 +42,8 @@ class SendStartMessageTask
                 })
                 ->protected()
                 ->send();
-            try{
-                $messageId = $response->telegraphMessageId();
-                $this->chat->pinMessage($messageId)->send();
-            }
-            catch(Exception $e){
-                //$response->result->message_id
-                $this->chat->html($e->getMessage())->send();
-            }
-
-            //$this->chat->html($response->result->message_id)->send();
-            //$this->chat->html($this->chat->message->id)->send();
-            //$this->chat->pinMessage($chatMessage->messageId)->send();
         } else {
-            $this->chat
+            $response = $this->chat
                 ->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
@@ -63,8 +52,8 @@ class SendStartMessageTask
                 })
                 ->protected()
                 ->send();
-            //$this->chat->pinMessage($chatMessage->messageId)->send();
         }
+        (new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
     }
 
     private function setTelegramBotMessage()

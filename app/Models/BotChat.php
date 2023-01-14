@@ -24,7 +24,8 @@ class BotChat extends Model
         'name',
         'telegraph_bot_id',
         'reference',
-        'language_id'
+        'language_id',
+        'pin_message'
     ];
     // protected $hidden = [];
     // protected $dates = [];
