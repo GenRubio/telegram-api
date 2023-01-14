@@ -22,7 +22,7 @@ class SetPinStartMessageTask
     public function run()
     {
         if ($this->botChat->pin_message) {
-            $this->chat->unpinMessage($this->botChat->pin_message);
+            $this->chat->unpinAllMessages();
         }
         $this->chat->pinMessage($this->messageId)->send();
         $this->botChatService->update($this->chat->chat_id, [
