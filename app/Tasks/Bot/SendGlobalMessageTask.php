@@ -6,6 +6,7 @@ use Exception;
 use App\Tasks\GetApiClientTask;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
+use App\Tasks\Bot\Translations\ButtonShopTextTask;
 
 class SendGlobalMessageTask
 {
@@ -37,9 +38,10 @@ class SendGlobalMessageTask
                 ->telegramChats
                 ->photo(public_path($this->message->image))
                 ->html($langMessage)
-                ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl) {
+                ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
                     return $keyboard->row([
-                        Button::make('TIENDA')->webApp($clientApiUrl)
+                        Button::make((new ButtonShopTextTask($chat))->run())
+                            ->webApp($clientApiUrl)
                     ]);
                 })
                 ->protected()
@@ -48,9 +50,10 @@ class SendGlobalMessageTask
             $chat
                 ->telegramChats
                 ->html($langMessage)
-                ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl) {
+                ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
                     return $keyboard->row([
-                        Button::make('TIENDA')->webApp($clientApiUrl)
+                        Button::make((new ButtonShopTextTask($chat))->run())
+                            ->webApp($clientApiUrl)
                     ]);
                 })
                 ->protected()

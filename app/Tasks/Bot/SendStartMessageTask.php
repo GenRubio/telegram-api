@@ -9,6 +9,7 @@ use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
 use App\Tasks\Bot\Settings\SetPinStartMessageTask;
+use App\Tasks\Bot\Translations\ButtonShopTextTask;
 
 class SendStartMessageTask
 {
@@ -37,7 +38,8 @@ class SendStartMessageTask
                 ->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make('TIENDA')->webApp($this->clientApiUrl)
+                        Button::make((new ButtonShopTextTask($this->botChat))->run())
+                            ->webApp($this->clientApiUrl)
                     ]);
                 })
                 ->protected()
@@ -47,7 +49,8 @@ class SendStartMessageTask
                 ->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make('TIENDA')->webApp($this->clientApiUrl)
+                        Button::make((new ButtonShopTextTask($this->botChat))->run())
+                            ->webApp($this->clientApiUrl)
                     ]);
                 })
                 ->protected()
