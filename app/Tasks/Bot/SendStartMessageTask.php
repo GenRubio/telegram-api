@@ -7,6 +7,7 @@ use App\Tasks\GetApiClientTask;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
+use Exception;
 
 class SendStartMessageTask
 {
@@ -40,6 +41,13 @@ class SendStartMessageTask
                 })
                 ->protected()
                 ->send();
+            try{
+                $this->chat->html("Ok")->send();
+            }
+            catch(Exception $e){
+                //$response->result->message_id
+                $this->chat->html("Error")->send();
+            }
 
             //$this->chat->html($response->result->message_id)->send();
             //$this->chat->html($this->chat->message->id)->send();
