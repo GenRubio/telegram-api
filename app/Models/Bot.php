@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use DefStudio\Telegraph\Models\TelegraphBot;
 
 class Bot extends Model
 {
@@ -46,6 +47,11 @@ class Bot extends Model
     public function telegramChats()
     {
         return $this->hasMany(BotChat::class, 'telegraph_bot_id', 'id');
+    }
+
+    public function telegraphBot()
+    {
+        return $this->hasOne(TelegraphBot::class, 'id', 'id');
     }
 
     /*
