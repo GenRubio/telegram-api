@@ -15,7 +15,7 @@ use DefStudio\Telegraph\Handlers\WebhookHandler;
 class MyWebhookHandler extends WebhookHandler
 {
     //$reference = null
-    public function start()
+    public function start($reference = null)
     {
         $botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
         if ($botChat->language) {
