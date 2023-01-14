@@ -42,6 +42,7 @@ class SendStartMessageTask
                 ->protected()
                 ->send();
             try{
+                $data = $response->result->message_id;
                 $this->chat->html("Ok")->send();
             }
             catch(Exception $e){
