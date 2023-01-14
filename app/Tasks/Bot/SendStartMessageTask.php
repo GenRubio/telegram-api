@@ -40,7 +40,7 @@ class SendStartMessageTask
                 })
                 ->protected()
                 ->send();
-            $this->chat->html($response->message_id) ->send();
+            $this->chat->html($response->message_id)->send();
             //$this->chat->pinMessage($chatMessage->messageId)->send();
         } else {
             $this->chat
