@@ -20,10 +20,6 @@ class MyWebhookHandler extends WebhookHandler
         $botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
         if ($botChat->language) {
             (new SendStartMessageTask($this->chat))->run();
-            $this->chat->bot->registerCommands([
-                'command1' => 'command 1 description',
-                'command2' => 'command 2 description'
-            ])->send();
         } else {
             (new SendLanguageMessageTask($this->chat))->run();
         }
