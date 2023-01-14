@@ -42,8 +42,8 @@ class SendStartMessageTask
                 ->protected()
                 ->send();
             try{
-                $data = $response->telegraphMessageId();
-                $this->chat->html($data)->send();
+                $messageId = $response->telegraphMessageId();
+                $this->chat->pinMessage($messageId)->send();
             }
             catch(Exception $e){
                 //$response->result->message_id
