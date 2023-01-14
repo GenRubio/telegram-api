@@ -64,6 +64,11 @@ class TelegraphChatCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
+            'name' => 'language_name',
+            'label' => 'Idioma',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'reference',
             'label' => 'Referencia',
             'type'  => 'text',
