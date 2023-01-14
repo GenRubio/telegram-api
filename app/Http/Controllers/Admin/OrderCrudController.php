@@ -85,7 +85,7 @@ class OrderCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(OrderRequest::class);
-        $clientLanguage = $this->crud->getCurrentEntry()->bot()->language->name;
+        $clientLanguage = $this->crud->getCurrentEntry()->telegraphChat->language->name;
         $retriveOrder = null;
         $retrivePayment = null;
         $payment_order_status = null;
