@@ -52,7 +52,7 @@ class WebAppDataResource extends JsonResource
     {
         $translations = [];
         foreach ($this->translations as $translation) {
-            $translations[$translation->uuid] = $this->formatLangText($translation->uuid, $translation->langText($this->language->abbr));
+            $translations[$translation->uuid] = $this->formatLangText($translation->uuid, $translation->langText($this->language));
         }
         return $translations;
     }
