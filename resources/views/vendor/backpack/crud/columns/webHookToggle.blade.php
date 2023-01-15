@@ -25,7 +25,7 @@
             },
 
             success: function(result) {
-                if ("{{ $checked }}") {
+                if (!result.checked) {
                     $('#customSwitch-{{ $entry->id }}').prop('checked', false);
                 } else {
                     $('#customSwitch-{{ $entry->id }}').prop('checked', true);

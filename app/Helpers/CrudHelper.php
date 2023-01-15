@@ -36,6 +36,8 @@ class CrudHelper
         } else {
             $telegraphBot->unregisterWebhook()->send();
         }
-        return true;
+        return [
+            'checked' => ($obj->$field)
+        ];
     }
 }
