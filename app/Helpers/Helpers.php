@@ -77,6 +77,13 @@ if (!function_exists('toggleField')) {
     }
 }
 
+if (!function_exists('toggleFieldV2')) {
+    function toggleFieldV2($request)
+    {
+        return CrudHelper::toggleFieldV2($request);
+    }
+}
+
 if (!function_exists('webHookToggle')) {
     function webHookToggle($request)
     {

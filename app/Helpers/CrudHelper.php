@@ -21,6 +21,19 @@ class CrudHelper
         return '<i class="la ' . $fa . '"></i> ' . $text;
     }
 
+    public static function toggleFieldV2(Request $request)
+    {
+        $model = new $request->model;
+        $field = $request->field;
+        $obj = $model->find($request->id);
+        $obj->$field = ($obj->$field) ? 0 : 1;
+        $obj->save();
+        
+        return [
+            'checked' => ($obj->$field)
+        ];
+    }
+
     public static function webHookToggle(Request $request)
     {
         $model = new $request->model;

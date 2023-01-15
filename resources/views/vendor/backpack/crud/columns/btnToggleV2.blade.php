@@ -1,7 +1,4 @@
 @php
-    //$fa = $entry->{$column['name']} ? 'la-check' : 'la-times';
-    //$text = $entry->{$column['name']} ? trans('backpack::crud.yes') : trans('backpack::crud.no');
-    //$btn_class = $text == trans('backpack::crud.yes') ? 'btn-info' : 'btn-danger';
     $checked = $entry->{$column['name']} ? true : false;
 @endphp
 <td>
@@ -20,7 +17,7 @@
         var field = $(this).data('field');
         $.ajax({
             type: 'POST',
-            url: "{{ route('toggleField') }}",
+            url: "{{ route('toggleFieldV2') }}",
             data: {
                 model: model,
                 id: id,
@@ -28,7 +25,7 @@
             },
 
             success: function(result) {
-                if ("{{ $checked }}"){
+                if (!result.checked){
                     $('#customSwitch-{{ $entry->id }}').prop('checked', false);
                 }
                 else{

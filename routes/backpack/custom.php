@@ -23,6 +23,9 @@ Route::group([
     Route::post('toggleField', function (Illuminate\Http\Request $request) {
         return toggleField($request);
     })->name('toggleField');
+    Route::post('toggleFieldV2', function (Illuminate\Http\Request $request) {
+        return toggleFieldV2($request);
+    })->name('toggleFieldV2');
 
     Route::crud('product-model', 'ProductModelCrudController');
     Route::group(['prefix' => 'product-model/{product_model_id}'], function () {
