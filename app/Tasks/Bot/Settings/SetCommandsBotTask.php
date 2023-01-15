@@ -16,13 +16,13 @@ class SetCommandsBotTask
     public function run()
     {
         $this->telegraphBot->unregisterCommands();
-        $commandsData = [];
-        foreach ($this->bot->telegramBotCommands as $command) {
-            $commandsData[] = [
-                $command->command => $command->description
-            ];
-        }
-        $this->telegraphBot->registerCommands($commandsData)
-            ->send();
+        //$commandsData = [];
+        //foreach ($this->bot->telegramBotCommands as $command) {
+        //    $commandsData[] = [
+        //        $command->command => $command->description
+        //    ];
+        //}
+        //$this->telegraphBot->registerCommands($commandsData)
+        //    ->send();
     }
 }
