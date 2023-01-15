@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Http\Request;
 use DefStudio\Telegraph\Models\TelegraphBot;
+use App\Tasks\Bot\Settings\SetCommandsBotTask;
 
 class CrudHelper
 {
@@ -46,6 +47,7 @@ class CrudHelper
         if (($obj->$field)) {
             $telegraphBot->unregisterWebhook()->send();
             $telegraphBot->registerWebhook()->send();
+            (new SetCommandsBotTask($obj))->run();
         } else {
             $telegraphBot->unregisterWebhook()->send();
         }
