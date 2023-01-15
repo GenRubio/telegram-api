@@ -27,32 +27,20 @@ class SendTrackingNumberMessageTask
 
     public function run()
     {
+        $response = $this->order->telegraphChat;
         if (!empty($this->telegramBotMessage->image)) {
-            $this->order->telegraphChat
-                ->photo(public_path($this->telegramBotMessage->image))
-                ->html($this->message)
-                ->keyboard(function (Keyboard $keyboard) {
-                    return $keyboard->row([
-                        Button::make('Url seguimiento')->url($this->order->provider_url),
-                        Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
-                            ->webApp("https://github.com/")
-                    ]);
-                })
-                ->protected()
-                ->send();
-        } else {
-            $this->order->telegraphChat
-                ->html($this->message)
-                ->keyboard(function (Keyboard $keyboard) {
-                    return $keyboard->row([
-                        Button::make('Url seguimiento')->url($this->order->provider_url),
-                        Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
-                            ->webApp("https://github.com/")
-                    ]);
-                })
-                ->protected()
-                ->send();
+            $response = $response->photo(public_path($this->telegramBotMessage->image));
         }
+        $response = $response->html($this->message)
+            ->keyboard(function (Keyboard $keyboard) {
+                return $keyboard->row([
+                    Button::make('Url seguimiento')->url($this->order->provider_url),
+                    Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
+                        ->webApp("https://github.com/")
+                ]);
+            })
+            ->protected()
+            ->send();
     }
 
     private function setTelegramBotMessage()

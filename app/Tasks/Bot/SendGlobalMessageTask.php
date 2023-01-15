@@ -33,31 +33,18 @@ class SendGlobalMessageTask
 
     private function sendMessageToChat($chat, $langMessage, $clientApiUrl)
     {
+        $response = $chat;
         if (!empty($this->message->image)) {
-            $chat
-                ->telegramChats
-                ->photo(public_path($this->message->image))
-                ->html($langMessage)
-                ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
-                    return $keyboard->row([
-                        Button::make((new ButtonShopTextTask($chat))->run())
-                            ->webApp($clientApiUrl)
-                    ]);
-                })
-                ->protected()
-                ->send();
-        } else {
-            $chat
-                ->telegramChats
-                ->html($langMessage)
-                ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
-                    return $keyboard->row([
-                        Button::make((new ButtonShopTextTask($chat))->run())
-                            ->webApp($clientApiUrl)
-                    ]);
-                })
-                ->protected()
-                ->send();
+            $response = $response->photo(public_path($this->message->image));
         }
+        $response = $response->html($langMessage)
+            ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
+                return $keyboard->row([
+                    Button::make((new ButtonShopTextTask($chat))->run())
+                        ->webApp($clientApiUrl)
+                ]);
+            })
+            ->protected()
+            ->send();
     }
 }

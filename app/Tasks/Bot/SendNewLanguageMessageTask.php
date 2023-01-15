@@ -29,8 +29,11 @@ class SendNewLanguageMessageTask
 
     public function run()
     {
-        $this->chat
-            ->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
+        $response = $this->chat;
+        if (!empty($this->telegramBotMessage->image)) {
+            $response = $response->photo(public_path($this->telegramBotMessage->image));
+        }
+        $response = $response->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
             ->keyboard(function (Keyboard $keyboard) {
                 foreach ($this->languages as $language) {
                     $keyboard
