@@ -41,7 +41,7 @@ class ApiClientCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'name' => 'active',
-            'type' => 'btnToggle',
+            'type' => 'btnToggleV2',
             'label' => 'Activo',
         ]);
     }
