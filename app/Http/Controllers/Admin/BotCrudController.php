@@ -63,6 +63,11 @@ class BotCrudController extends CrudController
             'label' => 'Chats',
             'type'  => 'text',
         ]);
+        $this->crud->addColumn([
+            'name' => 'count_telegram_bot_commands',
+            'label' => 'Comandos',
+            'type'  => 'text',
+        ]);
     }
 
     protected function setupCreateOperation()
