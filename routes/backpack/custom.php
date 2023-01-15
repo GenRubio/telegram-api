@@ -47,6 +47,9 @@ Route::group([
         ->name('updateWebhookBot');
     Route::post('bot-remove-webhook', 'BotCrudController@removeWebhook')
         ->name('removeWebhookBot');
+    Route::post('webHookToggle', function (Illuminate\Http\Request $request) {
+        return webHookToggle($request);
+    })->name('webHookToggle');
     Route::crud('bot-translation', 'BotTranslationCrudController');
     Route::crud('user', 'UserCrudController');
     Route::crud('office-permission', 'OfficePermissionCrudController');

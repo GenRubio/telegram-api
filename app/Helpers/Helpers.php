@@ -77,6 +77,13 @@ if (!function_exists('toggleField')) {
     }
 }
 
+if (!function_exists('webHookToggle')) {
+    function webHookToggle($request)
+    {
+        return CrudHelper::webHookToggle($request);
+    }
+}
+
 /**
  * SettingsHelper
  */

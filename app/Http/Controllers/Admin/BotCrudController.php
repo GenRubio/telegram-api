@@ -35,8 +35,8 @@ class BotCrudController extends CrudController
     {
         $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'bot-chats', 'bot-chats', 'beginning');
-        $this->crud->addButtonFromView('line', 'remove-webhook', 'remove-webhook', 'beginning');
-        $this->crud->addButtonFromView('line', 'update-webhook', 'update-webhook', 'beginning');
+        //$this->crud->addButtonFromView('line', 'remove-webhook', 'remove-webhook', 'beginning');
+        //$this->crud->addButtonFromView('line', 'update-webhook', 'update-webhook', 'beginning');
         $this->crud->addColumn([
             'name' => 'name',
             'label' => 'Nombre',
@@ -55,7 +55,7 @@ class BotCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'webhook',
             'label' => 'WebHook',
-            'type'  => 'check',
+            'type'  => 'webHookToggle',
         ]);
         $this->crud->addColumn([
             'name' => 'count_telegram_chats',
