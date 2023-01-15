@@ -77,6 +77,7 @@
 <li class="nav-title">SERVIDOR</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('elfinder') }}"><i class="nav-icon la la-files-o"></i> Elfinder</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon la la-hdd-o'></i> Backups</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('log') }}'><i class='nav-icon la la-terminal'></i> Logs</a></li>
 @endif
 @if(backpack_user()->officePermission('UserCrudController', 'show')
 || backpack_user()->officePermission('OfficePermissionCrudController', 'show'))
