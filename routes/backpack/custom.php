@@ -45,6 +45,7 @@ Route::group([
     Route::crud('bot', 'BotCrudController');
     Route::group(['prefix' => 'bot/{bot_id}'], function () {
         Route::crud('telegraph-chat', 'TelegraphChatCrudController');
+        Route::crud('telegram-bot-command', 'TelegramBotCommandCrudController');
     });
     Route::post('bot-update-webhook', 'BotCrudController@updateWebhook')
         ->name('updateWebhookBot');

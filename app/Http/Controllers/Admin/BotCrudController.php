@@ -34,6 +34,7 @@ class BotCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->removeActionsCrud();
+        $this->crud->addButtonFromView('line', 'bot-commands', 'bot-commands', 'beginning');
         $this->crud->addButtonFromView('line', 'bot-chats', 'bot-chats', 'beginning');
         //$this->crud->addButtonFromView('line', 'remove-webhook', 'remove-webhook', 'beginning');
         //$this->crud->addButtonFromView('line', 'update-webhook', 'update-webhook', 'beginning');

@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use DefStudio\Telegraph\Models\TelegraphBot;
+use Illuminate\Database\Eloquent\Model;
 
-class Bot extends Model
+class TelegramBotCommand extends Model
 {
     use CrudTrait;
 
@@ -15,17 +15,18 @@ class Bot extends Model
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-    protected $table = 'telegraph_bots';
+
+    protected $table = 'telegram_bot_commands';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = [
-        'name',
-        'token',
-        'bot_url',
-        'language_id',
-        'webhook'
+        'telegraph_bot_id',
+        'command',
+        'description'
     ];
+    // protected $hidden = [];
+    // protected $dates = [];
 
     /*
     |--------------------------------------------------------------------------
@@ -39,24 +40,14 @@ class Bot extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function language()
+    public function bot()
     {
-        return $this->belongsTo(Language::class, 'language_id');
-    }
-
-    public function telegramChats()
-    {
-        return $this->hasMany(BotChat::class, 'telegraph_bot_id', 'id');
-    }
-
-    public function telegramBotCommands()
-    {
-        return $this->hasMany(TelegramBotCommand::class, 'telegraph_bot_id', 'id');
+        return $this->hasOne(Bot::class, 'id', 'telegraph_bot_id');
     }
 
     public function telegraphBot()
     {
-        return $this->hasOne(TelegraphBot::class, 'id', 'id');
+        return $this->hasOne(TelegraphBot::class, 'id', 'telegraph_bot_id');
     }
 
     /*
@@ -70,21 +61,6 @@ class Bot extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
-
-    public function getCountTelegramChatsAttribute()
-    {
-        return count($this->telegramChats);
-    }
-
-    public function getCountTelegramBotCommandsAttribute()
-    {
-        return count($this->telegramBotCommands);
-    }
-
-    public function getLanguageNameAttribute()
-    {
-        return $this->language->name;
-    }
 
     /*
     |--------------------------------------------------------------------------
