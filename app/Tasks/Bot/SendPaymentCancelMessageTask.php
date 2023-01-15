@@ -2,7 +2,10 @@
 
 namespace App\Tasks\Bot;
 
+use DefStudio\Telegraph\Keyboard\Button;
+use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
+use App\Tasks\Bot\Translations\ButtonOrderDetailTextTask;
 
 class SendPaymentCancelMessageTask
 {
@@ -27,11 +30,23 @@ class SendPaymentCancelMessageTask
             $this->order->telegraphChat
                 ->photo(public_path($this->telegramBotMessage->image))
                 ->html($this->message)
+                ->keyboard(function (Keyboard $keyboard) {
+                    return $keyboard->row([
+                        Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
+                            ->webApp("https://github.com/")
+                    ]);
+                })
                 ->protected()
                 ->send();
         } else {
             $this->order->telegraphChat
                 ->html($this->message)
+                ->keyboard(function (Keyboard $keyboard) {
+                    return $keyboard->row([
+                        Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
+                            ->webApp("https://github.com/")
+                    ]);
+                })
                 ->protected()
                 ->send();
         }

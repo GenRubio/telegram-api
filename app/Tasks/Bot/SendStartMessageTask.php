@@ -32,30 +32,20 @@ class SendStartMessageTask
 
     public function run()
     {
+        $response = $this->chat;
         if (!empty($this->telegramBotMessage->image)) {
-            $response = $this->chat
-                ->photo(public_path($this->telegramBotMessage->image))
-                ->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
-                ->keyboard(function (Keyboard $keyboard) {
-                    return $keyboard->row([
-                        Button::make((new ButtonShopTextTask($this->botChat))->run())
-                            ->webApp($this->clientApiUrl)
-                    ]);
-                })
-                ->protected()
-                ->send();
-        } else {
-            $response = $this->chat
-                ->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
-                ->keyboard(function (Keyboard $keyboard) {
-                    return $keyboard->row([
-                        Button::make((new ButtonShopTextTask($this->botChat))->run())
-                            ->webApp($this->clientApiUrl)
-                    ]);
-                })
-                ->protected()
-                ->send();
+            $response->photo(public_path($this->telegramBotMessage->image));
         }
+        $response = $response->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
+            ->keyboard(function (Keyboard $keyboard) {
+                return $keyboard->row([
+                    Button::make((new ButtonShopTextTask($this->botChat))->run())
+                        ->webApp($this->clientApiUrl)
+                ]);
+            })
+            ->protected()
+            ->send();
+
         (new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
     }
 

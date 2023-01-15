@@ -2,9 +2,10 @@
 
 namespace App\Tasks\Bot;
 
-use App\Services\TelegramBotMessageService;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
+use App\Services\TelegramBotMessageService;
+use App\Tasks\Bot\Translations\ButtonOrderDetailTextTask;
 
 class SendTrackingNumberMessageTask
 {
@@ -32,7 +33,9 @@ class SendTrackingNumberMessageTask
                 ->html($this->message)
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make('Url seguimiento')->url($this->order->provider_url)
+                        Button::make('Url seguimiento')->url($this->order->provider_url),
+                        Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
+                            ->webApp("https://github.com/")
                     ]);
                 })
                 ->protected()
@@ -42,7 +45,9 @@ class SendTrackingNumberMessageTask
                 ->html($this->message)
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make('Url seguimiento')->url($this->order->provider_url)
+                        Button::make('Url seguimiento')->url($this->order->provider_url),
+                        Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
+                            ->webApp("https://github.com/")
                     ]);
                 })
                 ->protected()
