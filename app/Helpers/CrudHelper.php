@@ -28,7 +28,7 @@ class CrudHelper
         $obj = $model->find($request->id);
         $obj->$field = ($obj->$field) ? 0 : 1;
         $obj->save();
-        $telegraphBot = TelegraphBot::where('id', $request->botId)->first();
+        $telegraphBot = TelegraphBot::where('id', $obj->id)->first();
 
         if (($obj->$field)) {
             $telegraphBot->unregisterWebhook()->send();
