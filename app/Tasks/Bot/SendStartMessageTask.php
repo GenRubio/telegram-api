@@ -34,9 +34,9 @@ class SendStartMessageTask
     {
         $response = $this->chat;
         if (!empty($this->telegramBotMessage->image)) {
-            $response->photo(public_path($this->telegramBotMessage->image));
+            $response = $response->photo(public_path($this->telegramBotMessage->image));
         }
-        $response->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
+        $response = $response->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
             ->keyboard(function (Keyboard $keyboard) {
                 return $keyboard->row([
                     Button::make((new ButtonShopTextTask($this->botChat))->run())
