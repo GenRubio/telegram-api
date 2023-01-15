@@ -43,6 +43,11 @@ class BotCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
+            'name' => 'webhook',
+            'label' => 'WebHook',
+            'type'  => 'webHookToggle',
+        ]);
+        $this->crud->addColumn([
             'name' => 'language_name',
             'label' => 'Idioma',
             'type'  => 'text',
@@ -51,11 +56,6 @@ class BotCrudController extends CrudController
             'name' => 'bot_url',
             'label' => 'Bot Url',
             'type'  => 'link',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'webhook',
-            'label' => 'WebHook',
-            'type'  => 'webHookToggle',
         ]);
         $this->crud->addColumn([
             'name' => 'count_telegram_chats',
