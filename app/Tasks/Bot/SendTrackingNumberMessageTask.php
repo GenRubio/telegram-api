@@ -2,6 +2,7 @@
 
 namespace App\Tasks\Bot;
 
+use App\Tasks\GetApiClientTask;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
@@ -38,7 +39,7 @@ class SendTrackingNumberMessageTask
                     Button::make((new ButtonTracingUrlTextTask($this->order->botChat))->run())
                         ->url($this->order->provider_url),
                     Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
-                        ->webApp("https://github.com/")
+                        ->webApp((new GetApiClientTask())->orderDetail($this->order->reference))
                 ]);
             })
             ->protected()

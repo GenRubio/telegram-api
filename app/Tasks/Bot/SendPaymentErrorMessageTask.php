@@ -2,6 +2,7 @@
 
 namespace App\Tasks\Bot;
 
+use App\Tasks\GetApiClientTask;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
@@ -35,7 +36,7 @@ class SendPaymentErrorMessageTask
             ->keyboard(function (Keyboard $keyboard) {
                 return $keyboard->row([
                     Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
-                        ->webApp("https://github.com/")
+                        ->webApp((new GetApiClientTask())->orderDetail($this->order->reference))
                 ]);
             })
             ->protected()

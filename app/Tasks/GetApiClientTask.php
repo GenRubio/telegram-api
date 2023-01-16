@@ -6,19 +6,22 @@ use App\Services\ApiClientService;
 
 class GetApiClientTask
 {
-    private $chatId;
     private $apiClientService;
     private $activeClients;
 
-    public function __construct($chatId)
+    public function __construct()
     {
-        $this->chatId = $chatId;
         $this->apiClientService = new ApiClientService();
         $this->activeClients = $this->apiClientService->getAll();
     }
 
-    public function run()
+    public function products($chatId)
     {
-        return $this->activeClients->first()->url . 'webapp/' . $this->chatId;
+        return $this->activeClients->first()->url . 'webapp/' . $chatId;
+    }
+
+    public function orderDetail($reference)
+    {
+        return $this->activeClients->first()->url . 'order/' . $reference;
     }
 }

@@ -23,7 +23,7 @@ class SendGlobalMessageTask
             foreach ($bot->botChat as $chat) {
                 try {
                     $langMessage = $this->message->getLangMessage($chat->language->abbr);
-                    $clientApiUrl = (new GetApiClientTask($chat->chat_id))->run();
+                    $clientApiUrl = (new GetApiClientTask())->products($chat->chat_id);
                     $this->sendMessageToChat($chat, $langMessage, $clientApiUrl);
                 } catch (Exception $e) {
                 }

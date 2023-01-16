@@ -27,7 +27,7 @@ class SendStartMessageTask
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672042240.2779';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
-        $this->clientApiUrl = (new GetApiClientTask($this->chat->chat_id))->run();
+        $this->clientApiUrl = (new GetApiClientTask())->products($this->chat->chat_id);
     }
 
     public function run()
