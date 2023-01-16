@@ -83,9 +83,13 @@ class BotCrudController extends CrudController
                 'name' => 'token',
                 'label' => 'Token',
                 'type' => 'text',
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                  ],
             ],
             [
-                'label'     => "Idioma",
+                'label'     => "Idioma por defecto",
                 'type'      => 'select',
                 'name'      => 'language_id',
                 'entity'    => 'language',
