@@ -78,6 +78,7 @@ class BotCrudController extends CrudController
                 'name' => 'name',
                 'label' => 'Nombre',
                 'type' => 'text',
+                'tab' => 'Configuración'
             ],
             [
                 'name' => 'token',
@@ -86,7 +87,8 @@ class BotCrudController extends CrudController
                 'attributes' => [
                     'readonly'    => 'readonly',
                     'disabled'    => 'disabled',
-                  ],
+                ],
+                'tab' => 'Configuración'
             ],
             [
                 'label'     => "Idioma por defecto",
@@ -95,11 +97,13 @@ class BotCrudController extends CrudController
                 'entity'    => 'language',
                 'model'     => "App\Models\Language",
                 'attribute' => 'name',
+                'tab' => 'Configuración'
             ],
             [
                 'name' => 'bot_url',
                 'label' => 'Bot Url',
                 'type' => 'text',
+                'tab' => 'Configuración'
             ],
         ]);
     }
