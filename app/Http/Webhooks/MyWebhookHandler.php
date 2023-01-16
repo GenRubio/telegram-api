@@ -9,6 +9,8 @@ use App\Services\LanguageService;
 use App\Tasks\Bot\SendStartMessageTask;
 use DefStudio\Telegraph\Keyboard\Button;
 use App\Tasks\Bot\SendLanguageMessageTask;
+use App\Tasks\Bot\Settings\SetBotInfoTask;
+use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Tasks\Bot\SendNewLanguageMessageTask;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
@@ -18,8 +20,10 @@ class MyWebhookHandler extends WebhookHandler
     //$reference = null
     public function start($reference = null)
     {
+        $this->chat->action(ChatActions::TYPING)->send();
         $botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
         if ($botChat->language) {
+            (new SetBotInfoTask($this->chat))->run();
             (new SendStartMessageTask($this->chat))->run();
         } else {
             (new SendLanguageMessageTask($this->chat))->run();
