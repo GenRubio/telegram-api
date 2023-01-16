@@ -4,6 +4,7 @@ namespace App\Tasks\Bot;
 
 use App\Services\LanguageService;
 use DefStudio\Telegraph\Keyboard\Button;
+use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
 
@@ -26,6 +27,7 @@ class SendLanguageMessageTask
 
     public function run()
     {
+        $this->chat->action(ChatActions::TYPING)->send();
         $response = $this->chat;
         if (!empty($this->telegramBotMessage->image)) {
             $response = $response->photo(public_path($this->telegramBotMessage->image));

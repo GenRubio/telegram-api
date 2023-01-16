@@ -4,12 +4,16 @@ namespace App\Tasks\Bot;
 
 use App\Services\BotChatService;
 use App\Services\LanguageService;
+use App\Tasks\Bot\Traits\BotTasksTrait;
 use DefStudio\Telegraph\Keyboard\Button;
+use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
 
 class SendNewLanguageMessageTask
 {
+    use BotTasksTrait;
+    
     private $chat;
     private $botChat;
     private $telegramBotMessageService;
@@ -29,6 +33,7 @@ class SendNewLanguageMessageTask
 
     public function run()
     {
+        $this->chat->action(ChatActions::TYPING)->send();
         $response = $this->chat;
         if (!empty($this->telegramBotMessage->image)) {
             $response = $response->photo(public_path($this->telegramBotMessage->image));
@@ -45,10 +50,5 @@ class SendNewLanguageMessageTask
             })
             ->protected()
             ->send();
-    }
-
-    private function setTelegramBotMessage()
-    {
-        return $this->telegramBotMessageService->getByKey($this->key);
     }
 }

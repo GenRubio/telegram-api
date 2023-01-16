@@ -3,13 +3,17 @@
 namespace App\Tasks\Bot;
 
 use App\Tasks\GetApiClientTask;
+use App\Tasks\Bot\Traits\BotTasksTrait;
 use DefStudio\Telegraph\Keyboard\Button;
+use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
 use App\Tasks\Bot\Translations\ButtonOrderDetailTextTask;
 
 class SendPaymentCancelMessageTask
 {
+    use BotTasksTrait;
+    
     private $order;
     private $telegramBotMessageService;
     private $key;
@@ -27,6 +31,7 @@ class SendPaymentCancelMessageTask
 
     public function run()
     {
+        $this->order->telegraphChat->action(ChatActions::TYPING)->send();
         $response = $this->order->telegraphChat;
         if (!empty($this->telegramBotMessage->image)) {
             $response = $response->photo(public_path($this->telegramBotMessage->image));
@@ -40,10 +45,5 @@ class SendPaymentCancelMessageTask
             })
             ->protected()
             ->send();
-    }
-
-    private function setTelegramBotMessage()
-    {
-        return $this->telegramBotMessageService->getByKey($this->key);
     }
 }
