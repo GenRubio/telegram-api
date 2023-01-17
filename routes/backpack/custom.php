@@ -60,4 +60,5 @@ Route::group([
     Route::crud('telegram-bot-global-message', 'TelegramBotGlobalMessageCrudController');
     Route::crud('telegram-bot-group', 'TelegramBotGroupCrudController');
     Route::crud('geocoding-api', 'GeocodingApiCrudController');
+    Route::crud('affiliate', 'AffiliateCrudController');
 }); // this should be the absolute last line of this file

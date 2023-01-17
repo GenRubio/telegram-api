@@ -7,12 +7,12 @@ use App\Services\LanguageService;
 use App\Tasks\Bot\SendStartMessageTask;
 use App\Tasks\Bot\SendLanguageMessageTask;
 use DefStudio\Telegraph\Enums\ChatActions;
+use App\Tasks\Bot\Chat\SetReferenceChatTask;
 use App\Tasks\Bot\SendNewLanguageMessageTask;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 
 class MyWebhookHandler extends WebhookHandler
 {
-    //$reference = null
     public function start($reference = null)
     {
         $this->chat->action(ChatActions::TYPING)->send();
@@ -22,14 +22,7 @@ class MyWebhookHandler extends WebhookHandler
         } else {
             (new SendLanguageMessageTask($this->chat))->run();
         }
-        //https://t.me/HQDTiendaProdEsBot?start=3245435
-        //try {
-        //    BotChat::where('chat_id', $this->chat->chat_id)
-        //        ->update([
-        //            'reference' => $reference
-        //        ]);
-        //} catch (Exception $e) {
-        //}
+        (new SetReferenceChatTask($botChat, $reference))->run();
     }
 
     public function language()

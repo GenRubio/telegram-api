@@ -55,6 +55,8 @@
    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('bot-translation') }}"><i class="nav-icon la la-question"></i> Traducciones</a></li>
    @endif
 @endif
+<li class="nav-title">AFILIADOS</li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('affiliate') }}"><i class="nav-icon la la-th-list"></i> Afiliados</a></li>
 @if(backpack_user()->officePermission('LanguageCrudController', 'show')
 || backpack_user()->officePermission('ApiClientCrudController', 'show')
 || backpack_user()->officePermission('GeocodingApiCrudController', 'show')
