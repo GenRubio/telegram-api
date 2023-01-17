@@ -69,7 +69,7 @@ class BotChat extends Model
 
     public function getLanguageNameAttribute()
     {
-        return $this->language->name;
+        return $this->language?->name;
     }
 
     /*
