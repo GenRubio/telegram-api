@@ -22,7 +22,7 @@ class MyWebhookHandler extends WebhookHandler
         } else {
             (new SendLanguageMessageTask($this->chat))->run();
         }
-        (new SetReferenceChatTask($botChat, $reference))->run();
+        //(new SetReferenceChatTask($botChat, $reference))->run();
     }
 
     public function language()
