@@ -25,7 +25,7 @@ class SetReferenceChatTask
         if (!is_null($this->reference) && empty($this->botChat->reference)) {
             $affiliate = $this->affiliateService->getByReference($this->reference);
             if (!is_null($affiliate)) {
-                $this->botChatService->update($this->botChat->id, [
+                $this->botChatService->update($this->botChat->chat_id, [
                     'reference' => $this->reference
                 ]);
             }
