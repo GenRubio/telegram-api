@@ -22,7 +22,7 @@ class SetReferenceChatTask
 
     public function run()
     {
-        if (!is_null($this->reference) && is_null($this->botChat->reference)) {
+        if (!is_null($this->reference) && empty($this->botChat->reference)) {
             $affiliate = $this->affiliateService->getByReference($this->reference);
             if (!is_null($affiliate)) {
                 $this->botChatService->update($this->botChat->id, [
