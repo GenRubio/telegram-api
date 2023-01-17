@@ -147,6 +147,11 @@ class AffiliateCrudController extends CrudController
                 'type' => 'text',
             ],
             [
+                'name' => 'nif',
+                'label' => 'NIF',
+                'type' => 'text',
+            ],
+            [
                 'name' => 'iban',
                 'label' => 'IBAN',
                 'type' => 'text',
