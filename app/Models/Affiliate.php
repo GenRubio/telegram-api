@@ -88,7 +88,7 @@ class Affiliate extends Model
     public function setReferenceAttribute($value)
     {
         if (is_null($value)) {
-            $this->attributes['reference'] = microtime(true);
+            $this->attributes['reference'] = str_replace(".", "", microtime(true));
         }
     }
 }
