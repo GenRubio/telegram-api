@@ -9,6 +9,7 @@ use App\Tasks\Bot\SendLanguageMessageTask;
 use DefStudio\Telegraph\Enums\ChatActions;
 use App\Tasks\Bot\Chat\SetReferenceChatTask;
 use App\Tasks\Bot\SendNewLanguageMessageTask;
+use DefStudio\Telegraph\Enums\ChatPermissions;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 
 class MyWebhookHandler extends WebhookHandler
@@ -16,6 +17,12 @@ class MyWebhookHandler extends WebhookHandler
     public function start($reference = null)
     {
         $this->chat->action(ChatActions::TYPING)->send();
+        $this->chat->setPermissions([
+            ChatPermissions::CAN_INVITE_USERS,
+            ChatPermissions::CAN_CHANGE_INFO,
+            ChatPermissions::CAN_ADD_WEB_PAGE_PREVIEWS => true,
+            ChatPermissions::CAN_SEND_MESSAGES => false,
+        ])->send();
         $botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
         if ($botChat->language) {
             (new SendStartMessageTask($this->chat))->run();
