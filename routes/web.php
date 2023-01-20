@@ -18,16 +18,6 @@ use App\Http\Controllers\Api\v1\GetConfigController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('webapp/{chat}', function () {
-    return view('webapp.index');
-})->name('webapp');
-
-
 Route::prefix('api')->group(function () {
     Route::get('products', [GetProductsController::class, 'index']);
     Route::get('order/{reference}', [OrderController::class, 'getOrder']);

@@ -48,6 +48,7 @@ class SendStartMessageTask
                         ->webApp($this->clientApiUrl)
                 ]);
             })
+            ->removeReplyKeyboard(true)
             ->protected()
             ->send();
         (new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
