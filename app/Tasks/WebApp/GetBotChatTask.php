@@ -20,7 +20,7 @@ class GetBotChatTask
     {
         $chat = $this->botChatService->getByChatId($this->chatId);
         if (is_null($chat)) {
-            throw new GenericException("Chat undefined");
+            throw new GenericException("Chat {$this->chatId} undefined");
         }
         return $chat;
     }
