@@ -37,7 +37,7 @@ Route::prefix('api')->group(function () {
      * API v1 Routes
      */
     Route::prefix('v1')->group(function () {
-        Route::post('config', [GetConfigController::class, 'index']);
+        Route::get('config', [GetConfigController::class, 'index']);
     });
 
     /**
