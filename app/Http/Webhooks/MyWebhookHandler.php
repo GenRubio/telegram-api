@@ -18,7 +18,7 @@ class MyWebhookHandler extends WebhookHandler
     {
         $this->chat->action(ChatActions::TYPING)->send();
         $this->chat->setPermissions([
-            ChatPermissions::CAN_SEND_MESSAGES => false,
+            ChatPermissions::CAN_SEND_MESSAGES => true,
         ])->send();
         $botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
         if ($botChat->language) {
