@@ -18,9 +18,6 @@ class MyWebhookHandler extends WebhookHandler
     {
         $this->chat->action(ChatActions::TYPING)->send();
         $this->chat->setPermissions([
-            ChatPermissions::CAN_INVITE_USERS,
-            ChatPermissions::CAN_CHANGE_INFO,
-            ChatPermissions::CAN_ADD_WEB_PAGE_PREVIEWS => true,
             ChatPermissions::CAN_SEND_MESSAGES => false,
         ])->send();
         $botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
