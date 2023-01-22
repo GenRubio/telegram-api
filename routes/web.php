@@ -5,9 +5,9 @@ use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\StripeController;
 use App\Http\Controllers\Api\PaymentController;
-use App\Http\Controllers\Api\v1\AuthController;
 use App\Http\Controllers\Api\GetProductsController;
 use App\Http\Controllers\Api\v1\GetConfigController;
+use App\Http\Controllers\Api\v1\GetProductsV1Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +29,8 @@ Route::prefix('api')->group(function () {
      * API v1 Routes
      */
     Route::prefix('v1')->group(function () {
-        Route::get('auth/{token}', [AuthController::class, 'index']);
-        Route::post('config', [GetConfigController::class, 'index']);
+        Route::get('{token}/config', [GetConfigController::class, 'index']);
+        Route::get('{token}/products', [GetProductsV1Controller::class, 'index']);
     });
 
     /**

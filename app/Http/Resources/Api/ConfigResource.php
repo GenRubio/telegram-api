@@ -6,7 +6,7 @@ use App\Services\SettingService;
 use App\Services\TranslationService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetConfigResource extends JsonResource
+class ConfigResource extends JsonResource
 {
     private $translationService;
     private $translations;

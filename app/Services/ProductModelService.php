@@ -39,4 +39,9 @@ class ProductModelService extends Controller
     {
         return $this->productmodelRepository->getByReference($reference);
     }
+
+    public function getAllActive()
+    {
+        return $this->productmodelRepository->getAllActive();
+    }
 }

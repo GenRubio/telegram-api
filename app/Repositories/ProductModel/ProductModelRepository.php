@@ -57,4 +57,10 @@ class ProductModelRepository extends Repository implements ProductModelRepositor
             ->active()
             ->first();
     }
+
+    public function getAllActive()
+    {
+        return $this->model->where('active', true)
+            ->get();
+    }
 }

@@ -11,4 +11,5 @@ interface ProductModelRepositoryInterface
     public function enabled($id);
     public function getByReferences($references);
     public function getByReference($reference);
+    public function getAllActive();
 }
