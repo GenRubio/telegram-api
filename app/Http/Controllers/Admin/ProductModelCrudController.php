@@ -31,6 +31,7 @@ class ProductModelCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->removeActionsCrud();
+        $this->crud->addButtonFromView('line', 'model-valorations', 'model-valorations', 'beginning');
         $this->crud->addButtonFromView('line', 'model-flavors', 'model-flavors', 'beginning');
         $this->crud->addColumn([
             'name' => 'reference',

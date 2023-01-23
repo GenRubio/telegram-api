@@ -30,6 +30,7 @@ Route::group([
     Route::crud('product-model', 'ProductModelCrudController');
     Route::group(['prefix' => 'product-model/{product_model_id}'], function () {
         Route::crud('product-models-flavor', 'ProductModelsFlavorCrudController');
+        Route::crud('product-model-valoration', 'ProductModelValorationCrudController');
     });
     Route::crud('order', 'OrderCrudController');
     Route::group(['prefix' => 'order/{order_id}'], function () {
