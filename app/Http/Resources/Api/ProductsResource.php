@@ -24,9 +24,7 @@ class ProductsResource extends JsonResource
     {
         $products = [];
         foreach ($this->products as $product) {
-            $productData = $this->getProductData($product);
-
-            $products[] = $productData;
+            $products[] = $this->getProductData($product);
         }
         return $products;
     }

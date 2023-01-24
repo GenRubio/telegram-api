@@ -1,69 +1,59 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Api;
 
-use App\Services\BotService;
-use App\Services\SettingService;
 use App\Services\TranslationService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class WebAppDataResource extends JsonResource
+class ProductDetailResource extends JsonResource
 {
-    private $products;
+    private $product;
     private $translationService;
     private $translations;
-    private $language;
-    private $settingService;
-    private $settings;
 
-    public function __construct($products, $chat)
+    public function __construct($product)
     {
-        $this->products = $products;
+        $this->product = $product;
         $this->translationService = new TranslationService();
         $this->translations = $this->translationService->getAll();
-        $this->language = $chat->language->abbr;
-        $this->settingService = new SettingService();
-        $this->settings = $this->settingService->getAll();
     }
 
     public function toArray($request)
     {
         $response = [];
-        $response['products'] = $this->getPreparedProducts();
-        $response['translations'] = $this->getPreparedTranslations();
-        $response['settings'] = $this->getPreparedSettings();
+        $response['product'] = $this->getProductData($this->product);
+        $response['flavors'] = $this->getFlavorsData($this->product);
+        $response['valorations'] = $this->getValorationsData($this->product);
         return $response;
     }
 
-    private function getPreparedProducts()
+    private function getValorationsData($product)
     {
-        $products = [];
-        foreach ($this->products as $product) {
-            $productData = $this->getProductData($product);
-            $productData['flavors'] = [
-                'data' => $this->getFlavorsData($product)
+        $response = [];
+        foreach ($product->valorations as $valoration) {
+            $response[] = [
+                'stars' => $valoration->stars,
+                'comment' => $valoration->comment,
+                'likes' => $valoration->likes,
+                'dislikes' => $valoration->dislikes,
+                'created_at' => $valoration->created_at,
             ];
-            $products[] = $productData;
         }
-        return $products;
+        return $response;
     }
 
-    private function getPreparedTranslations()
+    private function getFlavorsData($product)
     {
-        $translations = [];
-        foreach ($this->translations as $translation) {
-            $translations[$translation->uuid] = $this->formatLangText($translation->uuid, $translation->langText($this->language));
+        $response = [];
+        foreach ($product->productModelsFlavors as $flavor) {
+            $response[] = [
+                'reference' => $flavor->reference,
+                'name' => $flavor->name,
+                'image' => url($flavor->image),
+                'stock' => $flavor->stock - $flavor->stock_bloqued,
+            ];
         }
-        return $translations;
-    }
-
-    private function getPreparedSettings()
-    {
-        $settings = [];
-        foreach ($this->settings as $setting) {
-            $settings["{$setting->key}a"] = $setting->value;
-        }
-        return $settings;
+        return $response;
     }
 
     private function getProductData($product)
@@ -76,6 +66,7 @@ class WebAppDataResource extends JsonResource
             'discount' => $product->discount,
             'price_with_discount' => $product->price_with_discount,
             'brand' => $product->productBrand->name,
+            'flavors' => count($product->productModelsFlavors),
             'description' => [
                 'data' => [
                     [
@@ -137,31 +128,9 @@ class WebAppDataResource extends JsonResource
         ];
     }
 
-    private function getFlavorsData($product)
+    private function getTranslationByUuid($uuid)
     {
-        $flavors = [];
-        foreach ($product->productModelsFlavors as $flavor) {
-            $flavors[] = [
-                'reference' => $flavor->reference,
-                'name' => $flavor->name,
-                'image' => url($flavor->image),
-                'stock' => $flavor->stock - $flavor->stock_bloqued,
-            ];
-        }
-        return $flavors;
-    }
-
-   
-
-    private function formatLangText($uuid, $text)
-    {
-        $formattedText = $text;
-        switch ($uuid) {
-            case '1671778172.297963a54f7c48b8b':
-                $price = $this->settings->where('key', '1671891736.2341')->first()->value;
-                $formattedText = str_replace("<price>", $price, $formattedText);
-                break;
-        }
-        return $formattedText;
+        $translation = $this->translations->where('uuid', $uuid)->first();
+        return $translation->langText($this->language);
     }
 }

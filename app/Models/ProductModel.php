@@ -65,6 +65,11 @@ class ProductModel extends Model
         return $this->hasMany(ProductModelsFlavor::class, 'product_model_id', 'id');
     }
 
+    public function valorations()
+    {
+        return $this->hasMany(ProductModelValoration::class, 'product_model_id', 'id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

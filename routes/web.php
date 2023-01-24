@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\GetProductsController;
 use App\Http\Controllers\Api\v1\GetConfigController;
 use App\Http\Controllers\Api\v1\GetProductsV1Controller;
+use App\Http\Controllers\Api\v1\GetProductDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::prefix('api')->group(function () {
     Route::prefix('v1')->group(function () {
         Route::get('{token}/config', [GetConfigController::class, 'index']);
         Route::get('{token}/products', [GetProductsV1Controller::class, 'index']);
+        Route::get('{token}/product/{reference}', [GetProductDetailController::class, 'index']);
     });
 
     /**
