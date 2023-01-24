@@ -8,12 +8,16 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ProductDetailResource extends JsonResource
 {
     private $product;
+    private $chat;
+    private $language;
     private $translationService;
     private $translations;
 
-    public function __construct($product)
+    public function __construct($product, $chat)
     {
         $this->product = $product;
+        $this->chat = $chat;
+        $this->language = $this->chat->language->abbr;
         $this->translationService = new TranslationService();
         $this->translations = $this->translationService->getAll();
     }
