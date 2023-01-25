@@ -164,4 +164,10 @@ class WebAppDataResource extends JsonResource
         }
         return $formattedText;
     }
+
+    private function getTranslationByUuid($uuid)
+    {
+        $translation = $this->translations->where('uuid', $uuid)->first();
+        return $translation->langText($this->language);
+    }
 }
