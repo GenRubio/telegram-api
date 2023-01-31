@@ -55,6 +55,15 @@ class ProductDetailResource extends JsonResource
                 'name' => $flavor->name,
                 'image' => url($flavor->image),
                 'stock' => $flavor->stock - $flavor->stock_bloqued,
+                'product_model' => [
+                    'reference' => $flavor->productModel->reference,
+                    'name' => $flavor->productModel->name,
+                    'image' => url($flavor->productModel->image),
+                    'price' => $flavor->productModel->price,
+                    'discount' => $flavor->productModel->discount,
+                    'price_with_discount' => $flavor->productModel->price_with_discount,
+                    'brand' => $flavor->productModel->productBrand->name,
+                ]
             ];
         }
         return $response;
