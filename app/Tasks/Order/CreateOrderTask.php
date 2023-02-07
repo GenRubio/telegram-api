@@ -40,6 +40,7 @@ class CreateOrderTask
         try {
             DB::beginTransaction();
             $orderPrepare = (new OrderPrepare($this->request, $this->customer))->run();
+            throw new GenericException("Hola");
             $this->order = $this->orderService->createOrder($orderPrepare);
             (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['pd_payment'], null))->run();
             $prderProductPrepare = (new OrderProductPrepare($this->order, $this->validateProductStock))->run();
