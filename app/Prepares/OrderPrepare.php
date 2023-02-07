@@ -4,8 +4,7 @@ namespace App\Prepares;
 
 use App\Enums\OrderStatusEnum;
 use App\Services\SettingService;
-use App\Exceptions\GenericException;
-use App\Services\ProductModelService;
+use App\Services\ProductModelsFlavorService;
 
 class OrderPrepare
 {
@@ -13,7 +12,7 @@ class OrderPrepare
     private $paymentData;
     private $products;
     private $settingService;
-    private $productModelService;
+    private $productModelsFlavorService;
 
     public function __construct($request, $customer)
     {
@@ -21,12 +20,11 @@ class OrderPrepare
         $this->paymentData = (object)$request->payment;
         $this->products = $request->products;
         $this->settingService = new SettingService();
-        $this->productModelService = new ProductModelService();
+        $this->productModelsFlavorService = new ProductModelsFlavorService();
     }
 
     public function run()
     {
-        throw new GenericException("Hola");
         return [
             'chat_id' => $this->customer->chat_id,
             'reference' => uniqid($this->customer->chat_id),
@@ -48,12 +46,12 @@ class OrderPrepare
     {
         $price = 0;
         foreach ($this->products as $item) {
-            $productData = (object)$item;
-            $productModel = $this->productModelService->getByReference($productData->reference);
-            if ($productModel->price != $productModel->price_with_discount) {
-                $price += $productModel->price_with_discount * $item['amount'];
+            $item = (object)$item;
+            $flavor = $this->productModelsFlavorService->getByReference($item->reference);
+            if ($flavor->productModel->price != $flavor->productModel->price_with_discount) {
+                $price += $flavor->productModel->price_with_discount * $item->amount;
             } else {
-                $price += $productModel->price * $item['amount'];
+                $price += $flavor->productModel->price * $item->amount;
             }
         }
         return $price;
