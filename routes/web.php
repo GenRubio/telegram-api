@@ -33,6 +33,7 @@ Route::prefix('api')->group(function () {
         Route::get('{token}/config', [GetConfigController::class, 'index']);
         Route::get('{token}/products', [GetProductsV1Controller::class, 'index']);
         Route::get('{token}/product/{reference}', [GetProductDetailController::class, 'index']);
+        Route::post('new-order', [OrderController::class, 'createOrder']);
     });
 
     /**
