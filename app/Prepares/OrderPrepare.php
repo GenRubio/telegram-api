@@ -4,6 +4,7 @@ namespace App\Prepares;
 
 use App\Enums\OrderStatusEnum;
 use App\Services\SettingService;
+use App\Exceptions\GenericException;
 use App\Services\ProductModelService;
 
 class OrderPrepare
@@ -25,6 +26,7 @@ class OrderPrepare
 
     public function run()
     {
+        throw new GenericException("Hola");
         return [
             'chat_id' => $this->customer->chat_id,
             'reference' => uniqid($this->customer->chat_id),
