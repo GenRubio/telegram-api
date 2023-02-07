@@ -39,4 +39,9 @@ class ProductModelsFlavorService extends Controller
     {
         $this->productmodelsflavorRepository->updateRemoveStock($flavorId, $amount);
     }
+
+    public function getByReference($reference)
+    {
+        return $this->productmodelsflavorRepository->getByReference($reference);
+    }
 }

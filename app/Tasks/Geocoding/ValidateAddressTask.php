@@ -26,7 +26,7 @@ class ValidateAddressTask
         $this->geocodingApiService->incrementRequests($this->geocoding->api_key);
         $this->geocodingApiService->incrementTotalRequests($this->geocoding->api_key);
 
-        $address = "{$this->paymentData->address} {$this->paymentData->postalCode} {$this->paymentData->city}";
+        $address = "{$this->paymentData->address} {$this->paymentData->postal_code} {$this->paymentData->city} {$this->paymentData->province}";
         $apiUrl = 'https://api.opencagedata.com/geocode/v1/json?q=' . urlencode($address) . '&key=' . $this->geocoding->api_key;
         $response = file_get_contents($apiUrl);
         $data = json_decode($response, true);

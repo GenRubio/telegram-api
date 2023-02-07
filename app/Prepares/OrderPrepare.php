@@ -31,10 +31,10 @@ class OrderPrepare
             'name' => $this->paymentData->name,
             'surnames' => $this->paymentData->surnames,
             'address' => $this->paymentData->address,
-            'postal_code' => $this->paymentData->postalCode,
+            'postal_code' => $this->paymentData->postal_code,
             'city' => $this->paymentData->city,
             'country' => $this->paymentData->country,
-            'payment_method' => $this->paymentData->paymentMethod,
+            'payment_method' => $this->paymentData->payment_method,
             'status' => OrderStatusEnum::STATUS_IDS['pd_payment'],
             'price' => $price = $this->getPrice(),
             'shipping_price' => $shippingPrice = $this->getShippingPrice($price),
@@ -46,7 +46,7 @@ class OrderPrepare
     {
         $price = 0;
         foreach ($this->products as $item) {
-            $productData = (object)$item['product'];
+            $productData = (object)$item;
             $productModel = $this->productModelService->getByReference($productData->reference);
             if ($productModel->price != $productModel->price_with_discount) {
                 $price += $productModel->price_with_discount * $item['amount'];

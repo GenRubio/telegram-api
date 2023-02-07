@@ -51,4 +51,10 @@ class ProductModelsFlavorRepository extends Repository implements ProductModelsF
     {
         $this->model->where('id', $flavorId)->decrement('stock', $amount);
     }
+
+    public function getByReference($reference)
+    {
+        return $this->model->where('reference', $reference)
+            ->first();
+    }
 }
