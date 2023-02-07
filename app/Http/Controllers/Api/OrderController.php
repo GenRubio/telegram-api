@@ -42,6 +42,7 @@ class OrderController extends Controller
             if (!(new ValidateAddressTask($request))->run()) {
                 throw new GenericException((new AddressNotFoundTextTask($customer->botChat))->run());
             }
+            throw new GenericException("Test");
             $validateProductStock = new ValidateProductsStockTask($request->products, $customer->botChat);
             $createOrder = new CreateOrderTask($request, $customer, $validateProductStock);
             $paymentUrl = (new GetPaymentUrlTask($createOrder->order))->run();
