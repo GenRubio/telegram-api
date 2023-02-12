@@ -36,4 +36,9 @@ class BrandRepository extends Repository implements BrandRepositoryInterface
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;
     }
+
+    public function getAllActive()
+    {
+        return $this->model->where('active', true)->get();
+    }
 }

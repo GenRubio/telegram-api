@@ -28,6 +28,7 @@ class ConfigResource extends JsonResource
         $response = [];
         $response['translations'] = $this->getPreparedTranslations();
         $response['settings'] = $this->getPreparedSettings();
+        $response['brands'] = new BrandsResource();
         return $response;
     }
 

@@ -8,5 +8,5 @@ namespace App\Repositories\Brand;
  */
 interface BrandRepositoryInterface
 {
-    //
+    public function getAllActive();
 }

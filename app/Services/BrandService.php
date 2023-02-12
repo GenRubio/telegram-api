@@ -25,12 +25,8 @@ class BrandService extends Controller
         $this->brandRepository = new BrandRepository();
     }
 
-    /**
-     * Entry
-     */
-    public function handle()
+    public function getAllActive()
     {
-        //
+        return $this->brandRepository->getAllActive();
     }
-
 }
