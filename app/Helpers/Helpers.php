@@ -5,6 +5,7 @@ use App\Helpers\CrudHelper;
 use App\Helpers\CacheHelper;
 use App\Helpers\UtilsHelper;
 use App\Helpers\SettingsHelper;
+use App\Helpers\FrontJsonHelper;
 use App\Helpers\BotMessagesTranslationsHelper;
 
 if (!function_exists('clearCache')) {
@@ -99,5 +100,51 @@ if (!function_exists('settings')) {
     function settings($key)
     {
         return SettingsHelper::settings($key);
+    }
+}
+
+/**
+ * FrontJsonHelper
+ */
+
+if (!function_exists('getJsonFirstLevelAttribute')) {
+    function getJsonFirstLevelAttribute($requestAll, $key, $array = false, $date = false)
+    {
+        return FrontJsonHelper::getJsonFirstLevelAttribute($requestAll, $key, $array, $date);
+    }
+}
+
+if (!function_exists('getJsonSecondLevelAttribute')) {
+    function getJsonSecondLevelAttribute($requestAll, $key, $secondKey, $array = false, $date = false)
+    {
+        return FrontJsonHelper::getJsonSecondLevelAttribute($requestAll, $key, $secondKey, $array, $date);
+    }
+}
+
+if (!function_exists('getJsonThirdLevelAttribute')) {
+    function getJsonThirdLevelAttribute($requestAll, $key, $secondKey, $thirdKey, $array = false, $date = false)
+    {
+        return FrontJsonHelper::getJsonThirdLevelAttribute($requestAll, $key, $secondKey, $thirdKey, $array, $date);
+    }
+}
+
+if (!function_exists('getJsonMetaValues')) {
+    function getJsonMetaValues($request)
+    {
+        return FrontJsonHelper::getJsonMetaValues($request);
+    }
+}
+
+if (!function_exists('getJsonDataValues')) {
+    function getJsonDataValues($request)
+    {
+        return FrontJsonHelper::getJsonDataValues($request);
+    }
+}
+
+if (!function_exists('getJsonValues')) {
+    function getJsonValues($request)
+    {
+        return FrontJsonHelper::getJsonValues($request);
     }
 }
