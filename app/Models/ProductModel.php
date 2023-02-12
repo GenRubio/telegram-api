@@ -81,6 +81,33 @@ class ProductModel extends Model
         return $query->where($this->table . '.active', true);
     }
 
+    public function scopeOrderBy($query, $order)
+    {
+        return $query->when(!empty($order) && $order == 'price_asc', function ($when) {
+            return $when->orderBy('price', 'asc');
+        })->when(!empty($order) && $order == 'price_desc', function ($when) {
+            return $when->orderBy('price', 'desc');
+        });
+    }
+
+    public function scopeNicotine($query, $nicotine)
+    {
+        return $query->when(!empty($nicotine) && $nicotine == '2', function ($when) {
+            return $when->where('concentration', '2')
+                ->orWhere('concentration', '20');
+        })->when(!empty($nicotine) && $nicotine == '5', function ($when) {
+            return $when->where('concentration', '5')
+                ->orWhere('concentration', '50');
+        });
+    }
+
+    public function scopeBrands($query, $brands)
+    {
+        return $query->when(!empty($brands), function ($when) use ($brands) {
+            return $when->whereIn('brand_id', $brands);
+        });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS

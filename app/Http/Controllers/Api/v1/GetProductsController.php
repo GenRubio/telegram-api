@@ -16,9 +16,9 @@ class GetProductsController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = (new FilterProductsPrepare($request))->get();
-            (new GetBotChatTask($data['token']))->run();
-            $products = (new ProductModelService())->getAllActive();
+            $filter = (new FilterProductsPrepare($request))->get();
+            (new GetBotChatTask($filter['token']))->run();
+            $products = (new ProductModelService())->get($filter);
             return response()->json(new ProductsResource($products));
         } catch (GenericException | Exception $e) {
             return response()->json([

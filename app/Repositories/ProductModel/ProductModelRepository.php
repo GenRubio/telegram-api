@@ -63,4 +63,14 @@ class ProductModelRepository extends Repository implements ProductModelRepositor
         return $this->model->where('active', true)
             ->get();
     }
+
+    public function get($filter)
+    {
+        return $this->model
+            ->nicotine($filter['nicotine'])
+            ->brands($filter['brands'])
+            ->orderBy($filter['order_by'])
+            ->where('active', true)
+            ->get();
+    }
 }

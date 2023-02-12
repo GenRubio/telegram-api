@@ -12,4 +12,5 @@ interface ProductModelRepositoryInterface
     public function getByReferences($references);
     public function getByReference($reference);
     public function getAllActive();
+    public function get($filter);
 }

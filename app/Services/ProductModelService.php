@@ -44,4 +44,9 @@ class ProductModelService extends Controller
     {
         return $this->productmodelRepository->getAllActive();
     }
+
+    public function get($filter)
+    {
+        return $this->productmodelRepository->get($filter);
+    }
 }
