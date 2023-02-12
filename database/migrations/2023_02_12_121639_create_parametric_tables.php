@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->text('comment')->nullable();
+            $table->boolean('resource')->default(true);
             $table->timestamps();
         });
     }

@@ -78,6 +78,8 @@
    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('setting') }}"><i class="nav-icon las la-tools"></i> Configuración</a></li>
    @endif
 @endif
+<li class="nav-title">Tablas parametricas</li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('parametric-table') }}"><i class="nav-icon la la-th-list"></i> Tablas</a></li>
 @if(backpack_user()->officePermission('UserCrudController', 'show'))
 <li class="nav-title">SERVIDOR</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('elfinder') }}"><i class="nav-icon la la-files-o"></i> Elfinder</a></li>

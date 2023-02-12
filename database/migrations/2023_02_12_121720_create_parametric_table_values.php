@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('parameter');
+            $table->boolean('resource')->default(true);
             $table->boolean('filter')->default(true);
             $table->boolean('visible')->default(true);
             $table->boolean('active')->default(true);
