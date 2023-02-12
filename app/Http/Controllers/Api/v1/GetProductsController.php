@@ -17,7 +17,6 @@ class GetProductsController extends Controller
     {
         try {
             $data = (new FilterProductsPrepare($request))->get();
-            return response()->json($data);
             (new GetBotChatTask($data['token']))->run();
             $products = (new ProductModelService())->getAllActive();
             return response()->json(new ProductsResource($products));
