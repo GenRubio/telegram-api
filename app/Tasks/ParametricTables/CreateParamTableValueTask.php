@@ -10,24 +10,21 @@ class CreateParamTableValueTask
     private $entityName;
     private $createModel;
     private $createBackpackCrud;
-    private $createService;
-    private $createRepository;
+    private $createHexagonalStructure;
     private $createResource;
 
     public function __construct(
         $tableName,
         $createModel = true,
         $createBackpackCrud = true,
-        $createService = true,
-        $createRepository = true,
+        $createHexagonalStructure = true,
         $createResource = true
     ) {
         $this->tableName = $tableName;
         $this->entityName = $this->setEntityName();
         $this->createModel = $createModel;
         $this->createBackpackCrud = $createBackpackCrud;
-        $this->createService = $createService;
-        $this->createRepository = $createRepository;
+        $this->createHexagonalStructure = $createHexagonalStructure;
         $this->createResource = $createResource;
     }
 
@@ -36,8 +33,7 @@ class CreateParamTableValueTask
         $this->validateOptions();
         $this->createModel();
         $this->createBackpackCrud();
-        $this->createService();
-        $this->createRespository();
+        $this->createHexagonalStructure();
         $this->createResource();
     }
 
@@ -53,15 +49,9 @@ class CreateParamTableValueTask
         }
     }
 
-    private function createService()
+    private function createHexagonalStructure()
     {
-        if ($this->createService) {
-        }
-    }
-
-    private function createRespository()
-    {
-        if ($this->createRepository) {
+        if ($this->createHexagonalStructure) {
         }
     }
 
