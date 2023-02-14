@@ -175,7 +175,7 @@ class MakeParametricService extends Command
     {
         $this->folder = app_path('Services' . '/' . 'ParametricTableValues' . '/');
         if (!file_exists($this->folder)) {
-            mkdir(base_path($this->folder), $this->folderPermissions, true);
+            mkdir($this->folder, $this->folderPermissions, true);
             $this->info('Services folder created successfully!');
         }
     }
