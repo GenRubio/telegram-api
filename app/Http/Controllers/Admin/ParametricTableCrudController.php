@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Str;
 use App\Http\Requests\ParametricTableRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use App\Tasks\ParametricTables\CreateParamTableValueTask;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class ParametricTableCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+        store as traitStore;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -31,7 +35,7 @@ class ParametricTableCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'comment',
             'label' => 'Comentario',
-            'type'  => 'text',
+            'type'  => 'textarea',
         ]);
         $this->crud->addColumn([
             'name' => 'resource',
@@ -54,7 +58,7 @@ class ParametricTableCrudController extends CrudController
             [
                 'name' => 'comment',
                 'label' => 'Comentario',
-                'type' => 'text',
+                'type' => 'textarea',
                 'tab' => 'Tabla'
             ],
             [
@@ -92,8 +96,33 @@ class ParametricTableCrudController extends CrudController
     {
         CRUD::setValidation(ParametricTableRequest::class);
 
-        CRUD::field('name');
-        CRUD::field('comment');
-        CRUD::field('resource');
+        $this->crud->addFields([
+            [
+                'name' => 'name',
+                'label' => 'Nomber',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'comment',
+                'label' => 'Comentario',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'resource',
+                'type' => 'checkbox',
+                'label' => 'Resource',
+                'default' => true,
+            ],
+        ]);
+    }
+
+    public function store()
+    {
+        $tableName = Str::snake(request()->input('name'));
+        $createModel = request()->input('create_model_table_values');
+        $createBackpackCrud  = request()->input('create_backpack_table_values');
+        $createHexagonalStructure  = request()->input('create_hexagonal_table_values');
+        (new CreateParamTableValueTask($tableName, $createModel, $createBackpackCrud, $createHexagonalStructure))->run();
+        return $this->traitStore();
     }
 }
