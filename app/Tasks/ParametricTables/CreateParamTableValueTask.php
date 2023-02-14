@@ -39,7 +39,6 @@ class CreateParamTableValueTask
         if ($this->createModel) {
             Artisan::call('make:parametric-model ' . $this->entityName . ' ' . $this->tableName);
         }
-        dd(1);
     }
 
     private function createBackpackCrud()
