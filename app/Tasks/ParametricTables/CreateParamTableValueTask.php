@@ -30,8 +30,8 @@ class CreateParamTableValueTask
     {
         $this->validateOptions();
         $this->createModel();
-        $this->createBackpackCrud();
         $this->createHexagonalStructure();
+        $this->createBackpackCrud();
     }
 
     private function createModel()
