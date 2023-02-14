@@ -160,7 +160,7 @@ class MakeParametricRepository extends Command
     {
         $this->folder = app_path('Repositories/ParametricTableValue/' . $this->singularModelName);
         if (!file_exists($this->folder)) {
-            mkdir($this->folder, $this->folderPermissions, true);
+            mkdir(base_path($this->folder), $this->folderPermissions, true);
             $this->info($this->singularModelName . ' folder created successfully into Repositories folder!');
         }
     }
