@@ -128,7 +128,7 @@ class MakeParametricService extends Command
     {
         $this->checkIfServiceFolderExists();
         if (!is_file(base_path($this->folder  . $this->serviceName . '.php'))) {
-            file_put_contents(base_path($this->folder  . $this->serviceName . '.php'), $file);
+            file_put_contents($this->folder  . $this->serviceName . '.php', $file);
             $this->info($this->serviceName . ' created successfully!');
         } else {
             $this->info('Service already exists');
