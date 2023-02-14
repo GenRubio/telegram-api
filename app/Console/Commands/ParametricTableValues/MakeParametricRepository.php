@@ -133,7 +133,7 @@ class MakeParametricRepository extends Command
     private function saveRepositoryInterface(string $file)
     {
         if (!is_file(base_path($this->folder . '/' . $this->singularRepositoryInterfaceName . '.php'))) {
-            file_put_contents(base_path($this->folder . '/' . $this->singularRepositoryInterfaceName . '.php'), $file);
+            file_put_contents($this->folder . '/' . $this->singularRepositoryInterfaceName . '.php', $file);
             $this->info($this->singularRepositoryInterfaceName . ' created successfully!');
         } else {
             $this->info('RepositoryInterface already exists');
