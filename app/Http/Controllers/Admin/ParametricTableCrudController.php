@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Exception;
 use Illuminate\Support\Str;
+use Prologue\Alerts\Facades\Alert;
+use App\Exceptions\GenericException;
 use App\Http\Requests\ParametricTableRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Tasks\ParametricTables\CreateParamTableValueTask;
@@ -122,7 +125,13 @@ class ParametricTableCrudController extends CrudController
         $createModel = request()->input('create_model_table_values');
         $createBackpackCrud  = request()->input('create_backpack_table_values');
         $createHexagonalStructure  = request()->input('create_hexagonal_table_values');
-        (new CreateParamTableValueTask($tableName, $createModel, $createBackpackCrud, $createHexagonalStructure))->run();
-        return $this->traitStore();
+        try{
+            (new CreateParamTableValueTask($tableName, $createModel, $createBackpackCrud, $createHexagonalStructure))->run();
+            return $this->traitStore();
+        }
+        catch(GenericException | Exception $e){
+            Alert::add('success', $e->getMessage())->flash();
+            return back();
+        }
     }
 }

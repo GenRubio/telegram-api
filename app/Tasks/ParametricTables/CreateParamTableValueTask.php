@@ -66,11 +66,8 @@ class CreateParamTableValueTask
         if ($this->createBackpackCrud && !$this->createModel) {
             throw new GenericException("No es posible crear Backpack CRUD sin el Modelo");
         }
-        if ($this->createService && !$this->createModel) {
-            throw new GenericException("No es posible crear Service sin el Modelo");
-        }
-        if ($this->createRepository && !$this->createService) {
-            throw new GenericException("No es posible crear Respository sin el Service");
+        if ($this->createHexagonalStructure && !$this->createModel) {
+            throw new GenericException("No es posible crear estructura hexagonal sin el Modelo");
         }
     }
 }
