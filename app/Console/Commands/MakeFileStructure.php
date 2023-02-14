@@ -59,7 +59,7 @@ class MakeFileStructure extends Command
 
     private function saveFile(string $file)
     {
-        file_put_contents($this->fullPath, $file);
+        file_put_contents(base_path($this->fullPath), $file);
         $this->info("{$this->fullName} created successfully!");
     }
 
@@ -72,7 +72,7 @@ class MakeFileStructure extends Command
 
     private function validateTaskName()
     {
-        if (file_exists($this->fullPath)) {
+        if (file_exists(base_path($this->fullPath))) {
             $this->error("{$this->fullName} already exists");
             return false;
         }
