@@ -53,7 +53,7 @@ class MakeFileStructure extends Command
     private function makeFile($key)
     {
         $function = "{$this->replaceWordsFunction}{$key}";
-        $file = $this->$function(file_get_contents($this->stubPath));
+        $file = $this->$function(file_get_contents(base_path($this->stubPath)));
         $this->saveFile($file);
     }
 
