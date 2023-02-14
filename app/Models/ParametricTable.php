@@ -39,6 +39,11 @@ class ParametricTable extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function parametricTableValues()
+    {
+        return $this->hasMany(ParametricTableValue::class, 'parametric_table_id', 'id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

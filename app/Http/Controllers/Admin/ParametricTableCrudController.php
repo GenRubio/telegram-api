@@ -79,22 +79,8 @@ class ParametricTableCrudController extends CrudController
                 'tab' => 'Configuración (Valores)'
             ],
             [
-                'name' => 'create_service_table_values',
-                'label' => 'Crear service',
-                'type' => 'checkbox',
-                'default' => true,
-                'tab' => 'Configuración (Valores)'
-            ],
-            [
-                'name' => 'create_repository_table_values',
-                'label' => 'Crear repository',
-                'type' => 'checkbox',
-                'default' => true,
-                'tab' => 'Configuración (Valores)'
-            ],
-            [
-                'name' => 'create_resource_table_values',
-                'label' => 'Crear resource',
+                'name' => 'create_hexagonal_table_values',
+                'label' => 'Crear estructura hexagonal',
                 'type' => 'checkbox',
                 'default' => true,
                 'tab' => 'Configuración (Valores)'
