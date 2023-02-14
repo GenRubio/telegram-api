@@ -65,8 +65,8 @@ class MakeFileStructure extends Command
 
     private function makeDirectories()
     {
-        if (!is_dir($this->pathDirectories)) {
-            mkdir($this->pathDirectories, $this->folderPermissions, true);
+        if (!is_dir(base_path($this->pathDirectories))) {
+            mkdir(base_path($this->pathDirectories), $this->folderPermissions, true);
         }
     }
 
