@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\ParametricTableValues;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;

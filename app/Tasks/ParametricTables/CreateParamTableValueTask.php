@@ -3,6 +3,7 @@
 namespace App\Tasks\ParametricTables;
 
 use App\Exceptions\GenericException;
+use Illuminate\Support\Facades\Artisan;
 
 class CreateParamTableValueTask
 {
@@ -11,21 +12,18 @@ class CreateParamTableValueTask
     private $createModel;
     private $createBackpackCrud;
     private $createHexagonalStructure;
-    private $createResource;
 
     public function __construct(
         $tableName,
         $createModel = true,
         $createBackpackCrud = true,
         $createHexagonalStructure = true,
-        $createResource = true
     ) {
         $this->tableName = $tableName;
         $this->entityName = $this->setEntityName();
         $this->createModel = $createModel;
         $this->createBackpackCrud = $createBackpackCrud;
         $this->createHexagonalStructure = $createHexagonalStructure;
-        $this->createResource = $createResource;
     }
 
     public function run()
@@ -34,30 +32,27 @@ class CreateParamTableValueTask
         $this->createModel();
         $this->createBackpackCrud();
         $this->createHexagonalStructure();
-        $this->createResource();
     }
 
     private function createModel()
     {
         if ($this->createModel) {
+            Artisan::call('make:parametric-model ' . $this->entityName . ' ' . $this->tableName);
         }
     }
 
     private function createBackpackCrud()
     {
         if ($this->createBackpackCrud) {
+            Artisan::call('backpack:crud-parametric ' . $this->entityName . 'Table');
         }
     }
 
     private function createHexagonalStructure()
     {
         if ($this->createHexagonalStructure) {
-        }
-    }
-
-    private function createResource()
-    {
-        if ($this->createResource) {
+            Artisan::call('make:parametric-repository ' . $this->entityName . 'Table');
+            Artisan::call('make:parametric-service ' . $this->entityName . 'Table');
         }
     }
 
@@ -70,9 +65,6 @@ class CreateParamTableValueTask
     {
         if ($this->createBackpackCrud && !$this->createModel) {
             throw new GenericException("No es posible crear Backpack CRUD sin el Modelo");
-        }
-        if ($this->createResource && !$this->createModel) {
-            throw new GenericException("No es posible crear Resource sin el Modelo");
         }
         if ($this->createService && !$this->createModel) {
             throw new GenericException("No es posible crear Service sin el Modelo");
