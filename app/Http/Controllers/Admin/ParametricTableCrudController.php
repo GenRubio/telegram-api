@@ -121,7 +121,8 @@ class ParametricTableCrudController extends CrudController
 
     public function store()
     {
-        $tableName = Str::snake(request()->input('name'));
+        request()->request->set('name', Str::snake(request()->input('name')));
+        $tableName = request()->input('name');
         $createModel = request()->input('create_model_table_values');
         $createBackpackCrud  = request()->input('create_backpack_table_values');
         $createHexagonalStructure  = request()->input('create_hexagonal_table_values');
