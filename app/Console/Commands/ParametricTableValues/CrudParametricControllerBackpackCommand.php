@@ -92,7 +92,7 @@ class CrudParametricControllerBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/../stubs/ParametricTableValues/parametric-crud-controller.stub';
+        return base_path('stubs/ParametricTableValues/parametric-crud-controller.stub');
     }
 
     /**
@@ -154,7 +154,7 @@ class CrudParametricControllerBackpackCommand extends GeneratorCommand
     protected function replaceSetFromDb(&$stub, $name)
     {
         $class = Str::afterLast($name, '\\');
-        $model = "App\\Models\\ParametricTablesValues\\$class";
+        $model = "App\\Models\\ParametricTableValues\\$class";
 
         if (! class_exists($model)) {
             return $this;
