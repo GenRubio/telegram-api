@@ -1,0 +1,43 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Http\Requests\DummyClassRequest;
+use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+
+class DummyClassCrudController extends CrudController
+{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+
+    public function setup()
+    {
+        CRUD::setModel(\App\Models\DummyClass::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/dummy-class');
+        CRUD::setEntityNameStrings('dummy singular', 'dummy plural');
+    }
+
+    protected function setupListOperation()
+    {
+        CRUD::setFromDb(); // columns
+
+
+    }
+
+    protected function setupCreateOperation()
+    {
+        CRUD::setValidation(DummyClassRequest::class);
+
+        CRUD::setFromDb(); // fields
+
+    }
+
+    protected function setupUpdateOperation()
+    {
+        $this->setupCreateOperation();
+    }
+}
