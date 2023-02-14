@@ -97,7 +97,7 @@ class MakeParametricRepository extends Command
      */
     private function makeRepository()
     {
-        $repository = $this->replaceWords(file_get_contents('stubs/ParametricTableValues/parametric-repository.stub'));
+        $repository = $this->replaceWords(file_get_contents(base_path('stubs/ParametricTableValues/parametric-repository.stub')));
         $this->saveRepository($repository);
     }
 
