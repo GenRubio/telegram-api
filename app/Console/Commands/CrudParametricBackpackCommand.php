@@ -1,6 +1,6 @@
 <?php
 
-namespace Backpack\Generators\Console\Commands;
+namespace App\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
