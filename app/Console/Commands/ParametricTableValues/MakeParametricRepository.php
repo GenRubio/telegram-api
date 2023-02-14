@@ -109,7 +109,7 @@ class MakeParametricRepository extends Command
     private function saveRepository(string $file)
     {
         if (!is_file(base_path($this->folder . '/' . $this->singularRepositoryName . '.php'))) {
-            file_put_contents(base_path($this->folder . '/' . $this->singularRepositoryName . '.php'), $file);
+            file_put_contents($this->folder . '/' . $this->singularRepositoryName . '.php', $file);
             $this->info($this->singularRepositoryName . ' created successfully!');
         } else {
             $this->info('Repository already exists');
