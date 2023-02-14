@@ -51,8 +51,8 @@ class CreateParamTableValueTask
     private function createHexagonalStructure()
     {
         if ($this->createHexagonalStructure) {
-            Artisan::call('make:parametric-repository ' . $this->entityName . 'Table');
-            Artisan::call('make:parametric-service ' . $this->entityName . 'Table');
+            Artisan::call('make:parametric-repository ' . $this->entityName);
+            Artisan::call('make:parametric-service ' . $this->entityName);
         }
     }
 
