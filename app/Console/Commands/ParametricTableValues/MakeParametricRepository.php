@@ -108,8 +108,8 @@ class MakeParametricRepository extends Command
      */
     private function saveRepository(string $file)
     {
-        if (!is_file($this->folder . '/' . $this->singularRepositoryName . '.php')) {
-            file_put_contents($this->folder . '/' . $this->singularRepositoryName . '.php', $file);
+        if (!is_file(base_path($this->folder . '/' . $this->singularRepositoryName . '.php'))) {
+            file_put_contents(base_path($this->folder . '/' . $this->singularRepositoryName . '.php'), $file);
             $this->info($this->singularRepositoryName . ' created successfully!');
         } else {
             $this->info('Repository already exists');
@@ -121,7 +121,7 @@ class MakeParametricRepository extends Command
      */
     private function makeRepositoryInterface()
     {
-        $interfaceRepository = $this->replaceWords(file_get_contents('stubs/ParametricTableValues/parametric-repository.interface.stub'));
+        $interfaceRepository = $this->replaceWords(file_get_contents(base_path('stubs/ParametricTableValues/parametric-repository.interface.stub')));
         $this->saveRepositoryInterface($interfaceRepository);
     }
 
@@ -132,8 +132,8 @@ class MakeParametricRepository extends Command
      */
     private function saveRepositoryInterface(string $file)
     {
-        if (!is_file($this->folder . '/' . $this->singularRepositoryInterfaceName . '.php')) {
-            file_put_contents($this->folder . '/' . $this->singularRepositoryInterfaceName . '.php', $file);
+        if (!is_file(base_path($this->folder . '/' . $this->singularRepositoryInterfaceName . '.php'))) {
+            file_put_contents(base_path($this->folder . '/' . $this->singularRepositoryInterfaceName . '.php'), $file);
             $this->info($this->singularRepositoryInterfaceName . ' created successfully!');
         } else {
             $this->info('RepositoryInterface already exists');

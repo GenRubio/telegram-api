@@ -115,7 +115,7 @@ class MakeParametricService extends Command
     private function makeService(): void
     {
         $stubFile = 'stubs/ParametricTableValues/parametric-service.repository.stub';
-        $service = $this->replaceWords(file_get_contents($stubFile));
+        $service = $this->replaceWords(file_get_contents(base_path($stubFile)));
         $this->saveService($service);
     }
 
@@ -127,8 +127,8 @@ class MakeParametricService extends Command
     private function saveService(string $file): void
     {
         $this->checkIfServiceFolderExists();
-        if (!is_file($this->folder  . $this->serviceName . '.php')) {
-            file_put_contents($this->folder  . $this->serviceName . '.php', $file);
+        if (!is_file(base_path($this->folder  . $this->serviceName . '.php'))) {
+            file_put_contents(base_path($this->folder  . $this->serviceName . '.php'), $file);
             $this->info($this->serviceName . ' created successfully!');
         } else {
             $this->info('Service already exists');
