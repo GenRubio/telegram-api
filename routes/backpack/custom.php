@@ -64,4 +64,5 @@ Route::group([
     Route::crud('affiliate', 'AffiliateCrudController');
     Route::crud('parametric-table', 'ParametricTableCrudController');
     Route::crud('settings-table', 'SettingsTableCrudController');
+    Route::crud('social-networks-table', 'SocialNetworksTableCrudController');
 }); // this should be the absolute last line of this file
