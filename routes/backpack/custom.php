@@ -63,4 +63,5 @@ Route::group([
     Route::crud('geocoding-api', 'GeocodingApiCrudController');
     Route::crud('affiliate', 'AffiliateCrudController');
     Route::crud('parametric-table', 'ParametricTableCrudController');
+    Route::crud('settings-table', 'SettingsTableCrudController');
 }); // this should be the absolute last line of this file
