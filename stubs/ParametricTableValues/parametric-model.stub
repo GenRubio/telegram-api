@@ -54,9 +54,4 @@ class {{ class }} extends ParametricTableValue
     {
         $this->attributes['parametric_table_id'] = ParametricTable::where('name', $this->parametricTableName)->first()->id;
     }
-
-    public function setKeyAttribute()
-    {
-        $this->attributes['key'] = $this->parametricTableName . '-' . Str::snake($this->attributes['name']);
-    }
 }

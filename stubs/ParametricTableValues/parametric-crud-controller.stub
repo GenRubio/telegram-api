@@ -2,6 +2,7 @@
 
 namespace DummyNamespace;
 
+use Illuminate\Support\Str;
 use App\Http\Requests\DummyClassRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -9,7 +10,9 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class DummyClassCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+        store as traitStore;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -23,6 +26,11 @@ class DummyClassCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->crud->addColumn([
+            'name' => 'key',
+            'label' => 'Key',
+            'type'  => 'text',
+        ]);
          $this->crud->addColumn([
             'name' => 'parametricTable',
             'label' => 'Tabla',
@@ -128,5 +136,11 @@ class DummyClassCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function store()
+    {
+        request()->request->set('key', $this->crud->model->parametricTableName . '-' .Str::snake(request()->input('name')));
+        return $this->traitStore();
     }
 }
