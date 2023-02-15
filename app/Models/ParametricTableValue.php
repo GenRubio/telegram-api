@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ParametricTableValue extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     protected static function boot()
     {
         parent::boot();

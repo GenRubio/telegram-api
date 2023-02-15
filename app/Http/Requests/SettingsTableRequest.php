@@ -25,9 +25,7 @@ class SettingsTableRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'description' => 'required',
-            'parameter' => 'required',
+            // 'name' => 'required|min:5|max:255'
         ];
     }
 
