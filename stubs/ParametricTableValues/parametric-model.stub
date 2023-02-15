@@ -2,6 +2,7 @@
 
 namespace {{ namespace }};
 
+use App\Models\ParametricTable;
 use App\Models\ParametricTableValue;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
@@ -47,4 +48,9 @@ class {{ class }} extends ParametricTableValue
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setParametricTableIdAttribute()
+    {
+        $this->attributes['parametric_table_id'] = ParametricTable::where('name', $this->parametricTableName)->first()->id;
+    }
 }
