@@ -79,6 +79,10 @@ class DummyClassCrudController extends CrudController
                 'type' => 'hidden',
             ],
             [
+                'name' => 'key',
+                'type' => 'hidden',
+            ],
+            [
                 'name' => 'name',
                 'label' => 'Nombre',
                 'type' => 'text',

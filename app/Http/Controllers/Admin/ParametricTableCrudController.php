@@ -131,7 +131,6 @@ class ParametricTableCrudController extends CrudController
             return $this->traitStore();
         }
         catch(GenericException | Exception $e){
-            dd($e);
             Alert::add('error', $e->getMessage())->flash();
             return back();
         }
