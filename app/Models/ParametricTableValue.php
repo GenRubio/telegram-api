@@ -26,6 +26,7 @@ class ParametricTableValue extends Model
     protected $fillable = [
         'parametric_table_id',
         'name',
+        'description',
         'parameter',
         'resource',
         'filter',
