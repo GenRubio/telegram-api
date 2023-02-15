@@ -67,6 +67,11 @@ class ParametricTableValue extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function setParametricTableIdAttribute()
+    {
+        return $this->parametricTable->id;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS
