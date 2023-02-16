@@ -124,7 +124,7 @@ class TelegramBotMessageCrudController extends CrudController
         $data[] = [
             'name' => 'image',
             'label' => 'Imagen',
-            'type' => 'upload',
+            'type' => 'upload-image',
             'upload' => true,
         ];
         $data[] = [
