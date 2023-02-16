@@ -27,7 +27,8 @@ class TelegramBotGlobalMessageRequest extends FormRequest
         return [
             'description' => 'required',
             'execution_date' => 'required',
-            'telegram_bot_group_id' => 'required'
+            'telegram_bot_group_id' => 'required',
+            'message' => 'required'
         ];
     }
 
