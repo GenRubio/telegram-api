@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 
 class Translation extends Model
 {
     use CrudTrait;
+    use HasTranslations;
 
     /*
     |--------------------------------------------------------------------------
@@ -25,6 +27,10 @@ class Translation extends Model
     ];
     // protected $hidden = [];
     // protected $dates = [];
+
+    protected $translatable = [
+        'text',
+    ];
 
     /*
     |--------------------------------------------------------------------------

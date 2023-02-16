@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Language;
 use App\Http\Requests\TelegramBotMessageRequest;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -12,12 +11,8 @@ class TelegramBotMessageCrudController extends CrudController
 {
     use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
-        store as traitStore;
-    }
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
-        update as traitUpdate;
-    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -54,123 +49,83 @@ class TelegramBotMessageCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(TelegramBotMessageRequest::class);
-        $this->crud->addFields($this->setCreateFields());
-    }
-
-    private function setCreateFields()
-    {
-        $laguages = Language::active()->orderBy('default', 'desc')->get();
-        $data = [];
-        $data[] = [
-            'name' => 'key',
-            'type' => 'hidden',
-        ];
-        $data[] = [
-            'name' => 'message',
-            'type' => 'hidden',
-        ];
-        $data[] = [
-            'name' => 'description',
-            'label' => 'Descripcion',
-            'type' => 'text',
-        ];
-        $data[] = [
-            'name' => 'image',
-            'label' => 'Imagen',
-            'type' => 'upload',
-            'upload' => true,
-        ];
-        $data[] = [
-            'name' => 'emojis_url',
-            'type' => 'custom_html',
-            'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
-        ];
-        foreach ($laguages as $lang) {
-            $data[] = [
-                'name' => "lang_{$lang->abbr}",
-                'label' => "Mensaje ({$lang->abbr})",
+        $this->crud->addFields([
+            [
+                'name' => 'key',
+                'type' => 'hidden',
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Descripcion',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'emojis_url',
+                'type' => 'custom_html',
+                'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
+            ],
+            [
+                'name' => "message",
+                'label' => "Mensaje",
                 'type'  => 'summernote',
                 'options' => [
                     'toolbar' => [
                         ['font', ['bold', 'underline', 'italic']]
                     ],
-                    'minheight' => 200,
-                    'height' => 200
+                    'minheight' => 300,
+                    'height' => 300
                 ],
-            ];
-        }
-        return $data;
+            ],
+            [
+                'name' => 'image',
+                'label' => 'Imagen',
+                'type' => 'upload',
+                'upload' => true,
+            ]
+        ]);
     }
 
     protected function setupUpdateOperation()
     {
         CRUD::setValidation(TelegramBotMessageRequest::class);
-        $this->crud->addFields($this->setUpdateFields());
-    }
-
-    private function setUpdateFields()
-    {
-        $laguages = Language::active()->orderBy('default', 'desc')->get();
-        $data = [];
-        $data[] = [
-            'name' => 'message',
-            'type' => 'hidden',
-        ];
-        $data[] = [
-            'name' => 'description',
-            'label' => 'Descripcion',
-            'type' => 'text',
-        ];
-        $data[] = [
-            'name' => 'image',
-            'label' => 'Imagen',
-            'type' => 'upload-image',
-            'upload' => true,
-        ];
-        $data[] = [
-            'name' => 'emojis_url',
-            'type' => 'custom_html',
-            'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
-        ];
-        foreach ($laguages as $lang) {
-            $data[] = [
-                'name' => "lang_{$lang->abbr}",
-                'label' => "Mensaje ({$lang->abbr})",
+        $this->crud->addFields([
+            [
+                'name' => 'key',
+                'label' => 'Key',
+                'type' => 'text',
+                'attributes' => [
+                    'readonly' => 'readonly',
+                    'disabled' => 'disabled'
+                ],
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Descripcion',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'emojis_url',
+                'type' => 'custom_html',
+                'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
+            ],
+            [
+                'name' => "message",
+                'label' => "Mensaje",
                 'type'  => 'summernote',
                 'options' => [
                     'toolbar' => [
                         ['font', ['bold', 'underline', 'italic']]
                     ],
-                    'minheight' => 200,
-                    'height' => 200
+                    'minheight' => 300,
+                    'height' => 300
                 ],
-                'value' => $this->crud->getCurrentEntry()->getTextValueForInput($lang->abbr)
-            ];
-        }
-        return $data;
-    }
-
-    public function store()
-    {
-        $textData = [];
-        $laguages = Language::active()->orderBy('default', 'desc')->get();
-        foreach ($laguages as $lang) {
-            $textValue = request()->input("lang_{$lang->abbr}");
-            $textData[$lang->abbr] = $textValue;
-        }
-        request()->request->set('message', json_encode($textData));
-        return $this->traitStore();
-    }
-
-    public function update()
-    {
-        $textData = [];
-        $laguages = Language::active()->orderBy('default', 'desc')->get();
-        foreach ($laguages as $lang) {
-            $textValue = request()->input("lang_{$lang->abbr}");
-            $textData[$lang->abbr] = $textValue;
-        }
-        request()->request->set('message', json_encode($textData));
-        return $this->traitUpdate();
+            ],
+            [
+                'name' => 'image',
+                'label' => 'Imagen',
+                'type' => 'upload-image',
+                'upload' => true,
+            ]
+        ]);
     }
 }

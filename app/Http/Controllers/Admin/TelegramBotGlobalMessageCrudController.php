@@ -86,8 +86,8 @@ class TelegramBotGlobalMessageCrudController extends CrudController
                     'toolbar' => [
                         ['font', ['bold', 'underline', 'italic']]
                     ],
-                    'minheight' => 200,
-                    'height' => 200
+                    'minheight' => 300,
+                    'height' => 300
                 ],
             ],
             [
@@ -114,6 +114,53 @@ class TelegramBotGlobalMessageCrudController extends CrudController
 
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
+        CRUD::setValidation(TelegramBotGlobalMessageRequest::class);
+        $this->crud->addFields([
+            [
+                'name' => 'status',
+                'type' => 'hidden',
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Descripcion',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'emojis_url',
+                'type' => 'custom_html',
+                'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
+            ],
+            [
+                'name' => "message",
+                'label' => "Mensaje",
+                'type'  => 'summernote',
+                'options' => [
+                    'toolbar' => [
+                        ['font', ['bold', 'underline', 'italic']]
+                    ],
+                    'minheight' => 300,
+                    'height' => 300
+                ],
+            ],
+            [
+                'name' => 'execution_date',
+                'label' => 'Fecha lanzamiento',
+                'type' => 'datetime',
+            ],
+            [
+                'label'     => "Grupo Bots",
+                'type'      => 'select',
+                'name'      => 'telegram_bot_group_id',
+                'entity'    => 'telegramBotGroup',
+                'model'     => "App\Models\TelegramBotGroup",
+                'attribute' => 'name',
+            ],
+            [
+                'name' => 'image',
+                'label' => 'Imagen',
+                'type' => 'upload-image',
+                'upload' => true,
+            ]
+        ]);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Language;
 use App\Http\Requests\BotTranslationRequest;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -12,12 +11,8 @@ class BotTranslationCrudController extends CrudController
 {
     use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
-        store as traitStore;
-    }
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
-        update as traitUpdate;
-    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -35,13 +30,13 @@ class BotTranslationCrudController extends CrudController
     {
         $this->removeActionsCrud();
         $this->crud->addColumn([
-            'name' => 'default_lang_text',
-            'label' => 'Texto',
+            'name' => 'key',
+            'label' => 'Key',
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'key',
-            'label' => 'Key',
+            'name' => 'default_lang_text',
+            'label' => 'Texto',
             'type'  => 'text',
         ]);
     }
@@ -49,77 +44,37 @@ class BotTranslationCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(BotTranslationRequest::class);
-        $this->crud->addFields($this->setCreateFields());
-    }
-
-    private function setCreateFields()
-    {
-        $laguages = Language::active()->orderBy('default', 'desc')->get();
-        $data = [];
-        $data[] = [
-            'name' => 'key',
-            'type' => 'hidden',
-        ];
-        $data[] = [
-            'name' => 'text',
-            'type' => 'hidden',
-        ];
-        foreach ($laguages as $lang) {
-            $data[] = [
-                'name' => "lang_{$lang->abbr}",
-                'label' => "Texto ({$lang->abbr})",
+        $this->crud->addFields([
+            [
+                'name' => 'key',
+                'type' => 'hidden',
+            ],
+            [
+                'name' => "text",
+                'label' => "Texto",
                 'type' => 'textarea',
-            ];
-        }
-        return $data;
+            ]
+        ]);
     }
 
     protected function setupUpdateOperation()
     {
         CRUD::setValidation(BotTranslationRequest::class);
-        $this->crud->addFields($this->setUpdateFields());
-    }
-
-    private function setUpdateFields()
-    {
-        $laguages = Language::active()->orderBy('default', 'desc')->get();
-        $data = [];
-        $data[] = [
-            'name' => 'text',
-            'type' => 'hidden',
-        ];
-        foreach ($laguages as $lang) {
-            $data[] = [
-                'name' => "lang_{$lang->abbr}",
-                'label' => "Texto ({$lang->abbr})",
+        $this->crud->addFields([
+            [
+                'name' => 'key',
+                'label' => 'Key',
+                'type' => 'text',
+                'attributes' => [
+                    'readonly' => 'readonly',
+                    'disabled' => 'disabled'
+                ],
+            ],
+            [
+                'name' => "text",
+                'label' => "Texto",
                 'type' => 'textarea',
-                'value' => $this->crud->getCurrentEntry()->getTextValueForInput($lang->abbr)
-            ];
-        }
-        return $data;
-    }
-
-    public function store()
-    {
-        $textData = [];
-        $laguages = Language::active()->orderBy('default', 'desc')->get();
-        foreach ($laguages as $lang){
-            $textValue = request()->input("lang_{$lang->abbr}");
-            $textData[$lang->abbr] = $textValue;
-        }
-        request()->request->set('text', json_encode($textData));
-        return $this->traitStore();
-    }
-
-    public function update()
-    {
-        $textData = [];
-        $laguages = Language::active()->orderBy('default', 'desc')->get();
-        foreach ($laguages as $lang){
-            $textValue = request()->input("lang_{$lang->abbr}");
-            $textData[$lang->abbr] = $textValue;
-        }
-        request()->request->set('text', json_encode($textData));
-        return $this->traitUpdate();
+            ]
+        ]);
     }
 }

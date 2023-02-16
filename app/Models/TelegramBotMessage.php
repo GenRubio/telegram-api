@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use App\Services\BotService;
 use App\Services\LanguageService;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 
 class TelegramBotMessage extends Model
 {
     use CrudTrait;
+    use HasTranslations;
 
     /*
     |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ class TelegramBotMessage extends Model
     ];
     // protected $hidden = [];
     // protected $dates = [];
+
+    protected $translatable = [
+        'message',
+    ];
 
     /*
     |--------------------------------------------------------------------------
