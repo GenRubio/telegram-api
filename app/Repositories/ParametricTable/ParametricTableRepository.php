@@ -36,4 +36,15 @@ class ParametricTableRepository extends Repository implements ParametricTableRep
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;
     }
+
+    public function getAll()
+    {
+        return $this->model->all();
+    }
+
+    public function getForResource()
+    {
+        return $this->model->where('resource', true)
+            ->get();
+    }
 }

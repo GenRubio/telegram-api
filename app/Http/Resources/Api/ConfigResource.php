@@ -4,7 +4,9 @@ namespace App\Http\Resources\Api;
 
 use App\Services\SettingService;
 use App\Services\TranslationService;
+use App\Services\ParametricTableService;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\ParametricTable\ParametricTableCollection;
 
 class ConfigResource extends JsonResource
 {
@@ -13,6 +15,7 @@ class ConfigResource extends JsonResource
     private $language;
     private $settingService;
     private $settings;
+    private $parametricTables;
 
     public function __construct($chat)
     {
@@ -21,6 +24,7 @@ class ConfigResource extends JsonResource
         $this->language = $chat->language->abbr;
         $this->settingService = new SettingService();
         $this->settings = $this->settingService->getAll();
+        $this->parametricTables = (new ParametricTableService())->getForResource();
     }
 
     public function toArray($request)
@@ -29,6 +33,11 @@ class ConfigResource extends JsonResource
         $response['translations'] = $this->getPreparedTranslations();
         $response['settings'] = $this->getPreparedSettings();
         $response['brands'] = json_decode(json_encode(new BrandsResource()));
+        $parametricTablesResponse = [];
+        foreach ($this->parametricTables as $table) {
+            $parametricTablesResponse[$table->name] = new ParametricTableCollection($table);
+        }
+        $response['parametric_tables'] = $parametricTablesResponse;
         return $response;
     }
 

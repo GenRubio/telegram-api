@@ -25,12 +25,13 @@ class ParametricTableService extends Controller
         $this->parametrictableRepository = new ParametricTableRepository();
     }
 
-    /**
-     * Entry
-     */
-    public function handle()
+    public function getAll()
     {
-        //
+        return $this->parametrictableRepository->getAll();
     }
 
+    public function getForResource()
+    {
+        return $this->parametrictableRepository->getForResource();
+    }
 }

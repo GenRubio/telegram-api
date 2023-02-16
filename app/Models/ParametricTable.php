@@ -44,6 +44,13 @@ class ParametricTable extends Model
         return $this->hasMany(ParametricTableValue::class, 'parametric_table_id', 'id');
     }
 
+    public function parametricTableValuesResource()
+    {
+        return $this->hasMany(ParametricTableValue::class, 'parametric_table_id', 'id')
+            ->where('resource', true)
+            ->where('active', true);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -52,7 +59,7 @@ class ParametricTable extends Model
 
     public function scopeName($query, $name)
     {
-        return $query->when(!is_null($name), function($query) use ($name){
+        return $query->when(!is_null($name), function ($query) use ($name) {
             return $query->where('name', $name);
         });
     }
