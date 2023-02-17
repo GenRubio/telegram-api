@@ -16,44 +16,40 @@
 </div>
 @include('crud::fields.inc.wrapper_end')
 @push('crud_fields_styles')
-    @loadOnce('upload_field_styles')
-        <style type="text/css">
-            .preview {
-                max-width: 100%;
-                max-height: 300px;
-            }
+    <style type="text/css">
+        .preview {
+            max-width: 100%;
+            max-height: 300px;
+        }
 
-            .image-container {
-                margin-bottom: 10px;
-            }
-        </style>
-    @endLoadOnce
+        .image-container {
+            margin-bottom: 10px;
+        }
+    </style>
 @endpush
 
 @push('crud_fields_scripts')
-    @loadOnce('bpFieldInitUploadElement')
-        <script>
-            $(document).ready(function() {
-                $("form").attr("enctype", "multipart/form-data");
-                const fileInput = document.getElementById("fileInput");
-                const previewImage = document.getElementById("previewImage");
+    <script>
+        $(document).ready(function() {
+            $("form").attr("enctype", "multipart/form-data");
+            const fileInput = document.getElementById("fileInput");
+            const previewImage = document.getElementById("previewImage");
 
-                fileInput.addEventListener("change", function() {
-                    const file = this.files[0];
+            fileInput.addEventListener("change", function() {
+                const file = this.files[0];
 
-                    if (file) {
-                        const reader = new FileReader();
+                if (file) {
+                    const reader = new FileReader();
 
-                        reader.addEventListener("load", function() {
-                            previewImage.setAttribute("src", this.result);
-                        });
+                    reader.addEventListener("load", function() {
+                        previewImage.setAttribute("src", this.result);
+                    });
 
-                        reader.readAsDataURL(file);
-                    } else {
-                        previewImage.setAttribute("src", "");
-                    }
-                });
-            })
-        </script>
-    @endLoadOnce
+                    reader.readAsDataURL(file);
+                } else {
+                    previewImage.setAttribute("src", "");
+                }
+            });
+        })
+    </script>
 @endpush

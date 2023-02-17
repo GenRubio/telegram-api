@@ -190,6 +190,12 @@ class ProductModelCrudController extends CrudController
                 'type' => 'text',
                 'tab' => 'Detalle'
             ],
+            //[
+            //    'name' => 'gallery',
+            //    'label' => 'Imagenes',
+            //    'type' => 'gallery-v1',
+            //    'tab' => 'Galeria'
+            //],
             [
                 'name' => 'active',
                 'type' => 'checkbox',

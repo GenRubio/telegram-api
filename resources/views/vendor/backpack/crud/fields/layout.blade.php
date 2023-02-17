@@ -7,15 +7,15 @@
 
 @include('crud::fields.inc.wrapper_end')
 @push('crud_fields_styles')
-    @loadOnce('upload_field_styles')
-        <style type="text/css">
-            
-        </style>
-    @endLoadOnce
+    <style type="text/css">
+
+    </style>
 @endpush
 
 @push('crud_fields_scripts')
-    @loadOnce('bpFieldInitUploadElement')
-        <script></script>
-    @endLoadOnce
+    <script>
+         $(document).ready(function() {
+
+         });
+    </script>
 @endpush
