@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('parametric_table_values', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parametric_table_id');
-            $table->text('key')->unique();
+            $table->string('key')->unique();
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('parameter');
