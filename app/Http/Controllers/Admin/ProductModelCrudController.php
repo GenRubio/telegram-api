@@ -90,8 +90,7 @@ class ProductModelCrudController extends CrudController
             [
                 'name' => 'image',
                 'label' => 'Imagen',
-                'type' => 'upload-image',
-                'upload' => true,
+                'type' => 'image-v2',
                 'tab' => 'Producto'
             ],
             [

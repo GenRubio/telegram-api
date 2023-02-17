@@ -79,8 +79,7 @@ class TelegramBotMessageCrudController extends CrudController
             [
                 'name' => 'image',
                 'label' => 'Imagen',
-                'type' => 'upload',
-                'upload' => true,
+                'type' => 'image-v2',
             ]
         ]);
     }
@@ -123,8 +122,7 @@ class TelegramBotMessageCrudController extends CrudController
             [
                 'name' => 'image',
                 'label' => 'Imagen',
-                'type' => 'upload-image',
-                'upload' => true,
+                'type' => 'image-v2',
             ]
         ]);
     }
