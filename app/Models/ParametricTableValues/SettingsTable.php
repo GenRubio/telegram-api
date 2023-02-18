@@ -24,6 +24,13 @@ class SettingsTable extends ParametricTableValue
     |--------------------------------------------------------------------------
     */
 
+    public function getParamatricTableId()
+    {
+        return ParametricTable::where('name', $this->parametricTableName)
+            ->first()
+            ->id;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

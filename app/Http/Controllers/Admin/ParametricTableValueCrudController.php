@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Requests\ParametricTableValueRequest;
+use App\Models\ParametricTable;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Str;
@@ -17,12 +19,36 @@ class ParametricTableValueCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
+    protected $parametricTableId;
+    protected $parametricTable;
+
     public function setup()
     {
         CRUD::setModel(\App\Models\ParametricTableValue::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/parametric-table-value');
-        CRUD::setEntityNameStrings('parametric table value', 'parametric table values');
+        $this->parametricTableId = Route::current()->parameter('parametric_table_id');
+        CRUD::setRoute('admin/parametric-table/' . $this->parametricTableId . '/parametric-table-value');
+        CRUD::setEntityNameStrings('valor', 'Valores de tabla parametrica');
+        $this->parametricTable = ParametricTable::find($this->parametricTableId);
+        $this->breadCrumbs();
+        $this->listFilter();
     }
+
+    protected function breadCrumbs()
+    {
+        $this->data['breadcrumbs'] = [
+            trans('backpack::crud.admin') => backpack_url('dashboard'),
+            'Tablas Parametricas' => backpack_url('parametric-table'),
+            'Valores' => backpack_url("parametric-table/" . $this->parametricTableId . "/parametric-table-value"),
+            trans('backpack::crud.list') => false,
+        ];
+    }
+
+    protected function listFilter()
+    {
+        $this->crud->addClause('where', 'parametric_table_id', $this->parametricTableId)
+            ->orderBy('order', 'asc');
+    }
+
 
     protected function setupListOperation()
     {
@@ -90,6 +116,7 @@ class ParametricTableValueCrudController extends CrudController
             [
                 'name' => 'parametric_table_id',
                 'type' => 'hidden',
+                'value' => $this->parametricTableId
             ],
             [
                 'name' => 'key',
@@ -150,7 +177,7 @@ class ParametricTableValueCrudController extends CrudController
 
     public function store()
     {
-        request()->request->set('key', $this->crud->model->parametricTableName . '-' . Str::snake(request()->input('name')));
+        request()->request->set('key', $this->parametricTable->name . '-' . Str::snake(request()->input('name')));
         return $this->traitStore();
     }
 }

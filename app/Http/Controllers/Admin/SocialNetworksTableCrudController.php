@@ -17,11 +17,15 @@ class SocialNetworksTableCrudController extends ParametricTableValueCrudControll
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
+    protected $parametricTableId;
+
     public function setup()
     {
         CRUD::setModel(\App\Models\ParametricTableValues\SocialNetworksTable::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/social-networks-table');
         CRUD::setEntityNameStrings('red', 'redes sociales');
+
+        $this->parametricTableId = $this->crud->model->getParamatricTableId();
     }
 
     public function store()

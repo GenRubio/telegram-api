@@ -27,12 +27,10 @@ class ProductModelsFlavorCrudController extends CrudController
         if (!backpack_user()->officePermission(get_class($this), 'show')) {
             abort(403);
         }
-        CRUD::setModel(\App\Models\ProductModelsFlavor::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/product-models-flavor');
-        CRUD::setEntityNameStrings('sabor', 'sabores');
-
         $this->productModelId = Route::current()->parameter('product_model_id');
-        $this->crud->setRoute("admin/product-model/" . $this->productModelId . '/product-models-flavor');
+        CRUD::setModel(\App\Models\ProductModelsFlavor::class);
+        CRUD::setRoute("admin/product-model/" . $this->productModelId . '/product-models-flavor');
+        CRUD::setEntityNameStrings('sabor', 'sabores');
         $this->breadCrumbs();
         $this->listFilter();
     }

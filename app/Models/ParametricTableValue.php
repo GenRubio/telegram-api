@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Scopes\ParametricTableScope;
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class ParametricTableValue extends Model
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    use CrudTrait;
     protected static function boot()
     {
         parent::boot();
@@ -69,11 +70,6 @@ class ParametricTableValue extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
-
-    public function setParametricTableIdAttribute()
-    {
-        return $this->parametricTable->id;
-    }
 
     /*
     |--------------------------------------------------------------------------
