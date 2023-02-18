@@ -13,24 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('parametric_table_values', function (Blueprint $table) {
+        Schema::create('gallery_products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parametric_table_id');
-            $table->string('key')->unique();
-            $table->string('name');
+            $table->string('title')->nullable();
+            $table->string('alt')->nullable();
             $table->text('description')->nullable();
-            $table->string('parameter');
+            $table->text('image');
             $table->integer('order')->default(1);
-            $table->boolean('resource')->default(true);
-            $table->boolean('filter')->default(true);
             $table->boolean('visible')->default(true);
             $table->boolean('active')->default(true);
             $table->timestamps();
-
-            $table->foreign('parametric_table_id')
-                ->references('id')
-                ->on('parametric_tables')
-                ->cascadeOnDelete();
         });
     }
 
@@ -41,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parametric_table_values');
+        Schema::dropIfExists('gallery_products');
     }
 };

@@ -41,14 +41,16 @@ class ParametricTable extends Model
 
     public function parametricTableValues()
     {
-        return $this->hasMany(ParametricTableValue::class, 'parametric_table_id', 'id');
+        return $this->hasMany(ParametricTableValue::class, 'parametric_table_id', 'id')
+            ->orderBy('order', 'asc');
     }
 
     public function parametricTableValuesResource()
     {
         return $this->hasMany(ParametricTableValue::class, 'parametric_table_id', 'id')
             ->where('resource', true)
-            ->where('active', true);
+            ->where('active', true)
+            ->orderBy('order', 'asc');
     }
 
     /*

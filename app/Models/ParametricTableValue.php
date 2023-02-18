@@ -30,6 +30,7 @@ class ParametricTableValue extends Model
         'name',
         'description',
         'parameter',
+        'order',
         'resource',
         'filter',
         'visible',

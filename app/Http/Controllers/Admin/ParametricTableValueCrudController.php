@@ -56,6 +56,11 @@ class ParametricTableValueCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
+            'name' => 'order',
+            'label' => 'Prioridad',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'resource',
             'type' => 'btnToggleV2',
             'label' => 'Resource',
@@ -104,6 +109,12 @@ class ParametricTableValueCrudController extends CrudController
                 'name' => 'parameter',
                 'label' => 'Parametro',
                 'type' => 'text',
+            ],
+            [
+                'name' => 'order',
+                'label' => 'Prioridad',
+                'type' => 'number',
+                'default' => 1
             ],
             [
                 'name' => 'resource',
