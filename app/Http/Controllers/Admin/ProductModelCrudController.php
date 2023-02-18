@@ -11,7 +11,9 @@ class ProductModelCrudController extends CrudController
 {
     use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+        store as traitStore;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
         update as traitUpdate;
     }
@@ -231,5 +233,10 @@ class ProductModelCrudController extends CrudController
             $request->request->remove('name');
         }
         return $request;
+    }
+
+    public function store()
+    {
+        return $this->traitStore();
     }
 }
