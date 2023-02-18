@@ -30,6 +30,7 @@ class ParametricTableCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->crud->addButtonFromView('line', 'parametric-table-values', 'parametric-table-values', 'beginning');
         $this->crud->addColumn([
             'name' => 'name',
             'label' => 'Nombre',
@@ -39,6 +40,11 @@ class ParametricTableCrudController extends CrudController
             'name' => 'comment',
             'label' => 'Comentario',
             'type'  => 'textarea',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'count_values',
+            'label' => 'Valores',
+            'type'  => 'number',
         ]);
         $this->crud->addColumn([
             'name' => 'resource',
@@ -82,7 +88,7 @@ class ParametricTableCrudController extends CrudController
                 'name' => 'create_backpack_table_values',
                 'label' => 'Crear Backpack (CRUD)',
                 'type' => 'checkbox',
-                'default' => true,
+                'default' => false,
                 'tab' => 'Configuración (Valores)'
             ],
             [

@@ -72,6 +72,11 @@ class ParametricTable extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getCountValuesAttribute()
+    {
+        return count($this->parametricTableValues);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS
