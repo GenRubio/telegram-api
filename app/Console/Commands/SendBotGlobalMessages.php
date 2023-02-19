@@ -40,6 +40,7 @@ class SendBotGlobalMessages extends Command
                 $telegramBotGlobalMessageService
                     ->updateStatus($message->id, BotGlobalMessagesEnum::STATUS_IDS['sent']);
             } catch (Exception $e) {
+                dd($e);
                 $telegramBotGlobalMessageService
                     ->updateStatus($message->id, BotGlobalMessagesEnum::STATUS_IDS['error']);
             }
