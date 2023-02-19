@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Enums\BotGlobalMessagesEnum;
 use App\Tasks\Bot\SendGlobalMessageTask;
 use App\Services\TelegramBotGlobalMessageService;
+use Exception;
 
 class SendBotGlobalMessages extends Command
 {
@@ -34,9 +35,14 @@ class SendBotGlobalMessages extends Command
         $pendingSend = $telegramBotGlobalMessageService
             ->getPendingSend(BotGlobalMessagesEnum::STATUS_IDS['pd_sent']);
         foreach ($pendingSend as $message) {
-            (new SendGlobalMessageTask($message))->run();
-            $telegramBotGlobalMessageService
-                ->updateStatus($message->id, BotGlobalMessagesEnum::STATUS_IDS['sent']);
+            try {
+                (new SendGlobalMessageTask($message))->run();
+                $telegramBotGlobalMessageService
+                    ->updateStatus($message->id, BotGlobalMessagesEnum::STATUS_IDS['sent']);
+            } catch (Exception $e) {
+                $telegramBotGlobalMessageService
+                    ->updateStatus($message->id, BotGlobalMessagesEnum::STATUS_IDS['error']);
+            }
         }
     }
 }
