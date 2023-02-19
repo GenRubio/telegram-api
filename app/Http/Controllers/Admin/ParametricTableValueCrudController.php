@@ -172,7 +172,59 @@ class ParametricTableValueCrudController extends CrudController
 
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
+        CRUD::setValidation(ParametricTableValueRequest::class);
+
+        $this->crud->addFields([
+            [
+                'name' => 'name',
+                'label' => 'Nombre',
+                'type' => 'text',
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                ],
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Descripcion',
+                'type' => 'textarea',
+            ],
+            [
+                'name' => 'parameter',
+                'label' => 'Parametro',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'order',
+                'label' => 'Prioridad',
+                'type' => 'number',
+                'default' => 1
+            ],
+            [
+                'name' => 'resource',
+                'type' => 'checkbox',
+                'label' => 'Resource',
+                'default' => true,
+            ],
+            [
+                'name' => 'filter',
+                'type' => 'checkbox',
+                'label' => 'Filter',
+                'default' => true,
+            ],
+            [
+                'name' => 'visible',
+                'type' => 'checkbox',
+                'label' => 'Visible',
+                'default' => true,
+            ],
+            [
+                'name' => 'active',
+                'type' => 'checkbox',
+                'label' => 'Active',
+                'default' => true,
+            ],
+        ]);
     }
 
     public function store()
