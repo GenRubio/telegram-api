@@ -25,11 +25,9 @@ class ProductModelValorationCrudController extends CrudController
             abort(403);
         }
         CRUD::setModel(\App\Models\ProductModelValoration::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/product-model-valoration');
-        CRUD::setEntityNameStrings('valoracion', 'valoraciones');
-
         $this->productModelId = Route::current()->parameter('product_model_id');
-        $this->crud->setRoute("admin/product-model/" . $this->productModelId . '/product-model-valoration');
+        CRUD::setRoute("admin/product-model/" . $this->productModelId . '/product-model-valoration');
+        CRUD::setEntityNameStrings('valoracion', 'valoraciones');
         $this->breadCrumbs();
         $this->listFilter();
     }

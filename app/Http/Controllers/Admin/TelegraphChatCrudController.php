@@ -26,11 +26,9 @@ class TelegraphChatCrudController extends CrudController
             abort(403);
         }
         CRUD::setModel(BotChat::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/telegraph-chat');
-        CRUD::setEntityNameStrings('telegraph chat', 'telegraph chats');
-
         $this->botId = Route::current()->parameter('bot_id');
-        $this->crud->setRoute("admin/bot/" . $this->botId . '/telegraph-chat');
+        CRUD::setRoute("admin/bot/" . $this->botId . '/telegraph-chat');
+        CRUD::setEntityNameStrings('telegraph chat', 'telegraph chats');
         $this->breadCrumbs();
         $this->listFilter();
     }

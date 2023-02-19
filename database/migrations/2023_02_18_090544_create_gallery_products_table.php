@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('gallery_products', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('product_model_id');
             $table->string('title')->nullable();
             $table->string('alt')->nullable();
             $table->text('description')->nullable();
@@ -23,6 +24,11 @@ return new class extends Migration
             $table->boolean('visible')->default(true);
             $table->boolean('active')->default(true);
             $table->timestamps();
+
+            $table->foreign('product_model_id')
+                ->references('id')
+                ->on('product_models')
+                ->cascadeOnDelete();
         });
     }
 

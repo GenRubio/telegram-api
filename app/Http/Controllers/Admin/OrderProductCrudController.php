@@ -25,11 +25,9 @@ class OrderProductCrudController extends CrudController
             abort(403);
         }
         CRUD::setModel(\App\Models\OrderProduct::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/order-product');
-        CRUD::setEntityNameStrings('order product', 'order products');
-
         $this->orderId = Route::current()->parameter('order_id');
-        $this->crud->setRoute("admin/order/" . $this->orderId . '/order-product');
+        CRUD::setRoute("admin/order/" . $this->orderId . '/order-product');
+        CRUD::setEntityNameStrings('order product', 'order products');
         $this->breadCrumbs();
         $this->listFilter();
     }

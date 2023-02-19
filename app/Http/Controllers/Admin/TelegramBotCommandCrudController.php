@@ -25,11 +25,9 @@ class TelegramBotCommandCrudController extends CrudController
             abort(403);
         }
         CRUD::setModel(\App\Models\TelegramBotCommand::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/telegram-bot-command');
-        CRUD::setEntityNameStrings('comando', 'comandos');
-
         $this->botId = Route::current()->parameter('bot_id');
-        $this->crud->setRoute("admin/bot/" . $this->botId . '/telegram-bot-command');
+        CRUD::setRoute("admin/bot/" . $this->botId . '/telegram-bot-command');
+        CRUD::setEntityNameStrings('comando', 'comandos');
         $this->breadCrumbs();
         $this->listFilter();
     }

@@ -62,12 +62,21 @@ class ProductModel extends Model
 
     public function productModelsFlavors()
     {
-        return $this->hasMany(ProductModelsFlavor::class, 'product_model_id', 'id');
+        return $this->hasMany(ProductModelsFlavor::class, 'product_model_id', 'id')
+            ->where('active', true);
     }
 
     public function valorations()
     {
-        return $this->hasMany(ProductModelValoration::class, 'product_model_id', 'id');
+        return $this->hasMany(ProductModelValoration::class, 'product_model_id', 'id')
+            ->where('visible', true);
+    }
+
+    public function galleryImages()
+    {
+        return $this->hasMany(GalleryProduct::class, 'product_model_id', 'id')
+            ->where('active', true)
+            ->orderBy('order', 'asc');
     }
 
     /*
