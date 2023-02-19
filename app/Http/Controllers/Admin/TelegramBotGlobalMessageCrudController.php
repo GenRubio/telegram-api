@@ -30,6 +30,11 @@ class TelegramBotGlobalMessageCrudController extends CrudController
     {
         $this->removeActionsCrud();
         $this->crud->addColumn([
+            'name' => 'execution_date',
+            'label' => 'Fecha ejecucion',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'status',
             'label' => 'Estado',
             'type'  => 'status-global-message',
@@ -52,11 +57,6 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             'entity'    => 'telegramBotGroup',
             'attribute' => 'name',
             'model'     => "App\Models\TelegramBotGroup",
-        ]);
-        $this->crud->addColumn([
-            'name' => 'execution_date',
-            'label' => 'Fecha ejecucion',
-            'type'  => 'text',
         ]);
     }
 
