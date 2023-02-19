@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('gallery_products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_model_id');
-            $table->string('title')->nullable();
-            $table->string('alt')->nullable();
+            $table->text('title')->nullable();
+            $table->text('alt')->nullable();
             $table->text('description')->nullable();
             $table->text('image');
             $table->integer('order')->default(1);

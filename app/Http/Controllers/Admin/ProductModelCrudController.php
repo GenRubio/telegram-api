@@ -34,11 +34,17 @@ class ProductModelCrudController extends CrudController
     {
         $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'model-valorations', 'model-valorations', 'beginning');
+        $this->crud->addButtonFromView('line', 'model-gallery-images', 'model-gallery-images', 'beginning');
         $this->crud->addButtonFromView('line', 'model-flavors', 'model-flavors', 'beginning');
         $this->crud->addColumn([
             'name' => 'reference',
             'label' => 'Referencia',
             'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'active',
+            'type' => 'btnToggleV2',
+            'label' => 'Activo',
         ]);
         $this->crud->addColumn([
             'name' => 'image',
@@ -74,11 +80,6 @@ class ProductModelCrudController extends CrudController
             'name' => 'product_models_flavors_count',
             'label' => 'Sabores',
             'type'  => 'text',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'active',
-            'type' => 'btnToggleV2',
-            'label' => 'Activo',
         ]);
     }
 

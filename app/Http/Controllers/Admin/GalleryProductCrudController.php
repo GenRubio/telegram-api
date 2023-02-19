@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Requests\GalleryProductRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
-/**
- * Class GalleryProductCrudController
- * @package App\Http\Controllers\Admin
- * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
- */
 class GalleryProductCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
@@ -19,76 +15,118 @@ class GalleryProductCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
-    /**
-     * Configure the CrudPanel object. Apply settings to all operations.
-     * 
-     * @return void
-     */
+    protected $productModelId;
+
     public function setup()
     {
         CRUD::setModel(\App\Models\GalleryProduct::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/gallery-product');
-        CRUD::setEntityNameStrings('gallery product', 'gallery products');
+        $this->productModelId = Route::current()->parameter('product_model_id');
+        CRUD::setRoute("admin/product-model/" . $this->productModelId . '/gallery-product');
+        CRUD::setEntityNameStrings('imagen', 'imagenes');
+        $this->breadCrumbs();
+        $this->listFilter();
     }
 
-    /**
-     * Define what happens when the List operation is loaded.
-     * 
-     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
-     * @return void
-     */
+    protected function breadCrumbs()
+    {
+        $this->data['breadcrumbs'] = [
+            trans('backpack::crud.admin') => backpack_url('dashboard'),
+            'Productos' => backpack_url('product-model'),
+            'Imagenes' => backpack_url("product-model/" . $this->productModelId . "/gallery-product"),
+            trans('backpack::crud.list') => false,
+        ];
+    }
+
+    protected function listFilter()
+    {
+        $this->crud->addClause('where', 'product_model_id', $this->productModelId)
+            ->orderBy('order', 'asc');
+    }
+
     protected function setupListOperation()
     {
-        CRUD::column('product_model_id');
-        CRUD::column('title');
-        CRUD::column('alt');
-        CRUD::column('description');
-        CRUD::column('image');
-        CRUD::column('order');
-        CRUD::column('visible');
-        CRUD::column('active');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
+        $this->crud->addColumn([
+            'name' => 'image',
+            'label' => 'Imagen',
+            'type'  => 'image',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'productModel',
+            'label' => 'Modelo',
+            'type'      => 'select',
+            'name'      => 'product_model_id',
+            'entity'    => 'productModel',
+            'attribute' => 'name',
+            'model'     => "App\Models\ProductModel",
+        ]);
+        $this->crud->addColumn([
+            'name' => 'order',
+            'label' => 'Prioridad',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'visible',
+            'type' => 'btnToggleV2',
+            'label' => 'Visible',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'active',
+            'type' => 'btnToggleV2',
+            'label' => 'Activo',
+        ]);
     }
 
-    /**
-     * Define what happens when the Create operation is loaded.
-     * 
-     * @see https://backpackforlaravel.com/docs/crud-operation-create
-     * @return void
-     */
     protected function setupCreateOperation()
     {
         CRUD::setValidation(GalleryProductRequest::class);
 
-        CRUD::field('product_model_id');
-        CRUD::field('title');
-        CRUD::field('alt');
-        CRUD::field('description');
-        CRUD::field('image');
-        CRUD::field('order');
-        CRUD::field('visible');
-        CRUD::field('active');
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
+        $this->crud->addFields([
+            [
+                'name' => 'product_model_id',
+                'value' => $this->productModelId,
+                'type' => 'hidden',
+            ],
+            [
+                'name' => 'image',
+                'label' => 'Imagen',
+                'type' => 'image-v2',
+            ],
+            [
+                'name' => 'title',
+                'label' => 'Titulo',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'alt',
+                'label' => 'ALT',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Decripcion',
+                'type' => 'textarea',
+            ],
+            [
+                'name' => 'order',
+                'label' => 'Prioridad',
+                'type' => 'number',
+                'default' => 1
+            ],
+            [
+                'name' => 'visible',
+                'type' => 'checkbox',
+                'label' => 'Visible',
+                'default' => true,
+            ],
+            [
+                'name' => 'active',
+                'type' => 'checkbox',
+                'label' => 'Activo',
+                'default' => true,
+            ],
+        ]);
     }
 
-    /**
-     * Define what happens when the Update operation is loaded.
-     * 
-     * @see https://backpackforlaravel.com/docs/crud-operation-update
-     * @return void
-     */
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();

@@ -59,6 +59,11 @@ class ProductModelsFlavorCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
+            'name' => 'active',
+            'type' => 'btnToggleV2',
+            'label' => 'Activo',
+        ]);
+        $this->crud->addColumn([
             'name' => 'image',
             'label' => 'Imagen',
             'type'  => 'image',
@@ -86,11 +91,6 @@ class ProductModelsFlavorCrudController extends CrudController
             'name' => 'stock_bloqued',
             'label' => 'Stock bloqueado',
             'type'  => 'text',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'active',
-            'type' => 'btnToggleV2',
-            'label' => 'Activo',
         ]);
     }
 
