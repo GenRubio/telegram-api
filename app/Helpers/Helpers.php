@@ -66,6 +66,13 @@ if (!function_exists('refactorBitMap')) {
     }
 }
 
+if (!function_exists('translateText')) {
+    function translateText($abbr, $attribute)
+    {
+        return UtilsHelper::translateText($abbr, $attribute);
+    }
+}
+
 /**
  * CrudHelper
  */

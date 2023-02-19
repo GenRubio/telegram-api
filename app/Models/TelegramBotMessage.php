@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Services\LanguageService;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -45,16 +44,7 @@ class TelegramBotMessage extends Model
 
     public function getLangMessage($abbr)
     {
-        $language = (new LanguageService())->getByAbbr($abbr);
-        $message = json_decode($this->attributes['message'])->{$language->abbr};
-        $newcontent = preg_replace("/<p[^>]*?>/", "", $message);
-        $newcontent = str_replace("</p>", "\n", $newcontent);
-        $newcontent = preg_replace("/<span[^>]*?>/", "", $newcontent);
-        $newcontent = str_replace("</span>", "", $newcontent);
-        $newcontent = preg_replace("/<br[^>]*?>/", "", $newcontent);
-        $newcontent = str_replace("</br>", "", $newcontent);
-        $newcontent = str_replace("&nbsp;", "", $newcontent);
-        return $newcontent;
+        return translateText($abbr, $this->attributes['message']);
     }
 
     public function getTextValueForInput($abbr)

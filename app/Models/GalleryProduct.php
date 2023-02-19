@@ -51,30 +51,17 @@ class GalleryProduct extends Model
 
     public function getLangTitle($abbr)
     {
-        return $this->getLangText($abbr, $this->attributes['title']);
+        return translateText($abbr, $this->attributes['title']);
     }
 
     public function getLangAlt($abbr)
     {
-        return $this->getLangText($abbr, $this->attributes['alt']);
+        return translateText($abbr, $this->attributes['alt']);
     }
 
     public function getLangDescription($abbr)
     {
-        return $this->getLangText($abbr, $this->attributes['description']);
-    }
-
-    public function getLangText($abbr, $attribute)
-    {
-        $language = (new LanguageService())->getByAbbr($abbr);
-        $message = json_decode($attribute)->{$language->abbr};
-        $newcontent = preg_replace("/<p[^>]*?>/", "", $message);
-        $newcontent = str_replace("</p>", "\n", $newcontent);
-        $newcontent = preg_replace("/<span[^>]*?>/", "", $newcontent);
-        $newcontent = str_replace("</span>", "", $newcontent);
-        $newcontent = preg_replace("/<br[^>]*?>/", "", $newcontent);
-        $newcontent = str_replace("</br>", "", $newcontent);
-        return $newcontent;
+        return translateText($abbr, $this->attributes['description']);
     }
 
     /*
