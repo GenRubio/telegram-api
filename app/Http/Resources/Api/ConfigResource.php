@@ -35,7 +35,7 @@ class ConfigResource extends JsonResource
         $response['brands'] = json_decode(json_encode(new BrandsResource()));
         $parametricTablesResponse = [];
         foreach ($this->parametricTables as $table) {
-            $parametricTablesResponse[$table->name] = new ParametricTableCollection($table);
+            $parametricTablesResponse[$table->name] = new ParametricTableCollection([$table]);
         }
         $response['parametric_tables'] = $parametricTablesResponse;
         return $response;
