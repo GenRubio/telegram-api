@@ -176,6 +176,15 @@ class ParametricTableValueCrudController extends CrudController
 
         $this->crud->addFields([
             [
+                'name' => 'key',
+                'label' => 'Key',
+                'type' => 'text',
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                    'disabled'    => 'disabled',
+                ],
+            ],
+            [
                 'name' => 'name',
                 'label' => 'Nombre',
                 'type' => 'text',
