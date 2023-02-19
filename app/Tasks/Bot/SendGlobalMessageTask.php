@@ -25,9 +25,7 @@ class SendGlobalMessageTask
                     $langMessage = $this->message->getLangMessage($chat->language->abbr);
                     $clientApiUrl = (new GetApiClientTask())->products($chat->chat_id);
                     $this->sendMessageToChat($chat, $langMessage, $clientApiUrl);
-                } catch (Exception $e) {
-                    dd($e);
-                }
+                } catch (Exception $e) {}
             }
         }
     }
