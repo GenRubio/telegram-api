@@ -20,7 +20,7 @@ class SendGlobalMessageTask
     public function run()
     {
         foreach ($this->message->telegramBotGroup->bots as $bot) {
-            foreach ($bot->botChat as $chat) {
+            foreach ($bot->telegramChats as $chat) {
                 try {
                     $langMessage = $this->message->getLangMessage($chat->language->abbr);
                     $clientApiUrl = (new GetApiClientTask())->products($chat->chat_id);
