@@ -53,11 +53,6 @@ class ParametricTableValueCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->crud->addColumn([
-            'name' => 'key',
-            'label' => 'Key',
-            'type'  => 'text',
-        ]);
-        $this->crud->addColumn([
             'name' => 'parametricTable',
             'label' => 'Tabla',
             'type'      => 'select',
@@ -67,23 +62,18 @@ class ParametricTableValueCrudController extends CrudController
             'model'     => "App\Models\ParametricTable",
         ]);
         $this->crud->addColumn([
-            'name' => 'name',
-            'label' => 'Nombre',
+            'name' => 'order',
+            'label' => 'Prioridad',
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'description',
-            'label' => 'Descripcion',
+            'name' => 'key',
+            'label' => 'Key',
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'parameter',
             'label' => 'Parametro',
-            'type'  => 'text',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'order',
-            'label' => 'Prioridad',
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
