@@ -34,17 +34,17 @@ class SendGlobalMessageTask
 
     private function sendMessageToChat($chat, $langMessage, $clientApiUrl)
     {
-        $response = $chat;
+        $response = $chat->telegraphChat;
         if (!empty($this->message->image)) {
             $response = $response->photo(public_path($this->message->image));
         }
         $response = $response->html($langMessage)
-            //->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
-            //    return $keyboard->row([
-            //        Button::make((new ButtonShopTextTask($chat))->run())
-            //            ->webApp($clientApiUrl)
-            //    ]);
-            //})
+            ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
+                return $keyboard->row([
+                    Button::make((new ButtonShopTextTask($chat))->run())
+                        ->webApp($clientApiUrl)
+                ]);
+            })
             ->protected()
             ->send();
     }
