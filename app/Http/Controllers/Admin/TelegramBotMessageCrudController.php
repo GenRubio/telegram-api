@@ -135,9 +135,8 @@ class TelegramBotMessageCrudController extends CrudController
     public function store()
     {
         $message = strip_tags(request()->input('message'));
-        dd($message, strlen($message));
-        if (strlen($message) >= 400){
-            Alert::error('El mesaje no puede superar 400 caracteres.')->flash();
+        if (strlen($message) >= 1000){
+            Alert::error('El mesaje no puede superar 1000 caracteres.')->flash();
             return back();
         }
         return $this->traitStore();
@@ -146,9 +145,8 @@ class TelegramBotMessageCrudController extends CrudController
     public function update()
     {
         $message = strip_tags(request()->input('message'));
-        dd($message, strlen($message));
-        if (strlen($message) >= 400){
-            Alert::error('El mesaje no puede superar 400 caracteres.')->flash();
+        if (strlen($message) >= 1000){
+            Alert::error('El mesaje no puede superar 1000 caracteres.')->flash();
             return back();
         }
         return $this->traitUpdate();
