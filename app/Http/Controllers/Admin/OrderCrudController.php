@@ -17,6 +17,7 @@ use App\Tasks\PayPal\API\GetRetrievePaymentPaypalTask;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Exception;
+use Prologue\Alerts\Facades\Alert;
 
 class OrderCrudController extends CrudController
 {
@@ -346,8 +347,12 @@ class OrderCrudController extends CrudController
             && (empty($order->provider_url) && !empty($request->input('provider_url'))
                 || !empty($request->input('provider_url')) && $order->provider_url != $request->input('provider_url'))
         ) {
-            $order->provider_url = $request->input('provider_url');
-            (new SendTrackingNumberMessageTask($order))->run();
+            if (!isUrl($request->input('provider_url'))) {
+                Alert::error("Url de seguimiento no tiene formato correcto")->flush();
+            } else {
+                $order->provider_url = $request->input('provider_url');
+                (new SendTrackingNumberMessageTask($order))->run();
+            }
         }
     }
 }
