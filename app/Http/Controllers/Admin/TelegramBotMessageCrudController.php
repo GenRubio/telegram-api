@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Prologue\Alerts\Facades\Alert;
 use App\Http\Requests\TelegramBotMessageRequest;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -11,8 +12,12 @@ class TelegramBotMessageCrudController extends CrudController
 {
     use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+        store as traitStore;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
+        update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -125,5 +130,25 @@ class TelegramBotMessageCrudController extends CrudController
                 'type' => 'image-v2',
             ]
         ]);
+    }
+
+    public function store()
+    {
+        $message = strip_tags(request()->input('message'));
+        if (strlen($message) >= 400){
+            Alert::error('El mesaje no puede superar 400 caracteres.')->flash();
+            return back();
+        }
+        return $this->traitStore();
+    }
+
+    public function update()
+    {
+        $message = strip_tags(request()->input('message'));
+        if (strlen($message) >= 400){
+            Alert::error('El mesaje no puede superar 400 caracteres.')->flash();
+            return back();
+        }
+        return $this->traitUpdate();
     }
 }
