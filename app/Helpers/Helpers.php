@@ -73,6 +73,13 @@ if (!function_exists('translateText')) {
     }
 }
 
+if (!function_exists('isUrl')) {
+    function isUrl($text)
+    {
+        return UtilsHelper::isUrl($text);
+    }
+}
+
 /**
  * CrudHelper
  */

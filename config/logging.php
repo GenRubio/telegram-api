@@ -117,6 +117,20 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'telegram-message' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/telegram-message.log'),
+            'level' => 'debug',
+            'days' => 1,
+        ],
+
+        'bot-message' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/bot-message.log'),
+            'level' => 'debug',
+            'days' => 1,
+        ],
     ],
 
 ];

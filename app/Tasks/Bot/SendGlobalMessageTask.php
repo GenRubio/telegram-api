@@ -4,6 +4,7 @@ namespace App\Tasks\Bot;
 
 use Exception;
 use App\Tasks\GetApiClientTask;
+use Illuminate\Support\Facades\Log;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Tasks\Bot\Translations\ButtonShopTextTask;
@@ -25,25 +26,31 @@ class SendGlobalMessageTask
                     $langMessage = $this->message->getLangMessage($chat->language->abbr);
                     $clientApiUrl = (new GetApiClientTask())->products($chat->chat_id);
                     $this->sendMessageToChat($chat, $langMessage, $clientApiUrl);
-                } catch (Exception $e) {}
+                } catch (Exception $e) {
+                    Log::channel('bot-message')->error($e);
+                }
             }
         }
     }
 
     private function sendMessageToChat($chat, $langMessage, $clientApiUrl)
     {
-        $response = $chat->telegraphChat;
-        if (!empty($this->message->image)) {
-            $response = $response->photo(public_path($this->message->image));
+        try {
+            $response = $chat->telegraphChat;
+            if (!empty($this->message->image)) {
+                $response = $response->photo(public_path($this->message->image));
+            }
+            $response = $response->html($langMessage)
+                ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
+                    return $keyboard->row([
+                        Button::make((new ButtonShopTextTask($chat))->run())
+                            ->webApp($clientApiUrl)
+                    ]);
+                })
+                ->protected()
+                ->send();
+        } catch (Exception $e) {
+            Log::channel('telegram-message')->error($e);
         }
-        $response = $response->html($langMessage)
-            ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
-                return $keyboard->row([
-                    Button::make((new ButtonShopTextTask($chat))->run())
-                        ->webApp($clientApiUrl)
-                ]);
-            })
-            ->protected()
-            ->send();
     }
 }

@@ -24,4 +24,12 @@ class UtilsHelper
         $newcontent = str_replace("</br>", "", $newcontent);
         return $newcontent;
     }
+
+    public static function isUrl($text)
+    {
+        if (filter_var($text, FILTER_VALIDATE_URL)) {
+            return true;
+        }
+        return false;
+    }
 }

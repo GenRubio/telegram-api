@@ -2,7 +2,9 @@
 
 namespace App\Tasks\Bot;
 
+use Exception;
 use App\Services\LanguageService;
+use Illuminate\Support\Facades\Log;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
@@ -27,23 +29,27 @@ class SendLanguageMessageTask
 
     public function run()
     {
-        $this->chat->action(ChatActions::TYPING)->send();
-        $response = $this->chat;
-        if (!empty($this->telegramBotMessage->image)) {
-            $response = $response->photo(public_path($this->telegramBotMessage->image));
+        try {
+            $this->chat->action(ChatActions::TYPING)->send();
+            $response = $this->chat;
+            if (!empty($this->telegramBotMessage->image)) {
+                $response = $response->photo(public_path($this->telegramBotMessage->image));
+            }
+            $response = $response->html($this->telegramBotMessage->getLangMessage("en"))
+                ->keyboard(function (Keyboard $keyboard) {
+                    foreach ($this->languages as $language) {
+                        $keyboard
+                            ->button($language->native)
+                            ->action('actionSetLaguage')
+                            ->param('parameter', $language->id);
+                    }
+                    return $keyboard;
+                })
+                ->protected()
+                ->send();
+        } catch (Exception $e) {
+            Log::channel('telegram-message')->error($e);
         }
-        $response = $response->html($this->telegramBotMessage->getLangMessage("en"))
-            ->keyboard(function (Keyboard $keyboard) {
-                foreach ($this->languages as $language) {
-                    $keyboard
-                        ->button($language->native)
-                        ->action('actionSetLaguage')
-                        ->param('parameter', $language->id);
-                }
-                return $keyboard;
-            })
-            ->protected()
-            ->send();
     }
 
     private function setTelegramBotMessage()

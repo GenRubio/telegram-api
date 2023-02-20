@@ -5,6 +5,7 @@ namespace App\Tasks\Bot;
 use Exception;
 use App\Tasks\GetApiClientTask;
 use App\Services\BotChatService;
+use Illuminate\Support\Facades\Log;
 use App\Tasks\Bot\Traits\BotTasksTrait;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Enums\ChatActions;
@@ -16,7 +17,7 @@ use App\Tasks\Bot\Translations\ButtonShopTextTask;
 class SendStartMessageTask
 {
     use BotTasksTrait;
-    
+
     private $chat;
     private $botChat;
     private $telegramBotMessageService;
@@ -36,20 +37,24 @@ class SendStartMessageTask
 
     public function run()
     {
-        $this->chat->action(ChatActions::TYPING)->send();
-        $response = $this->chat;
-        if (!empty($this->telegramBotMessage->image)) {
-            $response = $response->photo(public_path($this->telegramBotMessage->image));
+        try {
+            $this->chat->action(ChatActions::TYPING)->send();
+            $response = $this->chat;
+            if (!empty($this->telegramBotMessage->image)) {
+                $response = $response->photo(public_path($this->telegramBotMessage->image));
+            }
+            $response = $response->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
+                ->keyboard(function (Keyboard $keyboard) {
+                    return $keyboard->row([
+                        Button::make((new ButtonShopTextTask($this->botChat))->run())
+                            ->webApp($this->clientApiUrl)
+                    ]);
+                })
+                ->protected()
+                ->send();
+            (new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
+        } catch (Exception $e) {
+            Log::channel('telegram-message')->error($e);
         }
-        $response = $response->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
-            ->keyboard(function (Keyboard $keyboard) {
-                return $keyboard->row([
-                    Button::make((new ButtonShopTextTask($this->botChat))->run())
-                        ->webApp($this->clientApiUrl)
-                ]);
-            })
-            ->protected()
-            ->send();
-        (new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
     }
 }
