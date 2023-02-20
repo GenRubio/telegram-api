@@ -43,7 +43,7 @@ class SendStartMessageTask
             if (!empty($this->telegramBotMessage->image)) {
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }
-            $response = $response->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
+            $response = $response->html(utf8_encode($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr)))
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
                         Button::make((new ButtonShopTextTask($this->botChat))->run())
@@ -51,10 +51,8 @@ class SendStartMessageTask
                     ]);
                 })
                 ->protected()
-                //->send();
-                ->dump();
-
-            //(new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
+                ->send();
+            (new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
         } catch (Exception $e) {
             Log::channel('telegram-message')->error($e);
         }
