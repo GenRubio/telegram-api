@@ -51,7 +51,9 @@ class SendStartMessageTask
                     ]);
                 })
                 ->protected()
-                ->send();
+                //->send();
+                ->dump();
+
             //(new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
         } catch (Exception $e) {
             Log::channel('telegram-message')->error($e);
