@@ -37,10 +37,10 @@ class SendGlobalMessageTask
     {
         try {
             $response = $chat->telegraphChat;
-            if (!empty($this->message->image)) {
+            if (!empty($this->message->image) && !$this->message->image_bottom) {
                 $response = $response->photo(public_path($this->message->image));
             }
-            $response = $response->html($langMessage)
+            $response = $response->html($this->getResponseText($langMessage))
                 ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
                     return $keyboard->row([
                         Button::make((new ButtonShopTextTask($chat))->run())
@@ -52,5 +52,13 @@ class SendGlobalMessageTask
         } catch (Exception $e) {
             Log::channel('telegram-message')->error($e);
         }
+    }
+
+    private function getResponseText($langMessage)
+    {
+        if (!empty($this->message->image) && $this->message->image_bottom) {
+            return $langMessage . '<a href="' . url($this->message->image) . '">&#8205;</a>';
+        }
+        return $langMessage;
     }
 }

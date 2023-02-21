@@ -27,7 +27,8 @@ class TelegramBotMessage extends Model
         'key',
         'description',
         'image',
-        'message'
+        'message',
+        'image_bottom'
     ];
     // protected $hidden = [];
     // protected $dates = [];

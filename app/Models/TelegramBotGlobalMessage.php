@@ -32,6 +32,7 @@ class TelegramBotGlobalMessage extends Model
         'description',
         'message',
         'execution_date',
+        'image_bottom',
         'status'
     ];
     // protected $hidden = [];

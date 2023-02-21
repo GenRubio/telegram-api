@@ -128,10 +128,15 @@ class TelegramBotMessageCrudController extends CrudController
                 'name' => 'image',
                 'label' => 'Imagen',
                 'type' => 'image-v2',
-            ]
+            ],
+            [
+                'name' => 'image_bottom',
+                'type' => 'checkbox',
+                'label' => 'Colocar imagen debajo del mensaje',
+                'default' => true,
+            ],
         ]);
     }
-
     public function store()
     {
         $message = strip_tags(request()->input('message'));

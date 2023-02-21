@@ -107,7 +107,13 @@ class TelegramBotGlobalMessageCrudController extends CrudController
                 'name' => 'image',
                 'label' => 'Imagen',
                 'type' => 'image-v2',
-            ]
+            ],
+            [
+                'name' => 'image_bottom',
+                'type' => 'checkbox',
+                'label' => 'Colocar imagen debajo del mensaje',
+                'default' => true,
+            ],
         ]);
     }
 

@@ -36,10 +36,10 @@ class SendPaymentCancelMessageTask
         try {
             $this->order->telegraphChat->action(ChatActions::TYPING)->send();
             $response = $this->order->telegraphChat;
-            if (!empty($this->telegramBotMessage->image)) {
+            if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }
-            $response = $response->html($this->message)
+            $response = $response->html($this->getResponseText())
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
                         Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
@@ -51,5 +51,13 @@ class SendPaymentCancelMessageTask
         } catch (Exception $e) {
             Log::channel('telegram-message')->error($e);
         }
+    }
+
+    private function getResponseText()
+    {
+        if (!empty($this->telegramBotMessage->image) && $this->telegramBotMessage->image_bottom) {
+            return $this->message . '<a href="' . url($this->telegramBotMessage->image) . '">&#8205;</a>';
+        }
+        return $this->message;
     }
 }

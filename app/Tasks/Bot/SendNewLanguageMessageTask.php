@@ -22,6 +22,7 @@ class SendNewLanguageMessageTask
     private $key;
     private $telegramBotMessage;
     private $languages;
+    private $message;
 
     public function __construct($chat)
     {
@@ -31,6 +32,7 @@ class SendNewLanguageMessageTask
         $this->key = '1673688714.9174';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
         $this->languages = (new LanguageService())->getAllActive();
+        $this->message = $this->telegramBotMessage->getLangMessage($this->botChat->language->abbr);
     }
 
     public function run()
@@ -38,10 +40,10 @@ class SendNewLanguageMessageTask
         try {
             $this->chat->action(ChatActions::TYPING)->send();
             $response = $this->chat;
-            if (!empty($this->telegramBotMessage->image)) {
+            if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }
-            $response = $response->html($this->telegramBotMessage->getLangMessage($this->botChat->language->abbr))
+            $response = $response->html($this->getResponseText())
                 ->keyboard(function (Keyboard $keyboard) {
                     foreach ($this->languages as $language) {
                         $keyboard
@@ -56,5 +58,13 @@ class SendNewLanguageMessageTask
         } catch (Exception $e) {
             Log::channel('telegram-message')->error($e);
         }
+    }
+
+    private function getResponseText()
+    {
+        if (!empty($this->telegramBotMessage->image) && $this->telegramBotMessage->image_bottom) {
+            return $this->message . '<a href="' . url($this->telegramBotMessage->image) . '">&#8205;</a>';
+        }
+        return $this->message;
     }
 }
