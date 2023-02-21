@@ -215,7 +215,7 @@ class ProductModel extends Model
             if (is_null($product)) {
                 $this->attributes['reference'] = Carbon::now()->format('Y') . '10000';
             } else {
-                $this->attributes['reference'] = (int)$product->reference + 1;
+                $this->attributes['reference'] = ((int)$product->reference++);
             }
         }
     }
