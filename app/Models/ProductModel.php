@@ -211,8 +211,7 @@ class ProductModel extends Model
     public function setReferenceAttribute($value)
     {
         if (is_null($value)) {
-
-            $products = ProductModel::all();
+            $products = ProductModel::get();
             $product = $products->orderBy('reference', 'desc')->first();
             if (is_null($product)) {
                 $this->attributes['reference'] = Carbon::now()->format('Y') . '10000';
