@@ -212,7 +212,7 @@ class ProductModel extends Model
     {
         if (is_null($value)) {
             $products = ProductModel::get();
-            $product = $products->orderBy('reference', 'desc')->first();
+            $product = $products->sortByDesc('reference')->first();
             if (is_null($product)) {
                 $this->attributes['reference'] = Carbon::now()->format('Y') . '10000';
             } else {
