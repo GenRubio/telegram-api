@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\ProductModel;
 use Illuminate\Console\Command;
 
 class TestLogic extends Command
@@ -11,7 +12,7 @@ class TestLogic extends Command
      *
      * @var string
      */
-    protected $signature = 'test:logic';
+    protected $signature = 'test:logic {id} {reference}';
 
     /**
      * The console command description.
@@ -27,6 +28,16 @@ class TestLogic extends Command
      */
     public function handle()
     {
-        return Command::SUCCESS;
+
+        $productModel = ProductModel::where('id', $this->argument('id'))->first();
+        if ($productModel) {
+            echo ("Producto encontrado");
+            $productModel->update([
+                'reference' => $this->argument('reference')
+            ]);
+            echo ("Referencia actualziada");
+        } else {
+            echo ("Producto no encontrado");
+        }
     }
 }
