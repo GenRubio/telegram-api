@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\ProductModel;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class TestLogic extends Command
 {
@@ -31,10 +32,8 @@ class TestLogic extends Command
         $reference = 202210000;
         $products = ProductModel::all();
         foreach($products as $product){
-            $product->reference = $reference;
-            $product->save();
+            DB::update('update product_models set reference = ' . $reference .' where id = ?', [$product->id]);
             $reference = $reference + 1;
-            dump($reference);
         }
     }
 }
