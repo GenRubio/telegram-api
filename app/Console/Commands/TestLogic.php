@@ -34,6 +34,7 @@ class TestLogic extends Command
             $product->reference = $reference;
             $product->save();
             $reference = $reference + 1;
+            dump($reference);
         }
     }
 }
