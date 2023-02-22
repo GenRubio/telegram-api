@@ -82,15 +82,13 @@ class ProductModelsFlavor extends Model
     public function setReferenceAttribute($value)
     {
         if (is_null($value)) {
-            $product = ProductModelsFlavor::orderBy('reference', 'desc')->first();
-            if (is_null($product)) {
+            $flavors = ProductModelsFlavor::get();
+            $flavor = $flavors->sortByDesc('reference')->first();
+            if (is_null($flavor)) {
                 $this->attributes['reference'] = Carbon::now()->format('Y') . '10000';
             } else {
-                if (empty($product->reference)) {
-                    $this->attributes['reference'] = Carbon::now()->format('Y') . '10000';
-                } else {
-                    $this->attributes['reference'] = (int)$product->reference + 1;
-                }
+                $nextReference = $flavor->reference + 1;
+                $this->attributes['reference'] = $nextReference;
             }
         }
     }
