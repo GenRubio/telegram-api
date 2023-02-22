@@ -12,7 +12,7 @@ class TestLogic extends Command
      *
      * @var string
      */
-    protected $signature = 'test:logic {id} {reference}';
+    protected $signature = 'test:logic';
 
     /**
      * The console command description.
@@ -28,16 +28,12 @@ class TestLogic extends Command
      */
     public function handle()
     {
-
-        $productModel = ProductModel::where('id', $this->argument('id'))->first();
-        if ($productModel) {
-            echo ("Producto encontrado");
-            $productModel->update([
-                'reference' => $this->argument('reference')
-            ]);
-            echo ("Referencia actualziada");
-        } else {
-            echo ("Producto no encontrado");
+        $reference = 202210000;
+        $products = ProductModel::all();
+        foreach($products as $product){
+            $product->reference = $reference;
+            $product->save();
+            $reference = $reference + 1;
         }
     }
 }
