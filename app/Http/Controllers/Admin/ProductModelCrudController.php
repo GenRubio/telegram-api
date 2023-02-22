@@ -37,11 +37,6 @@ class ProductModelCrudController extends CrudController
         $this->crud->addButtonFromView('line', 'model-gallery-images', 'model-gallery-images', 'beginning');
         $this->crud->addButtonFromView('line', 'model-flavors', 'model-flavors', 'beginning');
         $this->crud->addColumn([
-            'name' => 'id',
-            'label' => 'ID',
-            'type'  => 'text',
-        ]);
-        $this->crud->addColumn([
             'name' => 'reference',
             'label' => 'Referencia',
             'type'  => 'text',
