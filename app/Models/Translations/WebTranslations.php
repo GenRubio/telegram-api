@@ -3,9 +3,15 @@
 namespace App\Models\Translations;
 
 use App\Models\Translation;
+use App\Scopes\WEBTranslationsScope;
 
-class WebTranslations extends Translation
+class WEBTranslations extends Translation
 {
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new WEBTranslationsScope);
+    }
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES

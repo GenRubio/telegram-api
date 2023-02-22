@@ -3,9 +3,15 @@
 namespace App\Models\Translations;
 
 use App\Models\Translation;
+use App\Scopes\APITranslationsScope;
 
-class BotTranslations extends Translation
+class APITranslations extends Translation
 {
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new APITranslationsScope);
+    }
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES

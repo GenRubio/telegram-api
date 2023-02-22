@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
@@ -23,7 +24,8 @@ class Translation extends Model
     protected $guarded = ['id'];
     protected $fillable = [
         'uuid',
-        'text'
+        'text',
+        'type'
     ];
     // protected $hidden = [];
     // protected $dates = [];
@@ -83,6 +85,8 @@ class Translation extends Model
 
     public function setUuidAttribute($value)
     {
-        $this->attributes['uuid'] = uniqid(microtime(true));
+        if (is_null($value)) {
+            $this->attributes['uuid'] = Str::uuid()->toString();
+        }
     }
 }
