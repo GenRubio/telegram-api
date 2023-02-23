@@ -189,7 +189,7 @@ class ParametricTableValueCrudController extends CrudController
             [
                 'name' => 'parameter',
                 'label' => 'Parametro',
-                'type' => 'text',
+                'type' => 'textarea',
             ],
             [
                 'name' => 'order',
