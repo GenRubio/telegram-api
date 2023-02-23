@@ -16,7 +16,7 @@ class ButtonShopTextTask
     {
         $this->chat = $chat;
         $this->apiTranslationService = new APITranslationService();
-        $this->uuid = '1673711890.578';
+        $this->uuid = 'a3c45835-3152-47d8-afce-11a4c591c3a7';
         $this->translation = $this->setTranslation();
         $this->message = $this->translation->langText($this->chat->language->abbr);
     }

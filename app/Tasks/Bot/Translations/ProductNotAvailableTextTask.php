@@ -18,7 +18,7 @@ class ProductNotAvailableTextTask
         $this->chat = $chat;
         $this->data = $data;
         $this->apiTranslationService = new APITranslationService();
-        $this->uuid = '1673327120.3528';
+        $this->uuid = 'dacf7cf6-654e-4d17-948f-60db82c8a6e0';
         $this->translation = $this->setTranslation();
         $this->message = $this->translation->langText($this->chat->language->abbr);
         $this->preparedMessage();

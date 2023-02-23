@@ -18,7 +18,7 @@ class FlavorNotAvailableTextTask
         $this->chat = $chat;
         $this->data = $data;
         $this->apiTranslationService = new APITranslationService();
-        $this->uuid = '1673327156.0906';
+        $this->uuid = '212db24a-32b2-4b07-8d1b-6d5a2d4bf20d';
         $this->translation = $this->setTranslation();
         $this->message = $this->translation->langText($this->chat->language->abbr);
         $this->preparedMessage();
