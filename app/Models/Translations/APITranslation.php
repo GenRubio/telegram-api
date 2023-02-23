@@ -3,14 +3,14 @@
 namespace App\Models\Translations;
 
 use App\Models\Translation;
-use App\Scopes\APITranslationsScope;
+use App\Scopes\APITranslationScope;
 
-class APITranslations extends Translation
+class APITranslation extends Translation
 {
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new APITranslationsScope);
+        static::addGlobalScope(new APITranslationScope);
     }
     /*
     |--------------------------------------------------------------------------

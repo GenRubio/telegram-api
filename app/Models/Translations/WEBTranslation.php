@@ -3,14 +3,14 @@
 namespace App\Models\Translations;
 
 use App\Models\Translation;
-use App\Scopes\WEBTranslationsScope;
+use App\Scopes\WEBTranslationScope;
 
-class WEBTranslations extends Translation
+class WEBTranslation extends Translation
 {
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new WEBTranslationsScope);
+        static::addGlobalScope(new WEBTranslationScope);
     }
     /*
     |--------------------------------------------------------------------------
