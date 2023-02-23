@@ -36,7 +36,7 @@ class BrandCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'name' => 'count_products',
-            'label' => 'Productos (total)',
+            'label' => 'Productos',
             'type'  => 'number',
         ]);
         $this->crud->addColumn([
