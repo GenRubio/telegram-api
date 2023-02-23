@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tasks\Bot\Translations;
+namespace App\Tasks\API\Translations;
 
 use App\Services\Translations\APITranslationService;
 
-class StockNotAvailableTextTask
+class ProductNotAvailableTextTask
 {
     private $chat;
     private $data;
@@ -18,7 +18,7 @@ class StockNotAvailableTextTask
         $this->chat = $chat;
         $this->data = $data;
         $this->apiTranslationService = new APITranslationService();
-        $this->uuid = 'f04273a9-e0c5-4816-9bf5-cb8b0b85ea3a';
+        $this->uuid = 'dacf7cf6-654e-4d17-948f-60db82c8a6e0';
         $this->translation = $this->setTranslation();
         $this->message = $this->translation->langText($this->chat->language->abbr);
         $this->preparedMessage();
@@ -36,8 +36,6 @@ class StockNotAvailableTextTask
 
     private function preparedMessage()
     {
-        $this->message = str_replace("[flavor_name]", $this->data['flavor_name'], $this->message);
         $this->message = str_replace("[product_name]", $this->data['product_name'], $this->message);
-        $this->message = str_replace("[flavor_available_stock]", $this->data['flavor_available_stock'], $this->message);
     }
 }

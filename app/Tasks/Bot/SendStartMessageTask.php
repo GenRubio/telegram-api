@@ -11,8 +11,8 @@ use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
+use App\Tasks\API\Translations\ButtonShopTextTask;
 use App\Tasks\Bot\Settings\SetPinStartMessageTask;
-use App\Tasks\Bot\Translations\ButtonShopTextTask;
 
 class SendStartMessageTask
 {

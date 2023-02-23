@@ -4,8 +4,8 @@ namespace App\Tasks;
 
 use App\Exceptions\GenericException;
 use App\Services\ProductModelsFlavorService;
-use App\Tasks\Bot\Translations\StockNotAvailableTextTask;
-use App\Tasks\Bot\Translations\FlavorNotAvailableTextTask;
+use App\Tasks\API\Translations\StockNotAvailableTextTask;
+use App\Tasks\API\Translations\FlavorNotAvailableTextTask;
 
 class ValidateProductsStockTask
 {

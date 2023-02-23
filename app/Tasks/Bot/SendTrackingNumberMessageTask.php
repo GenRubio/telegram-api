@@ -10,8 +10,8 @@ use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
-use App\Tasks\Bot\Translations\ButtonTracingUrlTextTask;
-use App\Tasks\Bot\Translations\ButtonOrderDetailTextTask;
+use App\Tasks\API\Translations\ButtonTracingUrlTextTask;
+use App\Tasks\API\Translations\ButtonOrderDetailTextTask;
 
 class SendTrackingNumberMessageTask
 {

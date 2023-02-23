@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tasks\Bot\Translations;
+namespace App\Tasks\API\Translations;
 
 use App\Services\Translations\APITranslationService;
 

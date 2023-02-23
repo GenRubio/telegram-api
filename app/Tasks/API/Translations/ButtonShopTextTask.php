@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Tasks\Bot\Translations;
+namespace App\Tasks\API\Translations;
 
 use App\Services\Translations\APITranslationService;
 
-
-class ButtonOrderDetailTextTask
+class ButtonShopTextTask
 {
     private $chat;
     private $apiTranslationService;
@@ -17,7 +16,7 @@ class ButtonOrderDetailTextTask
     {
         $this->chat = $chat;
         $this->apiTranslationService = new APITranslationService();
-        $this->uuid = '8afca38c-d9b6-44a6-8d1e-5dda28f0c6ab';
+        $this->uuid = 'a3c45835-3152-47d8-afce-11a4c591c3a7';
         $this->translation = $this->setTranslation();
         $this->message = $this->translation->langText($this->chat->language->abbr);
     }

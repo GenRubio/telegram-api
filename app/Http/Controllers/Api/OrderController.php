@@ -13,7 +13,7 @@ use App\Tasks\Order\GetPaymentUrlTask;
 use App\Tasks\ValidateProductsStockTask;
 use App\Http\Resources\OrderDataResource;
 use App\Tasks\Geocoding\ValidateAddressTask;
-use App\Tasks\Bot\Translations\AddressNotFoundTextTask;
+use App\Tasks\API\Translations\AddressNotFoundTextTask;
 
 class OrderController extends Controller
 {

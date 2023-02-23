@@ -7,7 +7,7 @@ use App\Tasks\GetApiClientTask;
 use Illuminate\Support\Facades\Log;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
-use App\Tasks\Bot\Translations\ButtonShopTextTask;
+use App\Tasks\API\Translations\ButtonShopTextTask;
 
 class SendGlobalMessageTask
 {
