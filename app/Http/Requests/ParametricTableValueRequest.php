@@ -28,6 +28,7 @@ class ParametricTableValueRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'parameter' => 'required',
+            'order' => 'required'
         ];
     }
 
