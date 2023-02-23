@@ -48,9 +48,6 @@
         </ul>
    </li>
    @endif
-   @if(backpack_user()->officePermission('TranslationCrudController', 'show'))
-   <li class="nav-item"><a class="nav-link" href="{{ backpack_url('translation') }}"><i class="nav-icon las la-language"></i> Traducciones</a></li>
-   @endif
 @endif
 @if(backpack_user()->officePermission('AffiliateCrudController', 'show'))
 <li class="nav-title">AFILIADOS</li>
@@ -63,6 +60,9 @@
 <li class="nav-title">CONFIGURACION</li>
    @if(backpack_user()->officePermission('LanguageCrudController', 'show'))
    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('language') }}"><i class="nav-icon las la-globe"></i> Idiomas</a></li>
+   @endif
+   @if(backpack_user()->officePermission('TranslationCrudController', 'show'))
+   <li class="nav-item"><a class="nav-link" href="{{ backpack_url('translation') }}"><i class="nav-icon las la-language"></i> Traducciones</a></li>
    @endif
    @if(backpack_user()->officePermission('ApiClientCrudController', 'show'))
    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('api-client') }}"><i class="nav-icon las la-server"></i> API Clientes</a></li>
