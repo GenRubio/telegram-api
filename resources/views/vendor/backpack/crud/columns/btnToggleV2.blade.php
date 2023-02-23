@@ -11,7 +11,7 @@
 </td>
 
 <script type="text/javascript">
-    $("#personal-switch-{{ $entry->id }}-{{ $entry->name }}").on('click', function(ev) {
+    $("#personal-switch-{{ $entry->id }}_{{ $entry->name }}").on('click', function(ev) {
         var model = $(this).data('model');
         var id = $(this).data('target');
         var field = $(this).data('field');
