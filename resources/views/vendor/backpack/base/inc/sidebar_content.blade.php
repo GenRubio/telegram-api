@@ -1,10 +1,6 @@
 {{-- This file is used to store sidebar items, inside the Backpack admin panel --}}
 {{-- https://icons8.com/line-awesome --}}
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a></li>
-@if(backpack_user()->officePermission('TranslationCrudController', 'show'))
-<li class="nav-title">WEB APP</li>
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('translation') }}"><i class="nav-icon las la-language"></i> Traducciones</a></li>
-@endif
 @if(backpack_user()->officePermission('ProductModelCrudController', 'show')
 || backpack_user()->officePermission('BrandCrudController', 'show')
 || backpack_user()->officePermission('OrderCrudController', 'show'))
@@ -52,8 +48,8 @@
         </ul>
    </li>
    @endif
-   @if(backpack_user()->officePermission('BotTranslationCrudController', 'show'))
-   <li class="nav-item"><a class="nav-link" href="{{ backpack_url('bot-translation') }}"><i class="nav-icon las la-language"></i> Traducciones</a></li>
+   @if(backpack_user()->officePermission('TranslationCrudController', 'show'))
+   <li class="nav-item"><a class="nav-link" href="{{ backpack_url('translation') }}"><i class="nav-icon las la-language"></i> Traducciones</a></li>
    @endif
 @endif
 @if(backpack_user()->officePermission('AffiliateCrudController', 'show'))
