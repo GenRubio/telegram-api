@@ -4,7 +4,7 @@
 <td>
     <div id="personal-switch-{{ $entry->id }}_{{ $entry->name }}" class="custom-control custom-switch" data-model="{{ get_class($entry) }}"
         data-target="{{ $entry->id }}" data-field="{{ $column['name'] }}">
-        <input type="checkbox" class="custom-control-input" id="customSwitch-{{ $entry->id }}"
+        <input type="checkbox" class="custom-control-input" id="customSwitch-{{ $entry->id }}-{{ $entry->name }}"
             {{ $checked ? 'checked' : '' }}>
         <label class="custom-control-label" for="customSwitch-{{ $entry->id }}-{{ $entry->name }}"></label>
     </div>
