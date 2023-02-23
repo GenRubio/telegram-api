@@ -16,6 +16,10 @@ class SettingsTable extends ParametricTableValue
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
+    public $translatable = [
+        'parameter',
+    ];
+    
     public $parametricTableName = 'settings';
 
     /*

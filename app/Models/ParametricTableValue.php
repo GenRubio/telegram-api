@@ -5,10 +5,13 @@ namespace App\Models;
 use App\Scopes\ParametricTableScope;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 
 class ParametricTableValue extends Model
 {
     use CrudTrait;
+    use HasTranslations;
+    
     protected static function boot()
     {
         parent::boot();
@@ -40,6 +43,9 @@ class ParametricTableValue extends Model
     public $parametricTableName = null;
     // protected $hidden = [];
     // protected $dates = [];
+    public $translatable = [
+        'parameter',
+    ];
 
     /*
     |--------------------------------------------------------------------------
