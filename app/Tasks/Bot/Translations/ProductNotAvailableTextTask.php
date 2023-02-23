@@ -2,25 +2,25 @@
 
 namespace App\Tasks\Bot\Translations;
 
-use App\Services\BotTranslationService;
+use App\Services\Translations\APITranslationService;
 
 class ProductNotAvailableTextTask
 {
     private $chat;
     private $data;
-    private $botTranslationService;
-    private $key;
-    private $botTranslation;
+    private $apiTranslationService;
+    private $uuid;
+    private $translation;
     private $message;
 
     public function __construct($chat, $data)
     {
         $this->chat = $chat;
         $this->data = $data;
-        $this->botTranslationService = new BotTranslationService();
-        $this->key = '1673327120.3528';
-        $this->botTranslation = $this->setBotTranslation();
-        $this->message = $this->botTranslation->langText($this->chat->language->abbr);
+        $this->apiTranslationService = new APITranslationService();
+        $this->uuid = '1673327120.3528';
+        $this->translation = $this->setTranslation();
+        $this->message = $this->translation->langText($this->chat->language->abbr);
         $this->preparedMessage();
     }
 
@@ -29,9 +29,9 @@ class ProductNotAvailableTextTask
         return $this->message;
     }
 
-    private function setBotTranslation()
+    private function setTranslation()
     {
-        return $this->botTranslationService->getByKey($this->key);
+        return $this->apiTranslationService->getByKey($this->uuid);
     }
 
     private function preparedMessage()
