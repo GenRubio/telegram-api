@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\TranslationTypesEnum;
 use App\Http\Requests\TranslationRequest;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -31,8 +32,14 @@ class TranslationCrudController extends CrudController
         $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'uuid',
-            'label' => 'Token',
+            'label' => 'UUID',
             'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'type',
+            'label' => 'Tipo',
+            'type' => 'select_from_array',
+            'options' => TranslationTypesEnum::TYPES,
         ]);
         $this->crud->addColumn([
             'name' => 'default_lang_text',
@@ -48,6 +55,12 @@ class TranslationCrudController extends CrudController
             [
                 'name' => 'uuid',
                 'type' => 'hidden',
+            ],
+            [
+                'name' => "type",
+                'label' => "Tipo",
+                'type' => 'select_from_array',
+                'options' => TranslationTypesEnum::TYPES,
             ],
             [
                 'name' => "text",
@@ -69,6 +82,12 @@ class TranslationCrudController extends CrudController
                     'readonly' => 'readonly',
                     'disabled' => 'disabled'
                 ]
+            ],
+            [
+                'name' => "type",
+                'label' => "Tipo",
+                'type' => 'select_from_array',
+                'options' => TranslationTypesEnum::TYPES,
             ],
             [
                 'name' => "text",
