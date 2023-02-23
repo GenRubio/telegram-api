@@ -86,7 +86,6 @@ class BotCrudController extends CrudController
                 'type' => 'text',
                 //'attributes' => [
                 //    'readonly'    => 'readonly',
-                //    'disabled'    => 'disabled',
                 //],
                 'tab' => 'Configuración'
             ],

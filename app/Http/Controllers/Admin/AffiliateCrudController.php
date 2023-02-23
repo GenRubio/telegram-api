@@ -168,7 +168,6 @@ class AffiliateCrudController extends CrudController
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
             ],
             [

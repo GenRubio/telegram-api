@@ -114,7 +114,6 @@ class OrderCrudController extends CrudController
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'General'
             ],
@@ -145,7 +144,6 @@ class OrderCrudController extends CrudController
                 'prefix' => '€',
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'General'
             ],
@@ -156,7 +154,6 @@ class OrderCrudController extends CrudController
                 'prefix' => '€',
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'General'
             ],
@@ -167,7 +164,6 @@ class OrderCrudController extends CrudController
                 'prefix' => '€',
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'General'
             ],
@@ -177,7 +173,6 @@ class OrderCrudController extends CrudController
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'General'
             ],
@@ -223,7 +218,6 @@ class OrderCrudController extends CrudController
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'Pago'
             ],
@@ -233,7 +227,6 @@ class OrderCrudController extends CrudController
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'Pago'
             ],
@@ -243,7 +236,6 @@ class OrderCrudController extends CrudController
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'Pago'
             ],
@@ -254,7 +246,6 @@ class OrderCrudController extends CrudController
                 'value' => 'https://www.sandbox.paypal.com/checkoutnow?token=' . $this->crud->getCurrentEntry()->paypal_id,
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'Pago'
             ],
@@ -265,7 +256,6 @@ class OrderCrudController extends CrudController
                 'value' => $payment_order_status,
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'Pago'
             ],
@@ -276,7 +266,6 @@ class OrderCrudController extends CrudController
                 'value' => $payment_payment_status,
                 'attributes' => [
                     'readonly'    => 'readonly',
-                    'disabled'    => 'disabled',
                 ],
                 'tab' => 'Pago'
             ],
