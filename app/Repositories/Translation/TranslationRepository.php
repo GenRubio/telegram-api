@@ -41,4 +41,10 @@ class TranslationRepository extends Repository implements TranslationRepositoryI
     {
         return $this->model->get();
     }
+
+    public function getByUUID($uuid)
+    {
+        return $this->model->where('uuid', $uuid)
+            ->first();
+    }
 }

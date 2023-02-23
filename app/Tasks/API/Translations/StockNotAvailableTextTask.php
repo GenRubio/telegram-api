@@ -31,7 +31,7 @@ class StockNotAvailableTextTask
 
     private function setTranslation()
     {
-        return $this->apiTranslationService->getByKey($this->uuid);
+        return $this->apiTranslationService->getByUUID($this->uuid);
     }
 
     private function preparedMessage()

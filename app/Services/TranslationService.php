@@ -29,4 +29,9 @@ class TranslationService extends Controller
     {
         return $this->translationRepository->getAll();
     }
+
+    public function getByUUID($uuid)
+    {
+        return $this->translationRepository->getByUUID($uuid);
+    }
 }

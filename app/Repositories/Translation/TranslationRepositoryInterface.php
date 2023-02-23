@@ -9,4 +9,5 @@ namespace App\Repositories\Translation;
 interface TranslationRepositoryInterface
 {
     public function getAll();
+    public function getByUUID($uuid);
 }
