@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class WEBTranslationsScope implements Scope
+class WEBTranslationScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
