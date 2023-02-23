@@ -5,12 +5,9 @@ namespace App\Models\ParametricTableValues;
 use App\Models\ParametricTable;
 use App\Models\ParametricTableValue;
 use Illuminate\Support\Str;
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class SocialNetworksTable extends ParametricTableValue
 {
-    use CrudTrait;
-
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES

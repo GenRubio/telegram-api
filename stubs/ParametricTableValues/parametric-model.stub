@@ -5,12 +5,9 @@ namespace {{ namespace }};
 use App\Models\ParametricTable;
 use App\Models\ParametricTableValue;
 use Illuminate\Support\Str;
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class {{ class }} extends ParametricTableValue
 {
-    use CrudTrait;
-
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES

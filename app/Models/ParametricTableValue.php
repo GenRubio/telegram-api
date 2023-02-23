@@ -5,12 +5,12 @@ namespace App\Models;
 use App\Scopes\ParametricTableScope;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
+//use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 
 class ParametricTableValue extends Model
 {
     use CrudTrait;
-    use HasTranslations;
+    //use HasTranslations;
     
     protected static function boot()
     {
