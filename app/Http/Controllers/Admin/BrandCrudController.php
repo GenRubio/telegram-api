@@ -35,6 +35,11 @@ class BrandCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
+            'name' => 'count_products',
+            'label' => 'Productos',
+            'type'  => 'number',
+        ]);
+        $this->crud->addColumn([
             'name' => 'active',
             'type' => 'btnToggleV2',
             'label' => 'Activo',

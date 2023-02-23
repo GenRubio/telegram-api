@@ -38,6 +38,11 @@ class Brand extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function productModels()
+    {
+        return $this->hasMany(ProductModel::class, 'brand_id', 'id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -54,6 +59,11 @@ class Brand extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+
+    public function getCountProductsAttribute()
+    {
+        return count($this->productModels);
+    }
 
     /*
     |--------------------------------------------------------------------------
