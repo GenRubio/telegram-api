@@ -64,12 +64,6 @@
    @if(backpack_user()->officePermission('TranslationCrudController', 'show'))
    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('translation') }}"><i class="nav-icon las la-language"></i> Traducciones</a></li>
    @endif
-   @if(backpack_user()->officePermission('ApiClientCrudController', 'show'))
-   <li class="nav-item"><a class="nav-link" href="{{ backpack_url('api-client') }}"><i class="nav-icon las la-server"></i> API Clientes</a></li>
-   @endif
-   @if(backpack_user()->officePermission('GeocodingApiCrudController', 'show'))
-   <li class="nav-item"><a class="nav-link" href="{{ backpack_url('geocoding-api') }}"><i class="nav-icon las la-database"></i> Geocoding</a></li>
-   @endif
    @if(backpack_user()->officePermission('SettingCrudController', 'show'))
    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('setting') }}"><i class="nav-icon las la-tools"></i> Configuración</a></li>
    @endif
@@ -85,6 +79,12 @@
 </li>
 @if(backpack_user()->officePermission('UserCrudController', 'show'))
 <li class="nav-title">SERVIDOR</li>
+@if(backpack_user()->officePermission('ApiClientCrudController', 'show'))
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('api-client') }}"><i class="nav-icon las la-server"></i> API Clientes</a></li>
+@endif
+@if(backpack_user()->officePermission('GeocodingApiCrudController', 'show'))
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('geocoding-api') }}"><i class="nav-icon las la-database"></i> Geocoding</a></li>
+@endif
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('elfinder') }}"><i class="nav-icon la la-files-o"></i> Elfinder</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon la la-hdd-o'></i> Backups</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('log') }}'><i class='nav-icon la la-terminal'></i> Logs</a></li>
