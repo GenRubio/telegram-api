@@ -109,7 +109,7 @@ class GalleryProduct extends Model
                 Storage::disk($disk)->delete('public/' . $this->{$attribute_name});
             }
             $filename = md5($value . time()) . '-' . $attribute_name . '.' . $value->getClientOriginalExtension();
-            dd($value);
+
             if ($value->getClientOriginalExtension() == "gif") {
                 //copy($value->getRealPath(), $destination);
                 Storage::disk($disk)->put($destination_path . $filename, file_get_contents($value));
