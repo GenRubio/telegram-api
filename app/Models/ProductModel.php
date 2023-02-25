@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Carbon\Carbon;
+use Exception;
 
 class ProductModel extends Model
 {
@@ -236,8 +237,15 @@ class ProductModel extends Model
             if ($this->{$attribute_name}) {
                 Storage::disk($disk)->delete('public/' . $this->{$attribute_name});
             }
-            $image = Image::make($value)->encode('png', 90);
-            $filename = md5($value . time()) . '-' . $attribute_name . '.png';
+            $extencion = 'png';
+            try{
+                $b64 = $value;
+                preg_match("/\/(.*?);/", $b64, $math);
+                $extencion = $math[1];
+            }
+            catch(Exception $e){ }
+            $image = Image::make($value)->encode($extencion, 90);
+            $filename = md5($value . time()) . '-' . $attribute_name . '.' . $extencion;
             Storage::disk($disk)->put($destination_path . $filename, $image->stream());
             $this->attributes[$attribute_name] = $destination_path_db . $filename;
         } else {
