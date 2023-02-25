@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use App\Services\LanguageService;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
@@ -107,8 +108,16 @@ class GalleryProduct extends Model
             if ($this->{$attribute_name}) {
                 Storage::disk($disk)->delete('public/' . $this->{$attribute_name});
             }
-            $image = Image::make($value)->encode('png', 90);
-            $filename = md5($value . time()) . '-' . $attribute_name . '.png';
+            dd($value);
+            $extencion = 'png';
+            try{
+                $b64 = $value;
+                preg_match("/\/(.*?);/", $b64, $math);
+                $extencion = $math[1];
+            }
+            catch(Exception $e){ }
+            $image = Image::make($value)->encode($extencion, 90);
+            $filename = md5($value . time()) . '-' . $attribute_name . '.' . $extencion;
             Storage::disk($disk)->put($destination_path . $filename, $image->stream());
             $this->attributes[$attribute_name] = $destination_path_db . $filename;
         } else {
