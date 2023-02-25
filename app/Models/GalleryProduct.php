@@ -108,7 +108,7 @@ class GalleryProduct extends Model
             if ($this->{$attribute_name}) {
                 Storage::disk($disk)->delete('public/' . $this->{$attribute_name});
             }
-            dd($value);
+            dd($value->getClientOriginalExtension());
             $extencion = 'png';
             try{
                 $b64 = $value;
