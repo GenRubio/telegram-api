@@ -136,8 +136,9 @@ class GalleryProductCrudController extends CrudController
 
     public function update()
     {
-        $imageProduct = $this->crud->getCurrentEntry();
-        dd($this->crud->getRequest()->image);
+        if (is_null($this->crud->getRequest()->image)){
+            request()->request->remove('image');
+        }
         return $this->traitUpdate();
     }
 }
