@@ -111,7 +111,7 @@ class GalleryProduct extends Model
             $filename = md5($value . time()) . '-' . $attribute_name . '.' . $value->getClientOriginalExtension();
             if ($value->getClientOriginalExtension() == "gif") {
                 //copy($value->getRealPath(), $destination);
-                Storage::disk($disk)->put($destination_path . $filename, $value);
+                Storage::disk($disk)->put($destination_path . $filename, $value->getRealPath());
             } else {
                 $image = Image::make($value)->encode($value->getClientOriginalExtension(), 90);
                 Storage::disk($disk)->put($destination_path . $filename, $image->stream());
