@@ -108,16 +108,8 @@ class GalleryProduct extends Model
             if ($this->{$attribute_name}) {
                 Storage::disk($disk)->delete('public/' . $this->{$attribute_name});
             }
-            dd($value->getClientOriginalExtension());
-            $extencion = 'png';
-            try{
-                $b64 = $value;
-                preg_match("/\/(.*?);/", $b64, $math);
-                $extencion = $math[1];
-            }
-            catch(Exception $e){ }
-            $image = Image::make($value)->encode($extencion, 90);
-            $filename = md5($value . time()) . '-' . $attribute_name . '.' . $extencion;
+            $image = Image::make($value)->encode($value->getClientOriginalExtension(), 90);
+            $filename = md5($value . time()) . '-' . $attribute_name . '.' . $value->getClientOriginalExtension();
             Storage::disk($disk)->put($destination_path . $filename, $image->stream());
             $this->attributes[$attribute_name] = $destination_path_db . $filename;
         } else {
