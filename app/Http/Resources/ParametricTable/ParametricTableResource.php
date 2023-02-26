@@ -19,7 +19,7 @@ class ParametricTableResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'comment' => $this->comment,
-            'parametric_table_values' => new ParametricTableValueCollection($this->parametricTableValues),
+            'parametric_table_values' => new ParametricTableValueCollection($this->parametricTableValuesResource),
         ];
     }
 }
