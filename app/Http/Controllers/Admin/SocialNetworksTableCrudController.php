@@ -26,6 +26,13 @@ class SocialNetworksTableCrudController extends ParametricTableValueCrudControll
         CRUD::setEntityNameStrings('red', 'redes sociales');
 
         $this->parametricTableId = $this->crud->model->getParamatricTableId();
+        $this->listFilter();
+    }
+
+    protected function listFilter()
+    {
+        $this->crud->addClause('where', 'parametric_table_id', $this->parametricTableId)
+            ->orderBy('order', 'asc');
     }
 
     public function store()
