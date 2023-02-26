@@ -20,6 +20,7 @@ class TelegramChat
     public function handle(Request $request, Closure $next)
     {
         try {
+            dd($request->input('token'));
             $token = $request->input('token');
             $botChatService = new BotChatService();
             $chat = $botChatService->getByChatId($token);
