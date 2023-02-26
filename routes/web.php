@@ -21,9 +21,6 @@ use App\Http\Controllers\Api\v1\GetProductDetailController;
 */
 
 Route::prefix('api')->group(function () {
-    Route::get('order/{reference}', [OrderController::class, 'getOrder']);
-    Route::post('new-order', [OrderController::class, 'createOrder']);
-
     /**
      * API v1 Routes
      */
@@ -31,7 +28,6 @@ Route::prefix('api')->group(function () {
         Route::get('{token}/config', [GetConfigController::class, 'index']);
         Route::get('{token}/products', [GetProductsController::class, 'index']);
         Route::get('{token}/product/{reference}', [GetProductDetailController::class, 'index']);
-        Route::post('new-order', [OrderController::class, 'createOrder']);
         Route::prefix('order')->group(function (){
             Route::post('create', [OrderController::class, 'createOrder']);
             Route::post('get', [OrderController::class, 'getOrder']);
