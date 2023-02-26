@@ -27,7 +27,7 @@ class TelegramChat
                 throw new GenericException("Chat {$this->chatId} undefined");
             }
         } catch (GenericException | Exception $e) {
-            return;
+            return response('Unauthorized.', 401);
         }
         return $next($request);
     }
