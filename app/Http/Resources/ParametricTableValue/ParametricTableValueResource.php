@@ -16,8 +16,11 @@ class ParametricTableValueResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'key' => $this->key,
             'name' => $this->name,
             'parameter' => $this->parameter,
+            'description' => $this->description,
+            'order' => $this->order,
             'filter' => $this->filter,
             'visible' => $this->visible,
         ];
