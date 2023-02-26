@@ -22,11 +22,11 @@ use App\Http\Controllers\Api\v1\GetProductDetailController;
 */
 
 Route::prefix('api')->group(function () {
-    /**
-     * API v1 Routes
-     */
-    Route::prefix('v1')->group(function () {
-        Route::middleware([TelegramChat::class])->group(function () {
+    Route::middleware([TelegramChat::class])->group(function () {
+        /**
+         * API v1 Routes
+         */
+        Route::prefix('v1')->group(function () {
             Route::get('{token}/config', [GetConfigController::class, 'index']);
             Route::get('{token}/products', [GetProductsController::class, 'index']);
             Route::get('{token}/product/{reference}', [GetProductDetailController::class, 'index']);
@@ -35,25 +35,25 @@ Route::prefix('api')->group(function () {
                 Route::post('get', [OrderController::class, 'getOrder']);
             });
         });
-    });
 
-    /**
-     * Payment Routes
-     */
-    Route::prefix('payment')->group(function () {
-        Route::get('/{reference}', [PaymentController::class, 'payment'])
-            ->name('payment');
-        Route::prefix('stripe')->group(function () {
-            Route::get('success/{reference}', [StripeController::class, 'paymentSuccess'])
-                ->name('stripe.payment.success');
-            Route::get('cancel/{reference}', [StripeController::class, 'paymentError'])
-                ->name('stripe.payment.cancel');
-        });
-        Route::prefix('paypal')->group(function () {
-            Route::get('success/{reference}', [PaypalController::class, 'paymentSuccess'])
-                ->name('paypal.payment.success');
-            Route::get('cancel/{reference}', [PaypalController::class, 'paymentError'])
-                ->name('paypal.payment.cancel');
+        /**
+         * Payment Routes
+         */
+        Route::prefix('payment')->group(function () {
+            Route::get('/{reference}', [PaymentController::class, 'payment'])
+                ->name('payment');
+            Route::prefix('stripe')->group(function () {
+                Route::get('success/{reference}', [StripeController::class, 'paymentSuccess'])
+                    ->name('stripe.payment.success');
+                Route::get('cancel/{reference}', [StripeController::class, 'paymentError'])
+                    ->name('stripe.payment.cancel');
+            });
+            Route::prefix('paypal')->group(function () {
+                Route::get('success/{reference}', [PaypalController::class, 'paymentSuccess'])
+                    ->name('paypal.payment.success');
+                Route::get('cancel/{reference}', [PaypalController::class, 'paymentError'])
+                    ->name('paypal.payment.cancel');
+            });
         });
     });
 });

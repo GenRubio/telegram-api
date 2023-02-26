@@ -4,12 +4,14 @@ namespace App\Http\Resources\Api;
 
 use App\Services\SettingService;
 use App\Services\TranslationService;
+use App\Tasks\WebApp\GetBotChatTask;
 use App\Services\ParametricTableService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\ParametricTable\ParametricTableCollection;
 
 class ConfigResource extends JsonResource
 {
+    private $chat;
     private $translationService;
     private $translations;
     private $language;
@@ -17,11 +19,12 @@ class ConfigResource extends JsonResource
     private $settings;
     private $parametricTables;
 
-    public function __construct($chat)
+    public function __construct($token)
     {
+        $this->chat = (new GetBotChatTask($token))->run();
         $this->translationService = new TranslationService();
         $this->translations = $this->translationService->getAll();
-        $this->language = $chat->language->abbr;
+        $this->language = $this->chat->language->abbr;
         $this->settingService = new SettingService();
         $this->settings = $this->settingService->getAll();
         $this->parametricTables = (new ParametricTableService())->getForResource();
