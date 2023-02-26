@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\TelegramChat;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\StripeController;
@@ -25,12 +26,14 @@ Route::prefix('api')->group(function () {
      * API v1 Routes
      */
     Route::prefix('v1')->group(function () {
-        Route::get('{token}/config', [GetConfigController::class, 'index']);
-        Route::get('{token}/products', [GetProductsController::class, 'index']);
-        Route::get('{token}/product/{reference}', [GetProductDetailController::class, 'index']);
-        Route::prefix('order')->group(function (){
-            Route::post('create', [OrderController::class, 'createOrder']);
-            Route::post('get', [OrderController::class, 'getOrder']);
+        Route::middleware([TelegramChat::class])->group(function () {
+            Route::get('{token}/config', [GetConfigController::class, 'index']);
+            Route::get('{token}/products', [GetProductsController::class, 'index']);
+            Route::get('{token}/product/{reference}', [GetProductDetailController::class, 'index']);
+            Route::prefix('order')->group(function () {
+                Route::post('create', [OrderController::class, 'createOrder']);
+                Route::post('get', [OrderController::class, 'getOrder']);
+            });
         });
     });
 
