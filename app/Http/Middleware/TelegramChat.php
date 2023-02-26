@@ -20,15 +20,14 @@ class TelegramChat
     public function handle(Request $request, Closure $next)
     {
         try {
-            dd($request->input('token'));
-            $token = $request->input('token');
+            $token = $request->token;
             $botChatService = new BotChatService();
             $chat = $botChatService->getByChatId($token);
             if (is_null($chat)) {
                 throw new GenericException("Chat {$this->chatId} undefined");
             }
         } catch (GenericException | Exception $e) {
-            abort(404);
+            return;
         }
         return $next($request);
     }
