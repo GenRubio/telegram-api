@@ -80,6 +80,20 @@ if (!function_exists('isUrl')) {
     }
 }
 
+if (!function_exists('responseAttrEncrypt')) {
+    function responseAttrEncrypt($attr)
+    {
+        return UtilsHelper::responseAttrEncrypt($attr);
+    }
+}
+
+if (!function_exists('requestAttrEncrypt')) {
+    function requestAttrEncrypt($attr)
+    {
+        return UtilsHelper::requestAttrEncrypt($attr);
+    }
+}
+
 /**
  * CrudHelper
  */

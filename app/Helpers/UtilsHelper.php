@@ -32,4 +32,20 @@ class UtilsHelper
         }
         return false;
     }
+
+    public static function responseAttrEncrypt($attr)
+    {
+        if (config('app.env') == "local") {
+            return $attr;
+        }
+        return encrypt($attr);
+    }
+
+    public static function requestAttrEncrypt($attr)
+    {
+        if (config('app.env') == "local") {
+            return $attr;
+        }
+        return decrypt($attr);
+    }
 }
