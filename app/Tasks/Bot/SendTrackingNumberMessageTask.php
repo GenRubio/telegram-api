@@ -46,8 +46,8 @@ class SendTrackingNumberMessageTask
                     return $keyboard->row([
                         Button::make((new ButtonTracingUrlTextTask($this->order->botChat))->run())
                             ->url($this->order->provider_url),
-                        Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
-                            ->webApp((new GetApiClientTask())->orderDetail($this->order->reference))
+                        //Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
+                        //    ->webApp((new GetApiClientTask())->orderDetail($this->order->reference))
                     ]);
                 })
                 ->protected()

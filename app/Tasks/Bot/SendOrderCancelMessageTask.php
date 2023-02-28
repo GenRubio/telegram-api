@@ -41,12 +41,12 @@ class SendOrderCancelMessageTask
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }
             $response = $response->html($this->getResponseText())
-                ->keyboard(function (Keyboard $keyboard) {
-                    return $keyboard->row([
-                        Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
-                            ->webApp((new GetApiClientTask())->orderDetail($this->order->reference))
-                    ]);
-                })
+                //->keyboard(function (Keyboard $keyboard) {
+                //    return $keyboard->row([
+                //        Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
+                //            ->webApp((new GetApiClientTask())->orderDetail($this->order->reference))
+                //    ]);
+                //})
                 ->protected()
                 ->send();
         } catch (Exception $e) {
