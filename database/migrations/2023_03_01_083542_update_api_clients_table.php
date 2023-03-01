@@ -28,6 +28,12 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('api_clients', function (Blueprint $table) {
+            $table->renameColumn('domine', 'url');
+            $table->dropColumn([
+                'protocol',
+                'remote_port'
+            ]);
+        });
     }
 };
