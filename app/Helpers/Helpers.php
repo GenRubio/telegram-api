@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\ApiHelper;
 use App\Helpers\AuthHelper;
 use App\Helpers\CrudHelper;
 use App\Helpers\CacheHelper;
@@ -174,5 +175,17 @@ if (!function_exists('getJsonValues')) {
     function getJsonValues($request)
     {
         return FrontJsonHelper::getJsonValues($request);
+    }
+}
+
+
+/**
+ * ApiHelper
+ */
+
+if (!function_exists('getAgentIp')) {
+    function getAgentIp()
+    {
+        return ApiHelper::getAgentIp();
     }
 }
