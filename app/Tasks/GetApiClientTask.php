@@ -17,7 +17,7 @@ class GetApiClientTask
 
     public function products($chatId)
     {
-        return $this->activeClients->first()->url . 'webapp/' . responseAttrEncrypt($chatId);
+        return $this->activeClients->first()->referer . 'webapp/' . responseAttrEncrypt($chatId);
     }
 
     public function orderDetail($reference)

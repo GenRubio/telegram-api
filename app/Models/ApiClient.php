@@ -20,7 +20,9 @@ class ApiClient extends Model
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = [
-        'url',
+        'protocol',
+        'domine',
+        'remote_port',
         'ip',
         'online',
         'active'
@@ -56,6 +58,16 @@ class ApiClient extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+
+    public function getOriginAttributes()
+    {
+        return "{$this->attributes['protocol']}://{$this->attributes['domine']}";
+    }
+
+    public function getRefererAttributes()
+    {
+        return "{$this->attributes['protocol']}://{$this->attributes['domine']}/";
+    }
 
     /*
     |--------------------------------------------------------------------------

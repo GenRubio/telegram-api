@@ -25,8 +25,9 @@ class ApiClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'url' => 'required',
-            'ip' => 'required'
+            'domine' => 'required',
+            'ip' => 'required',
+            'protocol' => 'required',
         ];
     }
 

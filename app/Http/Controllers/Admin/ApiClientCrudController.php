@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ProtocolTypesEnum;
 use App\Http\Requests\ApiClientRequest;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -30,8 +31,23 @@ class ApiClientCrudController extends CrudController
     {
         $this->removeActionsCrud();
         $this->crud->addColumn([
-            'name' => 'url',
-            'label' => 'Url',
+            'name' => 'protocol',
+            'label' => 'Protocolo',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'domine',
+            'label' => 'Dominio',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'ip',
+            'label' => 'IP',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'remote_port',
+            'label' => 'Puerto',
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
@@ -51,14 +67,26 @@ class ApiClientCrudController extends CrudController
         CRUD::setValidation(ApiClientRequest::class);
         $this->crud->addFields([
             [
-                'name' => 'url',
-                'label' => 'Url',
+                'name' => "protocol",
+                'label' => "Protocolo",
+                'type' => 'select_from_array',
+                'options' => ProtocolTypesEnum::TYPES,
+            ],
+            [
+                'name' => 'domine',
+                'label' => 'Dominio',
                 'type' => 'text',
             ],
             [
                 'name' => 'ip',
                 'label' => 'IP',
                 'type' => 'text',
+            ],
+            [
+                'name' => 'remote_port',
+                'label' => 'Puerto',
+                'type' => 'number',
+                'default' => null
             ],
             [
                 'name' => 'active',
