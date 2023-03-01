@@ -23,6 +23,7 @@ class {{ class }} extends ParametricTableValueService
      */
     public function __construct()
     {
+        parent::__construct();
         $this->{{ var_repository }} = new {{ class_repository }}();
     }
 

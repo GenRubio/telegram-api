@@ -23,6 +23,7 @@ class SocialNetworksTableService extends ParametricTableValueService
      */
     public function __construct()
     {
+        parent::__construct();
         $this->socialNetworksTableRepository = new SocialNetworksTableRepository();
     }
 

@@ -23,6 +23,7 @@ class SettingsTableService extends ParametricTableValueService
      */
     public function __construct()
     {
+        parent::__construct();
         $this->settingsTableRepository = new SettingsTableRepository();
     }
 
