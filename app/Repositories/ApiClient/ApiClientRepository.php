@@ -64,4 +64,12 @@ class ApiClientRepository extends Repository implements ApiClientRepositoryInter
             ->where('validate', true)
             ->get();
     }
+
+    public function getByDomain($domain)
+    {
+        return $this->model
+            ->active()
+            ->where('domain', $domain)
+            ->get();
+    }
 }

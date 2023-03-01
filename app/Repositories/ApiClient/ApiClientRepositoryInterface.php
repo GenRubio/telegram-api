@@ -12,4 +12,5 @@ interface ApiClientRepositoryInterface
     public function getToPing();
     public function setOnline($id, $status);
     public function getOnline();
+    public function getByDomain($domain);
 }

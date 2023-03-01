@@ -44,4 +44,9 @@ class ApiClientService extends Controller
     {
         $this->apiclientRepository->setOnline($id, $status);
     }
+
+    public function getByDomain($domain)
+    {
+        return $this->apiclientRepository->getByDomain($domain);
+    }
 }

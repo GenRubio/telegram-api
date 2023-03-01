@@ -3,8 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Exception;
 use Illuminate\Http\Request;
+use App\Services\ApiClientService;
 use Illuminate\Support\Facades\Log;
+use App\Exceptions\GenericException;
 use App\Services\AuthorizedApiAgentService;
 
 class AuthorizedAgentsApi
@@ -18,15 +21,30 @@ class AuthorizedAgentsApi
      */
     public function handle(Request $request, Closure $next)
     {
-        //$authorizedApiAgents = (new AuthorizedApiAgentService())->getAllAuthorizedAgent();
-        //Log::channel('api-agent')->info("Agent: IP: " . getAgentIp());
-        //if (env('APP_ENV') != "local" && !in_array(getAgentIp(), $authorizedApiAgents)) {
-        //    return response()->json(array(
-        //        'success' => false,
-        //        'message' => 'You are blocked to call API!'
-        //    ));
-        //}
-
+        if (config('app.env') != 'local') {
+            try {
+                $referer = $this->formatted($_SERVER['HTTP_REFERER']);
+                $origin = $this->formatted($_SERVER['HTTP_ORIGIN']);
+                $remotePort = $_SERVER['REMOTE_PORT'];
+                if ($referer != $origin) {
+                    throw new GenericException("Error");
+                }
+                $apiClient = (new ApiClientService())->getByDomain($origin);
+                if (!$apiClient) {
+                    throw new GenericException("Error");
+                }
+            } catch (GenericException | Exception $e) {
+                return response('Unauthorized.', 401);
+            }
+        }
         return $next($request);
+    }
+
+    private function formatted($text)
+    {
+        $text = str_replace("/", "", $text);
+        $text = str_replace("https:", "", $text);
+        $text = str_replace("http:", "", $text);
+        return $text;
     }
 }
