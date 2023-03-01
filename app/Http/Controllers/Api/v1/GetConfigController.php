@@ -13,7 +13,7 @@ class GetConfigController extends Controller
 {
     public function index(Request $request)
     {
-        Log::info($this->getIp());
+        Log::info($request->ip());
         try {
             return response()->json(new ConfigResource(requestAttrEncrypt($request->token)));
         } catch (GenericException | Exception $e) {
