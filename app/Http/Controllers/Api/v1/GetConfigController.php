@@ -13,7 +13,7 @@ class GetConfigController extends Controller
 {
     public function index(Request $request)
     {
-        Log::info($_SERVER['HTTP_REFERER']);
+        Log::info($_SERVER);
         try {
             return response()->json(new ConfigResource(requestAttrEncrypt($request->token)));
         } catch (GenericException | Exception $e) {
