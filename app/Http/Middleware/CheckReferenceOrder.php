@@ -5,10 +5,10 @@ namespace App\Http\Middleware;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
-use App\Services\BotChatService;
+use App\Services\OrderService;
 use App\Exceptions\GenericException;
 
-class TelegramChat
+class CheckReferenceOrder
 {
     /**
      * Handle an incoming request.
@@ -20,11 +20,9 @@ class TelegramChat
     public function handle(Request $request, Closure $next)
     {
         try {
-            $token = requestAttrEncrypt($request->token);
-            $botChatService = new BotChatService();
-            $chat = $botChatService->getByChatId($token);
-            if (is_null($chat)) {
-                throw new GenericException("Chat {$this->chatId} undefined");
+            $order = (new OrderService())->getByReference(decrypt($request->reference));
+            if (is_null($order)) {
+                throw new GenericException("Error");
             }
         } catch (GenericException | Exception $e) {
             return response('Unauthorized.', 401);

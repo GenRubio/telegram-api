@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Middleware\TelegramChat;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckTelegramChat;
+use App\Http\Middleware\CheckReferenceOrder;
 use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\StripeController;
 use App\Http\Controllers\Api\PaymentController;
@@ -22,7 +23,7 @@ use App\Http\Controllers\Api\v1\GetProductDetailController;
 */
 
 Route::prefix('api')->group(function () {
-    Route::middleware([TelegramChat::class])->group(function () {
+    Route::middleware([CheckTelegramChat::class])->group(function () {
         /**
          * API v1 Routes
          */
@@ -37,24 +38,25 @@ Route::prefix('api')->group(function () {
         });
     });
 
-    //TODO: Falta middleware para proteger estas rotas
-    /**
-     * Payment Routes
-     */
-    Route::prefix('payment')->group(function () {
-        Route::get('/{reference}', [PaymentController::class, 'payment'])
-            ->name('payment');
-        Route::prefix('stripe')->group(function () {
-            Route::get('success/{reference}', [StripeController::class, 'paymentSuccess'])
-                ->name('stripe.payment.success');
-            Route::get('cancel/{reference}', [StripeController::class, 'paymentError'])
-                ->name('stripe.payment.cancel');
-        });
-        Route::prefix('paypal')->group(function () {
-            Route::get('success/{reference}', [PaypalController::class, 'paymentSuccess'])
-                ->name('paypal.payment.success');
-            Route::get('cancel/{reference}', [PaypalController::class, 'paymentError'])
-                ->name('paypal.payment.cancel');
+    Route::middleware([CheckReferenceOrder::class])->group(function () {
+        /**
+         * Payment Routes
+         */
+        Route::prefix('payment')->group(function () {
+            Route::get('/{reference}', [PaymentController::class, 'payment'])
+                ->name('payment');
+            Route::prefix('stripe')->group(function () {
+                Route::get('success/{reference}', [StripeController::class, 'paymentSuccess'])
+                    ->name('stripe.payment.success');
+                Route::get('cancel/{reference}', [StripeController::class, 'paymentError'])
+                    ->name('stripe.payment.cancel');
+            });
+            Route::prefix('paypal')->group(function () {
+                Route::get('success/{reference}', [PaypalController::class, 'paymentSuccess'])
+                    ->name('paypal.payment.success');
+                Route::get('cancel/{reference}', [PaypalController::class, 'paymentError'])
+                    ->name('paypal.payment.cancel');
+            });
         });
     });
 });
