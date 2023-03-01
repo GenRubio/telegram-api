@@ -9,4 +9,7 @@ namespace App\Repositories\ApiClient;
 interface ApiClientRepositoryInterface
 {
     public function getAll();
+    public function getToPing();
+    public function setOnline($id, $status);
+    public function getOnline();
 }

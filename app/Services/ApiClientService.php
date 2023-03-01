@@ -29,4 +29,19 @@ class ApiClientService extends Controller
     {
         return $this->apiclientRepository->getAll();
     }
+
+    public function getOnline()
+    {
+        return $this->apiclientRepository->getOnline();
+    }
+
+    public function getToPing()
+    {
+        return $this->apiclientRepository->getToPing();
+    }
+
+    public function setOnline($id, $status)
+    {
+        $this->apiclientRepository->setOnline($id, $status);
+    }
 }

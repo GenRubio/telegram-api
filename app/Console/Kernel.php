@@ -15,11 +15,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('command:cancel-orders')->everyMinute();
-        $schedule->command('send:bot-global-messages')->everyMinute();
-        $schedule->command('remove:requests-geocoding')->daily()->at('03:00');
-        $schedule->command('backup:clean')->daily()->at('01:00');
-        $schedule->command('backup:run')->daily()->at('02:00');
+        $schedule->command('command:cancel-orders')->everyMinute()->withoutOverlapping();
+        $schedule->command('send:bot-global-messages')->everyMinute()->withoutOverlapping();
+        $schedule->command('ping:api-clients')->everyMinute()->withoutOverlapping();
+        $schedule->command('remove:requests-geocoding')->daily()->at('03:00')->withoutOverlapping();
+        $schedule->command('backup:clean')->daily()->at('01:00')->withoutOverlapping();
+        $schedule->command('backup:run')->daily()->at('02:00')->withoutOverlapping();
     }
 
     /**

@@ -12,7 +12,7 @@ class GetApiClientTask
     public function __construct()
     {
         $this->apiClientService = new ApiClientService();
-        $this->activeClients = $this->apiClientService->getAll();
+        $this->activeClients = $this->apiClientService->getOnline();
     }
 
     public function products($chatId)

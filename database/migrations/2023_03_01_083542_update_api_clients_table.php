@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('api_clients', function (Blueprint $table) {
             $table->text('url')->change();
-            $table->renameColumn('url', 'domine');
+            $table->renameColumn('url', 'domain');
             $table->string('protocol');
             $table->integer('remote_port')->nullable();
             $table->boolean('validate')->default(true);
@@ -30,7 +30,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('api_clients', function (Blueprint $table) {
-            $table->renameColumn('domine', 'url');
+            $table->renameColumn('domain', 'url');
             $table->dropColumn([
                 'protocol',
                 'remote_port',

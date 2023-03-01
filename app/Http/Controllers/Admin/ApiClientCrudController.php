@@ -36,7 +36,7 @@ class ApiClientCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'domine',
+            'name' => 'domain',
             'label' => 'Dominio',
             'type'  => 'text',
         ]);
@@ -78,7 +78,7 @@ class ApiClientCrudController extends CrudController
                 'options' => ProtocolTypesEnum::TYPES,
             ],
             [
-                'name' => 'domine',
+                'name' => 'domain',
                 'label' => 'Dominio',
                 'type' => 'text',
             ],

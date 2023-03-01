@@ -39,6 +39,29 @@ class ApiClientRepository extends Repository implements ApiClientRepositoryInter
 
     public function getAll()
     {
-        return $this->model->active()->get();
+        return $this->model->active()
+            ->get();
+    }
+
+    public function getToPing()
+    {
+        return $this->model->active()
+            ->where('validate', true)
+            ->get();
+    }
+
+    public function setOnline($id, $status)
+    {
+        $this->model->where('id', $id)->update([
+            'online' => $status
+        ]);
+    }
+
+    public function getOnline()
+    {
+        return $this->model->active()
+            ->where('online', true)
+            ->where('validate', true)
+            ->get();
     }
 }
