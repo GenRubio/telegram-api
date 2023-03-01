@@ -20,7 +20,7 @@ class TelegramChat
     public function handle(Request $request, Closure $next)
     {
         try {
-            $token = $request->token;
+            $token = requestAttrEncrypt($request->token);
             $botChatService = new BotChatService();
             $chat = $botChatService->getByChatId($token);
             if (is_null($chat)) {

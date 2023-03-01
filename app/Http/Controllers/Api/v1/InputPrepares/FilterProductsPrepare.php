@@ -14,7 +14,7 @@ class FilterProductsPrepare
     public function get()
     {
         return [
-            'token' => getJsonFirstLevelAttribute($this->request, 'token'),
+            'token' => requestAttrEncrypt(getJsonFirstLevelAttribute($this->request, 'token')),
             'order_by' => getJsonFirstLevelAttribute($this->request, 'order_by'),
             'nicotine' => getJsonFirstLevelAttribute($this->request, 'nicotine'),
             'brands' => getJsonFirstLevelAttribute($this->request, 'brands', true),

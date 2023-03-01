@@ -35,25 +35,26 @@ Route::prefix('api')->group(function () {
                 Route::post('get', [OrderController::class, 'getOrder']);
             });
         });
+    });
 
-        /**
-         * Payment Routes
-         */
-        Route::prefix('payment')->group(function () {
-            Route::get('/{reference}', [PaymentController::class, 'payment'])
-                ->name('payment');
-            Route::prefix('stripe')->group(function () {
-                Route::get('success/{reference}', [StripeController::class, 'paymentSuccess'])
-                    ->name('stripe.payment.success');
-                Route::get('cancel/{reference}', [StripeController::class, 'paymentError'])
-                    ->name('stripe.payment.cancel');
-            });
-            Route::prefix('paypal')->group(function () {
-                Route::get('success/{reference}', [PaypalController::class, 'paymentSuccess'])
-                    ->name('paypal.payment.success');
-                Route::get('cancel/{reference}', [PaypalController::class, 'paymentError'])
-                    ->name('paypal.payment.cancel');
-            });
+    //TODO: Falta middleware para proteger estas rotas
+    /**
+     * Payment Routes
+     */
+    Route::prefix('payment')->group(function () {
+        Route::get('/{reference}', [PaymentController::class, 'payment'])
+            ->name('payment');
+        Route::prefix('stripe')->group(function () {
+            Route::get('success/{reference}', [StripeController::class, 'paymentSuccess'])
+                ->name('stripe.payment.success');
+            Route::get('cancel/{reference}', [StripeController::class, 'paymentError'])
+                ->name('stripe.payment.cancel');
+        });
+        Route::prefix('paypal')->group(function () {
+            Route::get('success/{reference}', [PaypalController::class, 'paymentSuccess'])
+                ->name('paypal.payment.success');
+            Route::get('cancel/{reference}', [PaypalController::class, 'paymentError'])
+                ->name('paypal.payment.cancel');
         });
     });
 });

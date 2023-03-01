@@ -17,11 +17,11 @@ class GetApiClientTask
 
     public function products($chatId)
     {
-        return $this->activeClients->first()->url . 'webapp/' . $chatId;
+        return $this->activeClients->first()->url . 'webapp/' . responseAttrEncrypt($chatId);
     }
 
     public function orderDetail($reference)
     {
-        return $this->activeClients->first()->url . 'order/' . $reference;
+        //return $this->activeClients->first()->url . 'order/' . $reference;
     }
 }

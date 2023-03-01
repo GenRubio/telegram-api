@@ -15,7 +15,7 @@ class GetProductDetailController extends Controller
     public function index(Request $request)
     {
         try {
-            $chat = (new GetBotChatTask($request->token))->run();
+            $chat = (new GetBotChatTask(requestAttrEncrypt($request->token)))->run();
             $product = (new ProductModelService())->getByReference($request->reference);
             if (is_null($product)) {
                 throw new GenericException("Product not found");

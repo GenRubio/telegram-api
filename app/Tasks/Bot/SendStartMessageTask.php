@@ -55,17 +55,6 @@ class SendStartMessageTask
                 ->protected()
                 ->send();
             (new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
-
-            //$response = $this->chat;
-            //$response = $response->html('<b>HolaMundo</b><a href="' . url($this->telegramBotMessage->image) . '">&#8205;</a>')
-            //    ->keyboard(function (Keyboard $keyboard) {
-            //        return $keyboard->row([
-            //            Button::make((new ButtonShopTextTask($this->botChat))->run())
-            //                ->webApp($this->clientApiUrl)
-            //        ]);
-            //    })
-            //    ->protected()
-            //    ->send();
         } catch (Exception $e) {
             Log::channel('telegram-message')->error($e);
         }

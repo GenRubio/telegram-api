@@ -35,7 +35,7 @@ class OrderController extends Controller
     public function createOrder(Request $request)
     {
         try {
-            $customer = (new CustomerService())->getByChat($request->token);
+            $customer = (new CustomerService())->getByChat(requestAttrEncrypt($request->token));
             if (is_null($customer)) {
                 throw new GenericException("Error");
             }

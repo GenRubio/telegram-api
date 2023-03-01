@@ -13,7 +13,7 @@ class GetConfigController extends Controller
     public function index(Request $request)
     {
         try {
-            return response()->json(new ConfigResource($request->token));
+            return response()->json(new ConfigResource(requestAttrEncrypt($request->token)));
         } catch (GenericException | Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
