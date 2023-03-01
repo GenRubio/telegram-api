@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\ConfigResource;
-use Illuminate\Support\Facades\Log;
 
 class GetConfigController extends Controller
 {
