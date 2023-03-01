@@ -18,6 +18,7 @@ return new class extends Migration
             $table->renameColumn('url', 'domine');
             $table->string('protocol');
             $table->integer('remote_port')->nullable();
+            $table->boolean('validate')->default(true);
         });
     }
 
@@ -32,7 +33,8 @@ return new class extends Migration
             $table->renameColumn('domine', 'url');
             $table->dropColumn([
                 'protocol',
-                'remote_port'
+                'remote_port',
+                'validate'
             ]);
         });
     }

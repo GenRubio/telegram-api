@@ -24,6 +24,7 @@ class ApiClient extends Model
         'domine',
         'remote_port',
         'ip',
+        'validate',
         'online',
         'active'
     ];

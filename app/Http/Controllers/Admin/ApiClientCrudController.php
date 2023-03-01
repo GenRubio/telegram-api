@@ -56,6 +56,11 @@ class ApiClientCrudController extends CrudController
             'type'  => 'check',
         ]);
         $this->crud->addColumn([
+            'name' => 'validate',
+            'type' => 'btnToggleV2',
+            'label' => 'Validar',
+        ]);
+        $this->crud->addColumn([
             'name' => 'active',
             'type' => 'btnToggleV2',
             'label' => 'Activo',
@@ -87,6 +92,12 @@ class ApiClientCrudController extends CrudController
                 'label' => 'Puerto',
                 'type' => 'number',
                 'default' => null
+            ],
+            [
+                'name' => 'validate',
+                'type' => 'checkbox',
+                'label' => 'Validar',
+                'default' => true,
             ],
             [
                 'name' => 'active',
