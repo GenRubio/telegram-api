@@ -51,6 +51,7 @@ class TelegraphChatCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->removeActionsCrud();
+        $this->crud->addButtonFromView('line', 'bot-chat-encrypt-chat-id', 'bot-chat-encrypt-chat-id', 'beginning');
         $this->crud->addColumn([
             'name' => 'chat_id',
             'label' => 'Chat ID',
