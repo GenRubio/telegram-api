@@ -36,8 +36,8 @@ class ApiClientCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'domain',
-            'label' => 'Dominio',
+            'name' => 'origin',
+            'label' => 'Origen',
             'type'  => 'link',
         ]);
         $this->crud->addColumn([
