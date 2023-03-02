@@ -1,1 +1,1 @@
-<a href="{{ $entry->{$column['name']} }}" target="_blank">{{ $entry->{$column['name']} }}</a>
+<a href="www.{{ $entry->{$column['name']} }}" target="_blank">{{ $entry->{$column['name']} }}</a>
