@@ -6,9 +6,7 @@ use Closure;
 use Exception;
 use Illuminate\Http\Request;
 use App\Services\ApiClientService;
-use Illuminate\Support\Facades\Log;
 use App\Exceptions\GenericException;
-use App\Services\AuthorizedApiAgentService;
 
 class AuthorizedAgentsApi
 {

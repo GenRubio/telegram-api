@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckTelegramChat;
+use App\Http\Middleware\AuthorizedAgentsApi;
 use App\Http\Middleware\CheckReferenceOrder;
 use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\StripeController;
@@ -23,7 +24,10 @@ use App\Http\Controllers\Api\v1\GetProductDetailController;
 */
 
 Route::prefix('api')->group(function () {
-    Route::middleware([CheckTelegramChat::class])->group(function () {
+    Route::middleware([
+        CheckTelegramChat::class,
+        AuthorizedAgentsApi::class
+    ])->group(function () {
         /**
          * API v1 Routes
          */
