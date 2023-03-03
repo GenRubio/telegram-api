@@ -30,6 +30,7 @@ class TranslationCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->removeActionsCrud();
+        $this->crud->addButtonFromView('line', 'copy-uuid-trans-button', 'copy-uuid-trans-button', 'beginning');
         $this->crud->addColumn([
             'name' => 'uuid',
             'label' => 'UUID',
