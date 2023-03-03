@@ -25,7 +25,7 @@ class TranslationRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required',
+            'text' => 'required|unique:translations,text,'. request()->route()->id,
             'type' => 'required'
         ];
     }

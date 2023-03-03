@@ -84,54 +84,54 @@ class ProductDetailResource extends JsonResource
             'description' => [
                 'data' => [
                     [
-                        'name' => $this->getTranslationByUuid('1671777986.996363a54ec2f33a9'),
+                        'name' => $this->getTranslationByUuid('1fed3baa-9373-4786-8848-802873f05f0f'),
                         'value' => $product->concentration,
                         'simbol' => 'mg/ml',
                         'image' => url('images/icons/bg3-1.png'),
                         'has_images' => true
                     ],
                     [
-                        'name' => $this->getTranslationByUuid('1671778008.413463a54ed864ef9'),
+                        'name' => $this->getTranslationByUuid('d5bc98d7-e85a-4ebd-a3d6-986c1039c1fc'),
                         'value' => $product->absorbable_quantity,
                         'simbol' => 'Puffs',
                         'image' => url('images/icons/bg3-2.png'),
                         'has_images' => true
                     ],
                     [
-                        'name' => $this->getTranslationByUuid('1671778015.547363a54edf859bd'),
+                        'name' => $this->getTranslationByUuid('4537c769-5134-4217-abae-deb16f3cd8dc'),
                         'value' => $product->size,
                         'simbol' => 'mm',
                         'has_images' => false
                     ],
                     [
-                        'name' => $this->getTranslationByUuid('1671778023.580863a54ee78dca6'),
+                        'name' => $this->getTranslationByUuid('d77fa6c3-a544-4737-b10d-1a7197c9ebb3'),
                         'value' => $product->power_range,
                         'simbol' => 'W',
                         'has_images' => false
                     ],
                     [
-                        'name' => $this->getTranslationByUuid('1671778039.236463a54ef739b80'),
+                        'name' => $this->getTranslationByUuid('bec3b5f9-2945-445a-a3f6-4967ec4a1072'),
                         'value' => $product->battery_capacity,
                         'simbol' => 'mAh',
                         'image' => url('images/icons/bg3-4.png'),
                         'has_images' => true
                     ],
                     [
-                        'name' => $this->getTranslationByUuid('1671778050.365463a54f025935e'),
+                        'name' => $this->getTranslationByUuid('c92e37ac-2b3e-4922-bc18-de4e10332042'),
                         'value' => $product->e_liquid_capacity,
                         'simbol' => 'ml',
                         'image' => url('images/icons/bg3-5.png'),
                         'has_images' => true
                     ],
                     [
-                        'name' => $this->getTranslationByUuid('1671778059.778763a54f0bbe1a1'),
+                        'name' => $this->getTranslationByUuid('4af39b37-12b1-4e33-b383-6900f342f90a'),
                         'value' => $product->resistance,
                         'simbol' => 'Ω',
                         'image' => url('images/icons/bg3-6.png'),
                         'has_images' => true
                     ],
                     [
-                        'name' => $this->getTranslationByUuid('1671778073.652763a54f199f58d'),
+                        'name' => $this->getTranslationByUuid('4644d1de-43fc-4cc5-98a5-21b0cbdc8481'),
                         'value' => $product->charging_port,
                         'simbol' => null,
                         'image' => url('images/icons/bg3-3.png'),
