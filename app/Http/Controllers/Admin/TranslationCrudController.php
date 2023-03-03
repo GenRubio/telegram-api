@@ -45,6 +45,9 @@ class TranslationCrudController extends CrudController
             'name' => 'default_lang_text',
             'label' => 'Texto',
             'type'  => 'text',
+            'searchLogic' => function ($query, $column, $searchTerm) {
+                $query->orWhere('text', 'like', '%' . $searchTerm . '%');
+            }
         ]);
     }
 
