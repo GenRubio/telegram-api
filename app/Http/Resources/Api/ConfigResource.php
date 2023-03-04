@@ -44,6 +44,18 @@ class ConfigResource extends JsonResource
         return $response;
     }
 
+    private function formatLangText($uuid, $text)
+    {
+        $formattedText = $text;
+        switch ($uuid) {
+            case 'bca7fd48-3024-49d0-adfa-6265fb745d52':
+                $price = $this->settings->where('key', '1671891736.2341')->first()->value;
+                $formattedText = str_replace("[min_order_price]", $price, $formattedText);
+                break;
+        }
+        return $formattedText;
+    }
+
     private function getPreparedTranslations()
     {
         $translations = [];
@@ -60,17 +72,5 @@ class ConfigResource extends JsonResource
             $settings["{$setting->key}a"] = $setting->value;
         }
         return $settings;
-    }
-
-    private function formatLangText($uuid, $text)
-    {
-        $formattedText = $text;
-        switch ($uuid) {
-            case '1671778172.297963a54f7c48b8b':
-                $price = $this->settings->where('key', '1671891736.2341')->first()->value;
-                $formattedText = str_replace("<price>", $price, $formattedText);
-                break;
-        }
-        return $formattedText;
     }
 }
