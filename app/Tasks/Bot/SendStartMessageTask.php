@@ -45,7 +45,7 @@ class SendStartMessageTask
             if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }
-            Log::error("Test");
+            Log::error((new ButtonShopTextTask($this->botChat))->run());
             $response = $response->html($this->getResponseText())
                 //->keyboard(function (Keyboard $keyboard) {
                 //    return $keyboard->row([
