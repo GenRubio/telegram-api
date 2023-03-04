@@ -45,13 +45,14 @@ class SendStartMessageTask
             if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }
+            Log::error("Test");
             $response = $response->html($this->getResponseText())
-                ->keyboard(function (Keyboard $keyboard) {
-                    return $keyboard->row([
-                        Button::make((new ButtonShopTextTask($this->botChat))->run())
-                            ->webApp($this->clientApiUrl)
-                    ]);
-                })
+                //->keyboard(function (Keyboard $keyboard) {
+                //    return $keyboard->row([
+                //        Button::make((new ButtonShopTextTask($this->botChat))->run())
+                //            ->webApp($this->clientApiUrl)
+                //    ]);
+                //})
                 ->protected()
                 ->send();
             (new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
