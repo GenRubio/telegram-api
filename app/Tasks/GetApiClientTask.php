@@ -18,7 +18,7 @@ class GetApiClientTask
 
     public function products($chatId)
     {
-        Log::error($this->activeClients->first());
+        Log::error($this->activeClients->first()->referer);
         return $this->activeClients->first()->referer . 'webapp/' . responseAttrEncrypt($chatId);
     }
 
