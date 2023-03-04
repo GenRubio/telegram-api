@@ -60,12 +60,12 @@ class ApiClient extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getOriginAttributes()
+    public function getOriginAttribute()
     {
         return "{$this->attributes['protocol']}://{$this->attributes['domain']}";
     }
 
-    public function getRefererAttributes()
+    public function getRefererAttribute()
     {
         return "{$this->attributes['protocol']}://{$this->attributes['domain']}/";
     }
