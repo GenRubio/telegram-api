@@ -46,12 +46,12 @@ class SendStartMessageTask
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }
             $response = $response->html($this->getResponseText())
-                //->keyboard(function (Keyboard $keyboard) {
-                //    return $keyboard->row([
-                //        Button::make((new ButtonShopTextTask($this->botChat))->run())
-                //            ->webApp($this->clientApiUrl)
-                //    ]);
-                //})
+                ->keyboard(function (Keyboard $keyboard) {
+                    return $keyboard->row([
+                        Button::make((new ButtonShopTextTask($this->botChat))->run())
+                            ->webApp($this->clientApiUrl)
+                    ]);
+                })
                 ->protected()
                 ->send();
             (new SetPinStartMessageTask($this->chat, $response->telegraphMessageId()))->run();
