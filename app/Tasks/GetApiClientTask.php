@@ -3,6 +3,7 @@
 namespace App\Tasks;
 
 use App\Services\ApiClientService;
+use Illuminate\Support\Facades\Log;
 
 class GetApiClientTask
 {
@@ -17,6 +18,7 @@ class GetApiClientTask
 
     public function products($chatId)
     {
+        Log::error($this->activeClients->first());
         return $this->activeClients->first()->referer . 'webapp/' . responseAttrEncrypt($chatId);
     }
 
