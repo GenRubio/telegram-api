@@ -72,6 +72,18 @@ class TelegramBotMessage extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getIsTextFullTranslateAttribute()
+    {
+        $languages = Language::active()->pluck('abbr')->toArray();
+        $text = json_decode($this->attributes['message']);
+        foreach ($languages as $lang) {
+            if (empty($text->{$lang})) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

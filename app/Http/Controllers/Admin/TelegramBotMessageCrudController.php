@@ -49,6 +49,11 @@ class TelegramBotMessageCrudController extends CrudController
             'label' => 'Descripcion',
             'type'  => 'text',
         ]);
+        $this->crud->addColumn([
+            'name' => 'is_text_full_translate',
+            'label' => 'Traducido',
+            'type'  => 'check',
+        ]);
     }
 
     protected function setupCreateOperation()
