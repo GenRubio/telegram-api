@@ -77,6 +77,18 @@ class Translation extends Model
         return $text->{$language->abbr} ?? '';
     }
 
+    public function getIsTextFullTranslateAttribute()
+    {
+        $languages = Language::active()->pluck('abbr')->toArray();
+        $text = json_decode($this->attributes['text']);
+        foreach ($languages as $lang) {
+            if (empty($text->{$lang})) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

@@ -50,6 +50,11 @@ class TranslationCrudController extends CrudController
                 $query->orWhere('text', 'like', '%' . $searchTerm . '%');
             }
         ]);
+        $this->crud->addColumn([
+            'name' => 'is_text_full_translate',
+            'label' => 'Traducido',
+            'type'  => 'check',
+        ]);
     }
 
     protected function setupCreateOperation()
