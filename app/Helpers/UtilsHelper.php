@@ -22,6 +22,7 @@ class UtilsHelper
         $newcontent = str_replace("</span>", "", $newcontent);
         $newcontent = preg_replace("/<br[^>]*?>/", "", $newcontent);
         $newcontent = str_replace("</br>", "", $newcontent);
+        $newcontent = str_replace("&nbsp;", "", $newcontent);
         return $newcontent;
     }
 
