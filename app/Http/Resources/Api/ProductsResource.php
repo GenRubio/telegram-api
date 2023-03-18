@@ -39,6 +39,7 @@ class ProductsResource extends JsonResource
             'discount' => $product->discount,
             'price_with_discount' => $product->price_with_discount,
             'brand' => $product->productBrand->name,
+            'multiple_flavors' => $product->multiple_flavors,
             'flavors' => count($product->productModelsFlavors)
         ];
     }

@@ -79,6 +79,7 @@ class ProductDetailResource extends JsonResource
             'discount' => $product->discount,
             'price_with_discount' => $product->price_with_discount,
             'brand' => $product->productBrand->name,
+            'multiple_flavors' => $product->multiple_flavors,
             'flavors' => count($product->productModelsFlavors),
             'gallery' => json_decode(json_encode(new ProductGalleryResource($product->galleryImages))),
             'description' => [
