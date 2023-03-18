@@ -28,6 +28,7 @@ class ProductModel extends Model
         'image',
         'price',
         'discount',
+        'multiple_flavors',
         'size',
         'power_range',
         'input_voltage',

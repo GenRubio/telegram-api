@@ -198,7 +198,14 @@ class ProductModelCrudController extends CrudController
             //    'label' => 'Imagenes',
             //    'type' => 'gallery-v1',
             //    'tab' => 'Galeria'
-            //],
+            //],multiple_flavors
+            [
+                'name' => 'multiple_flavors',
+                'type' => 'checkbox',
+                'label' => 'Contiene mas de un sabor',
+                'default' => true,
+                'tab' => 'Producto'
+            ],
             [
                 'name' => 'active',
                 'type' => 'checkbox',
