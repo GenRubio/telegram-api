@@ -63,6 +63,7 @@ class ProductDetailResource extends JsonResource
                     'discount' => $flavor->productModel->discount,
                     'price_with_discount' => $flavor->productModel->price_with_discount,
                     'brand' => $flavor->productModel->productBrand->name,
+                    'multiple_flavors' => $flavor->productModel->multiple_flavors,
                 ]
             ];
         }
