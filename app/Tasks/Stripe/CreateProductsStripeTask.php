@@ -37,6 +37,6 @@ class CreateProductsStripeTask
 
     private function getNameProduct($product)
     {
-        return $product->productModel->name . " ({$product->productModelsFlavor->name})";
+        return $product->productModel->name . " ({$product->productModelsFlavor->reference})";
     }
 }
