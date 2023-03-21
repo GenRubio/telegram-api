@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\v1\OrderController;
 use App\Http\Controllers\Api\v1\GetConfigController;
 use App\Http\Controllers\Api\v1\GetProductsController;
 use App\Http\Controllers\Api\v1\GetProductDetailController;
+use App\Http\Controllers\Web\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ use App\Http\Controllers\Api\v1\GetProductDetailController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', [HomeController::class, 'index']);
 
 Route::prefix('api')->group(function () {
     Route::middleware([
