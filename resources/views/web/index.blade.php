@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>{{ env('APP_NAME') }} Shop</title>
+        <title>{{ config('app.name') }} Shop</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -19,7 +19,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">{{ env('APP_NAME') }}</a>
+                <a class="navbar-brand" href="#!">{{ config('app.name') }}</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -50,7 +50,7 @@
         background-size: cover;height: 600px;'>
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">{{ env('APP_NAME') }} in style</h1>
+                    <h1 class="display-4 fw-bolder">{{ config('app.name') }} in style</h1>
                     <p class="lead fw-normal text-white-50 mb-0"></p>
                 </div>
             </div>
@@ -259,7 +259,7 @@
             @php 
                $year = date("Y");
             @endphp
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; {{ env('APP_NAME') }} {{ $year }}</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; {{ config('app.name') }} {{ $year }}</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
