@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckTelegramChat;
+use App\Http\Controllers\Web\HomeController;
 use App\Http\Middleware\AuthorizedAgentsApi;
 use App\Http\Middleware\CheckReferenceOrder;
 use App\Http\Controllers\Api\PaypalController;
@@ -10,8 +11,8 @@ use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\v1\OrderController;
 use App\Http\Controllers\Api\v1\GetConfigController;
 use App\Http\Controllers\Api\v1\GetProductsController;
+use App\Http\Controllers\Api\v1\GetLocalizationController;
 use App\Http\Controllers\Api\v1\GetProductDetailController;
-use App\Http\Controllers\Web\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,7 @@ Route::prefix('api')->group(function () {
                 Route::post('create', [OrderController::class, 'createOrder']);
                 Route::post('get', [OrderController::class, 'getOrder']);
             });
+            Route::get('{token}/localization/{cp}', [GetLocalizationController::class, 'index']);
         });
     });
 
