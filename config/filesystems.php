@@ -80,6 +80,11 @@ return [
             'driver' => 'local',
             'root' => storage_path('users_trolley'),
         ],
+
+        'postal_codes'  => [
+            'driver' => 'local',
+            'root' => storage_path('postal_codes'),
+        ],
     ],
 
     /*
