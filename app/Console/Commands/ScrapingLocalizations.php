@@ -9,7 +9,7 @@ use App\Exceptions\GenericException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-class CreateSpainGeolocations extends Command
+class ScrapingLocalizations extends Command
 {
     protected $signature = 'geo:locations';
     protected $description = 'Command description';
