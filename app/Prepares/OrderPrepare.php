@@ -33,6 +33,7 @@ class OrderPrepare
             'address' => $this->paymentData->address,
             'postal_code' => $this->paymentData->postal_code,
             'city' => $this->paymentData->city,
+            'province' => $this->paymentData->province,
             'country' => $this->paymentData->country,
             'payment_method' => $this->paymentData->payment_method,
             'status' => OrderStatusEnum::STATUS_IDS['pd_payment'],
