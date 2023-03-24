@@ -313,7 +313,7 @@ class OrderCrudController extends CrudController
             && $order->status != $request->input('status')
         ) {
             (new CancelOrderTask($order))->run();
-            (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['cancel'], backpack_user()))->run();
+            (new UpdateStatusOrderTask($order, OrderStatusEnum::STATUS_IDS['cancel'], backpack_user()))->run();
             $order->order_cancel_detail = $request->input('order_cancel_detail');
             (new SendOrderCancelMessageTask($order))->run();
         }
