@@ -29,6 +29,7 @@ class Order extends Model
         'address',
         'postal_code',
         'city',
+        'province',
         'country',
         'payment_method',
         'status',

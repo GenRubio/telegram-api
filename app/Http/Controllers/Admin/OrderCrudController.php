@@ -91,11 +91,17 @@ class OrderCrudController extends CrudController
         $retrivePayment = null;
         $payment_order_status = null;
         $payment_payment_status = null;
-        if ($this->crud->getCurrentEntry()->payment_method == 'stripe') {
+        if (
+            $this->crud->getCurrentEntry()->payment_method == 'stripe'
+            && $this->crud->getCurrentEntry()->stripe_id
+        ) {
             $retriveOrder = (new GetRetrieveStripeTask($this->crud->getCurrentEntry()->stripe_id))->run();
             $payment_order_status = $retriveOrder->status;
             $payment_payment_status = $retriveOrder->payment_status;
-        } else {
+        } else if (
+            $this->crud->getCurrentEntry()->payment_method == 'paypal'
+            && $this->crud->getCurrentEntry()->paypal_id
+        ) {
             $retriveOrder = (new GetRetrieveOrderPaypalTask($this->crud->getCurrentEntry()))->run();
             if ($this->crud->getCurrentEntry()->payment_id) {
                 $retrivePayment = (new GetRetrievePaymentPaypalTask($this->crud->getCurrentEntry()))->run();
@@ -203,6 +209,12 @@ class OrderCrudController extends CrudController
             [
                 'name' => 'city',
                 'label' => 'Ciudad',
+                'type' => 'text',
+                'tab' => 'Cliente'
+            ],
+            [
+                'name' => 'province',
+                'label' => 'Província',
                 'type' => 'text',
                 'tab' => 'Cliente'
             ],
