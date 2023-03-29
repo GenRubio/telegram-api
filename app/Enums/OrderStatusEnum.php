@@ -30,6 +30,24 @@ abstract class OrderStatusEnum
         'delivered' => 'Entregado',
         'refund' => 'Pago reembolsado'
     ];
+    const STATUS_WEB = [
+        'payment_completed' => [
+            'trans_id' => 'd72d931b-91c6-421a-baf4-bf0ce086e382',
+            'color' => self::STATUS_COLORS['payment_completed']
+        ],
+        'cancel' => [
+            'trans_id' => 'fa69fff0-cce0-40e9-b303-d95cd4bcef3b',
+            'color' => self::STATUS_COLORS['cancel']
+        ],
+        'sent' => [
+            'trans_id' => 'c92b6305-f041-4a56-b372-720836a17dea',
+            'color' => self::STATUS_COLORS['sent']
+        ],
+        'delivered' => [
+            'trans_id' => 'fe0ce319-5b76-4c93-b0ab-c63ec89cf328',
+            'color' => self::STATUS_COLORS['delivered']
+        ],
+    ];
     const NOT_VALIDATED = [
         'error' => 'error',
         'pd_payment' => 'pd_payment',
