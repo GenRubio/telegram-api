@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Eloquent\Model;
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use DefStudio\Telegraph\Models\TelegraphChat;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class BotChat extends Model
 {
@@ -53,6 +54,13 @@ class BotChat extends Model
     public function telegraphChat()
     {
         return $this->hasOne(TelegraphChat::class, 'chat_id', 'chat_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'chat_id', 'chat_id')
+            ->whereNotIn('status', OrderStatusEnum::NOT_VALIDATED)
+            ->orderBy('created_at', 'desc');
     }
 
     /*

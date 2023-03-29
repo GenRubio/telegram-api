@@ -39,6 +39,7 @@ Route::prefix('api')->group(function () {
             Route::get('{token}/config', [GetConfigController::class, 'index']);
             Route::get('{token}/products', [GetProductsController::class, 'index']);
             Route::get('{token}/product/{reference}', [GetProductDetailController::class, 'index']);
+            Route::get('{token}/orders', [OrderController::class, 'getOrders']);
             Route::prefix('order')->group(function () {
                 Route::post('create', [OrderController::class, 'createOrder']);
                 Route::post('get', [OrderController::class, 'getOrder']);

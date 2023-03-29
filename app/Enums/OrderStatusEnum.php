@@ -30,6 +30,11 @@ abstract class OrderStatusEnum
         'delivered' => 'Entregado',
         'refund' => 'Pago reembolsado'
     ];
+    const NOT_VALIDATED = [
+        'error' => 'error',
+        'pd_payment' => 'pd_payment',
+        'payment_accepted' => 'payment_accepted',
+    ];
     const STATUS_COLORS = [
         'cancel' => '#df3e3e',
         'error' => '#df3e3e',
