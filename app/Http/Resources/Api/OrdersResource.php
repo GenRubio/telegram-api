@@ -94,12 +94,14 @@ class OrdersResource extends JsonResource
     {
         $statesData = [];
         foreach ($states as $state) {
-            $statesData[] = [
-                'state' => $state->state,
-                'data' => OrderStatusEnum::STATUS_WEB[$state->state],
-                'text' => (new GenericTextTask($this->chat, OrderStatusEnum::STATUS_WEB[$state->state]['trans_id']))->run(),
-                'created_at' => $state->created_at
-            ];
+            if (isset(OrderStatusEnum::STATUS_WEB[$state->state])) {
+                $statesData[] = [
+                    'state' => $state->state,
+                    'data' => OrderStatusEnum::STATUS_WEB[$state->state],
+                    'text' => (new GenericTextTask($this->chat, OrderStatusEnum::STATUS_WEB[$state->state]['trans_id']))->run(),
+                    'created_at' => $state->created_at
+                ];
+            }
         }
         return $statesData;
     }
