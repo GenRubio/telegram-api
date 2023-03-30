@@ -40,9 +40,7 @@ class OrderController extends Controller
             $chat = (new BotChatService())->getByChatId(requestAttrEncrypt($request->token));
             return response()->json(new OrdersResource($chat));
         } catch (GenericException | Exception $e) {
-            return response()->json([
-                'error' => 'Undefined'
-            ]);
+            throw $e;
         }
     }
 
