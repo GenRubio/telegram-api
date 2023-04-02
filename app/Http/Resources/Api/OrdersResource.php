@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use Carbon\Carbon;
 use App\Enums\OrderStatusEnum;
 use App\Tasks\API\Translations\GenericTextTask;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -48,8 +49,8 @@ class OrdersResource extends JsonResource
             'shipping_price' => $order->shipping_price,
             'provider_url' => $order->provider_url,
             'order_cancel_detail' => $order->order_cancel_detail,
-            'created_at' => $order->created_at,
-            'updated_at' => $order->updated_at,
+            'created_at' => Carbon::parse($order->created_at)->format('d-m-Y H:i:s'),
+            'updated_at' => Carbon::parse($order->updated_at)->format('d-m-Y H:i:s'),
             'address' => [
                 'address' => $order->address,
                 'postal_code' => $order->postal_code,
@@ -99,7 +100,7 @@ class OrdersResource extends JsonResource
                     'state' => $state->state,
                     'data' => OrderStatusEnum::STATUS_WEB[$state->state],
                     'text' => (new GenericTextTask($this->chat, OrderStatusEnum::STATUS_WEB[$state->state]['trans_id']))->run(),
-                    'created_at' => $state->created_at
+                    'created_at' => Carbon::parse($state->created_at)->format('d-m-Y H:i:s')
                 ];
             }
         }
