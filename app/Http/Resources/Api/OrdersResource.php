@@ -75,7 +75,7 @@ class OrdersResource extends JsonResource
                 'product_model' => [
                     'reference' => $orderProduct->productModel->reference,
                     'name' => $orderProduct->productModel->name,
-                    'image' => $orderProduct->productModel->image,
+                    'image' => url($orderProduct->productModel->image),
                     'multiple_flavors' => $orderProduct->productModel->multiple_flavors,
                     'model' => [
                         'name' =>  $orderProduct->productModel->productBrand->name,
@@ -84,7 +84,7 @@ class OrdersResource extends JsonResource
                 'product_model_flavor' => [
                     'reference' =>  $orderProduct->productModelsFlavor->reference,
                     'name' =>  $orderProduct->productModelsFlavor->name,
-                    'image' =>  $orderProduct->productModelsFlavor->image,
+                    'image' =>  url($orderProduct->productModelsFlavor->image),
                 ]
             ];
         }
