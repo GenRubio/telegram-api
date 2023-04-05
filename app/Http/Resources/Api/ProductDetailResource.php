@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Models\Order;
+use App\Enums\OrderStatusEnum;
 use App\Services\TranslationService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -82,6 +84,7 @@ class ProductDetailResource extends JsonResource
             'brand' => $product->productBrand->name,
             'multiple_flavors' => $product->multiple_flavors,
             'flavors' => count($product->productModelsFlavors),
+            'shopping' => $this->getTotalProductsBuyed($product),
             'gallery' => json_decode(json_encode(new ProductGalleryResource($product->galleryImages))),
             'description' => [
                 'data' => [
@@ -148,5 +151,22 @@ class ProductDetailResource extends JsonResource
     {
         $translation = $this->translations->where('uuid', $uuid)->first();
         return $translation->langText($this->language);
+    }
+
+    private function getTotalProductsBuyed($product)
+    {
+        $orders = Order::whereNotIn('status', [
+            OrderStatusEnum::STATUS_IDS['cancel'],
+            OrderStatusEnum::STATUS_IDS['pd_payment'],
+            OrderStatusEnum::STATUS_IDS['error'],
+            OrderStatusEnum::STATUS_IDS['payment_accepted'],
+            OrderStatusEnum::STATUS_IDS['payment_denied'],
+        ])->get();
+
+        $orderProducts = $orders->map(function ($order) use ($product) {
+            return $order->orderProducts->where('product_model_id', $product->id);
+        })->flatten();
+
+        return $orderProducts->sum('amount');
     }
 }
