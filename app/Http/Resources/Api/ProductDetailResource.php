@@ -66,7 +66,7 @@ class ProductDetailResource extends JsonResource
                     'price_with_discount' => $flavor->productModel->price_with_discount,
                     'brand' => $flavor->productModel->productBrand->name,
                     'multiple_flavors' => $flavor->productModel->multiple_flavors,
-                ]
+                ],
             ];
         }
         return $response;
@@ -86,6 +86,7 @@ class ProductDetailResource extends JsonResource
             'flavors' => count($product->productModelsFlavors),
             'shopping' => $this->getTotalProductsBuyed($product),
             'gallery' => json_decode(json_encode(new ProductGalleryResource($product->galleryImages))),
+            'bought' => $this->isProductBought(),
             'description' => [
                 'data' => [
                     [
@@ -145,6 +146,23 @@ class ProductDetailResource extends JsonResource
                 ]
             ]
         ];
+    }
+
+    private function isProductBought(): bool
+    {
+        $orders = Order::whereNotIn('status', [
+            OrderStatusEnum::STATUS_IDS['cancel'],
+            OrderStatusEnum::STATUS_IDS['pd_payment'],
+            OrderStatusEnum::STATUS_IDS['error'],
+            OrderStatusEnum::STATUS_IDS['payment_accepted'],
+            OrderStatusEnum::STATUS_IDS['payment_denied'],
+        ])->get();
+
+        $orderProducts = $orders->map(function ($order) {
+            return $order->orderProducts;
+        })->flatten();
+
+        return $orderProducts->where('product_model_id', $this->product->id)->count() > 0;
     }
 
     private function getTranslationByUuid($uuid)
