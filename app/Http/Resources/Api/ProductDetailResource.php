@@ -86,7 +86,8 @@ class ProductDetailResource extends JsonResource
             'flavors' => count($product->productModelsFlavors),
             'shopping' => $this->getTotalProductsBuyed($product),
             'gallery' => json_decode(json_encode(new ProductGalleryResource($product->galleryImages))),
-            'bought' => $this->isProductBought(),
+            'bought' => $bought = $this->isProductBought(),
+            'has_valoration' => $bought ? $this->hasValorationFromUser() : false,
             'description' => [
                 'data' => [
                     [
@@ -146,6 +147,13 @@ class ProductDetailResource extends JsonResource
                 ]
             ]
         ];
+    }
+
+    private function hasValorationFromUser()
+    {
+        return $this->product->valorations->where('user_id', auth()->user()->id)
+            ->where('product_model_id', $this->product->id)
+            ->first() ? true : false;
     }
 
     private function isProductBought(): bool
