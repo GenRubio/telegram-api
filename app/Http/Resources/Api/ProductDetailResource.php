@@ -151,7 +151,7 @@ class ProductDetailResource extends JsonResource
 
     private function hasValorationFromUser()
     {
-        return $this->product->valorations->where('user_id', auth()->user()->id)
+        return $this->product->valorations->where('chat_id', $this->chat->chat_id)
             ->where('product_model_id', $this->product->id)
             ->first() ? true : false;
     }
