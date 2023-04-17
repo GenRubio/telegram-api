@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use App\Services\BotService;
 use Illuminate\Database\Eloquent\Model;
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use DefStudio\Telegraph\Models\TelegraphChat;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class Order extends Model
 {
@@ -51,10 +50,9 @@ class Order extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function bot()
+    public function telegraphBot()
     {
-        $botService = new BotService();
-        return $botService->getById($this->telegraphChat->bot->id);
+        return $this->telegraphChat->bot;
     }
 
     /*
@@ -62,11 +60,6 @@ class Order extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function customer()
-    {
-        return $this->hasOne(Customer::class, 'chat_id', 'chat_id');
-    }
 
     public function orderProducts()
     {
@@ -76,11 +69,6 @@ class Order extends Model
     public function telegraphChat()
     {
         return $this->hasOne(TelegraphChat::class, 'chat_id', 'chat_id');
-    }
-
-    public function botChat()
-    {
-        return $this->hasOne(BotChat::class, 'chat_id', 'chat_id');
     }
 
     public function orderHistoryStates()

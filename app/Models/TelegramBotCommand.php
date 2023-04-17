@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use DefStudio\Telegraph\Models\TelegraphBot;
 use Illuminate\Database\Eloquent\Model;
 
 class TelegramBotCommand extends Model
@@ -39,11 +38,6 @@ class TelegramBotCommand extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function bot()
-    {
-        return $this->hasOne(Bot::class, 'id', 'telegraph_bot_id');
-    }
 
     public function telegraphBot()
     {

@@ -43,9 +43,9 @@ class ProductModelValoration extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function botChat()
+    public function telegraphChat()
     {
-        return $this->hasOne(BotChat::class, 'chat_id', 'chat_id');
+        return $this->hasOne(TelegraphChat::class, 'chat_id', 'chat_id');
     }
 
     public function productModel()

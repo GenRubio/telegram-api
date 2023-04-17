@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\BotChat;
+use App\Models\TelegraphChat;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\TelegraphChatRequest;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
@@ -25,7 +25,7 @@ class TelegraphChatCrudController extends CrudController
         if (!backpack_user()->officePermission(get_class($this), 'show')) {
             abort(403);
         }
-        CRUD::setModel(BotChat::class);
+        CRUD::setModel(TelegraphChat::class);
         $this->botId = Route::current()->parameter('bot_id');
         CRUD::setRoute("admin/bot/" . $this->botId . '/telegraph-chat');
         CRUD::setEntityNameStrings('telegraph chat', 'telegraph chats');

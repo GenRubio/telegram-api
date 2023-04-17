@@ -65,7 +65,7 @@ class TelegramBotGroupCrudController extends CrudController
                 'type'      => 'select_multiple',
                 'name'      => 'bots',
                 'entity'    => 'bots',
-                'model'     => "App\Models\Bot",
+                'model'     => "App\Models\TelegraphBot",
                 'attribute' => 'name',
             ],
         ]);

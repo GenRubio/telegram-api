@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Repositories\Bot;
+namespace App\Repositories\TelegraphBot;
 
-use App\Models\Bot;
+use App\Models\TelegraphBot;
 use App\Repositories\Repository;
 
 /**
- * Class BotRepository
- * @package App\Repositories\Bot
+ * Class TelegraphBotRepository
+ * @package App\Repositories\TelegraphBot
  */
-class BotRepository extends Repository implements BotRepositoryInterface
+class TelegraphBotRepository extends Repository implements TelegraphBotRepositoryInterface
 {
     /**
      * @var int Limit for retrieve data
@@ -22,16 +22,16 @@ class BotRepository extends Repository implements BotRepositoryInterface
     protected $defaultTtl;
 
     /**
-     * @var bot
+     * @var TelegraphBot
      */
     protected $model;
 
     /**
-     * BotRepository constructor.
+     * TelegraphBotRepository constructor.
      */
     public function __construct()
     {
-        $this->model = new Bot();
+        $this->model = new TelegraphBot();
         parent::__construct($this->model);
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;

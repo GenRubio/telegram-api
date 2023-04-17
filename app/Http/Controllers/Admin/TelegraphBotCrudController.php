@@ -4,15 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use Exception;
 use Illuminate\Http\Request;
-use App\Http\Requests\BotRequest;
-use Illuminate\Support\Facades\Artisan;
+use App\Http\Requests\TelegraphBotRequest;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
-use App\Models\Bot;
+use App\Models\TelegraphBot;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use DefStudio\Telegraph\Models\TelegraphBot;
 
-class BotCrudController extends CrudController
+class TelegraphBotCrudController extends CrudController
 {
     use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
@@ -26,7 +24,7 @@ class BotCrudController extends CrudController
         if (!backpack_user()->officePermission(get_class($this), 'show')) {
             abort(403);
         }
-        CRUD::setModel(\App\Models\Bot::class);
+        CRUD::setModel(\App\Models\TelegraphBot::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/bot');
         CRUD::setEntityNameStrings('bot', 'bots');
     }
@@ -36,8 +34,6 @@ class BotCrudController extends CrudController
         $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'bot-commands', 'bot-commands', 'beginning');
         $this->crud->addButtonFromView('line', 'bot-chats', 'bot-chats', 'beginning');
-        //$this->crud->addButtonFromView('line', 'remove-webhook', 'remove-webhook', 'beginning');
-        //$this->crud->addButtonFromView('line', 'update-webhook', 'update-webhook', 'beginning');
         $this->crud->addColumn([
             'name' => 'name',
             'label' => 'Nombre',
@@ -72,7 +68,7 @@ class BotCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(BotRequest::class);
+        CRUD::setValidation(TelegraphBotRequest::class);
         $this->crud->addFields([
             [
                 'name' => 'name',
@@ -84,9 +80,6 @@ class BotCrudController extends CrudController
                 'name' => 'token',
                 'label' => 'Token',
                 'type' => 'text',
-                //'attributes' => [
-                //    'readonly'    => 'readonly',
-                //],
                 'tab' => 'Configuración'
             ],
             [
@@ -115,12 +108,10 @@ class BotCrudController extends CrudController
     public function updateWebhook(Request $request)
     {
         $telegraphBot = TelegraphBot::where('id', $request->botId)->first();
-        $bot = Bot::where('id', $request->botId)->first();
         $message = 'WebHook actualizado correctamente';
         try {
-            //Artisan::call("telegraph:set-webhook {$request->botId}");
             $telegraphBot->registerWebhook()->send();
-            $bot->update([
+            $telegraphBot->update([
                 'webhook' => true
             ]);
         } catch (Exception $e) {
@@ -134,12 +125,10 @@ class BotCrudController extends CrudController
     public function removeWebhook(Request $request)
     {
         $telegraphBot = TelegraphBot::where('id', $request->botId)->first();
-        $bot = Bot::where('id', $request->botId)->first();
         $message = 'WebHook eliminado correctamente';
         try {
-            //Artisan::call("telegraph:set-webhook {$request->botId}");
             $telegraphBot->unregisterWebhook()->send();
-            $bot->update([
+            $telegraphBot->update([
                 'webhook' => false
             ]);
         } catch (Exception $e) {

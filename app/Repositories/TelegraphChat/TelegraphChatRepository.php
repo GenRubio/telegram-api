@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Repositories\BotChat;
+namespace App\Repositories\TelegraphChat;
 
-use App\Models\BotChat;
+use App\Models\TelegraphChat;
 use App\Repositories\Repository;
 
 /**
- * Class BotChatRepository
- * @package App\Repositories\BotChat
+ * Class TelegraphChatRepository
+ * @package App\Repositories\TelegraphChat
  */
-class BotChatRepository extends Repository implements BotChatRepositoryInterface
+class TelegraphChatRepository extends Repository implements TelegraphChatRepositoryInterface
 {
     /**
      * @var int Limit for retrieve data
@@ -22,16 +22,16 @@ class BotChatRepository extends Repository implements BotChatRepositoryInterface
     protected $defaultTtl;
 
     /**
-     * @var botChat
+     * @var TelegraphChat
      */
     protected $model;
 
     /**
-     * BotChatRepository constructor.
+     * TelegraphChatRepository constructor.
      */
     public function __construct()
     {
-        $this->model = new BotChat();
+        $this->model = new TelegraphChat();
         parent::__construct($this->model);
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;

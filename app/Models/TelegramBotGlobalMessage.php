@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Services\BotService;
-use App\Services\LanguageService;
 use App\Enums\BotGlobalMessagesEnum;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;

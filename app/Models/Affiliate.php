@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use DefStudio\Telegraph\Models\TelegraphBot;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class Affiliate extends Model
@@ -47,11 +46,6 @@ class Affiliate extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function bot()
-    {
-        return $this->belongsTo(Bot::class, 'telegraph_bot_id');
-    }
-
     public function telegraphBot()
     {
         return $this->belongsTo(TelegraphBot::class, 'telegraph_bot_id');
@@ -71,12 +65,13 @@ class Affiliate extends Model
 
     public function getCountClientsAttribute()
     {
-        return count($this->bot->telegramChats->where('reference', $this->attributes['reference']));
+        return count($this->telegraphBot->telegramChats
+            ->where('reference', $this->attributes['reference']));
     }
 
     public function getReferenceUrlAttribute()
     {
-        return $this->bot->bot_url . '?start=' . $this->attributes['reference'];
+        return $this->telegraphBot->bot_url . '?start=' . $this->attributes['reference'];
     }
 
     /*

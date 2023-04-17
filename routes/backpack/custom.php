@@ -41,10 +41,9 @@ Route::group([
     Route::crud('api-client', 'ApiClientCrudController');
     Route::crud('language', 'LanguageCrudController');
     Route::crud('translation', 'TranslationCrudController');
-    Route::crud('customer', 'CustomerCrudController');
     Route::crud('setting', 'SettingCrudController');
     Route::crud('telegram-bot-message', 'TelegramBotMessageCrudController');
-    Route::crud('bot', 'BotCrudController');
+    Route::crud('bot', 'TelegraphBotCrudController');
     Route::group(['prefix' => 'bot/{bot_id}'], function () {
         Route::crud('telegraph-chat', 'TelegraphChatCrudController');
         Route::crud('telegram-bot-command', 'TelegramBotCommandCrudController');

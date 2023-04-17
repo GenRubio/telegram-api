@@ -38,9 +38,9 @@ class TelegramBotGroup extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function bots()
+    public function telegraphBots()
     {
-        return $this->belongsToMany(Bot::class, 'telegram_bot_group_bot', 'telegram_bot_group_id', 'telegraph_bot_id');
+        return $this->belongsToMany(TelegraphBot::class, 'telegram_bot_group_bot', 'telegram_bot_group_id', 'telegraph_bot_id');
     }
 
     /*
@@ -57,7 +57,7 @@ class TelegramBotGroup extends Model
 
     public function getTotalBotsAssignedAttribute()
     {
-        return count($this->bots);
+        return count($this->telegraphBots);
     }
 
     /*

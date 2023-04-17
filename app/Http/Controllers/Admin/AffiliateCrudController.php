@@ -51,7 +51,7 @@ class AffiliateCrudController extends CrudController
             'name'      => 'telegraph_bot_id',
             'entity'    => 'bot',
             'attribute' => 'name',
-            'model'     => "App\Models\Bot",
+            'model'     => "App\Models\TelegraphBot",
         ]);
         $this->crud->addColumn([
             'name' => 'count_clients',
@@ -78,7 +78,7 @@ class AffiliateCrudController extends CrudController
                 'type'      => 'select',
                 'name'      => 'telegraph_bot_id',
                 'entity'    => 'bot',
-                'model'     => "App\Models\Bot",
+                'model'     => "App\Models\TelegraphBot",
                 'attribute' => 'name',
             ],
             [
@@ -129,7 +129,7 @@ class AffiliateCrudController extends CrudController
                 'type'      => 'select',
                 'name'      => 'telegraph_bot_id',
                 'entity'    => 'bot',
-                'model'     => "App\Models\Bot",
+                'model'     => "App\Models\TelegraphBot",
                 'attribute' => 'name',
             ],
             [
