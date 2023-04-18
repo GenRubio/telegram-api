@@ -39,13 +39,13 @@ class SendSuccessPaymentMessageTask
             $test = TelegraphChat::where('chat_id', $this->telegraphChat->chat_id)->first();
             $test->action(ChatActions::TYPING)->send();
 
-            //$response = $this->telegraphChat;
-            //if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {
-            //    $response = $response->photo(public_path($this->telegramBotMessage->image));
-            //}
-            //$response = $response->html($this->getResponseText())
-            //    ->protected()
-            //    ->send();
+            $response = $test;
+            if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {
+                $response = $response->photo(public_path($this->telegramBotMessage->image));
+            }
+            $response = $response->html($this->getResponseText())
+                ->protected()
+                ->send();
         } catch (Exception $e) {
             Log::channel('telegram-message')->error($e);
         }
