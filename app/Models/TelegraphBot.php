@@ -7,6 +7,7 @@
 
 namespace App\Models;
 
+use DefStudio\Telegraph\Models\TelegraphBot as BaseModel;
 use Illuminate\Support\Carbon;
 use DefStudio\Telegraph\Telegraph;
 use Illuminate\Database\Eloquent\Model;
@@ -34,7 +35,7 @@ use DefStudio\Telegraph\Database\Factories\TelegraphBotFactory;
  * @property Carbon $updated_at
  * @property-read Collection<TelegraphChat> $chats
  */
-class TelegraphBot extends Model implements Storable
+class TelegraphBot extends BaseModel implements Storable
 {
     use HasFactory;
     use HasStorage;

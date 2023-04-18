@@ -6,7 +6,6 @@
 
 namespace App\Models;
 
-use DefStudio\Telegraph\Models\TelegraphChat as BaseModel;
 use App\Enums\OrderStatusEnum;
 use Illuminate\Support\Carbon;
 use DefStudio\Telegraph\Telegraph;
@@ -18,6 +17,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use DefStudio\Telegraph\Exceptions\TelegraphException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use DefStudio\Telegraph\Models\TelegraphChat as BaseModel;
 use DefStudio\Telegraph\ScopedPayloads\TelegraphPollPayload;
 use DefStudio\Telegraph\ScopedPayloads\TelegraphQuizPayload;
 use DefStudio\Telegraph\Facades\Telegraph as TelegraphFacade;
@@ -307,11 +307,6 @@ class TelegraphChat extends BaseModel implements Storable
     public function dice(string $emoji = null): Telegraph
     {
         return TelegraphFacade::chat($this)->dice($emoji);
-    }
-
-    public function forwardMessage(TelegraphChat|int $fromChat, int $messageId): Telegraph
-    {
-        return TelegraphFacade::chat($this)->forwardMessage($fromChat, $messageId);
     }
 
     /**************************************************************************
