@@ -21,9 +21,6 @@ class TelegraphBotCrudController extends CrudController
 
     public function setup()
     {
-        if (!backpack_user()->officePermission(get_class($this), 'show')) {
-            abort(403);
-        }
         CRUD::setModel(\App\Models\TelegraphBot::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/bot');
         CRUD::setEntityNameStrings('bot', 'bots');
@@ -31,7 +28,6 @@ class TelegraphBotCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'bot-commands', 'bot-commands', 'beginning');
         $this->crud->addButtonFromView('line', 'bot-chats', 'bot-chats', 'beginning');
         $this->crud->addColumn([
