@@ -5,6 +5,7 @@ namespace App\Tasks\Bot;
 use Exception;
 use App\Services\LanguageService;
 use Illuminate\Support\Facades\Log;
+use App\Services\TelegraphChatService;
 use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
@@ -20,7 +21,7 @@ class SendLanguageMessageTask
 
     public function __construct($telegraphChat)
     {
-        $this->telegraphChat = $telegraphChat;
+        $this->telegraphChat = (new TelegraphChatService())->getByChatId($telegraphChat->chat_id);
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1673632039.8107';
         $this->telegramBotMessage = $this->setTelegramBotMessage();

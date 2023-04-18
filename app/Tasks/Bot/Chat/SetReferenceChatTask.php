@@ -14,7 +14,7 @@ class SetReferenceChatTask
 
     public function __construct($telegraphChat, $reference)
     {
-        $this->telegraphChat = $telegraphChat;
+        $this->telegraphChat = (new TelegraphChatService())->getByChatId($telegraphChat->chat_id);
         $this->reference = $reference;
         $this->telegraphChatService = new TelegraphChatService();
         $this->affiliateService = new AffiliateService();

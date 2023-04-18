@@ -5,6 +5,7 @@ namespace App\Tasks\Bot;
 use Exception;
 use App\Tasks\GetApiClientTask;
 use Illuminate\Support\Facades\Log;
+use App\Services\TelegraphChatService;
 use App\Tasks\Bot\Traits\BotTasksTrait;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Enums\ChatActions;
@@ -26,7 +27,7 @@ class SendStartMessageTask
 
     public function __construct($telegraphChat)
     {
-        $this->telegraphChat = $telegraphChat;
+        $this->telegraphChat = (new TelegraphChatService())->getByChatId($telegraphChat->chat_id);
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672042240.2779';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
