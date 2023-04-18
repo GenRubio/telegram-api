@@ -36,10 +36,9 @@ class SendSuccessPaymentMessageTask
     public function run()
     {
         try {
-            $test = TelegraphChat::where('chat_id', $this->telegraphChat->chat_id)->first();
-            $test->action(ChatActions::TYPING)->send();
+            $this->telegraphChat->action(ChatActions::TYPING)->send();
 
-            $response = $test;
+            $response = $this->telegraphChat;
             if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }
