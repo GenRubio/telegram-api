@@ -15,12 +15,12 @@ class GetProductDetailController extends Controller
     public function index(Request $request)
     {
         try {
-            $chat = (new TelegraphChatService())->getByChatId(requestAttrEncrypt($request->token));
+            $telegraphChat = (new TelegraphChatService())->getByChatId(requestAttrEncrypt($request->token));
             $product = (new ProductModelService())->getByReference($request->reference);
             if (is_null($product)) {
                 throw new GenericException("Product not found");
             }
-            return response()->json(new ProductDetailResource($product, $chat));
+            return response()->json(new ProductDetailResource($product, $telegraphChat));
         } catch (GenericException | Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
