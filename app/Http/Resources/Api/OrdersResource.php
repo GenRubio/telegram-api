@@ -6,16 +6,18 @@ use Carbon\Carbon;
 use App\Enums\OrderStatusEnum;
 use App\Tasks\API\Translations\GenericTextTask;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Api\Order\ProductsOrderResource;
+use App\Http\Resources\Api\Order\HistoryStateOrderResource;
 
 class OrdersResource extends JsonResource
 {
     private $orders;
-    private $chat;
+    private $telegraphChat;
 
-    public function __construct($chat)
+    public function __construct($telegraphChat)
     {
-        $this->chat = $chat;
-        $this->orders = $this->chat->orders;
+        $this->telegraphChat = $telegraphChat;
+        $this->orders = $this->telegraphChat->orders;
     }
 
     public function toArray($request)
@@ -59,51 +61,11 @@ class OrdersResource extends JsonResource
                 'country' => $order->country,
             ],
             'count_products' => count($order->orderProducts),
-            'order_products' => $this->getPreparedProductsOrder($order->orderProducts),
-            'history_states' => $this->getPreparedHistoryStates($order->orderHistoryStates)
+            'order_products' => json_decode(json_encode(new ProductsOrderResource($order->orderProducts))),
+            'history_states' => json_decode(json_encode(new HistoryStateOrderResource(
+                $order->orderHistoryStates,
+                $this->telegraphChat
+            )))
         ];
-    }
-
-    private function getPreparedProductsOrder($orderProducts)
-    {
-        $productsData = [];
-        foreach ($orderProducts as $orderProduct) {
-            $productsData[] = [
-                'amount' => $orderProduct->amount,
-                'unit_price' => $orderProduct->unit_price,
-                'total_price' => $orderProduct->total_price,
-                'product_model' => [
-                    'reference' => $orderProduct->productModel->reference,
-                    'name' => $orderProduct->productModel->name,
-                    'image' => url($orderProduct->productModel->image),
-                    'multiple_flavors' => $orderProduct->productModel->multiple_flavors,
-                    'model' => [
-                        'name' =>  $orderProduct->productModel->productBrand->name,
-                    ]
-                ],
-                'product_model_flavor' => [
-                    'reference' =>  $orderProduct->productModelsFlavor->reference,
-                    'name' =>  $orderProduct->productModelsFlavor->name,
-                    'image' =>  url($orderProduct->productModelsFlavor->image),
-                ]
-            ];
-        }
-        return $productsData;
-    }
-
-    private function getPreparedHistoryStates($states)
-    {
-        $statesData = [];
-        foreach ($states as $state) {
-            if (isset(OrderStatusEnum::STATUS_WEB[$state->state])) {
-                $statesData[] = [
-                    'state' => $state->state,
-                    'data' => OrderStatusEnum::STATUS_WEB[$state->state],
-                    'text' => (new GenericTextTask($this->chat, OrderStatusEnum::STATUS_WEB[$state->state]['trans_id']))->run(),
-                    'created_at' => Carbon::parse($state->created_at)->format('d-m-Y H:i:s')
-                ];
-            }
-        }
-        return $statesData;
     }
 }
