@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use DefStudio\Telegraph\Models\TelegraphChat as BaseModel;
 use App\Enums\OrderStatusEnum;
 use Illuminate\Support\Carbon;
 use DefStudio\Telegraph\Telegraph;
@@ -32,7 +33,7 @@ use DefStudio\Telegraph\Database\Factories\TelegraphChatFactory;
  * @property Carbon $updated_at
  * @property-read TelegraphBot $bot
  */
-class TelegraphChat extends Model implements Storable
+class TelegraphChat extends BaseModel implements Storable
 {
     use HasFactory;
     use HasStorage;
