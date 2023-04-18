@@ -2,9 +2,6 @@
 
 namespace App\Http\Resources\Api;
 
-use App\Models\Order;
-use App\Enums\OrderStatusEnum;
-use App\Services\TranslationService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Api\ProductDetail\FlavorsProductDetailResource;
 use App\Http\Resources\Api\ProductDetail\ProductProductDetailResource;
