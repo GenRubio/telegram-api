@@ -8,15 +8,15 @@ use App\Services\ProductModelsFlavorService;
 
 class OrderPrepare
 {
-    private $customer;
+    private $telegraphChat;
     private $paymentData;
     private $products;
     private $settingService;
     private $productModelsFlavorService;
 
-    public function __construct($request, $customer)
+    public function __construct($request, $telegraphChat)
     {
-        $this->customer = $customer;
+        $this->telegraphChat = $telegraphChat;
         $this->paymentData = (object)$request->payment;
         $this->products = $request->products;
         $this->settingService = new SettingService();
@@ -26,8 +26,8 @@ class OrderPrepare
     public function run()
     {
         return [
-            'chat_id' => $this->customer->chat_id,
-            'reference' => uniqid($this->customer->chat_id),
+            'chat_id' => $this->telegraphChat->chat_id,
+            'reference' => uniqid($this->telegraphChat->chat_id),
             'name' => $this->paymentData->name,
             'surnames' => $this->paymentData->surnames,
             'address' => $this->paymentData->address,

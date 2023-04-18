@@ -22,9 +22,4 @@ class GetApiClientTask
     {
         return $this->client->referer . 'webapp/' . responseAttrEncrypt($chatId);
     }
-
-    public function orderDetail($reference)
-    {
-        //return $this->client->url . 'order/' . $reference;
-    }
 }

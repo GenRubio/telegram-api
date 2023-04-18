@@ -2,11 +2,9 @@
 
 namespace App\Tasks\PayPal;
 
-use Exception;
 use App\Enums\OrderStatusEnum;
 use App\Services\OrderService;
 use App\Tasks\Order\UpdateStatusOrderTask;
-use App\Tasks\PayPal\API\VoidAuthorizedPaymentTask;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Tasks\PayPal\API\CheckPaymentCreatedPaypalTask;
 use App\Tasks\PayPal\API\CaptureAuthorizedPaymentPaypalTask;

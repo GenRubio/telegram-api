@@ -15,17 +15,17 @@ use App\Services\ProductModelsFlavorService;
 class CreateOrderTask
 {
     private $request;
-    private $customer;
+    private $telegraphChat;
     private $orderService;
     private $orderProductService;
     private $validateProductStock;
     private $productModelsFlavorService;
     public $order;
 
-    public function __construct($request, $customer, $validateProductStock)
+    public function __construct($request, $telegraphChat, $validateProductStock)
     {
         $this->request = $request;
-        $this->customer = $customer;
+        $this->telegraphChat = $telegraphChat;
         $this->orderService = new OrderService();
         $this->orderProductService = new OrderProductService();
         $this->validateProductStock = $validateProductStock;
@@ -39,7 +39,7 @@ class CreateOrderTask
         $this->blockFlavorStock();
         try {
             DB::beginTransaction();
-            $orderPrepare = (new OrderPrepare($this->request, $this->customer))->run();
+            $orderPrepare = (new OrderPrepare($this->request, $this->telegraphChat))->run();
             $this->order = $this->orderService->createOrder($orderPrepare);
             (new UpdateStatusOrderTask($this->order, OrderStatusEnum::STATUS_IDS['pd_payment'], null))->run();
             $prderProductPrepare = (new OrderProductPrepare($this->order, $this->validateProductStock))->run();
