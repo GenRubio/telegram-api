@@ -3,14 +3,10 @@
 namespace App\Tasks\Bot;
 
 use Exception;
-use App\Tasks\GetApiClientTask;
 use Illuminate\Support\Facades\Log;
 use App\Tasks\Bot\Traits\BotTasksTrait;
-use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Enums\ChatActions;
-use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
-use App\Tasks\API\Translations\ButtonOrderDetailTextTask;
 
 class SendSuccessPaymentMessageTask
 {
@@ -28,7 +24,9 @@ class SendSuccessPaymentMessageTask
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672078516.7314';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
-        $this->message = $this->telegramBotMessage->getLangMessage($this->order->botChat->language->abbr);
+        $this->message = $this->telegramBotMessage->getLangMessage(
+            $this->order->telegraphChat->language->abbr
+        );
         $this->preparedMessage();
     }
 
@@ -41,12 +39,6 @@ class SendSuccessPaymentMessageTask
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }
             $response = $response->html($this->getResponseText())
-                //->keyboard(function (Keyboard $keyboard) {
-                //    return $keyboard->row([
-                //        Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
-                //            ->webApp((new GetApiClientTask())->orderDetail($this->order->reference))
-                //    ]);
-                //})
                 ->protected()
                 ->send();
         } catch (Exception $e) {

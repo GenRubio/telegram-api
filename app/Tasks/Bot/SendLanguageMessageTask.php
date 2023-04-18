@@ -5,23 +5,22 @@ namespace App\Tasks\Bot;
 use Exception;
 use App\Services\LanguageService;
 use Illuminate\Support\Facades\Log;
-use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
 
 class SendLanguageMessageTask
 {
-    private $chat;
+    private $telegraphChat;
     private $telegramBotMessageService;
     private $key;
     private $telegramBotMessage;
     private $languages;
     private $message;
 
-    public function __construct($chat)
+    public function __construct($telegraphChat)
     {
-        $this->chat = $chat;
+        $this->telegraphChat = $telegraphChat;
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1673632039.8107';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
@@ -32,8 +31,8 @@ class SendLanguageMessageTask
     public function run()
     {
         try {
-            $this->chat->action(ChatActions::TYPING)->send();
-            $response = $this->chat;
+            $this->telegraphChat->action(ChatActions::TYPING)->send();
+            $response = $this->telegraphChat;
             if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }

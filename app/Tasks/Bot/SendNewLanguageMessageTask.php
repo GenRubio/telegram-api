@@ -3,11 +3,9 @@
 namespace App\Tasks\Bot;
 
 use Exception;
-use App\Services\BotChatService;
 use App\Services\LanguageService;
 use Illuminate\Support\Facades\Log;
 use App\Tasks\Bot\Traits\BotTasksTrait;
-use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
@@ -16,23 +14,22 @@ class SendNewLanguageMessageTask
 {
     use BotTasksTrait;
 
-    private $chat;
-    private $botChat;
-    private $telegramBotMessageService;
+    private $telegraphChat;
     private $key;
     private $telegramBotMessage;
     private $languages;
     private $message;
 
-    public function __construct($chat)
+    public function __construct($telegraphChat)
     {
-        $this->chat = $chat;
-        $this->botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
+        $this->telegraphChat = $telegraphChat;
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1673688714.9174';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
         $this->languages = (new LanguageService())->getAllActive();
-        $this->message = $this->telegramBotMessage->getLangMessage($this->botChat->language->abbr);
+        $this->message = $this->telegramBotMessage->getLangMessage(
+            $this->telegraphChat->language->abbr
+        );
     }
 
     public function run()

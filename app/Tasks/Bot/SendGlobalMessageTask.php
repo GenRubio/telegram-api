@@ -20,12 +20,12 @@ class SendGlobalMessageTask
 
     public function run()
     {
-        foreach ($this->message->telegramBotGroup->bots as $bot) {
-            foreach ($bot->telegramChats as $chat) {
+        foreach ($this->message->telegramBotGroup->telegraphBots as $telegraphBot) {
+            foreach ($telegraphBot->telegraphChats as $telegraphChat) {
                 try {
-                    $langMessage = $this->message->getLangMessage($chat->language->abbr);
-                    $clientApiUrl = (new GetApiClientTask())->products($chat->chat_id);
-                    $this->sendMessageToChat($chat, $langMessage, $clientApiUrl);
+                    $langMessage = $this->message->getLangMessage($telegraphChat->language->abbr);
+                    $clientApiUrl = (new GetApiClientTask())->products($telegraphChat->chat_id);
+                    $this->sendMessageToChat($telegraphChat, $langMessage, $clientApiUrl);
                 } catch (Exception $e) {
                     Log::channel('bot-message')->error($e);
                 }

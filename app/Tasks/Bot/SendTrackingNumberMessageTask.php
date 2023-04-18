@@ -3,7 +3,6 @@
 namespace App\Tasks\Bot;
 
 use Exception;
-use App\Tasks\GetApiClientTask;
 use Illuminate\Support\Facades\Log;
 use App\Tasks\Bot\Traits\BotTasksTrait;
 use DefStudio\Telegraph\Keyboard\Button;
@@ -11,7 +10,6 @@ use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use App\Services\TelegramBotMessageService;
 use App\Tasks\API\Translations\ButtonTracingUrlTextTask;
-use App\Tasks\API\Translations\ButtonOrderDetailTextTask;
 
 class SendTrackingNumberMessageTask
 {
@@ -29,7 +27,9 @@ class SendTrackingNumberMessageTask
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672062471.687';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
-        $this->message = $this->telegramBotMessage->getLangMessage($this->order->botChat->language->abbr);
+        $this->message = $this->telegramBotMessage->getLangMessage(
+            $this->order->telegraphChat->language->abbr
+        );
         $this->preparedMessage();
     }
 
@@ -44,10 +44,8 @@ class SendTrackingNumberMessageTask
             $response = $response->html($this->getResponseText())
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make((new ButtonTracingUrlTextTask($this->order->botChat))->run())
+                        Button::make((new ButtonTracingUrlTextTask($this->order->telegraphChat))->run())
                             ->url($this->order->provider_url),
-                        //Button::make((new ButtonOrderDetailTextTask($this->order->botChat))->run())
-                        //    ->webApp((new GetApiClientTask())->orderDetail($this->order->reference))
                     ]);
                 })
                 ->protected()

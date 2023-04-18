@@ -4,7 +4,6 @@ namespace App\Tasks\Bot;
 
 use Exception;
 use App\Tasks\GetApiClientTask;
-use App\Services\BotChatService;
 use Illuminate\Support\Facades\Log;
 use App\Tasks\Bot\Traits\BotTasksTrait;
 use DefStudio\Telegraph\Keyboard\Button;
@@ -18,37 +17,37 @@ class SendStartMessageTask
 {
     use BotTasksTrait;
 
-    private $chat;
-    private $botChat;
+    private $telegraphChat;
     private $telegramBotMessageService;
     private $key;
     private $telegramBotMessage;
     private $clientApiUrl;
     private $message;
 
-    public function __construct($chat)
+    public function __construct($telegraphChat)
     {
-        $this->chat = $chat;
-        $this->botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
+        $this->telegraphChat = $telegraphChat;
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672042240.2779';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
-        $this->clientApiUrl = (new GetApiClientTask())->products($this->chat->chat_id);
-        $this->message = $this->telegramBotMessage->getLangMessage($this->botChat->language->abbr);
+        $this->clientApiUrl = (new GetApiClientTask())->products($this->telegraphChat->chat_id);
+        $this->message = $this->telegramBotMessage->getLangMessage(
+            $this->telegraphChat->language->abbr
+        );
     }
 
     public function run()
     {
         try {
-            $this->chat->action(ChatActions::TYPING)->send();
-            $response = $this->chat;
+            $this->telegraphChat->action(ChatActions::TYPING)->send();
+            $response = $this->telegraphChat;
             if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }
             $response = $response->html($this->getResponseText())
                 ->keyboard(function (Keyboard $keyboard) {
                     return $keyboard->row([
-                        Button::make((new ButtonShopTextTask($this->botChat))->run())
+                        Button::make((new ButtonShopTextTask($this->telegraphChat))->run())
                             ->webApp($this->clientApiUrl)
                     ]);
                 })
