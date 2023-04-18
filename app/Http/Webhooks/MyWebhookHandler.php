@@ -2,8 +2,8 @@
 
 namespace App\Http\Webhooks;
 
-use App\Services\BotChatService;
 use App\Services\LanguageService;
+use App\Services\TelegraphBotService;
 use App\Tasks\Bot\SendStartMessageTask;
 use App\Tasks\Bot\SendLanguageMessageTask;
 use DefStudio\Telegraph\Enums\ChatActions;
@@ -20,13 +20,12 @@ class MyWebhookHandler extends WebhookHandler
         $this->chat->setPermissions([
             ChatPermissions::CAN_SEND_MESSAGES => false,
         ])->send();
-        $botChat = (new BotChatService())->getByChatId($this->chat->chat_id);
-        if ($botChat->language) {
+        if ($this->chat->language) {
             (new SendStartMessageTask($this->chat))->run();
         } else {
             (new SendLanguageMessageTask($this->chat))->run();
         }
-        (new SetReferenceChatTask($botChat, $reference))->run();
+        (new SetReferenceChatTask($this->chat, $reference))->run();
     }
 
     public function language()
@@ -37,10 +36,10 @@ class MyWebhookHandler extends WebhookHandler
     public function actionSetLaguage()
     {
         $parameter = $this->data->get('parameter');
-        $botChatService = new BotChatService();
+        $telegraphBotService = new TelegraphBotService();
         $language = (new LanguageService())->getById($parameter);
         if (!is_null($language)) {
-            $botChatService->update($this->chat->chat_id, [
+            $telegraphBotService->update($this->chat->chat_id, [
                 'language_id' => $language->id
             ]);
             $this->chat->deleteMessage($this->messageId)->send();
