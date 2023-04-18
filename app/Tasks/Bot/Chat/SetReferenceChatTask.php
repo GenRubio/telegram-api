@@ -2,30 +2,30 @@
 
 namespace App\Tasks\Bot\Chat;
 
-use App\Services\BotChatService;
 use App\Services\AffiliateService;
+use App\Services\TelegraphChatService;
 
 class SetReferenceChatTask
 {
     private $reference;
-    private $botChatService;
-    private $botChat;
+    private $telegraphChatService;
+    private $telegraphChat;
     private $affiliateService;
 
-    public function __construct($botChat, $reference)
+    public function __construct($telegraphChat, $reference)
     {
-        $this->botChat = $botChat;
+        $this->telegraphChat = $telegraphChat;
         $this->reference = $reference;
-        $this->botChatService = new BotChatService();
+        $this->telegraphChatService = new TelegraphChatService();
         $this->affiliateService = new AffiliateService();
     }
 
     public function run()
     {
-        if (!is_null($this->reference) && empty($this->botChat->reference)) {
+        if (!is_null($this->reference) && empty($this->telegraphChat->reference)) {
             $affiliate = $this->affiliateService->getByReference($this->reference);
             if (!is_null($affiliate)) {
-                $this->botChatService->update($this->botChat->chat_id, [
+                $this->telegraphChatService->update($this->telegraphChat->chat_id, [
                     'reference' => $this->reference
                 ]);
             }

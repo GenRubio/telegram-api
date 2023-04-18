@@ -2,30 +2,28 @@
 
 namespace App\Tasks\Bot\Settings;
 
-use App\Services\BotChatService;
+use App\Services\TelegraphChatService;
 
 class SetPinStartMessageTask
 {
-    private $chat;
+    private $telegraphChat;
     private $messageId;
-    private $botChatService;
-    private $botChat;
+    private $telegraphChatService;
 
-    public function __construct($chat, $messageId)
+    public function __construct($telegraphChat, $messageId)
     {
-        $this->chat = $chat;
+        $this->telegraphChat = $telegraphChat;
         $this->messageId = $messageId;
-        $this->botChatService = new BotChatService();
-        $this->botChat = $this->botChatService->getByChatId($this->chat->chat_id);
+        $this->telegraphChatService = new TelegraphChatService();
     }
 
     public function run()
     {
-        if ($this->botChat->pin_message) {
-            $this->chat->unpinMessage($this->botChat->pin_message)->send();
+        if ($this->telegraphChat->pin_message) {
+            $this->telegraphChat->unpinMessage($this->telegraphChat->pin_message)->send();
         }
-        $this->chat->pinMessage($this->messageId)->send();
-        $this->botChatService->update($this->chat->chat_id, [
+        $this->telegraphChat->pinMessage($this->messageId)->send();
+        $this->telegraphChatService->update($this->telegraphChat->chat_id, [
             'pin_message' => $this->messageId
         ]);
     }
