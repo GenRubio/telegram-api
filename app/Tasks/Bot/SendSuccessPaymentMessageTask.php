@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use App\Tasks\Bot\Traits\BotTasksTrait;
 use DefStudio\Telegraph\Enums\ChatActions;
 use App\Services\TelegramBotMessageService;
+use DefStudio\Telegraph\Models\TelegraphChat;
 
 class SendSuccessPaymentMessageTask
 {
@@ -35,7 +36,8 @@ class SendSuccessPaymentMessageTask
     public function run()
     {
         try {
-            $this->telegraphChat->action(ChatActions::TYPING)->send();
+            $test = TelegraphChat::where('chat_id', $this->telegraphChat->chat_id)->first();
+            $test->action(ChatActions::TYPING)->send();
 
             //$response = $this->telegraphChat;
             //if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {

@@ -25,7 +25,7 @@ use DefStudio\Telegraph\Facades\Telegraph as TelegraphFacade;
 use DefStudio\Telegraph\Database\Factories\TelegraphBotFactory;
 
 /**
- * DefStudio\Telegraph\Models\TelegraphBot
+ * App\Models\TelegraphBot
  *
  * @property int $id
  * @property string $token

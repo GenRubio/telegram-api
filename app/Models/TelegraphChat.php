@@ -23,7 +23,7 @@ use DefStudio\Telegraph\Facades\Telegraph as TelegraphFacade;
 use DefStudio\Telegraph\Database\Factories\TelegraphChatFactory;
 
 /**
- * DefStudio\Telegraph\Models\TelegraphChat
+ * App\Models\TelegraphChat
  *
  * @property int $id
  * @property string $chat_id
