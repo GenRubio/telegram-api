@@ -36,7 +36,6 @@ class TelegraphChat extends Model implements Storable
 {
     use HasFactory;
     use HasStorage;
-    use CrudTrait;
 
     protected $table = 'telegraph_chats';
 
@@ -317,6 +316,7 @@ class TelegraphChat extends Model implements Storable
     /**************************************************************************
      * MY APP DATA
      */
+    use CrudTrait;
 
     /*
     |--------------------------------------------------------------------------

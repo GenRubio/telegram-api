@@ -38,7 +38,6 @@ class TelegraphBot extends Model implements Storable
 {
     use HasFactory;
     use HasStorage;
-    use CrudTrait;
 
     protected $table = 'telegraph_bots';
 
@@ -205,6 +204,7 @@ class TelegraphBot extends Model implements Storable
     /**************************************************************************
      * MY APP DATA
      */
+    use CrudTrait;
 
     /*
     |--------------------------------------------------------------------------
