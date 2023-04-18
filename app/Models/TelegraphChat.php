@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use DefStudio\Telegraph\Contracts\Storable;
 use DefStudio\Telegraph\Concerns\HasStorage;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use DefStudio\Telegraph\Exceptions\TelegraphException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,6 +36,7 @@ class TelegraphChat extends Model implements Storable
 {
     use HasFactory;
     use HasStorage;
+    use CrudTrait;
 
     protected $table = 'telegraph_chats';
 

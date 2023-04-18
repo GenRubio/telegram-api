@@ -7,21 +7,22 @@
 
 namespace App\Models;
 
-use DefStudio\Telegraph\Concerns\HasStorage;
-use DefStudio\Telegraph\Contracts\Downloadable;
-use DefStudio\Telegraph\Contracts\Storable;
-use DefStudio\Telegraph\Database\Factories\TelegraphBotFactory;
-use DefStudio\Telegraph\DTO\InlineQueryResult;
-use DefStudio\Telegraph\DTO\TelegramUpdate;
-use DefStudio\Telegraph\Exceptions\TelegramUpdatesException;
-use DefStudio\Telegraph\Exceptions\TelegraphException;
-use DefStudio\Telegraph\Facades\Telegraph as TelegraphFacade;
-use DefStudio\Telegraph\Telegraph;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use DefStudio\Telegraph\Telegraph;
+use Illuminate\Database\Eloquent\Model;
+use DefStudio\Telegraph\Contracts\Storable;
+use DefStudio\Telegraph\DTO\TelegramUpdate;
+use DefStudio\Telegraph\Concerns\HasStorage;
+use Illuminate\Database\Eloquent\Collection;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use DefStudio\Telegraph\DTO\InlineQueryResult;
+use DefStudio\Telegraph\Contracts\Downloadable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use DefStudio\Telegraph\Exceptions\TelegraphException;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use DefStudio\Telegraph\Exceptions\TelegramUpdatesException;
+use DefStudio\Telegraph\Facades\Telegraph as TelegraphFacade;
+use DefStudio\Telegraph\Database\Factories\TelegraphBotFactory;
 
 /**
  * DefStudio\Telegraph\Models\TelegraphBot
@@ -37,6 +38,7 @@ class TelegraphBot extends Model implements Storable
 {
     use HasFactory;
     use HasStorage;
+    use CrudTrait;
 
     protected $table = 'telegraph_bots';
 
