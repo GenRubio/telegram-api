@@ -6,19 +6,19 @@ use App\Services\Translations\APITranslationService;
 
 class CreateOrderErrorTextTask
 {
-    private $chat;
+    private $telegraphChat;
     private $apiTranslationService;
     private $uuid;
     private $translation;
     private $message;
 
-    public function __construct($chat)
+    public function __construct($telegraphChat)
     {
-        $this->chat = $chat;
+        $this->telegraphChat = $telegraphChat;
         $this->apiTranslationService = new APITranslationService();
         $this->uuid = '59c90a7e-304e-4b28-968d-864e74f9747f';
         $this->translation = $this->setTranslation();
-        $this->message = $this->translation->langText($this->chat->language->abbr);
+        $this->message = $this->translation->langText($this->telegraphChat->language->abbr);
     }
 
     public function run()

@@ -6,19 +6,19 @@ use App\Services\Translations\APITranslationService;
 
 class ButtonShopTextTask
 {
-    private $chat;
+    private $telegraphChat;
     private $apiTranslationService;
     private $uuid;
     private $translation;
     private $message;
 
-    public function __construct($chat)
+    public function __construct($telegraphChat)
     {
-        $this->chat = $chat;
+        $this->telegraphChat = $telegraphChat;
         $this->apiTranslationService = new APITranslationService();
         $this->uuid = 'a3c45835-3152-47d8-afce-11a4c591c3a7';
         $this->translation = $this->setTranslation();
-        $this->message = $this->translation->langText($this->chat->language->abbr);
+        $this->message = $this->translation->langText($this->telegraphChat->language->abbr);
     }
 
     public function run()

@@ -6,21 +6,21 @@ use App\Services\Translations\APITranslationService;
 
 class FlavorNotAvailableTextTask
 {
-    private $chat;
+    private $telegraphChat;
     private $data;
     private $apiTranslationService;
     private $uuid;
     private $translation;
     private $message;
 
-    public function __construct($chat, $data)
+    public function __construct($telegraphChat, $data)
     {
-        $this->chat = $chat;
+        $this->telegraphChat = $telegraphChat;
         $this->data = $data;
         $this->apiTranslationService = new APITranslationService();
         $this->uuid = '212db24a-32b2-4b07-8d1b-6d5a2d4bf20d';
         $this->translation = $this->setTranslation();
-        $this->message = $this->translation->langText($this->chat->language->abbr);
+        $this->message = $this->translation->langText($this->telegraphChat->language->abbr);
         $this->preparedMessage();
     }
 

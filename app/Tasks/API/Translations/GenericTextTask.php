@@ -6,19 +6,19 @@ use App\Services\Translations\APITranslationService;
 
 class GenericTextTask
 {
-    private $chat;
+    private $telegraphChat;
     private $apiTranslationService;
     private $uuid;
     private $translation;
     private $message;
 
-    public function __construct($chat, $uuid)
+    public function __construct($telegraphChat, $uuid)
     {
-        $this->chat = $chat;
+        $this->telegraphChat = $telegraphChat;
         $this->apiTranslationService = new APITranslationService();
         $this->uuid = $uuid;
         $this->translation = $this->setTranslation();
-        $this->message = $this->translation->langText($this->chat->language->abbr);
+        $this->message = $this->translation->langText($this->telegraphChat->language->abbr);
     }
 
     public function run()
