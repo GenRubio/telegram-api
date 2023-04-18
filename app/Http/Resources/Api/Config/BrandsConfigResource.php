@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Api;
+namespace App\Http\Resources\Api\Config;
 
 use App\Services\BrandService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BrandsResource extends JsonResource
+class BrandsConfigResource extends JsonResource
 {
     private $brandService;
     private $brands;

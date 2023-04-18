@@ -6,7 +6,6 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
-use App\Tasks\WebApp\GetBotChatTask;
 use App\Services\ProductModelService;
 use App\Http\Resources\Api\ProductsResource;
 use App\Http\Controllers\Api\v1\InputPrepares\FilterProductsPrepare;
@@ -17,7 +16,6 @@ class GetProductsController extends Controller
     {
         try {
             $filter = (new FilterProductsPrepare($request))->get();
-            (new GetBotChatTask($filter['token']))->run();
             $products = (new ProductModelService())->get($filter);
             return response()->json(new ProductsResource($products));
         } catch (GenericException | Exception $e) {

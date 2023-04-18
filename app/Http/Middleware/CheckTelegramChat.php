@@ -5,8 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
-use App\Services\BotChatService;
 use App\Exceptions\GenericException;
+use App\Services\TelegraphChatService;
 
 class CheckTelegramChat
 {
@@ -21,8 +21,8 @@ class CheckTelegramChat
     {
         try {
             $token = requestAttrEncrypt($request->token);
-            $botChatService = new BotChatService();
-            $chat = $botChatService->getByChatId($token);
+            $telegraphChatService = new TelegraphChatService();
+            $chat = $telegraphChatService->getByChatId($token);
             if (is_null($chat)) {
                 throw new GenericException("Chat {$this->chatId} undefined");
             }

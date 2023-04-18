@@ -6,8 +6,8 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
-use App\Tasks\WebApp\GetBotChatTask;
 use App\Services\ProductModelService;
+use App\Services\TelegraphChatService;
 use App\Http\Resources\Api\ProductDetailResource;
 
 class GetProductDetailController extends Controller
@@ -15,7 +15,7 @@ class GetProductDetailController extends Controller
     public function index(Request $request)
     {
         try {
-            $chat = (new GetBotChatTask(requestAttrEncrypt($request->token)))->run();
+            $chat = (new TelegraphChatService())->getByChatId(requestAttrEncrypt($request->token));
             $product = (new ProductModelService())->getByReference($request->reference);
             if (is_null($product)) {
                 throw new GenericException("Product not found");
