@@ -34,7 +34,7 @@ class OrderController extends Controller
              * TODO: CustomerService is deprecated. Usar el BotChatService
              */
             $customer = (new CustomerService())->getByChat(requestAttrEncrypt($request->token));
-            if (!(new ValidateAddressTask($request))->run()) {
+            if (!(new ValidateAddressTask($request, $customer))->run()) {
                 throw new GenericException((new AddressNotFoundTextTask($customer->botChat))->run());
             }
             $validateProductStock = new ValidateProductsStockTask($request->products, $customer->botChat);

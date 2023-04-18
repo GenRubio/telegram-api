@@ -4,15 +4,18 @@ namespace App\Tasks\Geocoding;
 
 use App\Exceptions\GenericException;
 use App\Services\GeocodingApiService;
+use App\Tasks\API\Translations\CreateOrderErrorTextTask;
 
 class ValidateAddressTask
 {
     private $paymentData;
     private $geocodingApiService;
     private $geocoding;
+    private $customer;
 
-    public function __construct($request)
+    public function __construct($request, $customer)
     {
+        $this->customer = $customer;
         $this->paymentData = (object)$request->payment;
         $this->geocodingApiService = new GeocodingApiService();
         $this->geocoding = $this->geocodingApiService->getEnabled();
@@ -21,7 +24,7 @@ class ValidateAddressTask
     public function run()
     {
         if (is_null($this->geocoding)){
-            throw new GenericException("La tienda no esta disponible en este momento. Vuelva a intentar mas tarde");
+            throw new GenericException((new CreateOrderErrorTextTask($this->customer->botChat))->run());
         }
         $this->geocodingApiService->incrementRequests($this->geocoding->api_key);
         $this->geocodingApiService->incrementTotalRequests($this->geocoding->api_key);
