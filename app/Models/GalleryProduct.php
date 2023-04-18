@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Exception;
-use App\Services\LanguageService;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\TelegraphChat;
 use Illuminate\Database\Eloquent\Model;
-use DefStudio\Telegraph\Models\TelegraphChat;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class Order extends Model
