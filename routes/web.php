@@ -42,7 +42,6 @@ Route::prefix('api')->group(function () {
             Route::get('{token}/orders', [OrderController::class, 'getOrders']);
             Route::prefix('order')->group(function () {
                 Route::post('create', [OrderController::class, 'createOrder']);
-                Route::post('get', [OrderController::class, 'getOrder']);
             });
             Route::get('{token}/localization/{cp}', [GetLocalizationController::class, 'index']);
         });
