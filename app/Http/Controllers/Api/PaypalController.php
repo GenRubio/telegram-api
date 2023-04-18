@@ -52,7 +52,7 @@ class PaypalController extends Controller
         } catch (GenericException | Exception $e) {
             return Redirect::to(settings('1671894524.6744'));
         }
-        return Redirect::to($order->bot()->bot_url);
+        return Redirect::to($order->telegraphBot()->bot_url);
     }
 
     public function paymentError(Request $request)
@@ -63,7 +63,7 @@ class PaypalController extends Controller
             if (is_null($order)) {
                 $order = (new OrderService())->getByReference($reference);
                 if (!is_null($order)) {
-                    return Redirect::to($order->bot()->bot_url);
+                    return Redirect::to($order->telegraphBot()->bot_url);
                 } else {
                     throw new GenericException("Error");
                 }
@@ -73,6 +73,6 @@ class PaypalController extends Controller
         } catch (GenericException | Exception $e) {
             return Redirect::to(settings('1671894524.6744'));
         }
-        return Redirect::to($order->bot()->bot_url);
+        return Redirect::to($order->telegraphBot()->bot_url);
     }
 }

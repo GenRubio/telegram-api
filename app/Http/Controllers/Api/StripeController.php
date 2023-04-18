@@ -45,7 +45,7 @@ class StripeController extends Controller
         } catch (GenericException | Exception $e) {
             return Redirect::to(settings('1671894524.6744'));
         }
-        return Redirect::to($order->bot()->bot_url);
+        return Redirect::to($order->telegraphBot()->bot_url);
     }
 
     public function paymentError(Request $request)
@@ -66,6 +66,6 @@ class StripeController extends Controller
         } catch (GenericException | Exception $e) {
             return Redirect::to(settings('1671894524.6744'));
         }
-        return Redirect::to($order->bot()->bot_url);
+        return Redirect::to($order->telegraphBot()->bot_url);
     }
 }
