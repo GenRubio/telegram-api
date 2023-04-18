@@ -10,7 +10,6 @@ use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use App\Tasks\Order\AcceptOrderTask;
 use App\Tasks\Order\CancelOrderTask;
-use App\Services\TelegraphChatService;
 use Illuminate\Support\Facades\Redirect;
 use App\Tasks\Order\UpdateStatusOrderTask;
 use App\Tasks\Stripe\CancelPaymentStripeTask;
@@ -26,7 +25,6 @@ class StripeController extends Controller
     {
         try {
             $reference = decrypt($request->reference);
-            $telegraphChat = (new TelegraphChatService())->getByChatId(requestAttrEncrypt($request->token));
             $order = (new OrderService())->getPaymentOrder($reference);
             if (is_null($order)) {
                 $order = (new OrderService())->getByReference($reference);
@@ -47,16 +45,15 @@ class StripeController extends Controller
             }
         } catch (GenericException | Exception $e) {
             Log::error($e);
-            //return Redirect::to($telegraphChat->bot->bot_url);
+            //return Redirect::to(settings('1671894524.6744'));
         }
-        return Redirect::to($telegraphChat->bot->bot_url);
+        return Redirect::to($order->telegraphBot()->bot_url);
     }
 
     public function paymentError(Request $request)
     {
         try {
             $reference = decrypt($request->reference);
-            $telegraphChat = (new TelegraphChatService())->getByChatId(requestAttrEncrypt($request->token));
             $order = (new OrderService())->getPaymentOrder($reference);
             if (is_null($order)) {
                 $order = (new OrderService())->getByReference($reference);
@@ -69,9 +66,8 @@ class StripeController extends Controller
             (new CancelOrderTask($order))->run();
             (new SendPaymentCancelMessageTask($order))->run();
         } catch (GenericException | Exception $e) {
-            dd($e);
-            return Redirect::to($telegraphChat->bot->bot_url);
+            return Redirect::to(settings('1671894524.6744'));
         }
-        return Redirect::to($telegraphChat->bot->bot_url);
+        return Redirect::to($order->telegraphBot()->bot_url);
     }
 }
