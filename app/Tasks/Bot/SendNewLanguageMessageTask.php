@@ -35,8 +35,8 @@ class SendNewLanguageMessageTask
     public function run()
     {
         try {
-            $this->chat->action(ChatActions::TYPING)->send();
-            $response = $this->chat;
+            $this->telegraphChat->action(ChatActions::TYPING)->send();
+            $response = $this->telegraphChat;
             if (!empty($this->telegramBotMessage->image) && !$this->telegramBotMessage->image_bottom) {
                 $response = $response->photo(public_path($this->telegramBotMessage->image));
             }

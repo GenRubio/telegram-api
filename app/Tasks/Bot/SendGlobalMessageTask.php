@@ -33,17 +33,17 @@ class SendGlobalMessageTask
         }
     }
 
-    private function sendMessageToChat($chat, $langMessage, $clientApiUrl)
+    private function sendMessageToChat($telegraphChat, $langMessage, $clientApiUrl)
     {
         try {
-            $response = $chat->telegraphChat;
+            $response = $telegraphChat;
             if (!empty($this->message->image) && !$this->message->image_bottom) {
                 $response = $response->photo(public_path($this->message->image));
             }
             $response = $response->html($this->getResponseText($langMessage))
-                ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $chat) {
+                ->keyboard(function (Keyboard $keyboard) use ($clientApiUrl, $telegraphChat) {
                     return $keyboard->row([
-                        Button::make((new ButtonShopTextTask($chat))->run())
+                        Button::make((new ButtonShopTextTask($telegraphChat))->run())
                             ->webApp($clientApiUrl)
                     ]);
                 })
