@@ -18,6 +18,7 @@ use App\Tasks\Bot\SendPaymentErrorMessageTask;
 use App\Tasks\Bot\SendPaymentCancelMessageTask;
 use App\Tasks\Stripe\ValidatePaymentStripeTask;
 use App\Tasks\Bot\SendSuccessPaymentMessageTask;
+use Illuminate\Support\Facades\Log;
 
 class StripeController extends Controller
 {
@@ -45,8 +46,8 @@ class StripeController extends Controller
                 (new SendPaymentErrorMessageTask($order))->run();
             }
         } catch (GenericException | Exception $e) {
-            dd($e);
-            return Redirect::to($telegraphChat->bot->bot_url);
+            Log::error($e);
+            //return Redirect::to($telegraphChat->bot->bot_url);
         }
         return Redirect::to($telegraphChat->bot->bot_url);
     }
