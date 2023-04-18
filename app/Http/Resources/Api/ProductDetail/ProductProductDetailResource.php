@@ -4,6 +4,7 @@ namespace App\Http\Resources\Api\ProductDetail;
 
 use App\Models\Order;
 use App\Enums\OrderStatusEnum;
+use App\Services\TranslationService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Api\ProductGalleryResource;
 
@@ -12,12 +13,16 @@ class ProductProductDetailResource extends JsonResource
     private $product;
     private $telegraphChat;
     private $language;
+    private $translationService;
+    private $translations;
 
     public function __construct($product, $telegraphChat, $language)
     {
         $this->product = $product;
         $this->telegraphChat = $telegraphChat;
         $this->language = $language;
+        $this->translationService = new TranslationService();
+        $this->translations = $this->translationService->getAll();
     }
 
     public function toArray($request)
