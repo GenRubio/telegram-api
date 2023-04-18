@@ -11,11 +11,11 @@ class ValidateAddressTask
     private $paymentData;
     private $geocodingApiService;
     private $geocoding;
-    private $customer;
+    private $telegraphChat;
 
-    public function __construct($request, $customer)
+    public function __construct($request, $telegraphChat)
     {
-        $this->customer = $customer;
+        $this->telegraphChat = $telegraphChat;
         $this->paymentData = (object)$request->payment;
         $this->geocodingApiService = new GeocodingApiService();
         $this->geocoding = $this->geocodingApiService->getEnabled();
@@ -24,7 +24,7 @@ class ValidateAddressTask
     public function run()
     {
         if (is_null($this->geocoding)){
-            throw new GenericException((new CreateOrderErrorTextTask($this->customer->botChat))->run());
+            throw new GenericException((new CreateOrderErrorTextTask($this->telegraphChat))->run());
         }
         $this->geocodingApiService->incrementRequests($this->geocoding->api_key);
         $this->geocodingApiService->incrementTotalRequests($this->geocoding->api_key);

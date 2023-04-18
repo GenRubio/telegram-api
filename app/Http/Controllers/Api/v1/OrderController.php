@@ -30,15 +30,12 @@ class OrderController extends Controller
     public function createOrder(Request $request)
     {
         try {
-            /**
-             * TODO: CustomerService is deprecated. Usar el BotChatService
-             */
-            $customer = (new CustomerService())->getByChat(requestAttrEncrypt($request->token));
-            if (!(new ValidateAddressTask($request, $customer))->run()) {
-                throw new GenericException((new AddressNotFoundTextTask($customer->botChat))->run());
+            $telegraphChat = (new TelegraphChatService())->getByChatId(requestAttrEncrypt($request->token));
+            if (!(new ValidateAddressTask($request, $telegraphChat))->run()) {
+                throw new GenericException((new AddressNotFoundTextTask($telegraphChat))->run());
             }
-            $validateProductStock = new ValidateProductsStockTask($request->products, $customer->botChat);
-            $createOrder = new CreateOrderTask($request, $customer, $validateProductStock);
+            $validateProductStock = new ValidateProductsStockTask($request->products, $telegraphChat);
+            $createOrder = new CreateOrderTask($request, $telegraphChat, $validateProductStock);
             $paymentUrl = (new GetPaymentUrlTask($createOrder->order))->run();
             return response()->json([
                 'success' => true,
