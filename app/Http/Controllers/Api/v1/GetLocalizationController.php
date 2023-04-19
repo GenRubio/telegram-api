@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 
@@ -18,6 +19,7 @@ class GetLocalizationController extends Controller
                 'data' => $data[$request->cp]
             ]);
         } catch (GenericException | Exception $e) {
+            Log::channel('api-controllers')->error($e);
             return response()->json([
                 'error' => $e->getMessage()
             ]);

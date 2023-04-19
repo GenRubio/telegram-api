@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use Exception;
 use Illuminate\Http\Request;
-use App\Services\CustomerService;
+use Illuminate\Support\Facades\Log;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use App\Tasks\Order\CreateOrderTask;
@@ -23,7 +23,10 @@ class OrderController extends Controller
             $telegraphChat = (new TelegraphChatService())->getByChatId(requestAttrEncrypt($request->token));
             return response()->json(new OrdersResource($telegraphChat));
         } catch (GenericException | Exception $e) {
-            throw $e;
+            Log::channel('api-controllers')->error($e);
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 
@@ -42,6 +45,7 @@ class OrderController extends Controller
                 'url' => $paymentUrl
             ]);
         } catch (GenericException | Exception $e) {
+            Log::channel('api-controllers')->error($e);
             return response()->json([
                 'error' => $e->getMessage()
             ]);

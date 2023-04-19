@@ -131,6 +131,13 @@ return [
             'level' => 'debug',
             'days' => 1,
         ],
+
+        'api-controllers' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/api-controllers.log'),
+            'level' => 'debug',
+            'days' => 1,
+        ],
     ],
 
 ];

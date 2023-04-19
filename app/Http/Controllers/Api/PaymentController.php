@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Drivers\PaypalPaymentDriver;
 use Exception;
 use Illuminate\Http\Request;
 use App\Services\OrderService;
+use Illuminate\Support\Facades\Log;
+use App\Drivers\PaypalPaymentDriver;
 use App\Drivers\StripePaymentDriver;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
@@ -28,6 +29,7 @@ class PaymentController extends Controller
                 return Redirect::to($paypal);
             }
         } catch (GenericException | Exception $e) {
+            Log::channel('api-controllers')->error($e);
             return Redirect::to(settings('1671894524.6744'));
         }
     }

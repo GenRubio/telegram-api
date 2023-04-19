@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use App\Services\ProductModelService;
@@ -22,6 +23,7 @@ class GetProductDetailController extends Controller
             }
             return response()->json(new ProductDetailResource($product, $telegraphChat));
         } catch (GenericException | Exception $e) {
+            Log::channel('api-controllers')->error($e);
             return response()->json([
                 'error' => $e->getMessage()
             ]);
