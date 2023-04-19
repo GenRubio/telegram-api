@@ -33,10 +33,10 @@ class MailSuccessfulDatabaseBackup
 
     public function mailBackupFile($path)
     {
-        try {
-            Mail::to(config('app.backup_mail'))->send(new SendBackup($path));
-        } catch (\Exception $exception) {
-            throw $exception;
-        }
+        //try {
+        //    Mail::to(config('app.backup_mail'))->send(new SendBackup($path));
+        //} catch (\Exception $exception) {
+        //    throw $exception;
+        //}
     }
 }
