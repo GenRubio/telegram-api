@@ -2,7 +2,7 @@
 
 namespace App\Tasks\API;
 
-class BanChatTask
+class BanIPTask
 {
     public function __construct()
     {
