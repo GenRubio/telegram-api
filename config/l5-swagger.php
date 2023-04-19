@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'L5 Swagger UI',
+                'title' => 'API Telegram Bot - Documentation',
             ],
 
             'routes' => [
@@ -61,7 +61,17 @@ return [
              * Middleware allows to prevent unexpected access to API documentation
             */
             'middleware' => [
-                'api' => [],
+                'api' => [
+                    \App\Http\Middleware\ForceJsonResponse::class,
+                    //\App\Http\Middleware\EncryptCookies::class,
+                    //\Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+                    //\Illuminate\Session\Middleware\StartSession::class,
+                    //\Illuminate\View\Middleware\ShareErrorsFromSession::class,
+                    //\App\Http\Middleware\VerifyCsrfToken::class,
+                    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+                    \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+                    //'auth',
+                ],
                 'asset' => [],
                 'docs' => [],
                 'oauth2_callback' => [],
@@ -140,12 +150,6 @@ return [
              * @see \OpenApi\scan
             */
             'exclude' => [],
-
-            /*
-             * Allows to generate specs either for OpenAPI 3.0.0 or OpenAPI 3.1.0.
-             * By default the spec will be in version 3.0.0
-             */
-            'open_api_spec_version' => env('L5_SWAGGER_OPEN_API_SPEC_VERSION', \L5Swagger\Generator::OPEN_API_DEFAULT_SPEC_VERSION),
         ],
 
         /*
@@ -176,21 +180,23 @@ return [
                 ],
                 */
 
-                /* Open API 3.0 support
+                /* Open API 3.0 support */
                 'passport' => [ // Unique name of security
-                    'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
-                    'description' => 'Laravel passport oauth2 security.',
+                    'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                    'description' => 'Laravel passport apiKey security.',
+                    'name' => 'Authorization', // The name of the header or query parameter to be used.
                     'in' => 'header',
                     'scheme' => 'https',
                     'flows' => [
                         "password" => [
-                            "authorizationUrl" => config('app.url') . '/oauth/authorize',
-                            "tokenUrl" => config('app.url') . '/oauth/token',
-                            "refreshUrl" => config('app.url') . '/token/refresh',
+                            "authorizationUrl" => config('app.url') . 'oauth/authorize',
+                            "tokenUrl" => config('app.url') . 'oauth/token',
+                            "refreshUrl" => config('app.url') . 'token/refresh',
                             "scopes" => []
                         ],
                     ],
                 ],
+                /*
                 'sanctum' => [ // Unique name of security
                     'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Enter token in format (Bearer <token>)',
@@ -281,13 +287,6 @@ return [
                  * If set to true, it persists authorization data, and it would not be lost on browser close/refresh
                  */
                 'persist_authorization' => env('L5_SWAGGER_UI_PERSIST_AUTHORIZATION', false),
-
-                'oauth2' => [
-                    /*
-                    * If set to true, adds PKCE to AuthorizationCodeGrant flow
-                    */
-                    'use_pkce_with_authorization_code_grant' => false,
-                ],
             ],
         ],
         /*

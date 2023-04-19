@@ -4,6 +4,7 @@
 /public/storage
 /storage/*.key
 /storage/users_trolley
+/storage/api-docs
 /vendor
 .env
 .env.backup

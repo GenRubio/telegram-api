@@ -10,7 +10,7 @@
         "backpack/crud": "^5.4",
         "backpack/filemanager": "^2.0",
         "backpack/logmanager": "^4.0",
-        "darkaonline/l5-swagger": "^8.4",
+        "darkaonline/l5-swagger": "^8.5",
         "defstudio/telegraph": "^1.24",
         "guzzlehttp/guzzle": "^7.5",
         "intervention/image": "^2.7",

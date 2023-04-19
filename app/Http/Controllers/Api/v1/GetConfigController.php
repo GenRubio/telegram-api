@@ -9,9 +9,11 @@ use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use App\Services\TelegraphChatService;
 use App\Http\Resources\Api\ConfigResource;
+use App\Http\Controllers\Api\v1\Interfaces\GetConfigControllerInterface;
 
-class GetConfigController extends Controller
+class GetConfigController extends Controller implements GetConfigControllerInterface
 {
+
     public function index(Request $request)
     {
         try {

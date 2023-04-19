@@ -197,7 +197,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Srmklive\PayPal\Providers\PayPalServiceProvider::class
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+        L5Swagger\L5SwaggerServiceProvider::class,
 
     ],
 
