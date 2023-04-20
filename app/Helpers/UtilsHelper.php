@@ -44,9 +44,9 @@ class UtilsHelper
 
     public static function requestAttrEncrypt($attr)
     {
-        if (config('app.env') == "local") {
-            return $attr;
-        }
+        //if (config('app.env') == "local") {
+        //    return $attr;
+        //}
         return decrypt($attr);
     }
 }

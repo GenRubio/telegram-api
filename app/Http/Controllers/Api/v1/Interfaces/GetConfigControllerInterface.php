@@ -8,16 +8,15 @@ interface GetConfigControllerInterface
 {
     /**
      * @OA\Get(
-     * path="{token}/config",
+     * path="/{token}/config",
      * summary="Config",
      * tags={"Proyect"},
      * @OA\Parameter(
-     *     description="Parameter with mutliple examples",
+     *     description="Encrypted Chat ID",
      *     in="path",
      *     name="token",
      *     required=true,
-     *     @OA\Schema(type="string"),
-     *     @OA\Examples(example="string", value="0006faf6-7a61-426c-9034-579f2cfcfa83", summary="Encrypted chat ID."),
+     *     @OA\Schema(type="string")
      * ),
      * @OA\Response(
      *    response=200,
