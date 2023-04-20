@@ -69,7 +69,7 @@ return [
                     //\Illuminate\View\Middleware\ShareErrorsFromSession::class,
                     //\App\Http\Middleware\VerifyCsrfToken::class,
                     \Illuminate\Routing\Middleware\SubstituteBindings::class,
-                    \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+                    //\Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
                     //'auth',
                 ],
                 'asset' => [],
@@ -181,21 +181,21 @@ return [
                 */
 
                 /* Open API 3.0 support */
-                'passport' => [ // Unique name of security
-                    'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
-                    'description' => 'Laravel passport apiKey security.',
-                    'name' => 'Authorization', // The name of the header or query parameter to be used.
-                    'in' => 'header',
-                    'scheme' => 'https',
-                    'flows' => [
-                        "password" => [
-                            "authorizationUrl" => config('app.url') . 'oauth/authorize',
-                            "tokenUrl" => config('app.url') . 'oauth/token',
-                            "refreshUrl" => config('app.url') . 'token/refresh',
-                            "scopes" => []
-                        ],
-                    ],
-                ],
+                //'passport' => [ // Unique name of security
+                //    'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                //    'description' => 'Laravel passport apiKey security.',
+                //    'name' => 'Authorization', // The name of the header or query parameter to be used.
+                //    'in' => 'header',
+                //    'scheme' => 'https',
+                //    'flows' => [
+                //        "password" => [
+                //            "authorizationUrl" => config('app.url') . 'oauth/authorize',
+                //            "tokenUrl" => config('app.url') . 'oauth/token',
+                //            "refreshUrl" => config('app.url') . 'token/refresh',
+                //            "scopes" => []
+                //        ],
+                //    ],
+                //],
                 /*
                 'sanctum' => [ // Unique name of security
                     'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
