@@ -65,7 +65,7 @@ class Affiliate extends Model
 
     public function getCountClientsAttribute()
     {
-        return count($this->telegraphBot->telegramChats
+        return count($this->telegraphBot->telegraphChats
             ->where('reference', $this->attributes['reference']));
     }
 
