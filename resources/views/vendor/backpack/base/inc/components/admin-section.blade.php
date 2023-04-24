@@ -1,6 +1,6 @@
-<li class="nav-title">ADMIN</li>
+<li class="nav-title">ADMINISTRACION</li>
 <li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-th-list"></i> Administrator</a>
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-th-list"></i> Configuracion</a>
     <ul class="nav-dropdown-items">
         @if (backpack_user()->officePermission('UserCrudController', 'show') ||
                 backpack_user()->officePermission('OfficePermissionCrudController', 'show'))
