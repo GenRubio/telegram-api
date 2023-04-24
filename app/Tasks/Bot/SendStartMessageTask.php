@@ -25,9 +25,9 @@ class SendStartMessageTask
     private $clientApiUrl;
     private $message;
 
-    public function __construct($telegraphChat)
+    public function __construct($chat)
     {
-        $this->telegraphChat = (new TelegraphChatService())->getByChatId($telegraphChat->chat_id);
+        $this->telegraphChat = (new TelegraphChatService())->getByChatId($chat->chat_id);
         $this->telegramBotMessageService = new TelegramBotMessageService();
         $this->key = '1672042240.2779';
         $this->telegramBotMessage = $this->setTelegramBotMessage();
