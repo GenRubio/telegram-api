@@ -63,6 +63,12 @@ class OrderService extends Controller
         return $this->orderRepository->getByStatus($status);
     }
 
+    public function getCompletedPaymentOrders()
+    {
+        $status = OrderStatusEnum::STATUS_IDS['payment_completed'];
+        return $this->orderRepository->getByStatus($status);
+    }
+
     public function createOrder($data)
     {
         return $this->orderRepository->createOrder($data);
