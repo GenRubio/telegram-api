@@ -34,17 +34,17 @@
                 <i class="nav-icon las la-comments"></i> Mensajes
             </a>
             <ul class="nav-dropdown-items">
-                @if (backpack_user()->officePermission('TelegramBotMessageCrudController', 'show'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ backpack_url('telegram-bot-message') }}">
-                            <i class="nav-icon las la-comment-alt"></i> Mensajes
-                        </a>
-                    </li>
-                @endif
                 @if (backpack_user()->officePermission('TelegramBotGlobalMessageCrudController', 'show'))
                     <li class="nav-item">
                         <a class="nav-link" href="{{ backpack_url('telegram-bot-global-message') }}">
                             <i class="nav-icon las la-sms"></i> Globales
+                        </a>
+                    </li>
+                @endif
+                @if (backpack_user()->officePermission('TelegramBotMessageCrudController', 'show'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ backpack_url('telegram-bot-message') }}">
+                            <i class="nav-icon las la-comment-alt"></i> Predefinidos
                         </a>
                     </li>
                 @endif
