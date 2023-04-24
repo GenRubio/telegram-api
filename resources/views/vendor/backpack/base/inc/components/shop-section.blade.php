@@ -9,7 +9,7 @@
                 @php 
                     $newOrders = (new App\Services\OrderService())->getCompletedPaymentOrders();
                 @endphp
-                <i class="nav-icon las la-truck"></i> Pedidos @if($newOrders)<span class="badge badge-pill badge-warning mr-4">{{ count($newOrders) }}</span>@endif
+                <i class="nav-icon las la-truck"></i> Pedidos @if(count($newOrders))<span class="badge badge-pill badge-warning mr-4">{{ count($newOrders) }}</span>@endif
             </a>
         </li>
     @endif
