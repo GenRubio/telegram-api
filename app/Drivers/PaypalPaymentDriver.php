@@ -2,6 +2,7 @@
 
 namespace App\Drivers;
 
+use App\Exceptions\GenericException;
 use Exception;
 use App\Services\OrderService;
 use App\Tasks\PayPal\CreateProductsPaypalTask;
@@ -50,7 +51,7 @@ class PaypalPaymentDriver
                 ]
             ]);
         } catch (Exception $e) {
-            dd($e);
+            throw new GenericException($e);
         }
 
         $this->orderService->updatePaypalId($this->order->id, $order['id']);
