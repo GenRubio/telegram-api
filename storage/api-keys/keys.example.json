@@ -1,0 +1,51 @@
+[
+    {
+        "type": "paypal",
+        "paypal_mode": "live",
+        "parameters": [
+            {
+                "name": "PAYPAL_LIVE_CLIENT_ID",
+                "value": "",
+                "show_name": true,
+                "show_value": false
+            },
+            {
+                "name": "PAYPAL_LIVE_CLIENT_SECRET",
+                "value": "",
+                "show_name": true,
+                "show_value": false
+            }
+        ],
+        "description": "PayPal Live"
+    },
+    {
+        "type": "stripe",
+        "parameters": [
+            {
+                "name": "STRIPE_KEY",
+                "value": "",
+                "show_name": true,
+                "show_value": false
+            },
+            {
+                "name": "STRIPE_SECRET",
+                "value": "",
+                "show_name": true,
+                "show_value": false
+            }
+        ],
+        "description": "Stripe"
+    },
+    {
+        "type": "other",
+        "parameters": [
+            {
+                "name": null,
+                "value": null,
+                "show_name": true,
+                "show_value": true
+            }
+        ],
+        "description": null
+    }
+]
