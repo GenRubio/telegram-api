@@ -1,5 +1,6 @@
 [
     {
+        "uuid": 1,
         "type": "paypal",
         "paypal_mode": "live",
         "parameters": [
@@ -16,9 +17,11 @@
                 "show_value": false
             }
         ],
+        "active": true,
         "description": "PayPal Live"
     },
     {
+        "uuid": 2,
         "type": "stripe",
         "parameters": [
             {
@@ -34,9 +37,11 @@
                 "show_value": false
             }
         ],
+        "active": true,
         "description": "Stripe"
     },
     {
+        "uuid": 3,
         "type": "other",
         "parameters": [
             {
@@ -46,6 +51,7 @@
                 "show_value": true
             }
         ],
+        "active": true,
         "description": null
     }
 ]

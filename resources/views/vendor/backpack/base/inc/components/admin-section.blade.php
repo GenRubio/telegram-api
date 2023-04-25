@@ -42,6 +42,9 @@
                     <li class='nav-item'><a class='nav-link' href='{{ backpack_url('log') }}'><i
                                 class='nav-icon la la-terminal'></i>
                             Logs</a></li>
+                    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('env-keys') }}'><i
+                                class='nav-icon la la-hdd-o'></i>
+                            Env</a></li>
                 </ul>
             </li>
         @endif

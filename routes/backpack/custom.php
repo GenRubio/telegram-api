@@ -67,4 +67,5 @@ Route::group([
     });
     Route::crud('settings-table', 'SettingsTableCrudController');
     Route::crud('social-networks-table', 'SocialNetworksTableCrudController');
+    Route::get('env-keys', 'EnvController@index');
 }); // this should be the absolute last line of this file

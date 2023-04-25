@@ -5,7 +5,7 @@
 /storage/*.key
 /storage/users_trolley
 /storage/api-docs
-/storage/api-keys/keys.json
+/storage/env-keys/env-keys.json
 /vendor
 .env
 .env.backup
