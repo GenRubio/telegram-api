@@ -5,39 +5,76 @@
         "paypal_mode": "live",
         "parameters": [
             {
-                "name": "PAYPAL_LIVE_CLIENT_ID",
+                "name": "PAYPAL_LIVE_CLIENT_ID_1",
                 "value": "",
                 "show_value": false
             },
             {
-                "name": "PAYPAL_LIVE_CLIENT_SECRET",
+                "name": "PAYPAL_LIVE_CLIENT_SECRET_1",
                 "value": "",
                 "show_value": false
             }
         ],
         "active": true,
-        "description": "PayPal Live"
+        "description": "PayPal Live First Account"
     },
     {
         "uuid": 2,
-        "type": "stripe",
+        "type": "paypal",
+        "paypal_mode": "live",
         "parameters": [
             {
-                "name": "STRIPE_KEY",
+                "name": "PAYPAL_LIVE_CLIENT_ID_2",
                 "value": "",
                 "show_value": false
             },
             {
-                "name": "STRIPE_SECRET",
+                "name": "PAYPAL_LIVE_CLIENT_SECRET_2",
                 "value": "",
                 "show_value": false
             }
         ],
         "active": true,
-        "description": "Stripe"
+        "description": "PayPal Live Second Account"
     },
     {
         "uuid": 3,
+        "type": "stripe",
+        "parameters": [
+            {
+                "name": "STRIPE_KEY_1",
+                "value": "",
+                "show_value": false
+            },
+            {
+                "name": "STRIPE_SECRET_1",
+                "value": "",
+                "show_value": false
+            }
+        ],
+        "active": true,
+        "description": "Stripe First Account"
+    },
+    {
+        "uuid": 4,
+        "type": "stripe",
+        "parameters": [
+            {
+                "name": "STRIPE_KEY_2",
+                "value": "",
+                "show_value": false
+            },
+            {
+                "name": "STRIPE_SECRET_2",
+                "value": "",
+                "show_value": false
+            }
+        ],
+        "active": true,
+        "description": "Stripe Second Account"
+    },
+    {
+        "uuid": 5,
         "type": "other",
         "parameters": [
             {
