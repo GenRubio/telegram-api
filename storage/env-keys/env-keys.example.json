@@ -7,13 +7,11 @@
             {
                 "name": "PAYPAL_LIVE_CLIENT_ID",
                 "value": "",
-                "show_name": true,
                 "show_value": false
             },
             {
                 "name": "PAYPAL_LIVE_CLIENT_SECRET",
                 "value": "",
-                "show_name": true,
                 "show_value": false
             }
         ],
@@ -27,13 +25,11 @@
             {
                 "name": "STRIPE_KEY",
                 "value": "",
-                "show_name": true,
                 "show_value": false
             },
             {
                 "name": "STRIPE_SECRET",
                 "value": "",
-                "show_name": true,
                 "show_value": false
             }
         ],
@@ -47,7 +43,6 @@
             {
                 "name": null,
                 "value": null,
-                "show_name": true,
                 "show_value": true
             }
         ],
