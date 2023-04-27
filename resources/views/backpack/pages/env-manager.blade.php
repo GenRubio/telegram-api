@@ -15,11 +15,12 @@
 
 @section('content')
     {{-- Default box --}}
-    <button id="create-new-backup-button" href="" class="btn btn-success mb-2">
+    <button id="import-env-config" href="" class="btn btn-success mb-2" data-style="zoom-in" data-toggle="modal"
+        data-target="#uploadEnvFile" data-backdrop="false">
         <i class="las la-cloud-upload-alt"></i>
         <span>Importar</span>
     </button>
-    <a id="create-new-backup-button" href="{{ backpack_url('env-keys/download') }}" class="btn btn-primary mb-2">
+    <a id="download-env-config" href="{{ backpack_url('env-keys/download') }}" class="btn btn-primary mb-2">
         <i class="las la-cloud-download-alt"></i>
         <span>Descargar plantilla</span>
     </a>
@@ -57,6 +58,7 @@
     @foreach ($data as $item)
         @include('backpack.components.env-manager.view-modal', ['item' => $item])
     @endforeach
+    @include('backpack.components.env-manager.upload-file-modal')
 @endsection
 
 @section('after_styles')
@@ -84,5 +86,38 @@
 @endsection
 
 @section('after_scripts')
-    <script></script>
+    <script>
+        $(document).ready(function() {
+            const notyAlert = (title, message = '', type = 'success') => new Noty({
+                text: `<strong>${title}</strong><br>${message}`,
+                type
+            }).show();
+            $(document).on('submit', '#uplaod-file-env', function(ev) {
+                ev.preventDefault();
+                let buttonSend = $('#import-modal-button');
+                buttonSend.attr('disabled', true);
+                let url = $(this).data('url');
+                let formData = new FormData(this);
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        buttonSend.attr('disabled', false);
+                        if (data.success) {
+                            notyAlert(data.title, data.message);
+                            location.reload();
+                        } else {
+                            notyAlert(data.title, data.message, 'error');
+                        }
+                    },
+                    error: function(data) {
+                        buttonSend.attr('disabled', false);
+                    }
+                })
+            })
+        })
+    </script>
 @endsection
