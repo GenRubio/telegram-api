@@ -67,7 +67,4 @@ Route::group([
     });
     Route::crud('settings-table', 'SettingsTableCrudController');
     Route::crud('social-networks-table', 'SocialNetworksTableCrudController');
-    Route::get('env-keys', 'EnvController@index');
-    Route::get('env-keys/download', 'EnvController@downloadLayout');
-    Route::post('env-keys/upload', 'EnvController@uploadLayout');
 }); // this should be the absolute last line of this file
