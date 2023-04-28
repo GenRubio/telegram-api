@@ -33,6 +33,8 @@
                         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('geocoding-api') }}"><i
                                     class="nav-icon las la-database"></i> Geocoding</a></li>
                     @endif
+                    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('payment-platform-key') }}"><i
+                                class="nav-icon la la-th-list"></i> P.P. Llaves</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ backpack_url('elfinder') }}"><i
                                 class="nav-icon la la-files-o"></i>
                             Elfinder</a></li>

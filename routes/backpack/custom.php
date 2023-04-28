@@ -67,4 +67,5 @@ Route::group([
     });
     Route::crud('settings-table', 'SettingsTableCrudController');
     Route::crud('social-networks-table', 'SocialNetworksTableCrudController');
+    Route::crud('payment-platform-key', 'PaymentPlatformKeyCrudController');
 }); // this should be the absolute last line of this file
