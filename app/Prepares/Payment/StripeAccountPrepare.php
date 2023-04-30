@@ -30,8 +30,8 @@ class StripeAccountPrepare
     private function getPreparedData()
     {
         return [
-            'secret_key' => decrypt($this->selectedKeys->private_key),
-            'public_key' => decrypt($this->selectedKeys->public_key),
+            'secret_key' => decrypt($this->paymentPlatformKey->private_key),
+            'public_key' => decrypt($this->paymentPlatformKey->public_key),
         ];
     }
 }
