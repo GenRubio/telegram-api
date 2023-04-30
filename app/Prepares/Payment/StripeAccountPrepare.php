@@ -2,29 +2,28 @@
 
 namespace App\Prepares\Payment;
 
-use App\Enums\PaymentMethodsEnum;
 use App\Exceptions\GenericException;
 use App\Services\PaymentPlatformKeyService;
 
 class StripeAccountPrepare
 {
+    private $paymentPlatformKeyId;
     private $paymentPlatformKeyService;
-    private $paymentPlatformKeys;
-    private $selectedKeys;
+    private $paymentPlatformKey;
 
-    public function __construct()
+    public function __construct($paymentPlatformKeyId)
     {
+        $this->paymentPlatformKeyId = $paymentPlatformKeyId;
         $this->paymentPlatformKeyService = new PaymentPlatformKeyService();
-        $this->paymentPlatformKeys = $this->paymentPlatformKeyService
-            ->getAllByType(PaymentMethodsEnum::STRIPE);
+        $this->paymentPlatformKey = $this->paymentPlatformKeyService
+            ->getById($this->paymentPlatformKeyId);
     }
 
     public function run()
     {
-        if (count($this->paymentPlatformKeys) == 0) {
+        if (is_null($this->paymentPlatformKey)) {
             throw new GenericException('No se encontraron las llaves de Stripe');
         }
-        $this->selectedKeys = $this->paymentPlatformKeys->random();
         return $this->getPreparedData();
     }
 

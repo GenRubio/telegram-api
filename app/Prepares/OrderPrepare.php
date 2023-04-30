@@ -4,6 +4,9 @@ namespace App\Prepares;
 
 use App\Enums\OrderStatusEnum;
 use App\Services\SettingService;
+use App\Enums\PaymentMethodsEnum;
+use App\Exceptions\GenericException;
+use App\Services\PaymentPlatformKeyService;
 use App\Services\ProductModelsFlavorService;
 
 class OrderPrepare
@@ -13,6 +16,8 @@ class OrderPrepare
     private $products;
     private $settingService;
     private $productModelsFlavorService;
+    private $paymentPlatformKeyService;
+    private $paymentPlatformKeys;
 
     public function __construct($request, $telegraphChat)
     {
@@ -21,11 +26,18 @@ class OrderPrepare
         $this->products = $request->products;
         $this->settingService = new SettingService();
         $this->productModelsFlavorService = new ProductModelsFlavorService();
+        $this->paymentPlatformKeyService = new PaymentPlatformKeyService();
+        $this->paymentPlatformKeys = $this->paymentPlatformKeyService
+            ->getAllByType($this->setPaymentMethodType());
     }
 
     public function run()
     {
+        if (count($this->paymentPlatformKeys) == 0) {
+            throw new GenericException('No hay claves de pago disponibles');
+        }
         return [
+            'payment_platform_key_id' => $this->paymentPlatformKeys->random()->id,
             'chat_id' => $this->telegraphChat->chat_id,
             'reference' => uniqid($this->telegraphChat->chat_id),
             'name' => $this->paymentData->name,
@@ -41,6 +53,18 @@ class OrderPrepare
             'shipping_price' => $shippingPrice = $this->getShippingPrice($price),
             'total_price' => ($price + $shippingPrice),
         ];
+    }
+
+    private function setPaymentMethodType()
+    {
+        switch ($this->paymentData->payment_method) {
+            case 'paypal':
+                return PaymentMethodsEnum::PAYPAL;
+            case 'stripe':
+                return PaymentMethodsEnum::STRIPE;
+            default:
+                throw new GenericException('Método de pago no soportado');
+        }
     }
 
     private function getPrice()

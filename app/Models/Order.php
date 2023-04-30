@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use App\Models\TelegraphChat;
+use App\Exceptions\GenericException;
 use Illuminate\Database\Eloquent\Model;
+use App\Prepares\Payment\PayPalAccountPrepare;
+use App\Prepares\Payment\StripeAccountPrepare;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class Order extends Model
@@ -54,6 +57,18 @@ class Order extends Model
     public function telegraphBot()
     {
         return $this->telegraphChat->bot;
+    }
+
+    public function paymentAPICredentials()
+    {
+        switch ($this->payment_method) {
+            case 'paypal':
+                return (new PayPalAccountPrepare($this->payment_platform_key_id))->run();
+            case 'stripe':
+                return (new StripeAccountPrepare($this->payment_platform_key_id))->run();
+            default:
+                throw new GenericException('Método de pago no soportado');
+        }
     }
 
     /*

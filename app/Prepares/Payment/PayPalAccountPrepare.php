@@ -2,29 +2,28 @@
 
 namespace App\Prepares\Payment;
 
-use App\Enums\PaymentMethodsEnum;
 use App\Exceptions\GenericException;
 use App\Services\PaymentPlatformKeyService;
 
 class PayPalAccountPrepare
 {
+    private $paymentPlatformKeyId;
     private $paymentPlatformKeyService;
-    private $paymentPlatformKeys;
-    private $selectedKeys;
+    private $paymentPlatformKey;
 
-    public function __construct()
+    public function __construct($paymentPlatformKeyId)
     {
+        $this->paymentPlatformKeyId = $paymentPlatformKeyId;
         $this->paymentPlatformKeyService = new PaymentPlatformKeyService();
-        $this->paymentPlatformKeys = $this->paymentPlatformKeyService
-            ->getAllByType(PaymentMethodsEnum::PAYPAL);
+        $this->paymentPlatformKey = $this->paymentPlatformKeyService
+            ->getById($this->paymentPlatformKeyId);
     }
 
     public function run()
     {
-        if (count($this->paymentPlatformKeys) == 0) {
+        if (is_null($this->paymentPlatformKey)) {
             throw new GenericException('No se encontraron las llaves de PayPal');
         }
-        $this->selectedKeys = $this->paymentPlatformKeys->random();
         return $this->getPreparedData();
     }
 
@@ -33,13 +32,13 @@ class PayPalAccountPrepare
         return [
             'mode'    => env('PAYPAL_MODE', 'sandbox'), // Can only be 'sandbox' Or 'live'. If empty or invalid, 'live' will be used.
             'sandbox' => [
-                'client_id'         => decrypt($this->selectedKeys->public_key),
-                'client_secret'     => decrypt($this->selectedKeys->private_key),
+                'client_id'         => decrypt($this->paymentPlatformKey->public_key),
+                'client_secret'     => decrypt($this->paymentPlatformKey->private_key),
                 'app_id'            => 'APP-80W284485P519543T',
             ],
             'live' => [
-                'client_id'         => decrypt($this->selectedKeys->public_key),
-                'client_secret'     => decrypt($this->selectedKeys->private_key),
+                'client_id'         => decrypt($this->paymentPlatformKey->public_key),
+                'client_secret'     => decrypt($this->paymentPlatformKey->private_key),
                 'app_id'            => env('PAYPAL_LIVE_APP_ID', ''),
             ],
             'payment_action' => env('PAYPAL_PAYMENT_ACTION', 'Sale'), // Can only be 'Sale', 'Authorization' or 'Order'
