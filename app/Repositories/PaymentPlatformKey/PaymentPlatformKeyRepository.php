@@ -36,4 +36,9 @@ class PaymentPlatformKeyRepository extends Repository implements PaymentPlatform
         $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
         $this->limit = 10;
     }
+
+    public function getAll()
+    {
+        return $this->model->active()->get();
+    }
 }

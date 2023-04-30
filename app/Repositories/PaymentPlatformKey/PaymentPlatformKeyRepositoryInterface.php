@@ -8,5 +8,5 @@ namespace App\Repositories\PaymentPlatformKey;
  */
 interface PaymentPlatformKeyRepositoryInterface
 {
-
+    public function getAll();
 }

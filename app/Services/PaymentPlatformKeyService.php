@@ -24,4 +24,9 @@ class PaymentPlatformKeyService extends Controller
     {
         $this->paymentPlatformKeyRepository = new PaymentPlatformKeyRepository();
     }
+
+    public function getAll()
+    {
+        return $this->paymentPlatformKeyRepository->getAll();
+    }
 }
