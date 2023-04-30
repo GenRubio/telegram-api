@@ -80,6 +80,15 @@ class OrderCrudController extends CrudController
             'label' => 'Productos',
             'type'  => 'text',
         ]);
+        $this->crud->addColumn([
+            'name' => 'paymentPlatformKey',
+            'label' => 'P.P. Llaves',
+            'type'      => 'select',
+            'name'      => 'payment_platform_key_id',
+            'entity'    => 'paymentPlatformKey',
+            'attribute' => 'description',
+            'model'     => "App\Models\PaymentPlatformKey",
+        ]);
     }
 
     protected function setupCreateOperation()
@@ -275,6 +284,18 @@ class OrderCrudController extends CrudController
                 'label' => 'Estado de pago',
                 'type' => 'text',
                 'value' => $payment_payment_status,
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                ],
+                'tab' => 'Pago'
+            ],
+            [
+                'label'     => "P.P. Llaves",
+                'type'      => 'select',
+                'name'      => 'payment_platform_key_id',
+                'entity'    => 'paymentPlatformKey',
+                'model'     => "App\Models\PaymentPlatformKey",
+                'attribute' => 'name',
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],

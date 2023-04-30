@@ -47,6 +47,11 @@ class PaymentPlatformKey extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function scopeActive($query)
+    {
+        return $query->where($this->table . '.active', true);
+    }
+    
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS

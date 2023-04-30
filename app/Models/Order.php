@@ -21,6 +21,7 @@ class Order extends Model
     // public $timestamps = false;
     protected $guarded = ['id'];
     protected $fillable = [
+        'payment_platform_key_id',
         'chat_id',
         'reference',
         'name',
@@ -75,6 +76,11 @@ class Order extends Model
     {
         return $this->hasMany(OrderHistoryState::class, 'order_id', 'id')
             ->orderBy('id', 'desc');
+    }
+
+    public function paymentPlatformKey()
+    {
+        return $this->belongsTo(PaymentPlatformKey::class, 'payment_platform_key_id', 'id');
     }
 
     /*
