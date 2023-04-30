@@ -29,4 +29,9 @@ class PaymentPlatformKeyService extends Controller
     {
         return $this->paymentPlatformKeyRepository->getAll();
     }
+
+    public function getAllByType($type)
+    {
+        return $this->paymentPlatformKeyRepository->getAllByType($type);
+    }
 }

@@ -39,6 +39,14 @@ class PaymentPlatformKeyRepository extends Repository implements PaymentPlatform
 
     public function getAll()
     {
-        return $this->model->active()->get();
+        return $this->model->active()
+            ->get();
+    }
+
+    public function getAllByType($type)
+    {
+        return $this->model->active()
+            ->where('type', $type)
+            ->get();
     }
 }
