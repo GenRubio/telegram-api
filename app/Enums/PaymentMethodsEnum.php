@@ -8,7 +8,7 @@ abstract class PaymentMethodsEnum
     const STRIPE = 'STRIPE';
 
     const ALL = [
-        self::PAYPAL,
-        self::STRIPE,
+        self::PAYPAL => self::PAYPAL,
+        self::STRIPE => self::STRIPE,
     ];
 }
