@@ -138,6 +138,13 @@ return [
             'level' => 'debug',
             'days' => 1,
         ],
+
+        'create-order' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/create-order.log'),
+            'level' => 'debug',
+            'days' => 1,
+        ],
     ],
 
 ];

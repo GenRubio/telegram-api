@@ -11,6 +11,7 @@ use App\Exceptions\GenericException;
 use App\Prepares\OrderProductPrepare;
 use App\Services\OrderProductService;
 use App\Services\ProductModelsFlavorService;
+use Illuminate\Support\Facades\Log;
 
 class CreateOrderTask
 {
@@ -47,7 +48,7 @@ class CreateOrderTask
             DB::commit();
         } catch (GenericException | Exception $e) {
             DB::rollBack();
-            throw $e;
+            Log::channel('create-order')->error($e);
         }
     }
 
