@@ -5,6 +5,7 @@ namespace App\Tasks\PayPal\API;
 class GetRetrievePaymentPaypalTask
 {
     private $order;
+    private $paypal;
     private $clientId;
     private $secret;
     private $accessToken;
@@ -13,9 +14,10 @@ class GetRetrievePaymentPaypalTask
     public function __construct($order)
     {
         $this->order = $order;
-        $this->apiUrl = config('paypal.mode') == "sandbox" ? "https://api.sandbox.paypal.com" : "https://api.paypal.com";
-        $this->clientId = config('paypal.mode') == "sandbox" ? config('paypal.sandbox.client_id') : config('paypal.live.client_id');
-        $this->secret = config('paypal.mode') == "sandbox" ? config('paypal.sandbox.client_secret') : config('paypal.live.client_secret');
+        $this->paypal = $this->order->paymentAPICredentials();
+        $this->apiUrl = $this->paypal['mode'] == "sandbox" ? "https://api.sandbox.paypal.com" : "https://api.paypal.com";
+        $this->clientId = $this->paypal['mode'] == "sandbox" ? $this->paypal['sandbox']['client_id'] : $this->paypal['live']['client_id'];
+        $this->secret = $this->paypal['mode'] == "sandbox" ? $this->paypal['sandbox']['client_secret'] : $this->paypal['live']['client_secret'];
         $this->accessToken = $this->getAccessToken();
     }
 

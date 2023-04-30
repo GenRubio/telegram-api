@@ -17,7 +17,7 @@ class CancelPaymentPaypalTask
     {
         $this->order = $order;
         $this->provider = new PayPalClient;
-        $this->provider->setApiCredentials(config('paypal'));
+        $this->provider->setApiCredentials($this->order->paymentAPICredentials());
         $this->token = $this->provider->getAccessToken();
         $this->provider->setAccessToken($this->token);
         $this->orderService = new OrderService();
