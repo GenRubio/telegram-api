@@ -7,11 +7,12 @@ use App\Enums\OrderStatusEnum;
 use App\Prepares\OrderPrepare;
 use App\Services\OrderService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Exceptions\GenericException;
 use App\Prepares\OrderProductPrepare;
 use App\Services\OrderProductService;
 use App\Services\ProductModelsFlavorService;
-use Illuminate\Support\Facades\Log;
+use App\Tasks\API\Translations\ErrorTextTask;
 
 class CreateOrderTask
 {
@@ -49,6 +50,7 @@ class CreateOrderTask
         } catch (GenericException | Exception $e) {
             DB::rollBack();
             Log::channel('create-order')->error($e);
+            throw new GenericException((new ErrorTextTask($this->telegraphChat))->run());
         }
     }
 
