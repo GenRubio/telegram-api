@@ -34,12 +34,13 @@ class StripeController extends Controller
                     throw new GenericException("Error");
                 }
             }
-            if ((new ValidatePaymentStripeTask($order->stripe_id))->run()) {
+            $privateKeyStripe = $order->paymentAPICredentials()['secret_key'];
+            if ((new ValidatePaymentStripeTask($order->stripe_id, $privateKeyStripe))->run()) {
                 (new AcceptOrderTask($order))->run();
-                (new CancelPaymentStripeTask($order->stripe_id))->run();
+                (new CancelPaymentStripeTask($order->stripe_id, $privateKeyStripe))->run();
                 (new SendSuccessPaymentMessageTask($order))->run();
             } else {
-                (new CancelPaymentStripeTask($order->stripe_id))->run();
+                (new CancelPaymentStripeTask($order->stripe_id, $privateKeyStripe))->run();
                 (new UpdateStatusOrderTask($order, OrderStatusEnum::STATUS_IDS['payment_denied'], null))->run();
                 (new SendPaymentErrorMessageTask($order))->run();
             }

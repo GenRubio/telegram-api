@@ -22,7 +22,7 @@ class StripePaymentDriver
 
     public function run()
     {
-        Stripe::setApiKey(config('app.stripe_private'));
+        Stripe::setApiKey($this->order->paymentAPICredentials()['secret_key']);
         if (!empty($this->order->stripe_id)) {
             $session = $this->getSession($this->order->stripe_id);
         } else {

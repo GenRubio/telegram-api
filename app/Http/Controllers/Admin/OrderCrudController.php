@@ -103,7 +103,9 @@ class OrderCrudController extends CrudController
             $this->crud->getCurrentEntry()->payment_method == 'stripe'
             && $this->crud->getCurrentEntry()->stripe_id
         ) {
-            $retriveOrder = (new GetRetrieveStripeTask($this->crud->getCurrentEntry()->stripe_id))->run();
+            $privateKeyStripe = $this->crud->getCurrentEntry()
+                ->paymentAPICredentials()['secret_key'];
+            $retriveOrder = (new GetRetrieveStripeTask($this->crud->getCurrentEntry()->stripe_id, $privateKeyStripe))->run();
             $payment_order_status = $retriveOrder->status;
             $payment_payment_status = $retriveOrder->payment_status;
         } else if (
