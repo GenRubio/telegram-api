@@ -10,4 +10,5 @@ interface PaymentPlatformKeyRepositoryInterface
 {
     public function getAll();
     public function getAllByType($type);
+    public function getById($id);
 }

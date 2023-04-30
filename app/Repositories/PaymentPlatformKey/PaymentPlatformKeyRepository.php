@@ -49,4 +49,11 @@ class PaymentPlatformKeyRepository extends Repository implements PaymentPlatform
             ->where('type', $type)
             ->get();
     }
+
+    public function getById($id)
+    {
+        return $this->model->active()
+            ->where('id', $id)
+            ->first();
+    }
 }
