@@ -21,6 +21,7 @@ class SetPinStartMessageTask
     {
         if ($this->telegraphChat->pin_message) {
             $this->telegraphChat->unpinMessage($this->telegraphChat->pin_message)->send();
+            $this->telegraphChat->deleteMessage($this->telegraphChat->pin_message)->send();
         }
         $this->telegraphChat->pinMessage($this->messageId)->send();
         $this->telegraphChatService->update($this->telegraphChat->chat_id, [
