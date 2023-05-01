@@ -74,6 +74,13 @@ if (!function_exists('translateText')) {
     }
 }
 
+if (!function_exists('removeTextTags')) {
+    function removeTextTags($message)
+    {
+        return UtilsHelper::removeTextTags($message);
+    }
+}
+
 if (!function_exists('isUrl')) {
     function isUrl($text)
     {

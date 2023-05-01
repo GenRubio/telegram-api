@@ -16,6 +16,11 @@ class UtilsHelper
     {
         $language = (new LanguageService())->getByAbbr($abbr);
         $message = json_decode($attribute)->{$language->abbr};
+        return self::removeTextTags($message);
+    }
+
+    public static function removeTextTags($message)
+    {
         $newcontent = preg_replace("/<p[^>]*?>/", "", $message);
         $newcontent = str_replace("</p>", "\n", $newcontent);
         $newcontent = preg_replace("/<span[^>]*?>/", "", $newcontent);
