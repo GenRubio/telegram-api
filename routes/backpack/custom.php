@@ -39,6 +39,11 @@ Route::group([
     });
     Route::crud('brand', 'BrandCrudController');
     Route::crud('api-client', 'ApiClientCrudController');
+    Route::get('language/texts/{lang?}/{file?}', 'LanguageCrudController@showTexts');
+    Route::post('language/texts/{lang}/{file}', 'LanguageCrudController@updateTexts');
+    Route::post('language/create/file', 'LanguageCrudController@createFile');
+    Route::post('language/create/translation', 'LanguageCrudController@createTranslation');
+    Route::post('language/square/translation', 'LanguageCrudController@squareTranslation');
     Route::crud('language', 'LanguageCrudController');
     Route::crud('translation', 'TranslationCrudController');
     Route::crud('setting', 'SettingCrudController');
