@@ -9,6 +9,8 @@
             <ul class="nav-dropdown-items">
                 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('parametric-table') }}"><i
                             class="nav-icon la la-th-list"></i> T. Parametricas</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ backpack_url('language/texts') }}"><i
+                            class="nav-icon la la-language"></i> {{ trans('menu-admin.site-texts') }}</a></li>
             </ul>
         </li>
         <li class="nav-item nav-dropdown">
