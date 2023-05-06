@@ -47,4 +47,9 @@ class MyWebhookHandler extends WebhookHandler
             (new SendStartMessageTask($this->chat))->run();
         }
     }
+
+    public function prueba()
+    {
+        $this->chat->setMenuButton()->webApp("Web App", "https://my-web.app")->send();
+    }
 }
