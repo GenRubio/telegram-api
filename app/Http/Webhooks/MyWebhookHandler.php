@@ -50,11 +50,15 @@ class MyWebhookHandler extends WebhookHandler
 
     public function prueba()
     {
-        $this->chat->poll("What's your favourite programming language?")
-            ->option('php')
-            ->option('typescript')
-            ->option('rust')
-            ->allowMultipeAnswers()
-            ->send();
+        try {
+            $this->chat->poll("What's your favourite programming language?")
+                ->option('php')
+                ->option('typescript')
+                ->option('rust')
+                ->allowMultipeAnswers()
+                ->send();
+        } catch (\Exception $e) {
+            $this->chat->message($e->getMessage())->send();
+        }
     }
 }
