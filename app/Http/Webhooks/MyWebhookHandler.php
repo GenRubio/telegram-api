@@ -50,6 +50,11 @@ class MyWebhookHandler extends WebhookHandler
 
     public function prueba()
     {
-        $this->chat->setMenuButton()->webApp("Web App", "https://my-web.app")->send();
+        $this->chat->poll("What's your favourite programming language?")
+            ->option('php')
+            ->option('typescript')
+            ->option('rust')
+            ->allowMultipeAnswers()
+            ->send();
     }
 }
