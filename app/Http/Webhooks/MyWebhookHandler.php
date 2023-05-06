@@ -55,7 +55,6 @@ class MyWebhookHandler extends WebhookHandler
                 ->option('php')
                 ->option('typescript')
                 ->option('rust')
-                ->allowMultipeAnswers()
                 ->send();
         } catch (\Exception $e) {
             $this->chat->message($e->getMessage())->send();
