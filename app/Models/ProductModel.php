@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Carbon\Carbon;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 
 class ProductModel extends Model
 {
     use CrudTrait;
+    use HasTranslations;
 
     /*
     |--------------------------------------------------------------------------
@@ -24,6 +26,7 @@ class ProductModel extends Model
     protected $guarded = ['id'];
     protected $fillable = [
         'reference',
+        'description',
         'name',
         'image',
         'price',
@@ -43,6 +46,10 @@ class ProductModel extends Model
     ];
     // protected $hidden = [];
     // protected $dates = [];
+
+    protected $translatable = [
+        'description',
+    ];
 
     /*
     |--------------------------------------------------------------------------

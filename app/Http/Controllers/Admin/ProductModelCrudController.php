@@ -11,7 +11,7 @@ class ProductModelCrudController extends CrudController
 {
     use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
         store as traitStore;
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
@@ -126,6 +126,19 @@ class ProductModelCrudController extends CrudController
             [
                 'name' => 'discount',
                 'label' => 'Descuento',
+                'type'  => 'summernote',
+                'options' => [
+                    'toolbar' => [
+                        ['font', ['bold', 'underline', 'italic']]
+                    ],
+                    'minheight' => 300,
+                    'height' => 300
+                ],
+                'tab' => 'Producto'
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Descripcion',
                 'type' => 'number',
                 'prefix'  => '%',
                 'default' => 0,
