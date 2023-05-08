@@ -126,6 +126,14 @@ class ProductModelCrudController extends CrudController
             [
                 'name' => 'discount',
                 'label' => 'Descuento',
+                'type' => 'number',
+                'prefix'  => '%',
+                'default' => 0,
+                'tab' => 'Producto'
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Descripcion',
                 'type'  => 'summernote',
                 'options' => [
                     'toolbar' => [
@@ -134,14 +142,6 @@ class ProductModelCrudController extends CrudController
                     'minheight' => 300,
                     'height' => 300
                 ],
-                'tab' => 'Producto'
-            ],
-            [
-                'name' => 'description',
-                'label' => 'Descripcion',
-                'type' => 'number',
-                'prefix'  => '%',
-                'default' => 0,
                 'tab' => 'Producto'
             ],
             [
