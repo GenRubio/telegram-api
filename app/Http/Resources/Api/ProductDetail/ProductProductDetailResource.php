@@ -40,8 +40,10 @@ class ProductProductDetailResource extends JsonResource
             'flavors' => count($this->product->productModelsFlavors),
             'shopping' => $this->getTotalProductsBuyed(),
             'gallery' => json_decode(json_encode(new ProductGalleryResource($this->product->galleryImages))),
-            'bought' => $bought = $this->isProductBought(),
-            'has_valoration' => $bought ? $this->hasValorationFromUser() : false,
+            'user' => [
+                'bought' => $bought = $this->isProductBought(),
+                'has_valoration' => $bought ? $this->hasValorationFromUser() : false,
+            ],
             'description' => [
                 'data' => [
                     [
