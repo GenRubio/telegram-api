@@ -41,7 +41,7 @@ class CreateValorationTask
     {
         return [
             'chat_id' => $this->telegraphChat->chat_id,
-            'product_model_id' => $this->productId,
+            'product_model_id' => $this->productModel->id,
             'stars' => $this->rate,
             'comment' => $this->comment,
             'likes' => 0,
