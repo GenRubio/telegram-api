@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tasks\Review;
+namespace App\Tasks\Valoration;
 
 use App\Exceptions\GenericException;
 use App\Services\ProductModelService;
 use App\Services\ProductModelValorationService;
 
-class CreateReviewTask
+class CreateValorationTask
 {
     private $telegraphChat;
     private $productReference;
@@ -46,7 +46,7 @@ class CreateReviewTask
             'comment' => $this->comment,
             'likes' => 0,
             'dislikes' => 0,
-            'visible' => false
+            'visible' => true
         ];
     }
 }

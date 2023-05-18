@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\Exceptions\GenericException;
 use App\Http\Controllers\Controller;
 use App\Services\TelegraphChatService;
-use App\Tasks\Review\CreateReviewTask;
+use App\Tasks\Valoration\CreateValorationTask;
 
 class ValorationsController extends Controller
 {
@@ -16,7 +16,7 @@ class ValorationsController extends Controller
     {
         try {
             $telegraphChat = (new TelegraphChatService())->getByChatId(requestAttrEncrypt($request->token));
-            (new CreateReviewTask($telegraphChat, $request))->run();
+            (new CreateValorationTask($telegraphChat, $request))->run();
             return response()->json([
                 'success' => true,
             ]);
