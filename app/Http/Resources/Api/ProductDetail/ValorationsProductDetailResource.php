@@ -8,10 +8,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ValorationsProductDetailResource extends JsonResource
 {
     private $product;
+    private $telegraphChat;
 
-    public function __construct($product)
+    public function __construct($product, $telegraphChat)
     {
         $this->product = $product;
+        $this->telegraphChat = $telegraphChat;
     }
 
     public function toArray($request)
@@ -24,6 +26,7 @@ class ValorationsProductDetailResource extends JsonResource
                 'likes' => $valoration->likes,
                 'dislikes' => $valoration->dislikes,
                 'visible' => $valoration->visible,
+                'user_valoration' => $this->telegraphChat->chat_id == $valoration->chat_id ? true : false,
                 'created_at' => Carbon::parse($valoration->created_at)->format('d/m/Y'),
             ];
         }

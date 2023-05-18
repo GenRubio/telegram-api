@@ -29,7 +29,10 @@ class ProductDetailResource extends JsonResource
             $this->language,
         )));
         $response['flavors'] = json_decode(json_encode(new FlavorsProductDetailResource($this->product)));
-        $response['valorations'] = json_decode(json_encode(new ValorationsProductDetailResource($this->product)));
+        $response['valorations'] = json_decode(json_encode(new ValorationsProductDetailResource(
+            $this->product,
+            $this->telegraphChat
+        )));
         return $response;
     }
 }

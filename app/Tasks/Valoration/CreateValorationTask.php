@@ -2,6 +2,7 @@
 
 namespace App\Tasks\Valoration;
 
+use Carbon\Carbon;
 use App\Exceptions\GenericException;
 use App\Services\ProductModelService;
 use App\Services\ProductModelValorationService;
@@ -34,7 +35,19 @@ class CreateValorationTask
         if (!is_null($this->userValoration)) {
             throw new GenericException("You already rated this product");
         }
-        (new ProductModelValorationService())->create($this->prepareData());
+
+        $data = $this->prepareData();
+        (new ProductModelValorationService())->create($data);
+
+        return [
+            'stars' => $data['stars'],
+            'comment' => $data['comment'],
+            'likes' => $data['likes'],
+            'dislikes' => $data['dislikes'],
+            'visible' => $data['visible'],
+            'user_valoration' => true,
+            'created_at' => Carbon::parse($data['created_at'])->format('d/m/Y'),
+        ];
     }
 
     private function prepareData()
@@ -46,7 +59,8 @@ class CreateValorationTask
             'comment' => $this->comment,
             'likes' => 0,
             'dislikes' => 0,
-            'visible' => true
+            'visible' => true,
+            'created_at' => Carbon::now(),
         ];
     }
 }

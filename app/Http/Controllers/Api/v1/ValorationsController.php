@@ -16,9 +16,10 @@ class ValorationsController extends Controller
     {
         try {
             $telegraphChat = (new TelegraphChatService())->getByChatId(requestAttrEncrypt($request->token));
-            (new CreateValorationTask($telegraphChat, $request))->run();
+            $createdValoration = (new CreateValorationTask($telegraphChat, $request))->run();
             return response()->json([
                 'success' => true,
+                'valoration' => $createdValoration
             ]);
         } catch (GenericException | Exception $e) {
             Log::channel('api-controllers')->error($e);
