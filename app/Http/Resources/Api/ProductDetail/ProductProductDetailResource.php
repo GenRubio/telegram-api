@@ -108,8 +108,11 @@ class ProductProductDetailResource extends JsonResource
 
     private function getValorationsMean()
     {
-        $stars = 0;
         $visibleValorations = $this->product->valorations()->where('visible', true)->get();
+        if ($visibleValorations->count() == 0) {
+            return 5;
+        }
+        $stars = 0;
         foreach ($visibleValorations as $valoration) {
             $stars += $valoration->stars;
         }
