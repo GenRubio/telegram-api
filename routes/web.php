@@ -9,9 +9,9 @@ use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\StripeController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\v1\OrderController;
-use App\Http\Controllers\Api\v1\ReviewsController;
 use App\Http\Controllers\Api\v1\GetConfigController;
 use App\Http\Controllers\Api\v1\GetProductsController;
+use App\Http\Controllers\Api\v1\ValorationsController;
 use App\Http\Controllers\Api\v1\GetLocalizationController;
 use App\Http\Controllers\Api\v1\GetProductDetailController;
 
@@ -44,8 +44,8 @@ Route::prefix('api')->group(function () {
             Route::prefix('order')->group(function () {
                 Route::post('create', [OrderController::class, 'createOrder']);
             });
-            Route::prefix('review')->group(function () {
-                Route::post('create', [ReviewsController::class, 'create']);
+            Route::prefix('valoration')->group(function () {
+                Route::post('create', [ValorationsController::class, 'create']);
             });
             Route::get('{token}/localization/{cp}', [GetLocalizationController::class, 'index']);
         });
