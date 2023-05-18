@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api\ProductDetail;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ValorationsProductDetailResource extends JsonResource
@@ -22,7 +23,8 @@ class ValorationsProductDetailResource extends JsonResource
                 'comment' => $valoration->comment,
                 'likes' => $valoration->likes,
                 'dislikes' => $valoration->dislikes,
-                'created_at' => $valoration->created_at,
+                'visible' => $valoration->visible,
+                'created_at' => Carbon::parse($valoration->created_at)->format('d/m/Y'),
             ];
         }
         return $response;
