@@ -40,6 +40,7 @@ class ProductProductDetailResource extends JsonResource
             'flavors' => count($this->product->productModelsFlavors),
             'shopping' => $this->getTotalProductsBuyed(),
             'gallery' => json_decode(json_encode(new ProductGalleryResource($this->product->galleryImages))),
+            'valoration_mean' => $this->getValorationsMean(),
             'user' => [
                 'bought' => $bought = $this->isProductBought(),
                 'has_valoration' => $bought ? $this->hasValorationFromUser() : false,
@@ -103,6 +104,17 @@ class ProductProductDetailResource extends JsonResource
                 ]
             ]
         ];
+    }
+
+    private function getValorationsMean()
+    {
+        $stars = 0;
+        $visibleValorations = $this->product->valorations()->where('visible', true)->get();
+        foreach ($visibleValorations as $valoration) {
+            $stars += $valoration->stars;
+        }
+        $resum = $stars / $visibleValorations->count();
+        return round($resum, 1);
     }
 
     private function getTranslationByUuid($uuid)
