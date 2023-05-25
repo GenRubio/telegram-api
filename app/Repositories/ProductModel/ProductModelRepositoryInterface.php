@@ -13,5 +13,4 @@ interface ProductModelRepositoryInterface
     public function getByReference($reference);
     public function getAllActive();
     public function get($filter);
-    public function getTwoRecentCreatedProducts();
 }

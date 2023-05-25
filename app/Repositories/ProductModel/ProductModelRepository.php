@@ -73,12 +73,4 @@ class ProductModelRepository extends Repository implements ProductModelRepositor
             ->where('active', true)
             ->get();
     }
-
-    public function getTwoRecentCreatedProducts()
-    {
-        return $this->model
-            ->orderBy('created_at', 'desc')
-            ->limit(2)
-            ->get();
-    }
 }

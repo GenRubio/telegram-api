@@ -35,7 +35,7 @@ class ProductDetailResource extends JsonResource
             $this->telegraphChat
         )));
         $response['new_products'] = json_decode(json_encode(new ProductsResource(
-            (new ProductModelService())->getTwoRecentCreatedProducts(),
+            (new ProductModelService())->getAllActive()->sortByDesc('created_at'),
         )));
         return $response;
     }

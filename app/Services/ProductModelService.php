@@ -49,9 +49,4 @@ class ProductModelService extends Controller
     {
         return $this->productmodelRepository->get($filter);
     }
-
-    public function getTwoRecentCreatedProducts()
-    {
-        return $this->productmodelRepository->getTwoRecentCreatedProducts();
-    }
 }
