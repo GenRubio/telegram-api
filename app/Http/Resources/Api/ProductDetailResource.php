@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Services\ProductModelService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Api\ProductDetail\FlavorsProductDetailResource;
 use App\Http\Resources\Api\ProductDetail\ProductProductDetailResource;
@@ -32,6 +33,9 @@ class ProductDetailResource extends JsonResource
         $response['valorations'] = json_decode(json_encode(new ValorationsProductDetailResource(
             $this->product,
             $this->telegraphChat
+        )));
+        $response['new_products'] = json_decode(json_encode(new ProductsResource(
+            (new ProductModelService())->getTwoRecentCreatedProducts(),
         )));
         return $response;
     }
