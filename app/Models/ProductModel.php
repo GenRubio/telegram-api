@@ -74,10 +74,20 @@ class ProductModel extends Model
             ->where('active', true);
     }
 
+    public function productModelsFlavorsAll()
+    {
+        return $this->hasMany(ProductModelsFlavor::class, 'product_model_id', 'id');
+    }
+
     public function valorations()
     {
         return $this->hasMany(ProductModelValoration::class, 'product_model_id', 'id')
             ->where('visible', true);
+    }
+
+    public function valorationsAll()
+    {
+        return $this->hasMany(ProductModelValoration::class, 'product_model_id', 'id');
     }
 
     public function galleryImages()
@@ -85,6 +95,11 @@ class ProductModel extends Model
         return $this->hasMany(GalleryProduct::class, 'product_model_id', 'id')
             ->where('active', true)
             ->orderBy('order', 'asc');
+    }
+
+    public function galleryImagesAll()
+    {
+        return $this->hasMany(GalleryProduct::class, 'product_model_id', 'id');
     }
 
     /*

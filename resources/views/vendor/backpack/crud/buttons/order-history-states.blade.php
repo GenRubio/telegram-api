@@ -14,7 +14,7 @@
 <a id="show-modal" class="btn btn-sm btn-link" style="color: #7c69ef !important; cursor: pointer !important;"
     data-style="zoom-in" data-toggle="modal" data-target="#showHistoryStatesOrder{{ $entry->getKey() }}"
     data-backdrop="false">
-    <i class="la la-eye"></i> Estados
+    <i class="la la-eye"></i> Estados ({{ $order->orderHistoryStates->count() }})
 </a>
 <div class="modal fade" id="showHistoryStatesOrder{{ $entry->getKey() }}" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="background-color:#0000005c">

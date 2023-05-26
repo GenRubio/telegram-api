@@ -50,16 +50,6 @@ class TelegraphBotCrudController extends CrudController
             'label' => 'Bot Url',
             'type'  => 'link',
         ]);
-        $this->crud->addColumn([
-            'name' => 'count_telegram_chats',
-            'label' => 'Chats',
-            'type'  => 'text',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'count_telegram_bot_commands',
-            'label' => 'Comandos',
-            'type'  => 'text',
-        ]);
     }
 
     protected function setupCreateOperation()

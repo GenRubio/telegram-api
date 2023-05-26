@@ -76,11 +76,6 @@ class OrderCrudController extends CrudController
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'name' => 'count_products',
-            'label' => 'Productos',
-            'type'  => 'text',
-        ]);
-        $this->crud->addColumn([
             'name' => 'paymentPlatformKey',
             'label' => 'P.P. Llaves',
             'type'      => 'select',

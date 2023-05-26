@@ -76,11 +76,6 @@ class ProductModelCrudController extends CrudController
             'type'  => 'text',
             'name'  => 'product_brand_name',
         ]);
-        $this->crud->addColumn([
-            'name' => 'product_models_flavors_count',
-            'label' => 'Sabores',
-            'type'  => 'text',
-        ]);
     }
 
     protected function setFields()
