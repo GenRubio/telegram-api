@@ -121,6 +121,13 @@ if (!function_exists('toggleFieldV2')) {
     }
 }
 
+if (!function_exists('updateOrder')) {
+    function updateOrder($request)
+    {
+        return CrudHelper::updateOrder($request);
+    }
+}
+
 if (!function_exists('webHookToggle')) {
     function webHookToggle($request)
     {

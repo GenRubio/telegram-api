@@ -42,6 +42,7 @@ class ProductModel extends Model
         'absorbable_quantity',
         'charging_port',
         'brand_id',
+        'order',
         'active',
     ];
     // protected $hidden = [];
@@ -113,7 +114,7 @@ class ProductModel extends Model
         return $query->where($this->table . '.active', true);
     }
 
-    public function scopeOrderBy($query, $order)
+    public function scopeOrderByCustom($query, $order)
     {
         return $query->when(!empty($order) && $order == 'price_asc', function ($when) {
             return $when->orderBy('price', 'asc');

@@ -33,7 +33,7 @@ class ProductModelRepository extends Repository implements ProductModelRepositor
     {
         $this->model = new ProductModel();
         parent::__construct($this->model);
-        $this->defaultTtl = env('CACHE_DEFAULT_TTL', 7200);
+        $this->defaultTtl = env('CACHE_DEFAULT_TTL', 86400);
         $this->limit = 10;
     }
 
@@ -61,6 +61,14 @@ class ProductModelRepository extends Repository implements ProductModelRepositor
     public function getAllActive()
     {
         return $this->model->where('active', true)
+            ->orderBy('order', 'asc')
+            ->get();
+    }
+
+    public function getAll()
+    {
+        return $this->model
+            ->orderBy('order', 'asc')
             ->get();
     }
 
@@ -69,7 +77,7 @@ class ProductModelRepository extends Repository implements ProductModelRepositor
         return $this->model
             ->nicotine($filter['nicotine'])
             ->brands($filter['brands'])
-            ->orderBy($filter['order_by'])
+            ->orderByCustom($filter['order_by'])
             ->where('active', true)
             ->get();
     }

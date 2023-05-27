@@ -35,6 +35,20 @@ class CrudHelper
         ];
     }
 
+    public static function updateOrder(Request $request)
+    {
+        $model = str_replace('AppModels', '\App\Models\\', $request->model);
+        $model = new $model;
+        $field = $request->field;
+        $obj = $model->find($request->id);
+        $obj->$field = $request->order;
+        $obj->save();
+        
+        return [
+            'success' => true
+        ];
+    }
+
     public static function webHookToggle(Request $request)
     {
         $model = new $request->model;

@@ -28,10 +28,17 @@ class ProductModelCrudController extends CrudController
         CRUD::setModel(\App\Models\ProductModel::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/product-model');
         CRUD::setEntityNameStrings('producto', 'productos');
+        $this->listFilter();
+    }
+
+    protected function listFilter()
+    {
+        $this->crud->orderBy('order', 'asc');
     }
 
     protected function setupListOperation()
     {
+
         $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'model-valorations', 'model-valorations', 'beginning');
         $this->crud->addButtonFromView('line', 'model-gallery-images', 'model-gallery-images', 'beginning');
@@ -45,6 +52,11 @@ class ProductModelCrudController extends CrudController
             'name' => 'active',
             'type' => 'btnToggleV2',
             'label' => 'Activo',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'order',
+            'label' => 'Prioridad',
+            'type'  => 'order',
         ]);
         $this->crud->addColumn([
             'name' => 'image',
@@ -207,6 +219,13 @@ class ProductModelCrudController extends CrudController
             //    'type' => 'gallery-v1',
             //    'tab' => 'Galeria'
             //],multiple_flavors
+            [
+                'name' => 'order',
+                'label' => 'Orden',
+                'type' => 'number',
+                'default' => 1,
+                'tab' => 'Producto'
+            ],
             [
                 'name' => 'multiple_flavors',
                 'type' => 'checkbox',

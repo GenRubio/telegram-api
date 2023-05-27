@@ -64,7 +64,7 @@ class GalleryProductCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'order',
             'label' => 'Prioridad',
-            'type'  => 'text',
+            'type'  => 'order',
         ]);
         $this->crud->addColumn([
             'name' => 'visible',
