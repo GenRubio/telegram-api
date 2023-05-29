@@ -54,6 +54,11 @@ class ProductModelsFlavorCrudController extends CrudController
     {
         $this->removeActionsCrud();
         $this->crud->addColumn([
+            'name' => 'id',
+            'label' => 'ID',
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
             'name' => 'reference',
             'label' => 'Referencia',
             'type'  => 'text',

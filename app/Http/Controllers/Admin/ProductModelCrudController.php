@@ -266,6 +266,7 @@ class ProductModelCrudController extends CrudController
         foreach ($flavors as $flavor) {
             $newFlavor = $flavor->replicate();
             $newFlavor->product_model_id = $newProduct->id;
+            $newFlavor->reference = null;
             $newFlavor->save();
         }
 
