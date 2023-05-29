@@ -36,9 +36,9 @@
                     type: "success",
                     text: "Prioridad actualizada correctamente",
                 }).show();
+                crud.table.draw();
             }
         });
-        crud.table.draw();
         ev.preventDefault();
     })
 </script>

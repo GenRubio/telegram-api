@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\ProductModel;
+use Illuminate\Http\Request;
 use App\Http\Requests\ProductModelRequest;
 use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Prologue\Alerts\Facades\Alert;
 
 class ProductModelCrudController extends CrudController
 {
@@ -40,9 +43,10 @@ class ProductModelCrudController extends CrudController
     {
 
         $this->removeActionsCrud();
-        $this->crud->addButtonFromView('line', 'model-valorations', 'model-valorations', 'beginning');
-        $this->crud->addButtonFromView('line', 'model-gallery-images', 'model-gallery-images', 'beginning');
-        $this->crud->addButtonFromView('line', 'model-flavors', 'model-flavors', 'beginning');
+        //$this->crud->addButtonFromView('line', 'model-valorations', 'model-valorations', 'beginning');
+        //$this->crud->addButtonFromView('line', 'model-gallery-images', 'model-gallery-images', 'beginning');
+        //$this->crud->addButtonFromView('line', 'model-flavors', 'model-flavors', 'beginning');
+        $this->crud->addButtonFromView('line', 'product-actions', 'product-actions', 'beginning');
         $this->crud->addColumn([
             'name' => 'reference',
             'label' => 'Referencia',
@@ -247,6 +251,33 @@ class ProductModelCrudController extends CrudController
     {
         $this->setFields();
         CRUD::setValidation(ProductModelRequest::class);
+    }
+
+    public function duplicate(Request $request)
+    {
+        $product = ProductModel::find($request->product_model_id);
+        $newProduct = $product->replicate();
+        $newProduct->name = $newProduct->name . ' (Copia)';
+        $newProduct->active = false;
+        $newProduct->reference = null;
+        $newProduct->save();
+
+        $flavors = $product->productModelsFlavorsAll;
+        foreach ($flavors as $flavor) {
+            $newFlavor = $flavor->replicate();
+            $newFlavor->product_model_id = $newProduct->id;
+            $newFlavor->save();
+        }
+
+        $images = $product->galleryImagesAll;
+        foreach ($images as $image) {
+            $newImage = $image->replicate();
+            $newImage->product_model_id = $newProduct->id;
+            $newImage->save();
+        }
+
+        Alert::add('success', 'Producto duplicado')->flash();
+        return redirect()->back();
     }
 
     public function update()

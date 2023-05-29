@@ -37,6 +37,7 @@ Route::group([
         Route::crud('product-models-flavor', 'ProductModelsFlavorCrudController');
         Route::crud('product-model-valoration', 'ProductModelValorationCrudController');
         Route::crud('gallery-product', 'GalleryProductCrudController');
+        Route::get('duplicate', 'ProductModelCrudController@duplicate');
     });
     Route::crud('order', 'OrderCrudController');
     Route::group(['prefix' => 'order/{order_id}'], function () {
