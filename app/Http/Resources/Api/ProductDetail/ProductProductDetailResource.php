@@ -35,7 +35,7 @@ class ProductProductDetailResource extends JsonResource
             'discount' => $this->product->discount,
             'price_with_discount' => $this->product->price_with_discount,
             'brand' => $this->product->productBrand->name,
-            'product_description' => json_decode($this->product->description)[$this->language],
+            'product_description' => json_decode($this->product->description)[$this->telegraphChat->language->abbr],
             'multiple_flavors' => $this->product->multiple_flavors,
             'flavors' => count($this->product->productModelsFlavors),
             'shopping' => $this->getTotalProductsBuyed(),
