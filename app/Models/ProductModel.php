@@ -116,7 +116,9 @@ class ProductModel extends Model
 
     public function scopeOrderByCustom($query, $order)
     {
-        return $query->when(!empty($order) && $order == 'price_asc', function ($when) {
+        return $query->when(empty($order), function ($when) {
+            return $when->orderBy('order', 'asc');
+        })->when(!empty($order) && $order == 'price_asc', function ($when) {
             return $when->orderBy('price', 'asc');
         })->when(!empty($order) && $order == 'price_desc', function ($when) {
             return $when->orderBy('price', 'desc');
