@@ -46,16 +46,16 @@ class LanguageCrudController extends CrudController
         $this->crud->setColumns([
             [
                 'name' => 'name',
-                'label' => trans('translationsystem.form.laguage_name'),
+                'label' => 'Name',
             ],
             [
                 'name' => 'active',
-                'label' => trans('translationsystem.form.language_active'),
+                'label' => 'Active',
                 'type' => 'boolean',
             ],
             [
                 'name' => 'default',
-                'label' => trans('translationsystem.form.laguage_default'),
+                'label' => 'Default',
                 'type' => 'boolean',
             ],
         ]);
@@ -67,27 +67,27 @@ class LanguageCrudController extends CrudController
 
         $this->crud->addField([
             'name' => 'name',
-            'label' => trans('translationsystem.form.laguage_name'),
+            'label' => 'Name',
             'type' => 'text',
         ]);
         $this->crud->addField([
             'name' => 'native',
-            'label' => trans('translationsystem.form.laguage_native_name'),
+            'label' => 'Native name',
             'type' => 'text',
         ]);
         $this->crud->addField([
             'name' => 'abbr',
-            'label' => trans('translationsystem.form.laguage_abbr'),
+            'label' => 'Abbr',
             'type' => 'text',
         ]);
         $this->crud->addField([
             'name' => 'active',
-            'label' => trans('translationsystem.form.language_active'),
+            'label' => 'Active',
             'type' => 'checkbox',
         ]);
         $this->crud->addField([
             'name' => 'default',
-            'label' => trans('translationsystem.form.laguage_default'),
+            'label' => 'Default',
             'type' => 'checkbox',
         ]);
     }
