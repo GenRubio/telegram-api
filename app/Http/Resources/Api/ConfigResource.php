@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Services\ProductModelService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Api\Config\BrandsConfigResource;
 use App\Http\Resources\Api\Config\SettingsConfigResource;
@@ -26,6 +27,9 @@ class ConfigResource extends JsonResource
         $response['settings'] = json_decode(json_encode(new SettingsConfigResource()));
         $response['brands'] = json_decode(json_encode(new BrandsConfigResource()));
         $response['parametric_tables'] = json_decode(json_encode(new ParametricTablesConfigResource()));
+        $response['new_products'] = json_decode(json_encode(new ProductsResource(
+            (new ProductModelService())->getAllActive()->sortByDesc('created_at'),
+        )));
         return $response;
     }
 }
