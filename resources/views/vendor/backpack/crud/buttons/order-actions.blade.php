@@ -4,6 +4,11 @@
     $order = Order::where('id', $entry->getKey())->first();
 @endphp
 <style>
+    .custom-dropdown-item {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
     .status-container {
         padding: 6px;
         border-radius: 7px;
@@ -11,11 +16,23 @@
         cursor: default;
     }
 </style>
-<a id="show-modal" class="btn btn-sm btn-link" style="color: #7c69ef !important; cursor: pointer !important;"
-    data-style="zoom-in" data-toggle="modal" data-target="#showHistoryStatesOrder{{ $entry->getKey() }}"
-    data-backdrop="false">
-    <i class="la la-eye"></i> Estados ({{ $order->orderHistoryStates->count() }})
-</a>
+<span class="dropdown">
+    <button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Acciones
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item custom-dropdown-item"
+            href="{{ url($crud->route . '/' . $entry->getKey()) }}/order-product">
+            <i class="la la-eye"></i> Productos ({{ $entry->orderProducts->count() }})
+        </a>
+        <a id="show-modal" class="dropdown-item custom-dropdown-item" style="cursor: pointer" data-style="zoom-in" data-toggle="modal"
+            data-target="#showHistoryStatesOrder{{ $entry->getKey() }}" data-backdrop="false">
+            <i class="la la-eye"></i> Estados ({{ $order->orderHistoryStates->count() }})
+        </a>
+    </div>
+</span>
+
 <div class="modal fade" id="showHistoryStatesOrder{{ $entry->getKey() }}" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="background-color:#0000005c">
     <div class="modal-dialog modal-dialog-centered" role="document">

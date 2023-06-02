@@ -43,8 +43,7 @@ class OrderCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->removeActionsCrud();
-        $this->crud->addButtonFromView('line', 'order-history-states', 'order-history-states', 'beginning');
-        $this->crud->addButtonFromView('line', 'order-products', 'order-products', 'beginning');
+        $this->crud->addButtonFromView('line', 'order-actions', 'order-actions', 'beginning');
         $this->crud->addColumn([
             'name' => 'created_at',
             'label' => 'Fecha',

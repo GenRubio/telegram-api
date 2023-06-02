@@ -43,9 +43,6 @@ class ProductModelCrudController extends CrudController
     {
 
         $this->removeActionsCrud();
-        //$this->crud->addButtonFromView('line', 'model-valorations', 'model-valorations', 'beginning');
-        //$this->crud->addButtonFromView('line', 'model-gallery-images', 'model-gallery-images', 'beginning');
-        //$this->crud->addButtonFromView('line', 'model-flavors', 'model-flavors', 'beginning');
         $this->crud->addButtonFromView('line', 'product-actions', 'product-actions', 'beginning');
         $this->crud->addColumn([
             'name' => 'reference',
