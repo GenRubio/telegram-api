@@ -27,9 +27,9 @@ class UserCrudController extends CrudController
 
     public function setup()
     {
-        if (!backpack_user()->officePermission(get_class($this), 'show')) {
-            abort(403);
-        }
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\User::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/user');
         CRUD::setEntityNameStrings('usuario', 'usuarios');

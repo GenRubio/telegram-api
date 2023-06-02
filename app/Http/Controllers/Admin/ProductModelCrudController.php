@@ -25,9 +25,9 @@ class ProductModelCrudController extends CrudController
 
     public function setup()
     {
-        if (!backpack_user()->officePermission(get_class($this), 'show')) {
-            abort(403);
-        }
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\ProductModel::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/product-model');
         CRUD::setEntityNameStrings('producto', 'productos');
@@ -41,7 +41,6 @@ class ProductModelCrudController extends CrudController
 
     protected function setupListOperation()
     {
-
         $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'product-actions', 'product-actions', 'beginning');
         $this->crud->addColumn([

@@ -11,7 +11,7 @@ class GalleryProductCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
         update as traitUpdate;
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
@@ -21,6 +21,9 @@ class GalleryProductCrudController extends CrudController
 
     public function setup()
     {
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\GalleryProduct::class);
         $this->productModelId = Route::current()->parameter('product_model_id');
         CRUD::setRoute("admin/product-model/" . $this->productModelId . '/gallery-product');
@@ -136,7 +139,7 @@ class GalleryProductCrudController extends CrudController
 
     public function update()
     {
-        if (is_null($this->crud->getRequest()->image)){
+        if (is_null($this->crud->getRequest()->image)) {
             $this->crud->unsetValidation('image');
         }
         return $this->traitUpdate();

@@ -24,9 +24,9 @@ class ProductModelsFlavorCrudController extends CrudController
 
     public function setup()
     {
-        if (!backpack_user()->officePermission(get_class($this), 'show')) {
-            abort(403);
-        }
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         $this->productModelId = Route::current()->parameter('product_model_id');
         CRUD::setModel(\App\Models\ProductModelsFlavor::class);
         CRUD::setRoute("admin/product-model/" . $this->productModelId . '/product-models-flavor');

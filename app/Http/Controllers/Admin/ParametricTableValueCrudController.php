@@ -24,6 +24,9 @@ class ParametricTableValueCrudController extends CrudController
 
     public function setup()
     {
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\ParametricTableValue::class);
         $this->parametricTableId = Route::current()->parameter('parametric_table_id');
         CRUD::setRoute('admin/parametric-table/' . $this->parametricTableId . '/parametric-table-value');

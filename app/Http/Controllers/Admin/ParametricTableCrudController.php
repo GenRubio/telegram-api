@@ -23,6 +23,9 @@ class ParametricTableCrudController extends CrudController
 
     public function setup()
     {
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\ParametricTable::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/parametric-table');
         CRUD::setEntityNameStrings('tabla', 'tablas parametricas');

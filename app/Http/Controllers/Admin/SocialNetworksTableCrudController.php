@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class SocialNetworksTableCrudController extends ParametricTableValueCrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
         store as traitStore;
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
@@ -21,6 +21,9 @@ class SocialNetworksTableCrudController extends ParametricTableValueCrudControll
 
     public function setup()
     {
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\ParametricTableValues\SocialNetworksTable::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/social-networks-table');
         CRUD::setEntityNameStrings('red', 'redes sociales');

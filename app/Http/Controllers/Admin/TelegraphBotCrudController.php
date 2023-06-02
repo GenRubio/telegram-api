@@ -21,6 +21,9 @@ class TelegraphBotCrudController extends CrudController
 
     public function setup()
     {
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\TelegraphBot::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/bot');
         CRUD::setEntityNameStrings('bot', 'bots');

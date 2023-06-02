@@ -18,9 +18,9 @@ class TelegramBotGlobalMessageCrudController extends CrudController
 
     public function setup()
     {
-        if (!backpack_user()->officePermission(get_class($this), 'show')) {
-            abort(403);
-        }
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\TelegramBotGlobalMessage::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/telegram-bot-global-message');
         CRUD::setEntityNameStrings('mensaje', 'mensajes globales');

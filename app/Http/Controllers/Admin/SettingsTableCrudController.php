@@ -21,6 +21,9 @@ class SettingsTableCrudController extends ParametricTableValueCrudController
 
     public function setup()
     {
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\ParametricTableValues\SettingsTable::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/settings-table');
         CRUD::setEntityNameStrings('configuración', 'configuraciónes');

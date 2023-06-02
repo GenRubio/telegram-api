@@ -21,9 +21,9 @@ class OrderProductCrudController extends CrudController
 
     public function setup()
     {
-        if (!backpack_user()->officePermission(get_class($this), 'show')) {
-            abort(403);
-        }
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\OrderProduct::class);
         $this->orderId = Route::current()->parameter('order_id');
         CRUD::setRoute("admin/order/" . $this->orderId . '/order-product');

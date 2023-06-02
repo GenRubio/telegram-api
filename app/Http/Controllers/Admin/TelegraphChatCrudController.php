@@ -22,9 +22,9 @@ class TelegraphChatCrudController extends CrudController
 
     public function setup()
     {
-        if (!backpack_user()->officePermission(get_class($this), 'show')) {
-            abort(403);
-        }
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(TelegraphChat::class);
         $this->botId = Route::current()->parameter('bot_id');
         CRUD::setRoute("admin/bot/" . $this->botId . '/telegraph-chat');

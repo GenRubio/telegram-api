@@ -19,9 +19,9 @@ class OfficePermissionCrudController extends CrudController
 
     public function setup()
     {
-        if (!backpack_user()->officePermission(get_class($this), 'show')) {
-            abort(403);
-        }
+        //if (!backpack_user()->officePermission(get_class($this), 'show')) {
+        //    abort(403);
+        //}
         CRUD::setModel(\App\Models\OfficePermission::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/office-permission');
         CRUD::setEntityNameStrings('permiso', 'permisos');
