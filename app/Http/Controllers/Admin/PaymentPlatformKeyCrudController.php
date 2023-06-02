@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\PaymentMethodsEnum;
 use App\Http\Requests\PaymentPlatformKeyRequest;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class PaymentPlatformKeyCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
         store as traitStore;
@@ -29,6 +31,7 @@ class PaymentPlatformKeyCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'type',
             'label' => 'Tipo',

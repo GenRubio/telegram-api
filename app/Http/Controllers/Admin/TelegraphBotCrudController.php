@@ -31,6 +31,7 @@ class TelegraphBotCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'bot-actions', 'bot-actions', 'beginning');
         $this->crud->addColumn([
             'name' => 'name',

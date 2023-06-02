@@ -7,12 +7,14 @@ use Illuminate\Support\Str;
 use Prologue\Alerts\Facades\Alert;
 use App\Exceptions\GenericException;
 use App\Http\Requests\ParametricTableRequest;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Tasks\ParametricTables\CreateParamTableValueTask;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class ParametricTableCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
         store as traitStore;
@@ -33,6 +35,7 @@ class ParametricTableCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'parametric-table-values', 'parametric-table-values', 'beginning');
         $this->crud->addColumn([
             'name' => 'name',

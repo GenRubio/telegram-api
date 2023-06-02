@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\GalleryProductRequest;
+use App\Http\Controllers\Admin\Traits\AdminCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class GalleryProductCrudController extends CrudController
 {
+    use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
@@ -50,6 +52,7 @@ class GalleryProductCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'image',
             'label' => 'Imagen',

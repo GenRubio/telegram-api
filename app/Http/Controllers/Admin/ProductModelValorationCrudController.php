@@ -49,7 +49,7 @@ class ProductModelValorationCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        //$this->removeActionsCrud();
+        $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'productModel',
             'label' => 'Modelo',
