@@ -180,6 +180,31 @@ return [
                 'name' => 'Nombre',
                 'active' => 'Activo',
             ]
+        ],
+        "affiliates" => [
+            'list' => [
+                'name' => 'Nombre',
+                'surname' => 'Apellidos',
+                'identification' => 'Identificación',
+                'bot' => 'Bot',
+                'clients' => 'Clientes',
+                'active' => 'Activo',
+                'actions' => 'Acciones',
+                'action_buttons' => [
+                    'clients' => 'Clientes',
+                ],
+            ],
+            'update' => [
+                'name' => 'Nombre',
+                'surname' => 'Apellidos',
+                'identification' => 'Identificación',
+                'bot' => 'Bot',
+                'active' => 'Activo',
+                'email' => 'Email',
+                'phone' => 'Teléfono',
+                'iban' => 'IBAN',
+                'invitation_url' => 'URL Invitación',
+            ]
         ]
     ]
 ];

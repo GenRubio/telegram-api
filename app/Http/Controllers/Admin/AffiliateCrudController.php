@@ -31,22 +31,22 @@ class AffiliateCrudController extends CrudController
         $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'name',
-            'label' => 'Nombre',
+            'label' => trans('back-office.backpack_menu.affiliates.list.name'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'surnames',
-            'label' => 'Apellidos',
+            'label' => trans('back-office.backpack_menu.affiliates.list.surname'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'nif',
-            'label' => 'NIF',
+            'label' => trans('back-office.backpack_menu.affiliates.list.identification'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'bot',
-            'label' => 'Bot',
+            'label' => trans('back-office.backpack_menu.affiliates.list.bot'),
             'type'      => 'select',
             'name'      => 'telegraph_bot_id',
             'entity'    => 'telegraphBot',
@@ -55,13 +55,13 @@ class AffiliateCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'name' => 'count_clients',
-            'label' => 'Clientes',
+            'label' => trans('back-office.backpack_menu.affiliates.list.clients'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'active',
             'type' => 'btnToggleV2',
-            'label' => 'Activo',
+            'label' => trans('back-office.backpack_menu.affiliates.list.active'),
         ]);
     }
 
@@ -74,7 +74,7 @@ class AffiliateCrudController extends CrudController
                 'type' => 'hidden',
             ],
             [
-                'label'     => "Bot",
+                'label'     => trans('back-office.backpack_menu.affiliates.update.bot'),
                 'type'      => 'select',
                 'name'      => 'telegraph_bot_id',
                 'entity'    => 'telegraphBot',
@@ -83,38 +83,38 @@ class AffiliateCrudController extends CrudController
             ],
             [
                 'name' => 'name',
-                'label' => 'Nombre',
+                'label' => trans('back-office.backpack_menu.affiliates.update.name'),
                 'type' => 'text',
             ],
             [
                 'name' => 'surnames',
-                'label' => 'Apellidos',
+                'label' => trans('back-office.backpack_menu.affiliates.update.surname'),
                 'type' => 'text',
             ],
             [
                 'name' => 'email',
-                'label' => 'Email',
+                'label' => trans('back-office.backpack_menu.affiliates.update.email'),
                 'type' => 'text',
             ],
             [
                 'name' => 'phone',
-                'label' => 'Telefono',
+                'label' => trans('back-office.backpack_menu.affiliates.update.phone'),
                 'type' => 'text',
             ],
             [
                 'name' => 'nif',
-                'label' => 'NIF',
+                'label' => trans('back-office.backpack_menu.affiliates.update.identification'),
                 'type' => 'text',
             ],
             [
                 'name' => 'iban',
-                'label' => 'IBAN',
+                'label' => trans('back-office.backpack_menu.affiliates.update.iban'),
                 'type' => 'text',
             ],
             [
                 'name' => 'active',
                 'type' => 'checkbox',
-                'label' => 'Activo',
+                'label' => trans('back-office.backpack_menu.affiliates.update.active'),
                 'default' => true,
             ],
         ]);
@@ -125,7 +125,7 @@ class AffiliateCrudController extends CrudController
         CRUD::setValidation(AffiliateRequest::class);
         $this->crud->addFields([
             [
-                'label'     => "Bot",
+                'label'     => trans('back-office.backpack_menu.affiliates.update.bot'),
                 'type'      => 'select',
                 'name'      => 'telegraph_bot_id',
                 'entity'    => 'telegraphBot',
@@ -134,37 +134,37 @@ class AffiliateCrudController extends CrudController
             ],
             [
                 'name' => 'name',
-                'label' => 'Nombre',
+                'label' => trans('back-office.backpack_menu.affiliates.update.name'),
                 'type' => 'text',
             ],
             [
                 'name' => 'surnames',
-                'label' => 'Apellidos',
+                'label' => trans('back-office.backpack_menu.affiliates.update.surname'),
                 'type' => 'text',
             ],
             [
                 'name' => 'email',
-                'label' => 'Email',
+                'label' => trans('back-office.backpack_menu.affiliates.update.email'),
                 'type' => 'text',
             ],
             [
                 'name' => 'phone',
-                'label' => 'Telefono',
+                'label' => trans('back-office.backpack_menu.affiliates.update.phone'),
                 'type' => 'text',
             ],
             [
                 'name' => 'nif',
-                'label' => 'NIF',
+                'label' => trans('back-office.backpack_menu.affiliates.update.identification'),
                 'type' => 'text',
             ],
             [
                 'name' => 'iban',
-                'label' => 'IBAN',
+                'label' => trans('back-office.backpack_menu.affiliates.update.iban'),
                 'type' => 'text',
             ],
             [
                 'name' => 'reference_url',
-                'label' => 'Link Invitacion',
+                'label' => trans('back-office.backpack_menu.affiliates.update.invitation_url'),
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
@@ -173,7 +173,7 @@ class AffiliateCrudController extends CrudController
             [
                 'name' => 'active',
                 'type' => 'checkbox',
-                'label' => 'Activo',
+                'label' => trans('back-office.backpack_menu.affiliates.update.active'),
                 'default' => true,
             ],
         ]);
