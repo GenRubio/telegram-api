@@ -45,19 +45,14 @@ class OrderCrudController extends CrudController
         $this->removeActionsCrud();
         $this->crud->addButtonFromView('line', 'order-actions', 'order-actions', 'beginning');
         $this->crud->addColumn([
-            'name' => 'created_at',
-            'label' => trans('back-office.backpack_menu.orders.list.date'),
+            'name' => 'reference',
+            'label' => trans('back-office.backpack_menu.orders.list.reference'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'status',
             'label' => trans('back-office.backpack_menu.orders.list.state'),
             'type'  => 'status',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'reference',
-            'label' => trans('back-office.backpack_menu.orders.list.reference'),
-            'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'total_price_backpack',
@@ -72,6 +67,11 @@ class OrderCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'shipping_price_backpack',
             'label' => trans('back-office.backpack_menu.orders.list.price_shipping'),
+            'type'  => 'text',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'created_at',
+            'label' => trans('back-office.backpack_menu.orders.list.date'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
