@@ -49,15 +49,6 @@ return [
                 'action_buttons' => [
                     'products' => 'Productos',
                     'states' => 'Estados',
-                ],
-                'state_modal' => [
-                    'history_state' => 'Historial de estados',
-                    'reference' => 'Referencia',
-                    'payment_method' => 'Método de pago',
-                    'date' => 'Fecha',
-                    'state' => 'Estado',
-                    'user' => 'Usuario',
-                    'close' => 'Cerrar',
                 ]
             ],
             'states' => [
@@ -110,9 +101,6 @@ return [
                     'payment_state' => 'Estado Pago',
                     'payment_keys' => 'Claves de Pago',
                     'payment_method' => 'Método de Pago',
-                ],
-                'errors' => [
-                    'invalid_url' => 'Url de seguimiento no tiene formato correcto',
                 ]
             ]
         ]

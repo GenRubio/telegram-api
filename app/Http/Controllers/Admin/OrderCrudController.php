@@ -46,37 +46,37 @@ class OrderCrudController extends CrudController
         $this->crud->addButtonFromView('line', 'order-actions', 'order-actions', 'beginning');
         $this->crud->addColumn([
             'name' => 'created_at',
-            'label' => 'Fecha',
+            'label' => trans('back-office.backpack_menu.orders.list.date'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'status',
-            'label' => 'Estado',
+            'label' => trans('back-office.backpack_menu.orders.list.state'),
             'type'  => 'status',
         ]);
         $this->crud->addColumn([
             'name' => 'reference',
-            'label' => 'Referencia',
+            'label' => trans('back-office.backpack_menu.orders.list.reference'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'total_price_backpack',
-            'label' => 'Precio total',
+            'label' => trans('back-office.backpack_menu.orders.list.total_price'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'price_backpack',
-            'label' => 'Precio',
+            'label' => trans('back-office.backpack_menu.orders.list.price'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'shipping_price_backpack',
-            'label' => 'Precio envio',
+            'label' => trans('back-office.backpack_menu.orders.list.price_shipping'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'paymentPlatformKey',
-            'label' => 'P.P. Llaves',
+            'label' => trans('back-office.backpack_menu.orders.list.payment_keys'),
             'type'      => 'select',
             'name'      => 'payment_platform_key_id',
             'entity'    => 'paymentPlatformKey',
@@ -115,178 +115,178 @@ class OrderCrudController extends CrudController
             } catch (Exception $e) {
                 $payment_order_status = 'EXPIRED';
             }
-            $payment_payment_status = $retrivePayment ? $retrivePayment->status : 'Pendiente de pago';
+            $payment_payment_status = $retrivePayment ? $retrivePayment->status : OrderStatusEnum::STATUS()['pd_payment'];
         }
         $this->crud->addFields([
             [
                 'name' => 'reference',
-                'label' => 'Numero referencia',
+                'label' => trans('back-office.backpack_menu.orders.update.general.reference'),
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'General'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.general')
             ],
             [
                 'name'        => 'status',
-                'label'       => "Estado",
+                'label'       => trans('back-office.backpack_menu.orders.update.general.state'),
                 'type'        => 'select_from_array',
                 'options'     => $this->getListStatuses(),
                 'allows_null' => false,
-                'tab' => 'General'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.general')
             ],
             [
                 'name' => 'order_cancel_detail',
-                'label' => 'Razon de cancelacion de pedido <small>(En caso de que el estado sea Cancelado)</small><br><div style="font-size: 15px;font-weight: normal;">Idioma del cliente: ' . $clientLanguage . '</div>',
+                'label' => trans('back-office.backpack_menu.orders.update.general.payment_cancel_problem') . ' <small>(' . trans('back-office.backpack_menu.orders.update.general.explication_text') . ')</small><br><div style="font-size: 15px;font-weight: normal;">' . trans('back-office.backpack_menu.orders.update.general.client_language') . ': ' . $clientLanguage . '</div>',
                 'type' => 'textarea',
-                'tab' => 'General'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.general')
             ],
             [
                 'name' => 'provider_url',
-                'label' => 'Url Proveedor',
+                'label' => trans('back-office.backpack_menu.orders.update.general.provider_url'),
                 'type' => 'text',
-                'tab' => 'General'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.general')
             ],
             [
                 'name' => 'price',
-                'label' => 'Precio',
+                'label' => trans('back-office.backpack_menu.orders.update.general.price'),
                 'type' => 'text',
                 'prefix' => '€',
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'General'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.general')
             ],
             [
                 'name' => 'shipping_price',
-                'label' => 'Precio envio',
+                'label' => trans('back-office.backpack_menu.orders.update.general.price_shipping'),
                 'type' => 'text',
                 'prefix' => '€',
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'General'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.general')
             ],
             [
                 'name' => 'total_price',
-                'label' => 'Precio total',
+                'label' => trans('back-office.backpack_menu.orders.update.general.total_price'),
                 'type' => 'text',
                 'prefix' => '€',
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'General'
-            ],
-            [
-                'name' => 'payment_method',
-                'label' => 'Metodo de pago',
-                'type' => 'text',
-                'attributes' => [
-                    'readonly'    => 'readonly',
-                ],
-                'tab' => 'General'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.general')
             ],
             [
                 'name' => 'name',
-                'label' => 'Nombre',
+                'label' => trans('back-office.backpack_menu.orders.update.client.name'),
                 'type' => 'text',
-                'tab' => 'Cliente'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.client')
             ],
             [
                 'name' => 'surnames',
-                'label' => 'Apellidos',
+                'label' => trans('back-office.backpack_menu.orders.update.client.surname'),
                 'type' => 'text',
-                'tab' => 'Cliente'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.client')
             ],
             [
                 'name' => 'address',
-                'label' => 'Direccion',
+                'label' => trans('back-office.backpack_menu.orders.update.client.address'),
                 'type' => 'textarea',
-                'tab' => 'Cliente'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.client')
             ],
             [
                 'name' => 'postal_code',
-                'label' => 'Codigo postal',
+                'label' => trans('back-office.backpack_menu.orders.update.client.postal_code'),
                 'type' => 'text',
-                'tab' => 'Cliente'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.client')
             ],
             [
                 'name' => 'city',
-                'label' => 'Ciudad',
+                'label' => trans('back-office.backpack_menu.orders.update.client.city'),
                 'type' => 'text',
-                'tab' => 'Cliente'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.client')
             ],
             [
                 'name' => 'province',
-                'label' => 'Província',
+                'label' => trans('back-office.backpack_menu.orders.update.client.province'),
                 'type' => 'text',
-                'tab' => 'Cliente'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.client')
             ],
             [
                 'name' => 'country',
-                'label' => 'Pais',
+                'label' => trans('back-office.backpack_menu.orders.update.client.country'),
                 'type' => 'text',
-                'tab' => 'Cliente'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.client')
             ],
             [
                 'name' => 'stripe_id',
-                'label' => 'ID Pedido (Stripe)',
+                'label' => trans('back-office.backpack_menu.orders.update.payment.stripe_order_id'),
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'Pago'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.payment')
             ],
             [
                 'name' => 'paypal_id',
-                'label' => 'ID Pedido (Paypal)',
+                'label' => trans('back-office.backpack_menu.orders.update.payment.paypal_order_id'),
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'Pago'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.payment')
             ],
             [
                 'name' => 'payment_id',
-                'label' => 'ID Pago',
+                'label' => trans('back-office.backpack_menu.orders.update.payment.payment_id'),
                 'type' => 'text',
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'Pago'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.payment')
             ],
             [
                 'name' => 'payment_url_test',
-                'label' => 'Url pago paypal (test)',
+                'label' => trans('back-office.backpack_menu.orders.update.payment.paypal_payment_url'),
                 'type' => 'text',
                 'value' => 'https://www.sandbox.paypal.com/checkoutnow?token=' . $this->crud->getCurrentEntry()->paypal_id,
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'Pago'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.payment')
             ],
             [
                 'name' => 'payment_order_status',
-                'label' => 'Estado de pedido',
+                'label' => trans('back-office.backpack_menu.orders.update.payment.order_state'),
                 'type' => 'text',
                 'value' => $payment_order_status,
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'Pago'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.payment')
             ],
             [
                 'name' => 'payment_payment_status',
-                'label' => 'Estado de pago',
+                'label' => trans('back-office.backpack_menu.orders.update.payment.payment_state'),
                 'type' => 'text',
                 'value' => $payment_payment_status,
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'Pago'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.payment')
             ],
             [
-                'label'     => "P.P. Llaves",
+                'name' => 'payment_method',
+                'label' => trans('back-office.backpack_menu.orders.update.payment.payment_method'),
+                'type' => 'text',
+                'attributes' => [
+                    'readonly'    => 'readonly',
+                ],
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.payment')
+            ],
+            [
+                'label'     => trans('back-office.backpack_menu.orders.update.payment.payment_keys'),
                 'type'      => 'select',
                 'name'      => 'payment_platform_key_id',
                 'entity'    => 'paymentPlatformKey',
@@ -295,7 +295,7 @@ class OrderCrudController extends CrudController
                 'attributes' => [
                     'readonly'    => 'readonly',
                 ],
-                'tab' => 'Pago'
+                'tab' => trans('back-office.backpack_menu.orders.update.tabs.payment')
             ],
         ]);
     }
@@ -308,7 +308,7 @@ class OrderCrudController extends CrudController
     private function getListStatuses()
     {
         $actualStatus = $this->crud->getCurrentEntry()->status;
-        return OrderStatusEnum::STATUS_TO_STATUS[$actualStatus];
+        return OrderStatusEnum::STATUS_TO_STATUS()[$actualStatus];
     }
 
     public function update()
@@ -365,7 +365,7 @@ class OrderCrudController extends CrudController
                 || !empty($request->input('provider_url')) && $order->provider_url != $request->input('provider_url'))
         ) {
             if (!isUrl($request->input('provider_url'))) {
-                Alert::error("Url de seguimiento no tiene formato correcto")->flush();
+                Alert::error(trans('back-office.backpack_menu.orders.update.errors.invalid_url'))->flush();
             } else {
                 $order->provider_url = $request->input('provider_url');
                 (new SendTrackingNumberMessageTask($order))->run();

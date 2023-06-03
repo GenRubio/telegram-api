@@ -17,19 +17,22 @@ abstract class OrderStatusEnum
         'delivered' => 'delivered',
         'refund' => 'refund'
     ];
-    const STATUS = [
-        'cancel' => 'Cancelado',
-        'error' => 'Error',
-        'pd_payment' => 'Pendiente de pago',
-        'pd_sent' => 'Pendiente de envio',
-        'payment_accepted' => 'Pago aceptado',
-        'payment_completed' => 'Pago completado',
-        'payment_late' => 'Pago atrasado',
-        'payment_denied' => 'Pago denegado',
-        'sent' => 'Enviado',
-        'delivered' => 'Entregado',
-        'refund' => 'Pago reembolsado'
-    ];
+    public static function STATUS()
+    {
+        return [
+            'cancel' => trans('back-office.backpack_menu.orders.states.cancel'),
+            'error' => trans('back-office.backpack_menu.orders.states.error'),
+            'pd_payment' => trans('back-office.backpack_menu.orders.states.pd_payment'),
+            'pd_sent' => trans('back-office.backpack_menu.orders.states.pd_sent'),
+            'payment_accepted' => trans('back-office.backpack_menu.orders.states.payment_accepted'),
+            'payment_completed' => trans('back-office.backpack_menu.orders.states.payment_completed'),
+            'payment_late' => trans('back-office.backpack_menu.orders.states.payment_late'),
+            'payment_denied' => trans('back-office.backpack_menu.orders.states.payment_denied'),
+            'sent' => trans('back-office.backpack_menu.orders.states.sent'),
+            'delivered' => trans('back-office.backpack_menu.orders.states.delivered'),
+            'refund' => trans('back-office.backpack_menu.orders.states.refund')
+        ];
+    }
     const STATUS_WEB = [
         'payment_completed' => [
             'trans_id' => 'd72d931b-91c6-421a-baf4-bf0ce086e382',
@@ -66,37 +69,40 @@ abstract class OrderStatusEnum
         'delivered' => '#4add13',
         'refund' => '#5a5a5a'
     ];
-    const STATUS_TO_STATUS = [
-        'cancel' => [
-            'cancel' => self::STATUS['cancel'],
-        ],
-        'error' => [
-            'error' => self::STATUS['error'],
-        ],
-        'pd_payment' => [
-            'pd_payment' => self::STATUS['pd_payment'],
-            'cancel' => self::STATUS['cancel'],
-        ],
-        'payment_accepted' => [
-            'payment_accepted' => self::STATUS['payment_accepted'],
-        ],
-        'payment_denied' => [
-            'payment_denied' => self::STATUS['payment_denied'],
-        ],
-        'payment_late' => [
-            'payment_late' => self::STATUS['payment_late'],
-        ],
-        'payment_completed' => [
-            'payment_completed' => self::STATUS['payment_completed'],
-            'sent' => self::STATUS['sent'],
-            'cancel' => self::STATUS['cancel'],
-        ],
-        'sent' => [
-            'sent' => self::STATUS['sent'],
-            'delivered' => self::STATUS['delivered']
-        ],
-        'delivered' => [
-            'delivered' => self::STATUS['delivered']
-        ]
-    ];
+    public static function STATUS_TO_STATUS()
+    {
+        return [
+            'cancel' => [
+                'cancel' => self::STATUS()['cancel'],
+            ],
+            'error' => [
+                'error' => self::STATUS()['error'],
+            ],
+            'pd_payment' => [
+                'pd_payment' => self::STATUS()['pd_payment'],
+                'cancel' => self::STATUS()['cancel'],
+            ],
+            'payment_accepted' => [
+                'payment_accepted' => self::STATUS()['payment_accepted'],
+            ],
+            'payment_denied' => [
+                'payment_denied' => self::STATUS()['payment_denied'],
+            ],
+            'payment_late' => [
+                'payment_late' => self::STATUS()['payment_late'],
+            ],
+            'payment_completed' => [
+                'payment_completed' => self::STATUS()['payment_completed'],
+                'sent' => self::STATUS()['sent'],
+                'cancel' => self::STATUS()['cancel'],
+            ],
+            'sent' => [
+                'sent' => self::STATUS()['sent'],
+                'delivered' => self::STATUS()['delivered']
+            ],
+            'delivered' => [
+                'delivered' => self::STATUS()['delivered']
+            ]
+        ];
+    }
 }

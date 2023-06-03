@@ -19,16 +19,18 @@
 <span class="dropdown">
     <button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        Acciones
+        {{ trans('back-office.backpack_menu.orders.list.actions') }}
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item custom-dropdown-item"
             href="{{ url($crud->route . '/' . $entry->getKey()) }}/order-product">
-            <i class="la la-eye"></i> Productos ({{ $entry->orderProducts->count() }})
+            <i class="la la-eye"></i> {{ trans('back-office.backpack_menu.orders.list.action_buttons.products') }}
+            ({{ $entry->orderProducts->count() }})
         </a>
-        <a id="show-modal" class="dropdown-item custom-dropdown-item" style="cursor: pointer" data-style="zoom-in" data-toggle="modal"
-            data-target="#showHistoryStatesOrder{{ $entry->getKey() }}" data-backdrop="false">
-            <i class="la la-eye"></i> Estados ({{ $order->orderHistoryStates->count() }})
+        <a id="show-modal" class="dropdown-item custom-dropdown-item" style="cursor: pointer" data-style="zoom-in"
+            data-toggle="modal" data-target="#showHistoryStatesOrder{{ $entry->getKey() }}" data-backdrop="false">
+            <i class="la la-eye"></i> {{ trans('back-office.backpack_menu.orders.list.action_buttons.states') }}
+            ({{ $order->orderHistoryStates->count() }})
         </a>
     </div>
 </span>
@@ -38,34 +40,37 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Historico de estados</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    {{ trans('back-office.backpack_menu.orders.list.state_modal.history_state') }}</h5>
                 <button type="button" id="close-modal-button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="mb-1">
-                    Pedido: <b>{{ $order->reference }}</b>
+                    {{ trans('back-office.backpack_menu.orders.list.state_modal.reference') }}:
+                    <b>{{ $order->reference }}</b>
                 </div>
                 <div>
-                    Metodo pago: <b>{{ $order->payment_method }}</b>
+                    {{ trans('back-office.backpack_menu.orders.list.state_modal.payment_method') }}:
+                    <b>{{ $order->payment_method }}</b>
                 </div>
                 <hr>
                 <div class="row" style="align-items: center;">
                     <div class="col-md-4">
-                        Fecha
+                        {{ trans('back-office.backpack_menu.orders.list.state_modal.date') }}
                     </div>
                     <div class="col-md-4">
-                        Estado
+                        {{ trans('back-office.backpack_menu.orders.list.state_modal.state') }}
                     </div>
                     <div class="col-md-4">
-                        Usuario
+                        {{ trans('back-office.backpack_menu.orders.list.state_modal.user') }}
                     </div>
                 </div>
                 @foreach ($order->orderHistoryStates as $orderState)
                     @php
                         $status = $orderState->state;
-                        $name = OrderStatusEnum::STATUS[$status];
+                        $name = OrderStatusEnum::STATUS()[$status];
                         $color = OrderStatusEnum::STATUS_COLORS[$status];
                     @endphp
                     <hr>
@@ -86,7 +91,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="cancel-modal-button" class="btn btn-secondary"
-                    data-dismiss="modal">Cerrar</button>
+                    data-dismiss="modal">{{ trans('back-office.backpack_menu.orders.list.state_modal.close') }}</button>
             </div>
         </div>
     </div>

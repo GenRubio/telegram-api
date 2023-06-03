@@ -1,7 +1,7 @@
 @php
     use App\Enums\OrderStatusEnum;
     $status = $entry->{$column['name']};
-    $name = OrderStatusEnum::STATUS[$status];
+    $name = OrderStatusEnum::STATUS()[$status];
     $color = OrderStatusEnum::STATUS_COLORS[$status];
 @endphp
 <style>
