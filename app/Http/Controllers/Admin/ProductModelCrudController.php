@@ -45,46 +45,46 @@ class ProductModelCrudController extends CrudController
         $this->crud->addButtonFromView('line', 'product-actions', 'product-actions', 'beginning');
         $this->crud->addColumn([
             'name' => 'reference',
-            'label' => 'Referencia',
+            'label' => trans('back-office.backpack_menu.products.list.reference'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'active',
             'type' => 'btnToggleV2',
-            'label' => 'Activo',
+            'label' => trans('back-office.backpack_menu.products.list.active'),
         ]);
         $this->crud->addColumn([
             'name' => 'order',
-            'label' => 'Prioridad',
+            'label' => trans('back-office.backpack_menu.products.list.priority'),
             'type'  => 'order',
         ]);
         $this->crud->addColumn([
             'name' => 'image',
-            'label' => 'Imagen',
+            'label' => trans('back-office.backpack_menu.products.list.image'),
             'type'  => 'image',
         ]);
         $this->crud->addColumn([
             'name' => 'name',
-            'label' => 'Modelo',
+            'label' => trans('back-office.backpack_menu.products.list.name'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'total_price_backpack',
-            'label' => 'Precio total',
+            'label' => trans('back-office.backpack_menu.products.list.total_price'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'price_backpack',
-            'label' => 'Precio',
+            'label' => trans('back-office.backpack_menu.products.list.price'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'discount_backpack',
-            'label' => 'Descuento',
+            'label' => trans('back-office.backpack_menu.products.list.discount'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
-            'label' => 'Marca',
+            'label' => trans('back-office.backpack_menu.products.list.brand'),
             'type'  => 'text',
             'name'  => 'product_brand_name',
         ]);
@@ -99,18 +99,18 @@ class ProductModelCrudController extends CrudController
             ],
             [
                 'name' => 'image',
-                'label' => 'Imagen',
+                'label' => trans('back-office.backpack_menu.products.update.product.image'),
                 'type' => 'image-v2',
-                'tab' => 'Producto'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.product')
             ],
             [
                 'name' => 'name',
-                'label' => 'Modelo',
+                'label' => trans('back-office.backpack_menu.products.update.product.name'),
                 'type' => 'text',
-                'tab' => 'Producto'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.product')
             ],
             [
-                'label'     => "Marca",
+                'label'     => trans('back-office.backpack_menu.products.update.product.brand'),
                 'type'      => 'select',
                 'name'      => 'brand_id',
                 'entity'    => 'productBrand',
@@ -119,28 +119,28 @@ class ProductModelCrudController extends CrudController
                 'options'   => (function ($query) {
                     return $query->active()->get();
                 }),
-                'tab' => 'Producto'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.product')
             ],
             [
                 'name' => 'price',
-                'label' => 'Precio',
+                'label' => trans('back-office.backpack_menu.products.update.product.price'),
                 'type' => 'number',
                 'prefix' => '€',
                 'decimals' => 2,
                 'default' => 10,
-                'tab' => 'Producto'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.product')
             ],
             [
                 'name' => 'discount',
-                'label' => 'Descuento',
+                'label' => trans('back-office.backpack_menu.products.update.product.discount'),
                 'type' => 'number',
                 'prefix'  => '%',
                 'default' => 0,
-                'tab' => 'Producto'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.product')
             ],
             [
                 'name' => 'description',
-                'label' => 'Descripcion',
+                'label' => trans('back-office.backpack_menu.products.update.product.description'),
                 'type'  => 'summernote',
                 'options' => [
                     'toolbar' => [
@@ -149,90 +149,90 @@ class ProductModelCrudController extends CrudController
                     'minheight' => 300,
                     'height' => 300
                 ],
-                'tab' => 'Producto'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.product')
             ],
             [
                 'name' => 'size',
-                'label' => 'Medida',
+                'label' => trans('back-office.backpack_menu.products.update.datail.size'),
                 'type' => 'text',
                 'suffix' => 'mm',
-                'tab' => 'Detalle'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.detail')
             ],
             [
                 'name' => 'power_range',
-                'label' => 'Rango de poder',
+                'label' => trans('back-office.backpack_menu.products.update.datail.power_range'),
                 'type' => 'text',
                 'suffix' => 'W',
-                'tab' => 'Detalle'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.detail')
             ],
             [
                 'name' => 'input_voltage',
-                'label' => 'Voltaje de entrada',
+                'label' => trans('back-office.backpack_menu.products.update.datail.input_voltage'),
                 'type' => 'text',
                 'suffix' => 'V',
-                'tab' => 'Detalle'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.detail')
             ],
             [
                 'name' => 'battery_capacity',
-                'label' => 'Capacidad de la batería',
+                'label' => trans('back-office.backpack_menu.products.update.datail.battery_capacity'),
                 'type' => 'text',
                 'suffix' => 'mAh',
-                'tab' => 'Detalle'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.detail')
             ],
             [
                 'name' => 'e_liquid_capacity',
-                'label' => 'Capacidad E Liquid',
+                'label' => trans('back-office.backpack_menu.products.update.datail.e_liquid_capacity'),
                 'type' => 'text',
                 'suffix' => 'ml',
-                'tab' => 'Detalle'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.detail')
             ],
             [
                 'name' => 'concentration',
-                'label' => 'Concentración nicotina',
+                'label' => trans('back-office.backpack_menu.products.update.datail.concentration'),
                 'type' => 'text',
                 'suffix' => 'mg/ml',
-                'tab' => 'Detalle'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.detail')
             ],
             [
                 'name' => 'resistance',
-                'label' => 'Resistencia',
+                'label' => trans('back-office.backpack_menu.products.update.datail.resistance'),
                 'type' => 'text',
                 'suffix' => 'Ω',
-                'tab' => 'Detalle'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.detail')
             ],
             [
                 'name' => 'absorbable_quantity',
-                'label' => 'Cantidad de caladas',
+                'label' => trans('back-office.backpack_menu.products.update.datail.absorbable_quantity'),
                 'type' => 'text',
                 'suffix' => 'Puffs',
-                'tab' => 'Detalle'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.detail')
             ],
             [
                 'name' => 'charging_port',
-                'label' => 'Tipo de puerto de carga',
+                'label' => trans('back-office.backpack_menu.products.update.datail.charging_port'),
                 'type' => 'text',
-                'tab' => 'Detalle'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.detail')
             ],
             [
                 'name' => 'order',
-                'label' => 'Prioridad',
+                'label' => trans('back-office.backpack_menu.products.update.product.priority'),
                 'type' => 'number',
                 'default' => 1,
-                'tab' => 'Producto'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.product')
             ],
             [
                 'name' => 'multiple_flavors',
                 'type' => 'checkbox',
-                'label' => 'Multiples sabores',
+                'label' => trans('back-office.backpack_menu.products.update.product.contains_multiple_flavors'),
                 'default' => true,
-                'tab' => 'Producto'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.product')
             ],
             [
                 'name' => 'active',
                 'type' => 'checkbox',
-                'label' => 'Activo',
+                'label' => trans('back-office.backpack_menu.products.update.product.active'),
                 'default' => true,
-                'tab' => 'Producto'
+                'tab' => trans('back-office.backpack_menu.products.update.tabs.product')
             ],
         ]);
     }
@@ -253,7 +253,7 @@ class ProductModelCrudController extends CrudController
     {
         $product = ProductModel::find($request->product_model_id);
         $newProduct = $product->replicate();
-        $newProduct->name = $newProduct->name . ' (Copia)';
+        $newProduct->name = $newProduct->name . ' (' . trans('back-office.backpack_menu.products.update.extra.copy') . ')';
         $newProduct->active = false;
         $newProduct->reference = null;
         $newProduct->save();
@@ -273,7 +273,7 @@ class ProductModelCrudController extends CrudController
             $newImage->save();
         }
 
-        Alert::add('success', 'Producto duplicado')->flash();
+        Alert::add('success', trans('back-office.backpack_menu.products.update.success.duplicate'))->flash();
         return redirect()->back();
     }
 

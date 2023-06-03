@@ -115,6 +115,60 @@ return [
                     'invalid_url' => 'Url de seguimiento no tiene formato correcto',
                 ]
             ]
+        ],
+        'products' => [
+            'list' => [
+                'reference' => 'Referencia',
+                'active' => 'Activo',
+                'priority' => 'Prioridad',
+                'image' => 'Imagen',
+                'name' => 'Nombre',
+                'total_price' => 'Precio Total',
+                'price' => 'Precio',
+                'discount' => 'Descuento',
+                'brand' => 'Marca',
+                'actions' => 'Acciones',
+                'action_buttons' => [
+                    'flavors' => 'Sabores',
+                    'images' => 'Imágenes',
+                    'valoration' => 'Valoraciones',
+                    'duplicate' => 'Duplicar',
+                ],
+            ],
+            'update' => [
+                'tabs' => [
+                    'product' => 'Producto',
+                    'detail' => 'Detalle',
+                ],
+                'product' => [
+                    'image' => 'Imagen',
+                    'name' => 'Nombre',
+                    'brand' => 'Marca',
+                    'price' => 'Precio',
+                    'discount' => 'Descuento',
+                    'description' => 'Descripción',
+                    'priority' => 'Prioridad',
+                    'active' => 'Activo',
+                    'contains_multiple_flavors' => 'Contiene varios sabores',
+                ],
+                'datail' => [
+                    'size' => 'Tamaño',
+                    'power_range' => 'Rango de potencia',
+                    'input_voltage' => 'Voltaje de entrada',
+                    'battery_capacity' => 'Capacidad de la batería',
+                    'e_liquid_capacity' => 'Capacidad de E Liquid',
+                    'concentration' => 'Concentración nicotina',
+                    'resistance' => 'Resistencia',
+                    'absorbable_quantity' => 'Cantidad de caladas',
+                    'charging_port' => 'Puerto de carga',
+                ],
+                'success' => [
+                    'duplicate' => 'Producto duplicado correctamente',
+                ],
+                'extra' => [
+                    'copy' => 'Copiar',
+                ]
+            ]
         ]
     ]
 ];
