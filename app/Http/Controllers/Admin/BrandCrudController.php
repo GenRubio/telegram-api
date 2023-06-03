@@ -31,18 +31,18 @@ class BrandCrudController extends CrudController
         $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'name',
-            'label' => 'Nombre',
+            'label' => trans('back-office.backpack_menu.brands.list.name'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'count_products',
-            'label' => 'Productos',
+            'label' => trans('back-office.backpack_menu.brands.list.products'),
             'type'  => 'number',
         ]);
         $this->crud->addColumn([
             'name' => 'active',
             'type' => 'btnToggleV2',
-            'label' => 'Activo',
+            'label' => trans('back-office.backpack_menu.brands.list.active'),
         ]);
     }
 
@@ -53,13 +53,13 @@ class BrandCrudController extends CrudController
         $this->crud->addFields([
             [
                 'name' => 'name',
-                'label' => 'Nombre',
+                'label' => trans('back-office.backpack_menu.brands.update.name'),
                 'type' => 'text',
             ],
             [
                 'name' => 'active',
                 'type' => 'checkbox',
-                'label' => 'Activo',
+                'label' => trans('back-office.backpack_menu.brands.update.active'),
                 'default' => true,
             ],
         ]);

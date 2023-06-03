@@ -169,6 +169,17 @@ return [
                     'copy' => 'Copiar',
                 ]
             ]
+        ],
+        'brands' => [
+            'list' => [
+                'name' => 'Nombre',
+                'products' => 'Productos',
+                'active' => 'Activo',
+            ],
+            'update' => [
+                'name' => 'Nombre',
+                'active' => 'Activo',
+            ]
         ]
     ]
 ];
