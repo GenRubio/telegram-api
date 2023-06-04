@@ -35,22 +35,22 @@ class TelegraphBotCrudController extends CrudController
         $this->crud->addButtonFromView('line', 'bot-actions', 'bot-actions', 'beginning');
         $this->crud->addColumn([
             'name' => 'name',
-            'label' => 'Nombre',
+            'label' => trans('back-office.backpack_menu.bots.list.name'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'webhook',
-            'label' => 'WebHook',
+            'label' => trans('back-office.backpack_menu.bots.list.webhook'),
             'type'  => 'webHookToggle',
         ]);
         $this->crud->addColumn([
             'name' => 'language_name',
-            'label' => 'Idioma',
+            'label' => trans('back-office.backpack_menu.bots.list.language'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'bot_url',
-            'label' => 'Bot Url',
+            'label' => trans('back-office.backpack_menu.bots.list.bot_url'),
             'type'  => 'link',
         ]);
     }
@@ -61,30 +61,26 @@ class TelegraphBotCrudController extends CrudController
         $this->crud->addFields([
             [
                 'name' => 'name',
-                'label' => 'Nombre',
+                'label' => trans('back-office.backpack_menu.bots.update.name'),
                 'type' => 'text',
-                'tab' => 'Configuración'
             ],
             [
                 'name' => 'token',
-                'label' => 'Token',
+                'label' => trans('back-office.backpack_menu.bots.update.token'),
                 'type' => 'text',
-                'tab' => 'Configuración'
             ],
             [
-                'label'     => "Idioma por defecto",
+                'label'     => trans('back-office.backpack_menu.bots.update.default_language'),
                 'type'      => 'select',
                 'name'      => 'language_id',
                 'entity'    => 'language',
                 'model'     => "App\Models\Language",
                 'attribute' => 'name',
-                'tab' => 'Configuración'
             ],
             [
                 'name' => 'bot_url',
-                'label' => 'Bot Url',
+                'label' => trans('back-office.backpack_menu.bots.update.bot_url'),
                 'type' => 'text',
-                'tab' => 'Configuración'
             ],
         ]);
     }
@@ -97,7 +93,7 @@ class TelegraphBotCrudController extends CrudController
     public function updateWebhook(Request $request)
     {
         $telegraphBot = TelegraphBot::where('id', $request->botId)->first();
-        $message = 'WebHook actualizado correctamente';
+        $message = trans('back-office.backpack_menu.bots.success.update_webhook');
         try {
             $telegraphBot->registerWebhook()->send();
             $telegraphBot->update([
@@ -114,7 +110,7 @@ class TelegraphBotCrudController extends CrudController
     public function removeWebhook(Request $request)
     {
         $telegraphBot = TelegraphBot::where('id', $request->botId)->first();
-        $message = 'WebHook eliminado correctamente';
+        $message = trans('back-office.backpack_menu.bots.success.deleted_webhook');
         try {
             $telegraphBot->unregisterWebhook()->send();
             $telegraphBot->update([

@@ -31,17 +31,17 @@ class TelegramBotGroupCrudController extends CrudController
         $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'key',
-            'label' => 'Key',
+            'label' => trans('back-office.backpack_menu.grups.list.key'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'name',
-            'label' => 'Nombre',
+            'label' => trans('back-office.backpack_menu.grups.list.name'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'total_bots_assigned',
-            'label' => 'Bots',
+            'label' => trans('back-office.backpack_menu.grups.list.bots'),
             'type'  => 'text',
         ]);
     }
@@ -57,14 +57,14 @@ class TelegramBotGroupCrudController extends CrudController
             ],
             [
                 'name' => 'name',
-                'label' => 'Nombre',
+                'label' => trans('back-office.backpack_menu.grups.update.name'),
                 'type' => 'text',
             ],
             [
-                'label'     => "Bots",
+                'label'     => trans('back-office.backpack_menu.grups.update.bots'),
                 'type'      => 'select_multiple',
                 'name'      => 'bots',
-                'entity'    => 'bots',
+                'entity'    => 'telegraphBots',
                 'model'     => "App\Models\TelegraphBot",
                 'attribute' => 'name',
             ],

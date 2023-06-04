@@ -205,6 +205,40 @@ return [
                 'iban' => 'IBAN',
                 'invitation_url' => 'URL Invitación',
             ]
+        ],
+        "bots" => [
+            'list' => [
+                'name' => 'Nombre',
+                'webhook' => 'WebHook Active',
+                'language' => 'Idioma',
+                'bot_url' => 'URL Bot',
+                'actions' => 'Acciones',
+                'action_buttons' => [
+                    'chats' => 'Chats',
+                    'commands' => 'Comandos',
+                ],
+            ],
+            'update' => [
+                'name' => 'Nombre',
+                'token' => 'Token',
+                'default_language' => 'Idioma por defecto',
+                'bot_url' => 'URL Bot',
+            ],
+            'success' => [
+                'update_webhook' => 'WebHook actualizado correctamente',
+                'deleted_webhook' => 'WebHook eliminado correctamente',
+            ],
+        ],
+        "grups" => [
+            'list' => [
+                'key' => 'Clave',
+                'name' => 'Nombre',
+                'bots' => 'Bots',
+            ],
+            'update' => [
+                'name' => 'Nombre',
+                'bots' => 'Bots',
+            ]
         ]
     ]
 ];
