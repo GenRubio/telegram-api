@@ -43,6 +43,7 @@ class OrderCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->removeActionsCrud();
+        $this->crud->removeButton('create');
         $this->crud->addButtonFromView('line', 'order-actions', 'order-actions', 'beginning');
         $this->crud->addColumn([
             'name' => 'reference',
