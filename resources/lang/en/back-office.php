@@ -239,6 +239,49 @@ return [
                 'name' => 'Nombre',
                 'bots' => 'Bots',
             ]
+        ],
+        "glabal_messages" => [
+            'list' => [
+                'ejecution_date' => 'Fecha de ejecución',
+                'state' => 'Estado',
+                'image' => 'Imagen',
+                'description' => 'Descripción',
+                'bot_group' => 'Grupo de Bots',
+            ],
+            'states' => [
+                'cancel' => 'Cancelado',
+                'error' => 'Error',
+                'pd_sent' => 'Pendiente de envio',
+                'sent' => 'Enviado',
+            ],
+            'update' => [
+                'description' => 'Descripción',
+                'emojis' => 'Emojis',
+                'message' => 'Mensaje',
+                'ejectution_date' => 'Fecha de ejecución',
+                'bot_group' => 'Grupo de Bots',
+                'image' => 'Imagen',
+                'image_position' => 'Colocar imagen debajo del mensaje'
+            ]
+        ],
+        "default_messages" => [
+            'list' => [
+                'key' => 'Clave',
+                'image' => 'Imagen',
+                'description' => 'Descripción',
+                'translated' => 'Traducido',
+            ],
+            'update' => [
+                'key' => 'Clave',
+                'description' => 'Descripción',
+                'emojis' => 'Emojis',
+                'message' => 'Mensaje',
+                'image' => 'Imagen',
+                'image_position' => 'Colocar imagen debajo del mensaje'
+            ],
+            'errors' => [
+                'max_description_chars' => 'El mesaje no puede superar 4096 caracteres',
+            ]
         ]
     ]
 ];

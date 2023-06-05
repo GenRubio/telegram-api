@@ -10,12 +10,15 @@ abstract class BotGlobalMessagesEnum
         'pd_sent' => 'pd_sent',
         'sent' => 'sent',
     ];
-    const STATUS = [
-        'cancel' => 'Cancelado',
-        'error' => 'Error',
-        'pd_sent' => 'Pendiente de envio',
-        'sent' => 'Enviado',
-    ];
+    public static function STATUS()
+    {
+        return [
+            'cancel' => trans('back-office.backpack_menu.glabal_messages.states.cancel'),
+            'error' => trans('back-office.backpack_menu.glabal_messages.states.error'),
+            'pd_sent' => trans('back-office.backpack_menu.glabal_messages.states.pd_sent'),
+            'sent' => trans('back-office.backpack_menu.glabal_messages.states.sent'),
+        ];
+    }
     const STATUS_COLORS = [
         'cancel' => '#df3e3e',
         'error' => '#df3e3e',

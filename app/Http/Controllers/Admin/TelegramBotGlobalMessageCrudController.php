@@ -31,27 +31,27 @@ class TelegramBotGlobalMessageCrudController extends CrudController
         $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'execution_date',
-            'label' => 'Fecha ejecucion',
+            'label' => trans('back-office.backpack_menu.glabal_messages.list.ejecution_date'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'status',
-            'label' => 'Estado',
+            'label' => trans('back-office.backpack_menu.glabal_messages.list.state'),
             'type'  => 'status-global-message',
         ]);
         $this->crud->addColumn([
             'name' => 'image',
-            'label' => 'Imagen',
+            'label' => trans('back-office.backpack_menu.glabal_messages.list.image'),
             'type'  => 'image',
         ]);
         $this->crud->addColumn([
             'name' => 'description',
-            'label' => 'Descripcion',
+            'label' => trans('back-office.backpack_menu.glabal_messages.list.description'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'telegramBotGroup',
-            'label' => 'Grupo Bots',
+            'label' => trans('back-office.backpack_menu.glabal_messages.list.bot_group'),
             'type'      => 'select',
             'name'      => 'telegram_bot_group_id',
             'entity'    => 'telegramBotGroup',
@@ -70,17 +70,17 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             ],
             [
                 'name' => 'description',
-                'label' => 'Descripcion',
+                'label' => trans('back-office.backpack_menu.glabal_messages.update.description'),
                 'type' => 'text',
             ],
             [
                 'name' => 'emojis_url',
                 'type' => 'custom_html',
-                'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
+                'value' => '<label>' . trans('back-office.backpack_menu.glabal_messages.update.emojis') . '</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
             ],
             [
                 'name' => "message",
-                'label' => "Mensaje",
+                'label' => trans('back-office.backpack_menu.glabal_messages.update.message'),
                 'type'  => 'summernote',
                 'options' => [
                     'toolbar' => [
@@ -92,11 +92,11 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             ],
             [
                 'name' => 'execution_date',
-                'label' => 'Fecha lanzamiento',
+                'label' => trans('back-office.backpack_menu.glabal_messages.update.ejectution_date'),
                 'type' => 'datetime',
             ],
             [
-                'label'     => "Grupo Bots",
+                'label'     => trans('back-office.backpack_menu.glabal_messages.update.bot_group'),
                 'type'      => 'select',
                 'name'      => 'telegram_bot_group_id',
                 'entity'    => 'telegramBotGroup',
@@ -105,13 +105,13 @@ class TelegramBotGlobalMessageCrudController extends CrudController
             ],
             [
                 'name' => 'image',
-                'label' => 'Imagen',
+                'label' => trans('back-office.backpack_menu.glabal_messages.update.image'),
                 'type' => 'image-v2',
             ],
             [
                 'name' => 'image_bottom',
                 'type' => 'checkbox',
-                'label' => 'Colocar imagen debajo del mensaje',
+                'label' => trans('back-office.backpack_menu.glabal_messages.update.image_position'),
                 'default' => true,
             ],
         ]);
@@ -119,52 +119,6 @@ class TelegramBotGlobalMessageCrudController extends CrudController
 
     protected function setupUpdateOperation()
     {
-        CRUD::setValidation(TelegramBotGlobalMessageRequest::class);
-        $this->crud->addFields([
-            [
-                'name' => 'status',
-                'type' => 'hidden',
-            ],
-            [
-                'name' => 'description',
-                'label' => 'Descripcion',
-                'type' => 'text',
-            ],
-            [
-                'name' => 'emojis_url',
-                'type' => 'custom_html',
-                'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
-            ],
-            [
-                'name' => "message",
-                'label' => "Mensaje",
-                'type'  => 'summernote',
-                'options' => [
-                    'toolbar' => [
-                        ['font', ['bold', 'underline', 'italic']]
-                    ],
-                    'minheight' => 300,
-                    'height' => 300
-                ],
-            ],
-            [
-                'name' => 'execution_date',
-                'label' => 'Fecha lanzamiento',
-                'type' => 'datetime',
-            ],
-            [
-                'label'     => "Grupo Bots",
-                'type'      => 'select',
-                'name'      => 'telegram_bot_group_id',
-                'entity'    => 'telegramBotGroup',
-                'model'     => "App\Models\TelegramBotGroup",
-                'attribute' => 'name',
-            ],
-            [
-                'name' => 'image',
-                'label' => 'Imagen',
-                'type' => 'image-v2',
-            ]
-        ]);
+        $this->setupCreateOperation();
     }
 }

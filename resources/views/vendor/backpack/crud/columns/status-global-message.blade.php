@@ -1,7 +1,7 @@
 @php
     use App\Enums\BotGlobalMessagesEnum;
     $status = $entry->{$column['name']};
-    $name = BotGlobalMessagesEnum::STATUS[$status];
+    $name = BotGlobalMessagesEnum::STATUS()[$status];
     $color = BotGlobalMessagesEnum::STATUS_COLORS[$status];
 @endphp
 <style>

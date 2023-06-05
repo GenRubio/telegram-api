@@ -12,10 +12,10 @@ class TelegramBotMessageCrudController extends CrudController
 {
     use AdminCrudTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
         store as traitStore;
     }
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
         update as traitUpdate;
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
@@ -36,22 +36,22 @@ class TelegramBotMessageCrudController extends CrudController
         $this->removeActionsCrud();
         $this->crud->addColumn([
             'name' => 'key',
-            'label' => 'Key',
+            'label' => trans('back-office.backpack_menu.default_messages.list.key'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'image',
-            'label' => 'Imagen',
+            'label' => trans('back-office.backpack_menu.default_messages.list.image'),
             'type'  => 'image',
         ]);
         $this->crud->addColumn([
             'name' => 'description',
-            'label' => 'Descripcion',
+            'label' => trans('back-office.backpack_menu.default_messages.list.description'),
             'type'  => 'text',
         ]);
         $this->crud->addColumn([
             'name' => 'is_text_full_translate',
-            'label' => 'Traducido',
+            'label' => trans('back-office.backpack_menu.default_messages.list.translated'),
             'type'  => 'check',
         ]);
     }
@@ -66,17 +66,17 @@ class TelegramBotMessageCrudController extends CrudController
             ],
             [
                 'name' => 'description',
-                'label' => 'Descripcion',
+                'label' => trans('back-office.backpack_menu.default_messages.update.description'),
                 'type' => 'text',
             ],
             [
                 'name' => 'emojis_url',
                 'type' => 'custom_html',
-                'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
+                'value' => '<label>' . trans('back-office.backpack_menu.default_messages.update.emojis') . '</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
             ],
             [
                 'name' => "message",
-                'label' => "Mensaje",
+                'label' => trans('back-office.backpack_menu.default_messages.update.message'),
                 'type'  => 'summernote',
                 'options' => [
                     'toolbar' => [
@@ -88,65 +88,28 @@ class TelegramBotMessageCrudController extends CrudController
             ],
             [
                 'name' => 'image',
-                'label' => 'Imagen',
-                'type' => 'image-v2',
-            ]
-        ]);
-    }
-
-    protected function setupUpdateOperation()
-    {
-        CRUD::setValidation(TelegramBotMessageRequest::class);
-        $this->crud->addFields([
-            [
-                'name' => 'key',
-                'label' => 'Key',
-                'type' => 'text',
-                'attributes' => [
-                    'readonly' => 'readonly',
-                    'disabled' => 'disabled'
-                ],
-            ],
-            [
-                'name' => 'description',
-                'label' => 'Descripcion',
-                'type' => 'text',
-            ],
-            [
-                'name' => 'emojis_url',
-                'type' => 'custom_html',
-                'value' => '<label>Emojis</label><br><a href="https://emojiterra.com/es/x/" target="_blank">https://emojiterra.com/es/x/</a>'
-            ],
-            [
-                'name' => "message",
-                'label' => "Mensaje",
-                'type'  => 'summernote',
-                'options' => [
-                    'toolbar' => [
-                        ['font', ['bold', 'underline', 'italic']]
-                    ],
-                    'minheight' => 300,
-                    'height' => 300
-                ],
-            ],
-            [
-                'name' => 'image',
-                'label' => 'Imagen',
+                'label' => trans('back-office.backpack_menu.default_messages.update.image'),
                 'type' => 'image-v2',
             ],
             [
                 'name' => 'image_bottom',
                 'type' => 'checkbox',
-                'label' => 'Colocar imagen debajo del mensaje',
+                'label' => trans('back-office.backpack_menu.default_messages.update.image_position'),
                 'default' => true,
             ],
         ]);
     }
+
+    protected function setupUpdateOperation()
+    {
+        $this->setupCreateOperation();
+    }
+
     public function store()
     {
         $message = removeTextTags(request()->input('message'));
-        if (mb_strlen($message) >= 4096){
-            Alert::error('El mesaje no puede superar 4096 caracteres.')->flash();
+        if (mb_strlen($message) >= 4096) {
+            Alert::error(trans('back-office.backpack_menu.default_messages.errors.max_description_chars'))->flash();
             return back();
         }
         return $this->traitStore();
@@ -155,8 +118,8 @@ class TelegramBotMessageCrudController extends CrudController
     public function update()
     {
         $message = removeTextTags(request()->input('message'));
-        if (mb_strlen($message) >= 4096){
-            Alert::error('El mesaje no puede superar 4096 caracteres.')->flash();
+        if (mb_strlen($message) >= 4096) {
+            Alert::error(trans('back-office.backpack_menu.default_messages.errors.max_description_chars'))->flash();
             return back();
         }
         return $this->traitUpdate();
