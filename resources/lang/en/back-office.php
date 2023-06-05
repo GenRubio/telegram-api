@@ -282,6 +282,20 @@ return [
             'errors' => [
                 'max_description_chars' => 'El mesaje no puede superar 4096 caracteres',
             ]
+        ],
+        "languages" => [
+            'list' => [
+                'name' => 'Nombre',
+                'active' => 'Activo',
+                'default' => 'Por defecto',
+            ],
+            'update' => [
+                'name' => 'Nombre',
+                'native_name' => 'Nombre nativo',
+                'abbreviation' => 'Abreviación',
+                'active' => 'Activo',
+                'default' => 'Por defecto',
+            ]
         ]
     ]
 ];

@@ -46,16 +46,16 @@ class LanguageCrudController extends CrudController
         $this->crud->setColumns([
             [
                 'name' => 'name',
-                'label' => 'Name',
+                'label' => trans('back-office.backpack_menu.languages.list.name'),
             ],
             [
                 'name' => 'active',
-                'label' => 'Active',
+                'label' => trans('back-office.backpack_menu.languages.list.active'),
                 'type' => 'boolean',
             ],
             [
                 'name' => 'default',
-                'label' => 'Default',
+                'label' => trans('back-office.backpack_menu.languages.list.default'),
                 'type' => 'boolean',
             ],
         ]);
@@ -67,27 +67,27 @@ class LanguageCrudController extends CrudController
 
         $this->crud->addField([
             'name' => 'name',
-            'label' => 'Name',
+            'label' => trans('back-office.backpack_menu.languages.update.name'),
             'type' => 'text',
         ]);
         $this->crud->addField([
             'name' => 'native',
-            'label' => 'Native name',
+            'label' => trans('back-office.backpack_menu.languages.update.native_name'),
             'type' => 'text',
         ]);
         $this->crud->addField([
             'name' => 'abbr',
-            'label' => 'Abbr',
+            'label' => trans('back-office.backpack_menu.languages.update.abbreviation'),
             'type' => 'text',
         ]);
         $this->crud->addField([
             'name' => 'active',
-            'label' => 'Active',
+            'label' => trans('back-office.backpack_menu.languages.update.active'),
             'type' => 'checkbox',
         ]);
         $this->crud->addField([
             'name' => 'default',
-            'label' => 'Default',
+            'label' => trans('back-office.backpack_menu.languages.update.default'),
             'type' => 'checkbox',
         ]);
     }
