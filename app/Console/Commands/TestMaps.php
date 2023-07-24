@@ -28,7 +28,7 @@ class TestMaps extends Command
     public function handle()
     {
         $addressEndoded = urlencode("Madrid, España");
-        $url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . $addressEndoded . "&key=AIzaSyA-shDh08XgaSHhpO77DeGBfj7c-cRsbeE";
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . $addressEndoded . "&key=";
 
         $opts = array(
             'http' =>
